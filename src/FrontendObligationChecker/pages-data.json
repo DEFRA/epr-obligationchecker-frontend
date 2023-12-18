@@ -1,0 +1,681 @@
+﻿[
+  {
+    "$type": "FrontendObligationChecker.Models.ObligationChecker.Page, FrontendObligationChecker",
+    "NextFinder": {
+      "$type": "FrontendObligationChecker.Services.NextFinder.OptionFinder, FrontendObligationChecker"
+    },
+    "Index": 10,
+    "Path": "organisation-type",
+    "AlternateRowTitle": "organisationTypePage_alternateRowTitle",
+    "Titles": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "organisationTypePage_title1"
+    },
+    "Contents": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker]], System.Private.CoreLib"
+    },
+    "PageType": 0,
+    "Questions": [
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "organisation-type",
+        "Description": "organisationTypePage_question_description",
+        "Detail": "organisationTypePage_detail",
+        "DetailPosition": 1,
+        "Summary": "organisationTypePage_summary",
+        "HasError": false,
+        "ErrorMessage": "organisationTypePage_question_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "organisationTypePage_question_option_label1",
+            "Value": "parent",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "organisationTypePage_question_option_label2",
+            "Value": "subsidiary",
+            "Next": 1
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "organisationTypePage_question_option_label3",
+            "Value": "individual",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      }
+    ],
+    "Paths": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "turnover",
+      "Secondary": "turnover"
+    },
+    "AssociationType": 0,
+    "AdditionalDescriptions": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "View": "SingleQuestion",
+    "HasError": false,
+    "HasBackLink": false,
+    "Errors": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "Title": "organisationTypePage_title1",
+    "IsPageHeading": true
+  },
+  {
+    "$type": "FrontendObligationChecker.Models.ObligationChecker.Page, FrontendObligationChecker",
+    "NextFinder": {
+      "$type": "FrontendObligationChecker.Services.NextFinder.OptionFinder, FrontendObligationChecker"
+    },
+    "Index": 20,
+    "Path": "turnover",
+    "AlternateRowTitle": "turnoverPage_alternateRowTitle",
+    "Titles": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "turnoverPage_title1",
+      "Secondary": "turnoverPage_title2"
+    },
+    "Contents": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker]], System.Private.CoreLib"
+    },
+    "PageType": 0,
+    "Questions": [
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "turnover",
+        "Description": "turnoverPage_question_description",
+        "DetailPosition": 0,
+        "HasError": false,
+        "ErrorMessage": "turnoverPage_question_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "turnoverPage_question_option_label1",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "turnoverPage_question_option_label2",
+            "Value": "2",
+            "Next": 1
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "turnoverPage_question_option_label3",
+            "Value": "3",
+            "Next": 1
+          }
+        ],
+        "HasDetail": false
+      }
+    ],
+    "Paths": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "no-further-action",
+      "Secondary": "handle-packaging"
+    },
+    "AssociationType": 0,
+    "AdditionalDescriptions": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "turnoverPage_additional_description_1"
+    },
+    "View": "SingleQuestion",
+    "HasError": false,
+    "HasBackLink": false,
+    "Errors": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "Title": "turnoverPage_title1",
+    "IsPageHeading": true
+  },
+  {
+    "$type": "FrontendObligationChecker.Models.ObligationChecker.Page, FrontendObligationChecker",
+    "NextFinder": {
+      "$type": "FrontendObligationChecker.Services.NextFinder.AggregateFinder, FrontendObligationChecker"
+    },
+    "Index": 30,
+    "Path": "handle-packaging",
+    "AlternateRowTitle": "handlePackagingPage_alternateRowTitle",
+    "Titles": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Secondary": "handlePackagingPage_title"
+    },
+    "Contents": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker]], System.Private.CoreLib"
+    },
+    "PageType": 1,
+    "Questions": [
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "supply-goods-own-brand",
+        "Title": "handlePackagingPage_question1_title",
+        "AlternateTitle": "handlePackagingPage_question1_alternate_title",
+        "Detail": "handlePackagingPage_question1_detail",
+        "DetailPosition": 0,
+        "Summary": "handlePackagingPage_question1_summary",
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question1_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "pay-another-organisation",
+        "Title": "handlePackagingPage_question2_title",
+        "AlternateTitle": "handlePackagingPage_question2_alternate_title",
+        "Detail": "handlePackagingPage_question2_detail",
+        "DetailPosition": 0,
+        "Summary": "handlePackagingPage_question2_summary",
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question2_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "transit-packaging",
+        "Title": "handlePackagingPage_question3_title",
+        "AlternateTitle": "handlePackagingPage_question3_alternate_title",
+        "Description": "handlePackagingPage_question3_description",
+        "DetailPosition": 0,
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question3_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": false
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "package-on-behalf-of-organisation",
+        "Title": "handlePackagingPage_question4_title",
+        "AlternateTitle": "handlePackagingPage_question4_alternate_title",
+        "Detail": "handlePackagingPage_question4_detail",
+        "DetailPosition": 0,
+        "Summary": "handlePackagingPage_question4_summary",
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question4_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "import-packaging",
+        "Title": "handlePackagingPage_question5_title",
+        "AlternateTitle": "handlePackagingPage_question5_alternate_title",
+        "Detail": "handlePackagingPage_question5_detail",
+        "DetailPosition": 0,
+        "Summary": "handlePackagingPage_question5_summary",
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question5_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "marketplace",
+        "Title": "handlePackagingPage_question6_title",
+        "AlternateTitle": "handlePackagingPage_question6_alternate_title",
+        "Detail": "handlePackagingPage_question6_detail",
+        "DetailPosition": 0,
+        "Summary": "handlePackagingPage_question6_summary",
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question6_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "empty-packaging",
+        "Title": "handlePackagingPage_question7_title",
+        "AlternateTitle": "handlePackagingPage_question7_alternate_title",
+        "Detail": "handlePackagingPage_question7_detail",
+        "DetailPosition": 0,
+        "Summary": "handlePackagingPage_question7_summary",
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question7_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": true
+      },
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "hire-out-packaging",
+        "Title": "handlePackagingPage_question8_title",
+        "AlternateTitle": "handlePackagingPage_question8_alternate_title",
+        "Description": "handlePackagingPage_question8_description",
+        "DetailPosition": 0,
+        "HasError": false,
+        "ErrorMessage": "handlePackagingPage_question8_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_yes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "question_option_no",
+            "Value": "2",
+            "Next": 1
+          }
+        ],
+        "HasDetail": false
+      }
+    ],
+    "Paths": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "no-further-action",
+      "Secondary": "amount-of-packaging"
+    },
+    "AssociationType": 0,
+    "AdditionalDescriptions": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "View": "MultiQuestion",
+    "HasError": false,
+    "HasBackLink": false,
+    "Errors": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "Title": "handlePackagingPage_title",
+    "IsPageHeading": false
+  },
+  {
+    "$type": "FrontendObligationChecker.Models.ObligationChecker.Page, FrontendObligationChecker",
+    "NextFinder": {
+      "$type": "FrontendObligationChecker.Services.NextFinder.OptionFinder, FrontendObligationChecker"
+    },
+    "Index": 40,
+    "Path": "amount-of-packaging",
+    "AlternateRowTitle": "amountOfPackagingPage_alternateRowTitle",
+    "Titles": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Secondary": "amountOfPackagingPage_title"
+    },
+    "Contents": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker]], System.Private.CoreLib"
+    },
+    "PageType": 0,
+    "Questions": [
+      {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Question, FrontendObligationChecker",
+        "Key": "amount-of-packaging",
+        "Title": "amountOfPackagingPage_questionTitle",
+        "DetailPosition": 0,
+        "HasError": false,
+        "ErrorMessage": "amountOfPackagingPage_question_error",
+        "Options": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "Under 25 tonnes",
+            "Value": "1",
+            "Next": 0
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "25 tonnes to 50 tonnes",
+            "Value": "2",
+            "Next": 1
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.Option, FrontendObligationChecker",
+            "Title": "50 tonnes or more",
+            "Value": "3",
+            "Next": 1
+          }
+        ],
+        "HasDetail": false
+      }
+    ],
+    "Paths": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "no-further-action",
+      "Secondary": "obligated"
+    },
+    "AssociationType": 0,
+    "AdditionalDescriptions": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "View": "SingleQuestion",
+    "HasError": false,
+    "HasBackLink": false,
+    "Errors": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "Title": "amountOfPackagingPage_title",
+    "IsPageHeading": false
+  },
+  {
+    "$type": "FrontendObligationChecker.Models.ObligationChecker.Page, FrontendObligationChecker",
+    "NextFinder": {
+      "$type": "FrontendObligationChecker.Services.NextFinder.OptionFinder, FrontendObligationChecker"
+    },
+    "Index": 50,
+    "Path": "no-further-action",
+    "Titles": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Primary": "noFurtherActionPage_title"
+    },
+    "Contents": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker]], System.Private.CoreLib",
+      "turnover": {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker",
+        "ContentItems": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 3,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_turnover_description_organization"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 4,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_turnover_description_parent"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 0,
+            "Content": "noFurtherActionPage_turnover_title1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_turnover_description2"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 6,
+            "ContentType": 0,
+            "Content": "noFurtherActionPage_turnover_title2"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 6,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_turnover_description3"
+          }
+        ]
+      },
+      "handle-packaging": {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker",
+        "ContentItems": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_handle_packaging_description1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 0,
+            "Content": "noFurtherActionPage_handle_packaging_title1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_handle_packaging_description2"
+          }
+        ]
+      },
+      "amount-of-packaging": {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker",
+        "ContentItems": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_amount_of_packaging_description1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 0,
+            "Content": "noFurtherActionPage_amount_of_packaging_title1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "noFurtherActionPage_amount_of_packaging_description2"
+          }
+        ]
+      }
+    },
+    "PageType": 2,
+    "Questions": [],
+    "Paths": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "AssociationType": 0,
+    "AdditionalDescriptions": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "View": "NoFurtherAction",
+    "HasError": false,
+    "HasBackLink": false,
+    "Errors": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "Title": "noFurtherActionPage_title",
+    "IsPageHeading": false
+  },
+  {
+    "$type": "FrontendObligationChecker.Models.ObligationChecker.Page, FrontendObligationChecker",
+    "NextFinder": {
+      "$type": "FrontendObligationChecker.Services.NextFinder.OptionFinder, FrontendObligationChecker"
+    },
+    "Index": 60,
+    "Path": "obligated",
+    "Titles": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+      "Secondary": "obligatedPage_title"
+    },
+    "Description": "",
+    "Contents": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker]], System.Private.CoreLib",
+      "obligated": {
+        "$type": "FrontendObligationChecker.Models.ObligationChecker.Content, FrontendObligationChecker",
+        "ContentItems": [
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 2,
+            "Content": "obligatedPage_content_banner"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "obligatedPage_content_paragraph1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 0,
+            "ContentType": 3,
+            "ContentItems": [
+              "obligatedPage_content_print1",
+              "obligatedPage_content_print2"
+            ]
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 0,
+            "Content": "obligatedPage_content_heading1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "obligatedPage_content_paragraph2"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 7,
+            "Content": "obligatedPage_content_inset1"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 4,
+            "Content": "obligatedPage_content_heading2"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 1,
+            "Content": "obligatedPage_content_paragraph3"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 7,
+            "Content": "obligatedPage_content_inset2"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 8,
+            "Content": "obligatedPage_content_details"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 0,
+            "Content": "obligatedPage_content_heading4"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 6,
+            "Content": "obligatedPage_content_ordered"
+          },
+          {
+            "$type": "FrontendObligationChecker.Models.ObligationChecker.ContentItem, FrontendObligationChecker",
+            "AssociationType": 7,
+            "ContentType": 0,
+            "Content": "obligatedPage_content_heading5"
+          }
+        ]
+      }
+    },
+    "PageType": 3,
+    "Questions": [],
+    "Paths": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "AssociationType": 0,
+    "AdditionalDescriptions": {
+      "$type": "System.Collections.Generic.Dictionary`2[[FrontendObligationChecker.Models.ObligationChecker.OptionPath, FrontendObligationChecker],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "View": "Obligated",
+    "HasError": false,
+    "HasBackLink": false,
+    "Errors": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib"
+    },
+    "Title": "obligatedPage_title",
+    "IsPageHeading": false
+  }
+]

@@ -1,0 +1,13 @@
+@using FrontendObligationChecker.Models.ObligationChecker
+@model DetailViewModel
+
+<details class="govuk-details @(DetailPosition.BelowQuestion.Equals(Model.Position) ? "govuk-!-margin-top-7 govuk-!-margin-bottom-6" : string.Empty)" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+            @Model.Summary
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+        @Html.Raw(Model.Detail)
+    </div>
+</details>

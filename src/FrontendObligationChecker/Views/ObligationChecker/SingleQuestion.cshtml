@@ -1,0 +1,171 @@
+@using FrontendObligationChecker.Models.ObligationChecker
+@model PageModel
+
+@{
+    ViewData["Title"] = Localizer[Model.Page.Title].Value;
+}
+
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+
+                @if (Model.Page.FirstQuestion.HasError)
+                {
+                    @await Html.PartialAsync("Partials/Govuk/_ErrorSummary", Model.Page.Errors.ToDictionary(error => error.Key, error => Localizer[error.Value].Value))
+                }
+
+                @if (!Model.Page.IsPageHeading)
+                {
+                    @if (Model.Page.HasTitleCaption)
+                    {
+                        <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span>
+                    }
+                    <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
+                }
+
+                @if (Model.Page.GetAlternateTitles().Any() || !string.IsNullOrEmpty(Model.Page.GetAlternateTitleFirstParagraph()))
+                {
+
+                    <p class="govuk-body">@Localizer[Model.Page.GetAlternateTitleFirstParagraph() ?? "SingleQuestion.YouToldUsHeader"]</p>
+
+                    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+                        @foreach (var alternateTitle in Model.Page.GetAlternateTitles())
+                        {
+                            <li>@Localizer[alternateTitle].Value</li>
+                        }
+                    </ul>
+                    @foreach (var alternateTitleSubContent in Model.Page.GetAlternateTitlesSubContent())
+                    {
+                        <p class="govuk-body">@Localizer[alternateTitleSubContent]</p>
+                    }
+                }
+
+                @using (Html.BeginRouteForm("GetNextPage", FormMethod.Post,new { @class="single-question-form" }))
+                {
+                    
+                    @if (Model.Page.FirstQuestion.QuestionType == QuestionType.CheckboxesNone)
+                    {
+                         @await Html.PartialAsync("Partials/Govuk/_CheckboxesNone", new CheckboxesNoneViewModel
+                        {
+                            Id = Model.Page.FirstQuestion.Key,
+                            Fieldset = new FieldsetViewModel
+                            {
+                                Legend = new LegendViewModel
+                                {
+                                    IsPageHeading = Model.Page.IsPageHeading,
+                                    Text = Model.Page.IsPageHeading ?
+                                        Localizer[Model.Page.Title].Value
+                                        : Localizer[Model.Page.FirstQuestion.Title].Value,
+                                    Classes = "govuk-!-margin-bottom-5",
+                                    Caption = Model.Page.HasTitleCaption ? SharedLocalizer[Model.Page.TitleCaption]?.Value : null
+                                },
+                                DescribedBy = Model.Page.FirstQuestion.HasError ? $"{Model.Page.FirstQuestion.Key}-error" : null
+                            },
+                            Detail = Model.Page.FirstQuestion.HasDetail ? new DetailViewModel
+                            {
+                                Summary = Localizer[Model.Page.FirstQuestion.Summary].Value,
+                                Detail = Localizer[Model.Page.FirstQuestion.Detail].Value,
+                                Position = Model.Page.FirstQuestion.DetailPosition
+                            } : null,
+                            Items = Model.Page.FirstQuestion.Options.Select(option => new RadioItemViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-{option.Value}",
+                                IsSelected = option.IsSelected.GetValueOrDefault(),
+                                Label = new LabelViewModel
+                                {
+                                    For = $"{Model.Page.FirstQuestion.Key}-{option.Value}",
+                                    Text = Localizer[option.Title].Value
+                                },
+                                Name = Model.Page.FirstQuestion.Key,
+                                Value = option.Value
+                            }).Take(Model.Page.FirstQuestion.Options.Count - 1).ToList(),
+                            NoneItem = Model.Page.FirstQuestion.Options.Select(option => new RadioItemViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-{option.Value}",
+                                IsSelected = option.IsSelected.GetValueOrDefault(),
+                                Label = new LabelViewModel
+                                {
+                                    For = $"{Model.Page.FirstQuestion.Key}-{option.Value}",
+                                    Text = Localizer[option.Title].Value
+                                },
+                                Name = Model.Page.FirstQuestion.Key,
+                                Value = option.Value
+                            }).Last(),
+                            Hint = !string.IsNullOrEmpty(Model.Page.FirstQuestion.GetDescription()) ? new HintViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-hint",
+                                Text = Localizer[Model.Page.FirstQuestion.GetDescription()].Value
+                            } : null,
+                            Error = Model.Page.FirstQuestion.HasError ? new ErrorViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-error",
+                                Text = Localizer[Model.Page.FirstQuestion.ErrorMessage].Value
+                            } : null,
+                            AdditionalDescription = !string.IsNullOrEmpty(Model.Page.AdditionalDescription) ?
+                                Localizer[Model.Page.AdditionalDescription].Value : null,
+                            DividerText = SharedLocalizer["or_text"].Value
+                        })
+                    }
+                    else
+                    {
+                        @await Html.PartialAsync("Partials/Govuk/_Radios", new RadiosViewModel
+                        {
+                            Id = Model.Page.FirstQuestion.Key,
+                            Fieldset = new FieldsetViewModel
+                            {
+                                Legend = new LegendViewModel
+                                {
+                                    IsPageHeading = Model.Page.IsPageHeading,
+                                    Text = Model.Page.IsPageHeading ?
+                                        Localizer[Model.Page.Title].Value
+                                        : Localizer[Model.Page.FirstQuestion.Title].Value,
+                                    Classes = "govuk-!-margin-bottom-5",
+                                    Caption = Model.Page.HasTitleCaption ? SharedLocalizer[Model.Page.TitleCaption]?.Value : null
+                                },
+                                DescribedBy = Model.Page.FirstQuestion.HasError ? $"{Model.Page.FirstQuestion.Key}-error" : null
+                            },
+                            Detail = Model.Page.FirstQuestion.HasDetail ? new DetailViewModel
+                            {
+                                Summary = Localizer[Model.Page.FirstQuestion.Summary].Value,
+                                Detail = Localizer[Model.Page.FirstQuestion.Detail].Value,
+                                Position = Model.Page.FirstQuestion.DetailPosition
+                            } : null,
+                            Items = Model.Page.FirstQuestion.Options.Select(option => new RadioItemViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-{option.Value}",
+                                IsSelected = option.IsSelected.GetValueOrDefault(),
+                                Label = new LabelViewModel
+                                {
+                                    For = $"{Model.Page.FirstQuestion.Key}-{option.Value}",
+                                    Text = Localizer[option.Title].Value
+                                },
+                                Name = Model.Page.FirstQuestion.Key,
+                                Value = option.Value
+                            }).ToList(),
+                            Hint = !string.IsNullOrEmpty(Model.Page.FirstQuestion.GetDescription()) ? new HintViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-hint",
+                                Text = Localizer[Model.Page.FirstQuestion.GetDescription()].Value
+                            } : null,
+                            Error = Model.Page.FirstQuestion.HasError ? new ErrorViewModel
+                            {
+                                Id = $"{Model.Page.FirstQuestion.Key}-error",
+                                Text = Localizer[Model.Page.FirstQuestion.ErrorMessage].Value
+                            } : null,
+                            AdditionalDescription = !string.IsNullOrEmpty(Model.Page.AdditionalDescription) ?
+                                Localizer[Model.Page.AdditionalDescription].Value : null
+                        })
+                    }
+                    
+                    <input type="hidden" name="path" value="@Model.Page.Path"/>
+
+                    @await Html.PartialAsync("Partials/Govuk/_Button", new ButtonViewModel
+                    {
+                        Text = SharedLocalizer["continue_button_text"].Value
+                    })
+                }
+            </div>
+        </div>
+    </main>
+</div>

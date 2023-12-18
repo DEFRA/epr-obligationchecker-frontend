@@ -1,0 +1,212 @@
+@using FrontendObligationChecker.Models.ObligationChecker
+@using FrontendObligationChecker.Models
+@model PageModel
+@{
+    ViewData["Title"] = Localizer[Model.Page.Title];
+
+    var groupedPages = new List<Page>();
+    var lastPageGroup = PageGroup.None;
+    var scriptNonce = (string?)Context.Items[ContextKeys.ScriptNonceKey];
+}
+
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-form-group">
+                    @foreach (var item in Model.Page.GetObligatedContentItems(Model.Page.AssociationType))
+                    {
+                        switch (item.ContentType)
+                        {
+                            case ContentType.Banner:
+                                <div class="govuk-panel govuk-panel--blue">
+                                    <h1 class="govuk-panel__body govuk-!-font-weight-bold govuk-!-margin-top-0 govuk-!-margin-bottom-0">
+                                        @Localizer[item.Content]
+                                    </h1>
+                                </div>
+                                break;
+                            case ContentType.Paragraph:
+                                <p class="govuk-body">@Localizer[item.Content]</p>
+                                break;
+                            case ContentType.Print:
+                                <p id="printParagraph" class="govuk-body govuk-visually-hidden">@Localizer[item.ContentItems[0]?.Trim()] <a id="printSummary" href="#" class="govuk-link govuk-link--no-visited-state">@Localizer[item.ContentItems[1]?.Trim()]</a>.</p>
+                                break;
+                            case ContentType.Heading:
+                                <h2 class="govuk-heading-m govuk-!-margin-top-5">@Localizer[item.Content]</h2>
+                                break;
+                            case ContentType.Heading3:
+                                <h3 class="govuk-heading-s">@Localizer[item.Content]</h3>
+                                break;
+                            case ContentType.UnorderedList:
+                                <ul class="govuk-list govuk-list--bullet">
+                                    @foreach (var contentItem in @item.ContentItems)
+                                    {
+                                        <li>@Localizer[contentItem?.Trim()]</li>
+                                    }
+                                </ul>
+                                break;
+                            case ContentType.Inset:
+                                <div class="govuk-inset-text">
+                                    @foreach (var contentItem in @item.ContentItems)
+                                    {
+                                        <p class="govuk-body">@Localizer[contentItem?.Trim()]</p>
+                                    }
+                                </div>
+                                break;
+                            case ContentType.Details:
+                                @Localizer[item.Content]
+                                break;
+                            case ContentType.OrderedList:
+                                @Localizer[item.Content]
+                                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                                break;
+                            case ContentType.SeparatorLine:
+                                <dl class="govuk-summary-list govuk-!-margin-bottom-7"><div class="govuk-summary-list__row">&nbsp;</div></dl>
+                                break;
+                            case ContentType.Hyperlink:
+                            {
+                                if (item is Hyperlink link)
+                                {
+                                    <p class="govuk-body">
+                                        <a href="@link.Url" class="govuk-link @link.AnalyticsTrackingId" target="_blank">@Localizer[link.Description]</a>
+                                    </p>
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    @foreach (var sessionPage in Model.Page.SessionPages.OrderBy(x => x.Index))
+                    {
+                        if (sessionPage.PageGroup != PageGroup.None)
+                        {
+                            if (sessionPage.PageGroup != lastPageGroup && groupedPages.Count > 0)
+                            {
+                                RenderAnswers(groupedPages.ToArray());
+
+                                groupedPages = new List<Page> { sessionPage };
+                                lastPageGroup = sessionPage.PageGroup;
+                            }
+                            else
+                            {
+                                groupedPages.Add(sessionPage);
+                                lastPageGroup = sessionPage.PageGroup;
+                            }
+
+                            continue;
+                        }
+
+                        if (groupedPages.Count > 0)
+                        {
+                            RenderAnswers(groupedPages.ToArray());
+                            groupedPages = new List<Page>();
+                            lastPageGroup = sessionPage.PageGroup;
+                        }
+
+                        var containsUnansweredQuestion = sessionPage.Questions.Any(q => q.SelectedOption is null);
+
+                        if (!sessionPage.Questions.Any() || containsUnansweredQuestion)
+                        {
+                            continue;
+                        }
+
+                        RenderAnswers(sessionPage);
+                    }
+
+                    @if (groupedPages.Count > 0)
+                    {
+                        RenderAnswers(groupedPages.ToArray());
+                    }
+                </div>
+                <p class="govuk-body">
+                    @SharedLocalizer["Disclaimer"]
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+
+@{
+    void RenderAnswers(params Page[] pages)
+    {
+        var firstPage = pages.Length > 0 ? pages[0] : null;
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-0">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    @if (pages.Length == 1)
+                    {
+                        @Localizer[firstPage.AlternateRowTitle]
+                    }
+                    else
+                    {
+                        @SharedLocalizer[firstPage.TitleCaption]
+                    }
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    @if (pages.Length == 1)
+                    {
+                        var currentPage = pages[0];
+
+                        if (currentPage.FirstQuestion?.QuestionType == QuestionType.CheckboxesNone)
+                        {
+                            var noneOption = currentPage.FirstQuestion?.Options.FirstOrDefault(o => o.IsSelected == true && o.Value == "0");
+                            if (noneOption != null)
+                            {
+                                <p class="govuk-body">@SharedLocalizer[noneOption.Title]</p>
+                            }
+                            else
+                            {
+                                <ul class="govuk-list govuk-list--bullet">
+                                    @foreach (var option in currentPage.FirstQuestion?.Options.Where(o => o.IsSelected == true))
+                                    {
+                                        <li>
+                                            @SharedLocalizer[option.Title]
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        }
+                        else
+                        {
+                            @SharedLocalizer[currentPage.FirstQuestion?.SelectedOption?.Title]
+                        }
+                    }
+                    else
+                    {
+                        <ul class="govuk-list govuk-list--bullet">
+
+                            @foreach (var question in pages.SelectMany(x => x.Questions).Where(x => x.Answer == YesNo.Yes))
+                            {
+                                <li>
+                                    @SharedLocalizer[question.AlternateTitle]
+                                </li>
+                            }
+                        </ul>
+                    }
+                </dd>
+            </div>
+        </dl>
+
+    }
+}
+
+@section Scripts
+{
+    <script nonce="@scriptNonce">
+        document.addEventListener('DOMContentLoaded', WireUpEvents);
+    
+        function WireUpEvents() {
+            if (window.print) {
+                let printParagraph = document.getElementById('printParagraph');
+                printParagraph.className = 'govuk-body';
+                let printLink = document.getElementById('printSummary');
+                printLink.addEventListener('click', printPage);
+            } 
+        }
+    
+         function printPage() {
+                window.print();
+         }
+    </script>
+}

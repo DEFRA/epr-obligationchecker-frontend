@@ -1,0 +1,58 @@
+﻿@using FrontendObligationChecker.Models.ObligationChecker
+@model RadiosViewModel
+
+<fieldset class="govuk-fieldset" aria-describedBy="@Model.Fieldset?.DescribedBy">
+    <div class="govuk-form-group @Model.FormGroup?.Classes @(Model.Error != null ? "govuk-form-group--error" : String.Empty)">
+        @if (Model.Fieldset != null)
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Legend", Model.Fieldset.Legend)
+        }
+        else
+        {
+            <legend visibility: hidden></legend>
+        }
+
+        @if (Model.AdditionalDescription != null)
+        {
+            <p class="govuk-body">@Model.AdditionalDescription</p>
+        }
+
+        @if (Model.Hint != null)
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Hint", Model.Hint)
+        }
+
+        @if (Model.Detail is {Position: DetailPosition.AboveQuestion})
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Detail", Model.Detail)
+        }
+
+        @if (Model.Error != null)
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Error", Model.Error)
+        }
+
+        <div class="govuk-radios @Model.Fieldset?.RadioClasses" data-module="govuk-radios">
+            @foreach (var item in Model.Items)
+            {
+                <div class="govuk-radios__item">
+                    <input
+                        class="govuk-radios__input"
+                        id="@item.Id"
+                        name="@item.Name"
+                        type="radio"
+                        value="@item.Value"
+                        checked="@item.IsSelected">
+                    <label class="govuk-label govuk-radios__label @item.Label.Classes" for="@item.Label.For">
+                        @item.Label.Text
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+
+    @if (Model.Detail is {Position: DetailPosition.BelowQuestion})
+    {
+        @await Html.PartialAsync("Partials/Govuk/_Detail", Model.Detail)
+    }
+</fieldset>

@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  obligation-checker:
+    build:
+      context: src
+      dockerfile: ./FrontendObligationChecker/Dockerfile
+      args:
+        ADD_TRUSTED_CERT: true
+        TRUSTED_CERT: kainos-chain.pem
+        PORT: 80
+    ports:
+    - "80:80"
+    environment:
+    - ConnectionStrings__REDIS_CONNECTION=oc-redis:6379
+  
+  oc-redis:
+    image: "redis:latest"
+    ports:
+    - "6379:6379"

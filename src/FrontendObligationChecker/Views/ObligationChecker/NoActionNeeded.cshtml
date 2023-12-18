@@ -1,0 +1,35 @@
+@using FrontendObligationChecker.Models.ObligationChecker
+@model PageModel
+
+@{
+    ViewData["Title"] = Localizer[Model.Page.Title];
+}
+
+<div class="govuk-width-container">
+
+    <main class="govuk-main-wrapper govuk-!-padding-top-4" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h1 class="govuk-heading-l govuk-!-margin-top-5">@Localizer[Model.Page.Title]</h1>
+
+                @foreach (var item in Model.Page.GetRelatedContentItems())
+                {
+                    var content = Localizer[item.Content];
+
+                    switch (item.ContentType)
+                    {
+                        case ContentType.Heading:
+                            <h2 class="govuk-heading-m">@content</h2>
+                            break;
+                        case ContentType.Paragraph:
+                            <p class="govuk-body">@content</p>
+                            break;
+                    }
+                }
+                <p class="govuk-body">
+                    @SharedLocalizer["Disclaimer"]
+                </p>
+            </div>
+        </div>
+    </main>
+</div>

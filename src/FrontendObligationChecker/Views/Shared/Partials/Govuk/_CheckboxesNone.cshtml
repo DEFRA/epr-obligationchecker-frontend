@@ -1,0 +1,72 @@
+﻿@using FrontendObligationChecker.Models.ObligationChecker
+@model CheckboxesNoneViewModel
+
+<div class="govuk-form-group @Model.FormGroup?.Classes @(Model.Error != null ? "govuk-form-group--error" : String.Empty)">
+    <fieldset class="govuk-fieldset" aria-describedBy="@Model.Fieldset?.DescribedBy">
+        @if (Model.Fieldset != null)
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Legend", Model.Fieldset.Legend)
+        }
+        else
+        {
+            <legend visibility: hidden></legend>
+        }
+
+        @if (Model.AdditionalDescription != null)
+        {
+            <p class="govuk-body">@Model.AdditionalDescription</p>
+        }
+
+        @if (Model.Hint != null)
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Hint", Model.Hint)
+        }
+
+        @if (Model.Detail is {Position: DetailPosition.AboveQuestion})
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Detail", Model.Detail)
+        }
+
+        @if (Model.Error != null)
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Error", Model.Error)
+        }
+
+        <div class="govuk-checkboxes @Model.Fieldset?.RadioClasses" data-module="govuk-checkboxes">
+            @foreach (var item in Model.Items)
+            {
+                <div class="govuk-checkboxes__item">
+                    <input
+                        class="govuk-checkboxes__input"
+                        id="@item.Id"
+                        name="@item.Name"
+                        type="checkbox"
+                        value="@item.Value"
+                        checked="@item.IsSelected">
+                    <label class="govuk-label govuk-checkboxes__label @item.Label.Classes" for="@item.Label.For">
+                        @item.Label.Text
+                    </label>
+                </div>
+            }
+            <div class="govuk-checkboxes__divider">@Model.DividerText</div>     
+              <div class="govuk-checkboxes__item">
+                                <input
+                                    class="govuk-checkboxes__input"
+                                    id="@Model.NoneItem.Id"
+                                    name="@Model.NoneItem.Name"
+                                    type="checkbox"
+                                    value="@Model.NoneItem.Value"
+                                    checked="@Model.NoneItem.IsSelected" data-behaviour="exclusive">
+                                <label class="govuk-label govuk-checkboxes__label @Model.NoneItem.Label.Classes" for="@Model.NoneItem.Label.For">
+                                    @Model.NoneItem.Label.Text
+                                </label>
+                            </div>
+        </div>
+        
+
+        @if (Model.Detail is {Position: DetailPosition.BelowQuestion})
+        {
+            @await Html.PartialAsync("Partials/Govuk/_Detail", Model.Detail)
+        }
+    </fieldset>
+</div>

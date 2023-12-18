@@ -1,0 +1,38 @@
+$govuk-assets-path: '/check-if-you-need-to-report/';
+@import 'node_modules/govuk-frontend/govuk/all';
+
+// Components
+@import './components/language_toggle';
+@import './components/ordered_list';
+
+.govuk-panel {
+    &--blue {
+        background-color: govuk-colour('blue');
+        color: govuk-colour('white');
+    }
+
+    &--darkblue {
+        @extend .govuk-panel;
+        text-align: left;
+        padding: 15px 40px;
+        color: govuk-colour('white');
+        background-color: govuk-colour('dark-blue');
+
+        .govuk-button {
+            color: govuk-colour('black');
+            background-color: govuk-colour('light-grey');
+        }
+
+        > p:first-of-type {
+            @extend .govuk-\!-margin-top-7
+        }
+
+        > p:last-of-type {
+            @extend .govuk-\!-margin-bottom-6
+        }
+    }
+
+    .govuk-heading-l {
+        color: inherit;
+    }
+}

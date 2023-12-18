@@ -1,0 +1,17 @@
+@model Dictionary<string, string>
+
+<div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" data-module="govuk-error-summary">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">
+    @Localizer["title"].Value
+  </h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      @foreach (var error in Model)
+      {
+        <li>
+          <a href="#@error.Key-1">@error.Value</a>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

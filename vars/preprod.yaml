@@ -1,0 +1,6 @@
+variables:
+  azureSubscription: 'AZR-RWD-PRE1'
+  docker.imageName: 'obligationregistry'
+  acr.azureContainerRegistryName: 'prerwdinfac1401'
+  acr.repositoryName: 'obligationregistry'
+  serviceName: 'prerwdwebwa1401'

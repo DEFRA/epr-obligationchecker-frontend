@@ -1,0 +1,140 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <CodeAnalysisRuleSet>..\stylecop.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+  <Target Name="NpmInstall" Inputs="package.json" Outputs="node_modules/.install-stamp">
+    <Exec Command="npm install" Condition="'$(RestorePackagesWithLockFile)' != 'true'" />
+
+    <!-- Write the stamp file, so incremental builds work -->
+    <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="NpmRunBuildFrontend" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild">
+    <Exec Command="npm run build-frontend" />
+  </Target>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\css" />
+      <Folder Include="wwwroot\js" />
+      <Folder Include="wwwroot\lib" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+      <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.8" />
+      <PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435" />
+      <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+      <PackageReference Include="System.IO.Abstractions" Version="17.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="wwwroot\css\application.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\fonts\bold-affa96571d-v2.woff">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\fonts\bold-b542beb274-v2.woff2">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\fonts\light-94a07e06a1-v2.woff2">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\fonts\light-f591b13f7d-v2.woff">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\favicon.ico">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-apple-touch-icon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-apple-touch-icon-152x152.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-apple-touch-icon-167x167.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-apple-touch-icon-180x180.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-crest.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-crest-2x.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-logotype-crown.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-mask-icon.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\images\govuk-opengraph-image.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\js\govuk.js">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\ObligationChecker\SingleQuestion.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SingleQuestion.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResources.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\ObligationChecker\NoActionNeeded.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>NoFurtherAction.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\ObligationChecker\WhatYouNeedToDo.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Obligated.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\Partials\Govuk\_ErrorSummary.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ErrorSummary.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\ObligationChecker\AmountYouSupply.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AmountOfPackaging.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Views\ObligationChecker\InterruptionCard.cshtml.cs" />
+    </ItemGroup>
+     <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0 and '$(IsCrossTargetingBuild)' == 'true'">
+       <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
+      <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory="../.." />
+  </Target>
+
+
+    <ItemGroup>
+        <SonarQubeSetting Include="sonar.coverage.exclusions">
+            <Value>**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**</Value>
+        </SonarQubeSetting>
+    </ItemGroup>
+    
+</Project>

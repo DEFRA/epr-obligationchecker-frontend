@@ -1,0 +1,20 @@
+@model LegendViewModel
+
+@if (Model.IsPageHeading)
+{
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l @Model.Classes">
+        @if (Model.HasCaption)
+        {
+            <span class="govuk-caption-l">@Model.Caption</span>
+        }
+        <h1 class="govuk-fieldset__heading">
+            @Model.Text
+        </h1>
+    </legend>
+}
+else
+{
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m @Model.Classes">
+        @Model.Text
+    </legend>
+}

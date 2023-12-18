@@ -1,0 +1,6 @@
+variables:
+  azureSubscription: 'AZD-RWD-TST1'
+  docker.imageName: 'obligationregistry'
+  acr.azureContainerRegistryName: 'tstrwdinfac1401'
+  acr.repositoryName: 'obligationregistry'
+  serviceName: 'tstrwdwebwa1401'

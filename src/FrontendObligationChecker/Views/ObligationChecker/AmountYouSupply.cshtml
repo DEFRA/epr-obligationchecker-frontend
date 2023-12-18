@@ -1,0 +1,92 @@
+﻿@model PageModel
+
+@{
+    ViewData["Title"] = Localizer[Model.Page.Title];
+
+    var page = new AmountYouSupply(Model.Page);
+}
+
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                @if (Model.Page.FirstQuestion.HasError)
+                {
+                    var errorMessage = page.HasSingleActivity ?
+                        Localizer["AmountYouSupply.SingleActivityQuestionError"].Value :
+                        Localizer["AmountYouSupply.MultipleActivitiesQuestionError"].Value;
+
+                    @await Html.PartialAsync("Partials/Govuk/_ErrorSummary",  new Dictionary<string, string> {{Model.Page.FirstQuestion.Key, errorMessage }})
+                }
+
+                @if (!Model.Page.IsPageHeading)
+                {
+                    @if (Model.Page.HasTitleCaption)
+                    {
+                        <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span>
+                    }
+                    <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
+                }
+
+                @if (page.HasSingleActivity)
+                {
+                    <p class="govuk-body">
+                        @Localizer["AmountYouSupply.SingleActivityParagraph"]
+                    </p>
+                }
+                else
+                {
+                    <p class="govuk-body">
+                        @Localizer["AmountYouSupply.MultipleActivitiesParagraph"]
+                    </p>
+                }
+
+                <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+                    @foreach (var activity in page.NonSellerYesActivities)
+                    {
+                        <li>@SharedLocalizer[activity].Value</li>
+                    }
+                </ul>
+
+                @if (page.HasSingleUseDrinkContainers)
+                {
+                    <div class="govuk-inset-text govuk-body govuk-!-margin-bottom-6">
+                        @Localizer["AmountYouSupply.DrinksParagraph"]
+                    </div>
+                }
+
+                @{
+                    var question = Model.Page.FirstQuestion;
+
+                    if (page.HasSingleActivity)
+                    {
+                        question.Title = "AmountYouSupply.SingleActivityQuestionTitle";
+                        question.ErrorMessage = "AmountYouSupply.SingleActivityQuestionError";
+                    }
+                    else
+                    {
+                        question.Title = "AmountYouSupply.MultipleActivitiesQuestionTitle";
+                        question.ErrorMessage = "AmountYouSupply.MultipleActivitiesQuestionError";
+                    }
+
+                    if (page.IsParentCompany)
+                    {
+                        question.Description = "AmountYouSupply.Description";
+                    }
+                }
+
+                @using (Html.BeginRouteForm("GetNextPage", FormMethod.Post, new { @class = "single-question-form" }))
+                {
+                    @await Html.PartialAsync("Partials/Govuk/_Radios", new RadiosViewModel(question, Localizer))
+
+                    <input type="hidden" name="path" value="@Model.Page.Path"/>
+
+                    @await Html.PartialAsync("Partials/Govuk/_Button", new ButtonViewModel
+                    {
+                        Text = SharedLocalizer["continue_button_text"].Value
+                    })
+                }
+            </div>
+        </div>
+    </main>
+</div>

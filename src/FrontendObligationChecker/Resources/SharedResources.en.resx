@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="back_link_text" xml:space="preserve">
+        <value>Back</value>
+    </data>
+    <data name="continue_button_text" xml:space="preserve">
+        <value>Continue</value>
+    </data>
+    <data name="skip_to_main_content_text" xml:space="preserve">
+        <value>Skip to main content</value>
+    </data>
+    <data name="question_option_yes" xml:space="preserve">
+        <value>Yes</value>
+    </data>
+    <data name="question_option_no" xml:space="preserve">
+        <value>No</value>
+    </data>
+     <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
+        <value>Parent Company</value>
+    </data>
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
+        <value>Subsidiary</value>
+    </data>
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
+        <value>Individual company</value>
+    </data>
+    <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
+        <value>Under £1 million</value>
+    </data>
+    <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel2" xml:space="preserve">
+        <value>£1 million to £2 million</value>
+    </data>
+    <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel3" xml:space="preserve">
+        <value>£2 million or more</value>
+    </data>
+    <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
+        <value>supplying goods to the UK market under your own brand</value>
+    </data>
+    <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
+        <value>placing goods into packaging that's unbranded when it's supplied</value>
+    </data>
+     <data name="SingleQuestion.ImportingProducts.AmountHandlePageText" xml:space="preserve">
+        <value>importing products in packaging which are supplied or discarded in the UK</value>
+    </data>
+     <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
+        <value>importing products in packaging</value>
+    </data>
+     <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
+        <value>owning an online marketplace</value>
+    </data>
+     <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
+        <value>supplying empty packaging to businesses that fall under the higher threshold</value>
+    </data>
+    <data name="SingleQuestion.SellingEmptyPackaging.AmountHandlePageText" xml:space="preserve">
+        <value>supplying empty packaging to businesses that aren't classed as a large organisation</value>
+    </data>
+    <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
+        <value>hiring or loaning out reusable packaging to UK organisations</value>
+    </data>
+    <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
+        <value>supplying filled packaging to consumers</value>
+    </data>
+    <data name="ApplicationTitle" xml:space="preserve">
+        <value>Check if you need to report packaging data</value>
+    </data>
+    <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
+        <value>25 tonnes to 50 tonnes</value>
+    </data>
+    <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
+        <value>50 tonnes or more</value>
+    </data>
+    <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
+        <value>Under 25 tonnes</value>
+    </data>
+    <data name="or_text" xml:space="preserve">
+        <value>or</value>
+    </data>
+    <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
+        <value>Materials used for drinks containers</value>
+    </data>
+    <data name="SingleQuestion.MaterialsForDrinksContainers.AluminiumCans" xml:space="preserve">
+        <value>Aluminium cans</value>
+    </data>
+    <data name="SingleQuestion.MaterialsForDrinksContainers.None" xml:space="preserve">
+        <value>None from the list</value>
+    </data>
+    <data name="SingleQuestion.MaterialsForDrinksContainers.GlassBottles" xml:space="preserve">
+        <value>Glass bottles</value>
+    </data>
+    <data name="SingleQuestion.MaterialsForDrinksContainers.SteelCans" xml:space="preserve">
+        <value>Steel cans</value>
+    </data>
+    <data name="SingleQuestion.MaterialsForDrinksContainers.PlasticBottles" xml:space="preserve">
+        <value>Polyethylene terephthalate (PET) plastic bottles</value>
+    </data>
+    <data name="AmountOfPackaging" xml:space="preserve">
+        <value>Amount of packaging</value>
+    </data>
+    <data name="AboutYourOrganisation" xml:space="preserve">
+        <value>About your organisation</value>
+    </data>
+    <data name="YourPackagingActivities" xml:space="preserve">
+        <value>Your packaging activities</value>
+    </data>
+    <data name="Disclaimer" xml:space="preserve">
+        <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice. Please consult the Extended Producer Responsibility for Packaging legislation for comprehensive legal guidance on obligations and responsibilities.</value>
+    </data>
+</root>

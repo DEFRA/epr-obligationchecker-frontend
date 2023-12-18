@@ -1,0 +1,20 @@
+{
+   "tasks": [
+      {
+         "name": "dotnet-format-example",
+         "command": "dotnet",
+         "args": [ "dotnet-format", "--include", "${staged}" ],
+         "include": [ "**/*.cs", "**/*.vb" ]
+      },
+      {
+         "name": "dotnet-build-stylecorp-sonar",
+         "command": "bash",
+         "args": [ " make unit-tests" ],
+         "windows": {
+            "command": "cmd",
+            "args": ["make unit-tests" ]
+         },
+         "include": [ "**/*.cs", "**/*.vb" ]
+      }
+   ]
+}
