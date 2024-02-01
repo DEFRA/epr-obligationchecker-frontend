@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace FrontendObligationChecker.ViewComponents;
+
 public class LanguageSwitcherViewComponent : ViewComponent
 {
     private readonly IOptions<RequestLocalizationOptions> _localizationOptions;
@@ -16,7 +17,7 @@ public class LanguageSwitcherViewComponent : ViewComponent
     public IViewComponentResult Invoke()
     {
         var cultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
-        var languageSwitcherModel = new LanguageSwitcherModel()
+        var languageSwitcherModel = new LanguageSwitcherModel
         {
             SupportedCultures = _localizationOptions.Value.SupportedCultures!.ToList(),
             CurrentCulture = cultureFeature!.RequestCulture.Culture,

@@ -1,11 +1,14 @@
-﻿using FrontendObligationChecker.Models.ObligationChecker;
-using FrontendObligationChecker.Services.NextFinder;
-using FrontendObligationChecker.Services.PageService.Interfaces;
-using FrontendObligationChecker.ViewModels;
+﻿namespace FrontendObligationChecker.Controllers;
+
+using Constants;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement.Mvc;
+using Models.ObligationChecker;
+using Services.NextFinder;
+using Services.PageService.Interfaces;
+using ViewModels;
 
-namespace FrontendObligationChecker.Controllers;
-
+[FeatureGate(FeatureFlags.ObligationCheckerEnabled)]
 public class ObligationCheckerController : Controller
 {
     private readonly ILogger<ObligationCheckerController> _logger;
@@ -52,13 +55,5 @@ public class ObligationCheckerController : Controller
         var nextPath = Url.RouteUrl("ObligationChecker", new { path = PageFinder.GetNextPath(page) });
 
         return Redirect(nextPath + Request.QueryString);
-    }
-
-    [Route("")]
-    public IActionResult RedirectToStart()
-    {
-        return RedirectToRoute(
-            "ObligationChecker",
-            new { path = PagePath.TypeOfOrganisation });
     }
 }

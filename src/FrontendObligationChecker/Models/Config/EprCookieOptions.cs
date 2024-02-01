@@ -1,4 +1,4 @@
-﻿namespace FrontendObligationChecker.Models.Cookies;
+﻿namespace FrontendObligationChecker.Models.Config;
 
 public class EprCookieOptions
 {

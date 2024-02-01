@@ -1,6 +1,5 @@
-﻿using System.Globalization;
+﻿namespace FrontendObligationChecker.ViewModels;
 
-namespace FrontendObligationChecker.ViewModels;
 public class CookieBannerModel
 {
     public bool ShowBanner { get; set; }

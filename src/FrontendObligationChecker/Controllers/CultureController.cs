@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace FrontendObligationChecker.Controllers;
 
-namespace FrontendObligationChecker.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Models.LargeProducerRegister;
+
+[Route(PagePath.Culture)]
 public class CultureController : Controller
 {
     [HttpGet]
-    [Route("culture")]
     public LocalRedirectResult UpdateCulture(string culture, string returnUrl)
     {
         var urlWithCulture = $"{returnUrl}?culture={culture}";

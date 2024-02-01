@@ -18,6 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    
     <data name="Detail.Title" xml:space="preserve">
         <value>Cookies</value>
     </data>
@@ -58,10 +59,10 @@
         <value>2 years</value>
     </data>
     <data name="Detail.AnalyticsCookiePurpose1" xml:space="preserve">
-        <value>This cookie is a Google Analytics persistent cookie which is used to distinguish unique visitors</value>
+        <value>This cookie is a Google Analytics persistent cookie which is used to distinguish unique visitors.</value>
     </data>
     <data name="Detail.AnalyticsCookiePurpose2" xml:space="preserve">
-        <value>This cookie is used to throttle request rate. These are third party cookies that are placed on your device to allow us to use the Google Analytics service. These cookies are used to collect information about how visitors use our website. We use this information to compile reports and to help us improve the website</value>
+        <value>This cookie is used to throttle request rate. These are third party cookies that are placed on your device to allow us to use the Google Analytics service. These cookies are used to collect information about how visitors use our website. We use this information to compile reports and to help us improve the website.</value>
     </data>
     <data name="Detail.EssentialCookieExpires1" xml:space="preserve">
         <value>6 months</value>
@@ -73,10 +74,10 @@
         <value>Session</value>
     </data>
     <data name="Detail.EssentialCookiePurpose1" xml:space="preserve">
-        <value>Saves your cookie consent settings</value>
+        <value>Saves your cookie consent settings.</value>
     </data>
     <data name="Detail.EssentialCookiePurpose2" xml:space="preserve">
-        <value>Saves your responses so you have a better experience</value>
+        <value>Saves your responses so you have a better experience.</value>
     </data>
     <data name="Detail.EssentialCookiePurpose3" xml:space="preserve">
         <value>This is an anti-forgery token and is used to prevent cross-site request forgery (CSRF) attacks. It prevents others from forging your website links.</value>
@@ -115,7 +116,7 @@
         <value>Cookies are small files saved on your phone, tablet or computer when you visit a website.</value>
     </data>
     <data name="Detail.CookieDescription2" xml:space="preserve">
-        <value>We use cookies to make this site work and collect information about how you use our service.</value>
+        <value>We use cookies to make the list of large producers on the ‘report packaging data’ work and collect information about how you use our service.</value>
     </data>
     <data name="Detail.SetCookiePreferences" xml:space="preserve">
         <value>You’ve set your cookie preferences.</value>

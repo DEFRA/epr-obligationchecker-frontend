@@ -1,10 +1,11 @@
-﻿using FrontendObligationChecker.Models.Cookies;
+﻿using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Services.Infrastructure.Interfaces;
 using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace FrontendObligationChecker.ViewComponents;
+
 public class CookieBannerViewComponent : ViewComponent
 {
     private readonly EprCookieOptions _options;

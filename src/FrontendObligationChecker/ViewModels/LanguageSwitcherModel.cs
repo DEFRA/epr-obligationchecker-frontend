@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 
 namespace FrontendObligationChecker.ViewModels;
+
 public class LanguageSwitcherModel
 {
     public CultureInfo? CurrentCulture { get; set; }

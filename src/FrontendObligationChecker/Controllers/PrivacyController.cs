@@ -1,12 +1,13 @@
-﻿using FrontendObligationChecker.Extensions;
-using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.ViewModels;
+﻿namespace FrontendObligationChecker.Controllers;
 
+using Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Models.Config;
+using Models.LargeProducerRegister;
+using ViewModels;
 
-namespace FrontendObligationChecker.Controllers;
-
+[Route(PagePath.Privacy)]
 public class PrivacyController : Controller
 {
     private readonly ILogger<PrivacyController> _logger;
@@ -27,7 +28,6 @@ public class PrivacyController : Controller
     }
 
     [HttpGet]
-    [Route("privacy")]
     public async Task<IActionResult> Detail(string returnUrl)
     {
         if (!Url.IsLocalUrl(returnUrl))

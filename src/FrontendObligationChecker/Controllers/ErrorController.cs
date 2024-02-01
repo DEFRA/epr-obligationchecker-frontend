@@ -1,15 +1,13 @@
-﻿using System.Net;
+﻿namespace FrontendObligationChecker.Controllers;
 
-using FrontendObligationChecker.Models.ObligationChecker;
-using FrontendObligationChecker.ViewModels;
-
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Models.ObligationChecker;
+using ViewModels;
 
-namespace FrontendObligationChecker.Controllers;
-
+[Route(PagePath.Error)]
 public class ErrorController : Controller
 {
-    [Route("error")]
     public ViewResult Error(int? statusCode)
     {
         var errorView = statusCode == (int?)HttpStatusCode.NotFound ? nameof(PageType.PageNotFound) : nameof(PageType.Error);

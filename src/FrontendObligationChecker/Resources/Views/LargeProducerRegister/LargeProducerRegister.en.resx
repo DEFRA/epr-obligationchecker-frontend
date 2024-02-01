@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <root>
     <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
         <xsd:element name="root" msdata:IsDataSet="true">
-
         </xsd:element>
     </xsd:schema>
+    
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -19,19 +19,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     
-    <data name="PageNotFound.Title" xml:space="preserve">
-        <value>There is a problem</value>
+    <data name="title" xml:space="preserve">
+        <value>Large organisations on the ‘report packaging data’ service</value>
     </data>
-    <data name="PageNotFound.PleaseSelect" xml:space="preserve">
-        <value>Please select 'Go to the start'.</value>
-    </data>
-    <data name="PageNotFound.YouCannotContinue" xml:space="preserve">
-        <value>You cannot continue your journey from here.</value>
-    </data>
-    <data name="PageNotFound.WeWouldLike" xml:space="preserve">
-        <value>We would like to take you to the beginning of the “large organisations on the ‘report packaging data’ service”.</value>
-    </data>
-    <data name="PageNotFound.GoToTheStart" xml:space="preserve">
-        <value>Go to the start</value>
+    <data name="paragraph" xml:space="preserve">
+        <value>To edit later.</value>
     </data>
 </root>

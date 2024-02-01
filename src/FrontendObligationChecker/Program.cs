@@ -6,8 +6,11 @@ using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.Cookies;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddFeatureManagement();
 
 builder.Services.Configure<EprCookieOptions>(builder.Configuration.GetSection(EprCookieOptions.ConfigSection));
 builder.Services.Configure<AnalyticsOptions>(builder.Configuration.GetSection(AnalyticsOptions.ConfigSection));
@@ -16,10 +19,12 @@ builder.Services.Configure<ExternalUrlsOptions>(builder.Configuration.GetSection
 builder.Services.Configure<EmailAddressOptions>(builder.Configuration.GetSection(EmailAddressOptions.ConfigSection));
 builder.Services.Configure<SiteDateOptions>(builder.Configuration.GetSection(SiteDateOptions.ConfigSection));
 
+string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
+
 builder.Services.AddAntiforgery(opts =>
 {
     opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
-    opts.Cookie.Path = builder.Configuration.GetValue<string>("PATH_BASE");
+    opts.Cookie.Path = pathBase;
 });
 
 builder.Services
@@ -50,7 +55,7 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 
 var app = builder.Build();
 
-app.UsePathBase(builder.Configuration.GetValue<string>("PATH_BASE"));
+app.UsePathBase(pathBase);
 
 if (app.Environment.IsDevelopment())
 {
@@ -67,31 +72,14 @@ app.UseMiddleware<SecurityHeaderMiddleware>();
 app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.UseRequestLocalization();
-
 app.UseSession();
-
 app.UseMiddleware<AnalyticsCookieMiddleware>();
-
-app.MapHealthChecks(
-    builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"),
-    HealthCheckOptionBuilder.Build());
-
-app.MapControllerRoute(name: "GetNextPage",
-    pattern: "{path}",
-    defaults: new { controller = "ObligationChecker", action = "GetNextPage" });
-
-app.MapControllerRoute(name: "ObligationChecker",
-    pattern: "{path}",
-    defaults: new { controller = "ObligationChecker", action = "Question" });
-
+app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
+app.MapControllers();
 app.Run();
 
 public partial class Program

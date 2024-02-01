@@ -18,6 +18,9 @@ public static class PagePath
     public const string MaterialsForDrinksContainers = "materials-for-drinks-containers";
     public const string ContainerVolume = "container-volume";
 
+    public const string Empty = "";
+    public const string Error = "error";
+
     public static bool IsActivityPagePath(string path)
     {
         return path is PagePath.OwnBrand

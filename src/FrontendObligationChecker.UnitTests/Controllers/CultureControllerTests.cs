@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 
 namespace FrontendObligationChecker.UnitTests.Controllers;
+
 [TestClass]
 public class CultureControllerTests
 {

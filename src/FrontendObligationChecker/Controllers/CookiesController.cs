@@ -1,13 +1,15 @@
-﻿using FrontendObligationChecker.Extensions;
-using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.Models.Cookies;
-using FrontendObligationChecker.Services.Infrastructure.Interfaces;
-using FrontendObligationChecker.ViewModels;
+﻿namespace FrontendObligationChecker.Controllers;
 
+using Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Models.Config;
+using Models.Cookies;
+using Models.LargeProducerRegister;
+using Services.Infrastructure.Interfaces;
+using ViewModels;
 
-namespace FrontendObligationChecker.Controllers;
+[Route(PagePath.Cookies)]
 public class CookiesController : Controller
 {
     private readonly ICookieService _cookieService;
@@ -25,7 +27,7 @@ public class CookiesController : Controller
     }
 
     [HttpPost]
-    [Route("cookies/update")]
+    [Route(PagePath.Update)]
     public LocalRedirectResult UpdateAcceptance(string returnUrl, string cookies)
     {
         _cookieService.SetCookieAcceptance(cookies == CookieAcceptance.Accept, Request.Cookies, Response.Cookies);
@@ -34,13 +36,12 @@ public class CookiesController : Controller
     }
 
     [HttpPost]
-    [Route("cookies/confirm")]
+    [Route(PagePath.Confirm)]
     public LocalRedirectResult ConfirmAcceptance(string returnUrl)
     {
         return LocalRedirect(returnUrl);
     }
 
-    [Route("cookies")]
     public async Task<IActionResult> Detail(string returnUrl)
     {
         var cookieConsentState = _cookieService.GetConsentState(Request.Cookies, Response.Cookies);

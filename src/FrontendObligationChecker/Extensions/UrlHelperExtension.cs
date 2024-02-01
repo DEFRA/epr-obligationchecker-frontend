@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
+﻿namespace FrontendObligationChecker.Extensions;
 
-namespace FrontendObligationChecker.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 public static class UrlHelperExtension
 {
     public static string HomePath(this IUrlHelper url)
     {
-        return url.Action("RedirectToStart", "ObligationChecker");
+        return url.Action("Get", "LargeProducerRegister");
     }
 }

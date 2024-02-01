@@ -3,6 +3,14 @@
 This repository hosts the ObligationChecker service that helps producers determine their obligations towards reporting packaging.
 This service is available to the public at: https://www.gov.uk/guidance/check-if-you-need-to-report-packaging-data
 
+## Notes
+
+ObligationChecker becomes a public portal that will serve all EPR-related pages that can be accessed by the general public.
+The register of large producers is the first of those pages.
+
+Original function of ObligationChecker has been disabled by feature toggle called `FeatureManagement:ObligationCheckerEnabled`.
+This functionality will be restored in the future roadmap.
+
 # Getting Started
 
 ## Dependencies
@@ -12,11 +20,6 @@ You can either run the application locally or through docker.
 ### Prerequisites for Docker
 
 You will need docker desktop, please download that [here](https://www.docker.com/products/docker-desktop/)
-
-You will also need the latest Kainos Certificate Chain file which you will find under Team Stig Developement documents:
-https://kainossoftwareltd.sharepoint.com/:f:/r/sites/EPRProject-LAPaymentScrumTeam3/Shared%20Documents/LA%20Payment%20Team%20Stig/Development%20Docs?csf=1&web=1&e=dv3bgA
-
-Download and copy this into the <repository>/src folder
 
 ### Prerequisites for Local
 

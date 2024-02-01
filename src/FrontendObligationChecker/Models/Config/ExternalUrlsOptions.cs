@@ -23,4 +23,12 @@ public class ExternalUrlsOptions
     public string StartPage { get; set; }
 
     public string GovUkHome { get; set; }
+
+    public string AccessibilityAbilityNet { get; set; }
+
+    public string AccessibilityEqualityAdvisorySupportService { get; set; }
+
+    public string AccessibilityContactUs { get; set; }
+
+    public string AccessibilityWebContentAccessibility { get; set; }
 }

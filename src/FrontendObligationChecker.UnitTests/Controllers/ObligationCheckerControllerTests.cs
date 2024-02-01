@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace FrontendObligationChecker.UnitTests.Controllers;
+
 [TestClass]
 public class ObligationCheckerControllerTests
 {

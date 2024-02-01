@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 
 namespace FrontendObligationChecker.UnitTests.Controllers;
+
 [TestClass]
 public class PrivacyControllerTests
 {

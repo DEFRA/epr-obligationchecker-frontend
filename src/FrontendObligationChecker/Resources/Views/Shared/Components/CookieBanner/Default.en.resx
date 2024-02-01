@@ -18,8 +18,9 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    
     <data name="CookieBanner.Title" xml:space="preserve">
-        <value>Cookies on check if you need to report packaging data</value>
+        <value>Cookies on “large organisations on the ‘report packaging data’ service”</value>
     </data>
     <data name="CookieBanner.EssentialParagraph" xml:space="preserve">
         <value>We use some essential cookies to make this service work.</value>
@@ -40,10 +41,10 @@
         <value>Hide cookie message</value>
     </data>
     <data name="CookieBanner.Accepted" xml:space="preserve">
-        <value>You’ve accepted analytical cookies. You can</value>
+        <value>You’ve accepted analytics cookies. You can</value>
     </data>
     <data name="CookieBanner.Rejected" xml:space="preserve">
-        <value>You’ve rejected analytical cookies. You can</value>
+        <value>You’ve rejected analytics cookies. You can</value>
     </data>
     <data name="CookieBanner.ChangeYourCookieSettings" xml:space="preserve">
         <value>change your cookie settings</value>

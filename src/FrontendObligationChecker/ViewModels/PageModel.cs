@@ -6,7 +6,7 @@ public class PageModel : BaseViewModel
     public PageModel(Page page)
     {
         Page = page;
-        BackLinkToDisplay = page is { HasBackLink: true,IsBackButtonHidden: false } ? page.BackLinkPath : string.Empty;
+        BackLinkToDisplay = page is { HasBackLink: true, IsBackButtonHidden: false } ? page.BackLinkPath : string.Empty;
     }
 
     public Page Page { get; }

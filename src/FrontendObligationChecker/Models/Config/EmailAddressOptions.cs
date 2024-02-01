@@ -9,4 +9,6 @@ public class EmailAddressOptions
     public string DefraGroupProtectionOfficer { get; set; }
 
     public string InformationCommissioner { get; set; }
+
+    public string DefraHelpline { get; set; }
 }
