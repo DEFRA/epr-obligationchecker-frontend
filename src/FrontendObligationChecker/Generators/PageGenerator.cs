@@ -1,6 +1,7 @@
-﻿using FrontendObligationChecker.Models.ObligationChecker;
+﻿namespace FrontendObligationChecker.Generators;
 
-namespace FrontendObligationChecker.Generators;
+using Models.ObligationChecker;
+
 public static class PageGenerator
 {
     public static IEnumerable<Page> Create(string eprGuidanceUrl)

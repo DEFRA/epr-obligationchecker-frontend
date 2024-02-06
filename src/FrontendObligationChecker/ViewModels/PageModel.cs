@@ -1,6 +1,7 @@
-﻿using FrontendObligationChecker.Models.ObligationChecker;
+﻿namespace FrontendObligationChecker.ViewModels;
 
-namespace FrontendObligationChecker.ViewModels;
+using Models.ObligationChecker;
+
 public class PageModel : BaseViewModel
 {
     public PageModel(Page page)

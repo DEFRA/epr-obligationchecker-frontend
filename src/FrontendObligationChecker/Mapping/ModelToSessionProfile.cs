@@ -1,8 +1,9 @@
-﻿using AutoMapper;
-using FrontendObligationChecker.Models.ObligationChecker;
-using FrontendObligationChecker.Models.Session;
+﻿namespace FrontendObligationChecker.Mapping;
 
-namespace FrontendObligationChecker.Mapping;
+using AutoMapper;
+using Models.ObligationChecker;
+using Models.Session;
+
 public class ModelToSessionProfile : Profile
 {
     public ModelToSessionProfile()

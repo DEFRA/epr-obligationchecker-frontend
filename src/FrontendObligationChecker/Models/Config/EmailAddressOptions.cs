@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.Models.Config;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class EmailAddressOptions
 {
     public const string ConfigSection = "EmailAddresses";

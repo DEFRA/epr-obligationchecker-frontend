@@ -1,15 +1,23 @@
-﻿using System.IO.Abstractions;
+﻿namespace FrontendObligationChecker.ConfigurationExtensions;
 
-using FrontendObligationChecker.Services.Infrastructure;
-using FrontendObligationChecker.Services.Infrastructure.Interfaces;
-using FrontendObligationChecker.Services.PageService;
-using FrontendObligationChecker.Services.PageService.Interfaces;
+using System.Diagnostics.CodeAnalysis;
+using System.IO.Abstractions;
+using Azure.Storage.Blobs;
 using FrontendObligationChecker.Services.Session;
 using FrontendObligationChecker.Services.Session.Interfaces;
-using FrontendObligationChecker.Services.Wrappers;
-using FrontendObligationChecker.Services.Wrappers.Interfaces;
+using Microsoft.Extensions.Options;
+using Models.Config;
+using Readers;
+using Services.Infrastructure;
+using Services.Infrastructure.Interfaces;
+using Services.LargeProducerRegister;
+using Services.LargeProducerRegister.Interfaces;
+using Services.PageService;
+using Services.PageService.Interfaces;
+using Services.Wrappers;
+using Services.Wrappers.Interfaces;
 
-namespace FrontendObligationChecker.ConfigurationExtensions;
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     public static IServiceCollection RegisterServices(this IServiceCollection services)
@@ -21,6 +29,16 @@ public static class DependencyInjection
         services.AddScoped(typeof(IDistributedSession<>), typeof(DistributedSession<>));
         services.AddScoped<IJourneySession, JourneySession>();
         services.AddScoped<IPageService, PageService>();
+        services.AddScoped<IBlobReader, BlobReader>();
+        services.AddScoped<ILargeProducerRegisterService, LargeProducerRegisterService>();
+        services.AddSingleton(x =>
+        {
+            var storageAccountOptions = x.GetService<IOptions<StorageAccountOptions>>().Value;
+            var blobContainerClient = new BlobContainerClient(
+                storageAccountOptions.ConnectionString,
+                storageAccountOptions.BlobContainerName);
+            return blobContainerClient;
+        });
         services.AddAutoMapper(typeof(Program).Assembly);
         services.AddHealthChecks();
         return services;

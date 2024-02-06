@@ -1,15 +1,84 @@
-@model LargeProducerRegisterViewModel
+@using FrontendObligationChecker.Constants
+@using FrontendObligationChecker.Models.Config
+@using Microsoft.Extensions.Options
+@inject IOptions<ExternalUrlsOptions> ExternalUrls;
+@addTagHelper *, Microsoft.FeatureManagement.AspNetCore
 
 @{
-    ViewData["Title"] = Localizer["title"];
+    ViewData["Title"] = Localizer["LargeProducerRegister.Title"];
 }
 
 <div class="govuk-width-container">
     <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-l">@Localizer["title"]</h1>
-                <p class="govuk-body">@Localizer["paragraph"]</p>
+                <h1 class="govuk-heading-l">@Localizer["LargeProducerRegister.Title"]</h1>
+                <p class="govuk-body">
+                    @Localizer["LargeProducerRegister.BeforeYouStart"]<a href=@ExternalUrls.Value.WhoIsAffectedAndWhatToDo class="govuk-link">@Localizer["LargeProducerRegister.FindOutWhatThisLinkIsForLink"]</a>@Localizer["LargeProducerRegister.WhoIsAffectedPostLink"]
+                </p>
+                <p class="govuk-body">
+                    @Localizer["LargeProducerRegister.ForAnythingBeforeReportingYear"]<a href=@ExternalUrls.Value.NpwdRegister class="govuk-link">@Localizer["LargeProducerRegister.PublicRegisterOfRegisteredProducersLink"]</a>@Localizer["LargeProducerRegister.PublicRegisterPostLink"]
+                </p>
+                
+                <h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.ListOfLargeProducers"]</h2>
+                <p class="govuk-body">@Localizer["LargeProducerRegister.TheInformationIsInCsvFiles"]</p>
+                @using (Html.BeginForm(FormMethod.Post))
+                {
+                    <ul class="govuk-list">
+                        <feature name="@FeatureFlags.EnglandNationDownloadLink">
+                            <li>
+                                @Html.ActionLink(Localizer["LargeProducerRegister.EnglandLink"].Value,
+                                    "File",
+                                    "LargeProducerRegister",
+                                    new {NationCode = HomeNation.England},
+                                    new {@class = "govuk-link"})
+                            </li>
+                        </feature>
+                        <feature name="@FeatureFlags.WalesNationDownloadLink">
+                            <li>
+                                @Html.ActionLink(Localizer["LargeProducerRegister.WalesLink"].Value,
+                                    "File",
+                                    "LargeProducerRegister",
+                                    new { NationCode = HomeNation.Wales },
+                                    new { @class = "govuk-link" })
+                            </li>
+                        </feature>
+                        <feature name="@FeatureFlags.NorthernIrelandNationDownloadLink">
+                            <li>
+                                @Html.ActionLink(Localizer["LargeProducerRegister.NorthernIrelandLink"].Value,
+                                    "File",
+                                    "LargeProducerRegister",
+                                    new {NationCode = HomeNation.NorthernIreland},
+                                    new {@class = "govuk-link"})
+                            </li>
+                        </feature>
+                        <feature name="@FeatureFlags.ScotlandNationDownloadLink">
+                            <li>
+                                @Html.ActionLink(Localizer["LargeProducerRegister.ScotlandLink"].Value,
+                                    "File",
+                                    "LargeProducerRegister",
+                                    new {NationCode = HomeNation.Scotland},
+                                    new {@class = "govuk-link"})
+                            </li>
+                        </feature>
+                        <feature name="@FeatureFlags.AllNationsDownloadLink">
+                            <li>
+                                @Html.ActionLink(Localizer["LargeProducerRegister.AllFourRegulatorsLink"].Value,
+                                    "File",
+                                    "LargeProducerRegister",
+                                    new {NationCode = HomeNation.All},
+                                    new {@class = "govuk-link"})
+                            </li>
+                        </feature>
+                    </ul>
+                }
+
+                <p class="govuk-body">@Localizer["LargeProducerRegister.ThisInformationIsUsuallyUpdated"]</p>
+                
+                <h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.Disclaimer"]</h2>
+                <p class="govuk-body">@Localizer["LargeProducerRegister.TheListsShowTheInformation"]</p>
+                <p class="govuk-body">@Localizer["LargeProducerRegister.SomeFieldsMayBeBlank"]</p>
+                <p class="govuk-body">@Localizer["LargeProducerRegister.IfYoureUnsureAboutAnything"]</p>
             </div>
         </div>
     </main>

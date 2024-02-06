@@ -1,7 +1,9 @@
-﻿using FrontendObligationChecker.Models.ObligationChecker;
+﻿namespace FrontendObligationChecker.ViewModels;
 
-namespace FrontendObligationChecker.ViewModels;
+using System.Diagnostics.CodeAnalysis;
+using Models.ObligationChecker;
 
+[ExcludeFromCodeCoverage]
 public class AmountYouSupply
 {
     public AmountYouSupply(Page page)

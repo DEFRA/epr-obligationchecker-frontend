@@ -1,7 +1,9 @@
-﻿using System.Globalization;
+﻿namespace FrontendObligationChecker.ViewModels;
 
-namespace FrontendObligationChecker.ViewModels;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
+[ExcludeFromCodeCoverage]
 public class LanguageSwitcherModel
 {
     public CultureInfo? CurrentCulture { get; set; }

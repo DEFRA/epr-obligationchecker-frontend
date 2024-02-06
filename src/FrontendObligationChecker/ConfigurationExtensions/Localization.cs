@@ -1,8 +1,10 @@
 ﻿namespace FrontendObligationChecker.ConfigurationExtensions;
 
+using System.Diagnostics.CodeAnalysis;
 using Constants;
 using Microsoft.AspNetCore.Localization;
 
+[ExcludeFromCodeCoverage]
 public static class Localization
 {
     public static IServiceCollection ConfigureLocalization(this IServiceCollection services)

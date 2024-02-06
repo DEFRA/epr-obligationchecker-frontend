@@ -1,73 +1,71 @@
-﻿using System.Security.Cryptography;
+﻿namespace FrontendObligationChecker.Middleware;
 
-using FrontendObligationChecker.Models;
+using System.Security.Cryptography;
+using Models;
 
-namespace FrontendObligationChecker.Middleware
+public class SecurityHeaderMiddleware
 {
-    public class SecurityHeaderMiddleware
+    private const int DefaultBytesInNonce = 32;
+
+    private readonly RequestDelegate _next;
+    private readonly RandomNumberGenerator _random = RandomNumberGenerator.Create();
+
+    public SecurityHeaderMiddleware(RequestDelegate next)
     {
-        private const int DefaultBytesInNonce = 32;
+        _next = next;
+    }
 
-        private readonly RequestDelegate _next;
-        private readonly RandomNumberGenerator _random = RandomNumberGenerator.Create();
+    public async Task Invoke(HttpContext httpContext)
+    {
+        var scriptNonce = GenerateNonce();
 
-        public SecurityHeaderMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        const string permissionsPolicy = "accelerometer=(),ambient-light-sensor=(),autoplay=(),battery=(),camera=(),display-capture=()," +
+            "document-domain=(),encrypted-media=(),fullscreen=(),gamepad=(),geolocation=(),gyroscope=()," +
+            "layout-animations=(self),legacy-image-formats=(self),magnetometer=(),microphone=(),midi=()," +
+            "oversized-images=(self),payment=(),picture-in-picture=(),publickey-credentials-get=(),speaker-selection=()," +
+            "sync-xhr=(self),unoptimized-images=(self),unsized-media=(self),usb=(),screen-wake-lock=(),web-share=(),xr-spatial-tracking=()";
 
-        public async Task Invoke(HttpContext httpContext)
-        {
-            var scriptNonce = GenerateNonce();
+        httpContext.Response.Headers.Add("Content-Security-Policy", GetContentSecurityPolicyHeader(scriptNonce));
+        httpContext.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
+        httpContext.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
+        httpContext.Response.Headers.Add("Cross-Origin-Resource-Policy", "same-origin");
+        httpContext.Response.Headers.Add("Permissions-Policy", permissionsPolicy);
+        httpContext.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");
+        httpContext.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        httpContext.Response.Headers.Add("X-Frame-Options", "deny");
+        httpContext.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
+        httpContext.Response.Headers.Add("X-Robots-Tag", "noindex, nofollow");
 
-            const string permissionsPolicy = "accelerometer=(),ambient-light-sensor=(),autoplay=(),battery=(),camera=(),display-capture=()," +
-                "document-domain=(),encrypted-media=(),fullscreen=(),gamepad=(),geolocation=(),gyroscope=()," +
-                "layout-animations=(self),legacy-image-formats=(self),magnetometer=(),microphone=(),midi=()," +
-                "oversized-images=(self),payment=(),picture-in-picture=(),publickey-credentials-get=(),speaker-selection=()," +
-                "sync-xhr=(self),unoptimized-images=(self),unsized-media=(self),usb=(),screen-wake-lock=(),web-share=(),xr-spatial-tracking=()";
+        httpContext.Items[ContextKeys.ScriptNonceKey] = scriptNonce;
 
-            httpContext.Response.Headers.Add("Content-Security-Policy", GetContentSecurityPolicyHeader(scriptNonce));
-            httpContext.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
-            httpContext.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
-            httpContext.Response.Headers.Add("Cross-Origin-Resource-Policy", "same-origin");
-            httpContext.Response.Headers.Add("Permissions-Policy", permissionsPolicy);
-            httpContext.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");
-            httpContext.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-            httpContext.Response.Headers.Add("X-Frame-Options", "deny");
-            httpContext.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
-            httpContext.Response.Headers.Add("X-Robots-Tag", "noindex, nofollow");
+        await _next(httpContext);
+    }
 
-            httpContext.Items[ContextKeys.ScriptNonceKey] = scriptNonce;
+    private static string GetContentSecurityPolicyHeader(string scriptNonce)
+    {
+        const string defaultSrc = "default-src 'self'";
+        const string objectSrc = "object-src 'none'";
+        const string frameAncestors = "frame-ancestors 'none'";
+        const string upgradeInsecureRequests = "upgrade-insecure-requests";
+        const string blockAllMixedContent = "block-all-mixed-content";
+        const string imgSrc = "img-src 'self' www.googletagmanager.com https://ssl.gstatic.com https://www.gstatic.com " +
+            "https://*.google-analytics.com https://*.googletagmanager.com";
+        string scriptSrc = $"script-src 'self' 'nonce-{scriptNonce}' https://tagmanager.google.com https://*.googletagmanager.com";
+        const string formAction = "form-action 'self'";
+        const string styleSrc = "style-src 'self' https://tagmanager.google.com https://fonts.googleapis.com";
+        const string fontSrc = "font-src 'self' https://fonts.gstatic.com data:";
+        const string connectSrc = "connect-src 'self' https://*.google-analytics.com " +
+            "https://*.analytics.google.com https://*.googletagmanager.com";
 
-            await _next(httpContext);
-        }
+        return string.Join(";", defaultSrc, objectSrc, frameAncestors, upgradeInsecureRequests,
+            blockAllMixedContent, scriptSrc, imgSrc, formAction, styleSrc, fontSrc, connectSrc);
+    }
 
-        private static string GetContentSecurityPolicyHeader(string scriptNonce)
-        {
-            const string defaultSrc = "default-src 'self'";
-            const string objectSrc = "object-src 'none'";
-            const string frameAncestors = "frame-ancestors 'none'";
-            const string upgradeInsecureRequests = "upgrade-insecure-requests";
-            const string blockAllMixedContent = "block-all-mixed-content";
-            const string imgSrc = "img-src 'self' www.googletagmanager.com https://ssl.gstatic.com https://www.gstatic.com " +
-                "https://*.google-analytics.com https://*.googletagmanager.com";
-            string scriptSrc = $"script-src 'self' 'nonce-{scriptNonce}' https://tagmanager.google.com https://*.googletagmanager.com";
-            const string formAction = "form-action 'self'";
-            const string styleSrc = "style-src 'self' https://tagmanager.google.com https://fonts.googleapis.com";
-            const string fontSrc = "font-src 'self' https://fonts.gstatic.com data:";
-            const string connectSrc = "connect-src 'self' https://*.google-analytics.com " +
-                "https://*.analytics.google.com https://*.googletagmanager.com";
+    private string GenerateNonce()
+    {
+        var bytes = new byte[DefaultBytesInNonce];
+        _random.GetBytes(bytes);
 
-            return string.Join(";", defaultSrc, objectSrc, frameAncestors, upgradeInsecureRequests,
-                blockAllMixedContent, scriptSrc, imgSrc, formAction, styleSrc, fontSrc, connectSrc);
-        }
-
-        private string GenerateNonce()
-        {
-            var bytes = new byte[DefaultBytesInNonce];
-            _random.GetBytes(bytes);
-
-            return Convert.ToBase64String(bytes);
-        }
+        return Convert.ToBase64String(bytes);
     }
 }

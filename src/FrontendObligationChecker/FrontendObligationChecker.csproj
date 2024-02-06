@@ -36,6 +36,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
       <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
       <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.8" />
@@ -122,6 +123,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>AmountOfPackaging.en.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\LargeProducerRegister\LargeProducerError.cy.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LargeProducerError.cy.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\LargeProducerRegister\LargeProducerError.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LargeProducerError.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -137,6 +146,11 @@
         <SonarQubeSetting Include="sonar.coverage.exclusions">
             <Value>**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**</Value>
         </SonarQubeSetting>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\LargeProducerRegister\LargeProducerError.cshtml" />
     </ItemGroup>
     
 </Project>

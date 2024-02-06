@@ -92,8 +92,8 @@
   <data name="Accessibility.TheTestWasCarriedOut" xml:space="preserve">
     <value>The test was carried out by the Digital Accessibility Centre to the WCAG 2.1 standard.</value>
   </data>
-  <data name="Accessibility.ThePublicListOfLargeOrganisations" xml:space="preserve">
-    <value>The public list of large organisations is part of the ‘report packaging data’ service.</value>
+  <data name="Accessibility.ThePublicListOfLargeProducers" xml:space="preserve">
+    <value>The public list of large producers is part of the ‘report packaging data’ service.</value>
   </data>
   <data name="Accessibility.ThisStatementWasPrepared" xml:space="preserve">
     <value>This statement was prepared on</value>
@@ -102,13 +102,13 @@
     <value>This website is partially compliant with the</value>
   </data>
   <data name="Accessibility.ThisWebsiteIsRun" xml:space="preserve">
-    <value>This website is run by the Department for Environment, Food and Rural Affairs (Defra).</value>
+    <value>This is run by the Department for Environment, Food and Rural Affairs (Defra).</value>
   </data>
   <data name="Accessibility.ThisWebsiteWas" xml:space="preserve">
     <value>This website was last tested on</value>
   </data>
   <data name="Accessibility.Title" xml:space="preserve">
-    <value>Accessibility statement - large organisations on the ‘report packaging data’ service</value>
+    <value>Accessibility statement - large producers on the ‘report packaging data’ service</value>
   </data>
   <data name="Accessibility.WebContentAccessibility" xml:space="preserve">
     <value>Web Content Accessibility Guidelines version 2.1 AA standard</value>

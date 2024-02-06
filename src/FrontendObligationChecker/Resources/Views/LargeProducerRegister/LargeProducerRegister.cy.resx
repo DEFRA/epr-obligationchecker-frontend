@@ -5,7 +5,7 @@
         <xsd:element name="root" msdata:IsDataSet="true">
         </xsd:element>
     </xsd:schema>
-    
+
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -19,10 +19,61 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
 
-    <data name="title" xml:space="preserve">
-        <value>W_Large organisations on the ‘report packaging data’ service</value>
+    <data name="LargeProducerRegister.Title" xml:space="preserve">
+        <value>W_Public list of large producers on the ‘report packaging data’ service</value>
     </data>
-    <data name="paragraph" xml:space="preserve">
-        <value>W_To edit later.</value>
+    <data name="LargeProducerRegister.BeforeYouStart" xml:space="preserve">
+        <value>W_Before you start, </value>
+    </data>
+    <data name="LargeProducerRegister.FindOutWhatThisLinkIsForLink" xml:space="preserve">
+        <value>W_find out what this list is for and how to use it</value>
+    </data>
+    <data name="LargeProducerRegister.PublicRegisterPostLink" xml:space="preserve">
+        <value>W_.</value>
+    </data>
+    <data name="LargeProducerRegister.ForAnythingBeforeReportingYear" xml:space="preserve">
+        <value>W_For anything before reporting year 2023, use the </value>
+    </data>
+    <data name="LargeProducerRegister.WhoIsAffectedPostLink" xml:space="preserve">
+        <value>W_.</value>
+    </data>
+    <data name="LargeProducerRegister.PublicRegisterOfRegisteredProducersLink" xml:space="preserve">
+        <value>W_Public Register of Registered Producers on the National Packaging Waste Database (NPWD)</value>
+    </data>
+    <data name="LargeProducerRegister.ListOfLargeProducers" xml:space="preserve">
+        <value>W_List of large producers - download CSV files</value>
+    </data>
+    <data name="LargeProducerRegister.TheInformationIsInCsvFiles" xml:space="preserve">
+        <value>W_The information is in CSV files, depending on which environmental regulator the producer is reporting to</value>
+    </data>
+    <data name="LargeProducerRegister.EnglandLink" xml:space="preserve">
+        <value>W_Environment Agency - England</value>
+    </data>
+    <data name="LargeProducerRegister.NorthernIrelandLink" xml:space="preserve">
+        <value>W_Northern Ireland Environment Agency</value>
+    </data>
+    <data name="LargeProducerRegister.ScotlandLink" xml:space="preserve">
+        <value>W_Scottish Environment Protection Agency</value>
+    </data>
+    <data name="LargeProducerRegister.WalesLink" xml:space="preserve">
+        <value>W_Natural Resources Wales</value>
+    </data>
+    <data name="LargeProducerRegister.ThisInformationIsUsuallyUpdated" xml:space="preserve">
+        <value>W_This information is usually updated every day.</value>
+    </data>
+    <data name="LargeProducerRegister.AllFourRegulatorsLink" xml:space="preserve">
+        <value>W_All four regulators</value>
+    </data>
+    <data name="LargeProducerRegister.Disclaimer" xml:space="preserve">
+        <value>W_Disclaimer</value>
+    </data>
+    <data name="LargeProducerRegister.TheListsShowTheInformation" xml:space="preserve">
+        <value>W_The lists show the information that producers have submitted to the ‘report packaging data’ service. This means that if a producer has submitted errors, the errors will be shown here.</value>
+    </data>
+    <data name="LargeProducerRegister.SomeFieldsMayBeBlank" xml:space="preserve">
+        <value>W_Some fields may be blank. This could be because they do not apply to the producer in question.</value>
+    </data>
+    <data name="LargeProducerRegister.IfYoureUnsureAboutAnything" xml:space="preserve">
+        <value>W_If you’re unsure about anything, check with the producer directly.</value>
     </data>
 </root>

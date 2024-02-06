@@ -2,9 +2,6 @@
 using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
-using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.Models.Cookies;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.FeatureManagement;
 
@@ -12,12 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddFeatureManagement();
 
-builder.Services.Configure<EprCookieOptions>(builder.Configuration.GetSection(EprCookieOptions.ConfigSection));
-builder.Services.Configure<AnalyticsOptions>(builder.Configuration.GetSection(AnalyticsOptions.ConfigSection));
-builder.Services.Configure<PhaseBannerOptions>(builder.Configuration.GetSection(PhaseBannerOptions.ConfigSection));
-builder.Services.Configure<ExternalUrlsOptions>(builder.Configuration.GetSection(ExternalUrlsOptions.ConfigSection));
-builder.Services.Configure<EmailAddressOptions>(builder.Configuration.GetSection(EmailAddressOptions.ConfigSection));
-builder.Services.Configure<SiteDateOptions>(builder.Configuration.GetSection(SiteDateOptions.ConfigSection));
+builder.Services.ConfigureOptions(builder.Configuration);
 
 string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
 

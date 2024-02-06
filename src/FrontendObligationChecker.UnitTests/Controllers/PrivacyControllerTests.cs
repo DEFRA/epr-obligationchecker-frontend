@@ -1,17 +1,14 @@
-﻿using FluentAssertions;
+﻿namespace FrontendObligationChecker.UnitTests.Controllers;
 
+using FluentAssertions;
 using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.ViewModels;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
 using Moq;
-
-namespace FrontendObligationChecker.UnitTests.Controllers;
+using ViewModels;
 
 [TestClass]
 public class PrivacyControllerTests

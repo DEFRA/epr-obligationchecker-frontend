@@ -1,7 +1,4 @@
-﻿using FrontendObligationChecker.Models.ObligationChecker;
-using FrontendObligationChecker.ViewModels;
-
-namespace FrontendObligationChecker.UnitTests.Helpers;
+﻿namespace FrontendObligationChecker.UnitTests.Helpers;
 
 public enum TypeOfOrganisation
 {

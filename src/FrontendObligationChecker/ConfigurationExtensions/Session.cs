@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿namespace FrontendObligationChecker.ConfigurationExtensions;
 
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.DataProtection;
 using StackExchange.Redis;
 
-namespace FrontendObligationChecker.ConfigurationExtensions;
-
+[ExcludeFromCodeCoverage]
 public static class Session
 {
     public static IServiceCollection ConfigureSession(this IServiceCollection services, IConfiguration configuration)

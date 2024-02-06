@@ -1,6 +1,7 @@
-﻿using System.Text.Json;
+﻿namespace FrontendObligationChecker.Extensions;
 
-namespace FrontendObligationChecker.Extensions;
+using System.Text.Json;
+
 public static class SessionExtensions
 {
     public static async Task SetAsync<T>(this ISession session, string key, T value)

@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.Models.Config;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class EprCookieOptions
 {
     public const string ConfigSection = "COOKIE_OPTIONS";

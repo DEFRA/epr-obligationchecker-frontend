@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.ViewModels;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class AccessibilityViewModel : BaseViewModel
 {
     public string AbilityNetUrl { get; set; }

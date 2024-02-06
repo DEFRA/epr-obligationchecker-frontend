@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.Models.Config;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class ExternalUrlsOptions
 {
     public const string ConfigSection = "ExternalUrls";
@@ -31,4 +34,8 @@ public class ExternalUrlsOptions
     public string AccessibilityContactUs { get; set; }
 
     public string AccessibilityWebContentAccessibility { get; set; }
+
+    public string WhoIsAffectedAndWhatToDo { get; set; }
+
+    public string NpwdRegister { get; set; }
 }

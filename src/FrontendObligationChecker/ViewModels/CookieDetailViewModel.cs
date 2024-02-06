@@ -1,4 +1,8 @@
 ﻿namespace FrontendObligationChecker.ViewModels;
+
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class CookieDetailViewModel : BaseViewModel
 {
     public bool CookiesAccepted { get; set; }

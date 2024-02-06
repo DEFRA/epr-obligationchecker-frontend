@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿namespace FrontendObligationChecker.HealthChecks;
+
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace FrontendObligationChecker.HealthChecks;
 public static class HealthCheckOptionBuilder
 {
     public static HealthCheckOptions Build() => new()

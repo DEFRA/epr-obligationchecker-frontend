@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.ViewModels;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class PrivacyViewModel : BaseViewModel
 {
     public string DataProtectionPublicRegisterUrl { get; set; }

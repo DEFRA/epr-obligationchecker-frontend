@@ -1,22 +1,17 @@
-﻿using System.Net;
+﻿namespace FrontendObligationChecker.UnitTests.Services.Infrastructure;
 
 using FluentAssertions;
-
 using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.Models.Cookies;
 using FrontendObligationChecker.Services.Infrastructure;
 using FrontendObligationChecker.Services.Wrappers.Interfaces;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
-
 using Moq;
 
-namespace FrontendObligationChecker.UnitTests.Services.Infrastructure;
 [TestClass]
 public class CookieServiceTests
 {

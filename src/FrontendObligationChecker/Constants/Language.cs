@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.Constants;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public static class Language
 {
     public const string English = "en";
