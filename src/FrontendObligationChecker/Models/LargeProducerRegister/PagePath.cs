@@ -7,7 +7,7 @@ public static class PagePath
 {
     public const string LargeProducerRegister = "large-producers";
     public const string Report = "report";
-    public const string Error = "error";
+    public const string FileNotDownloaded = "file-not-downloaded";
     public const string Empty = "";
     public const string Culture = "culture";
     public const string Accessibility = LargeProducerRegister + "/accessibility";
