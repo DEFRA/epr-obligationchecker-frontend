@@ -34,4 +34,19 @@ public class BlobReader : IBlobReader
             throw new BlobReaderException(string.Format(ErrorMessage, fileName), ex);
         }
     }
+
+    public async Task<long> GetFileSizeInBytesAsync(string fileName)
+    {
+        try
+        {
+            var blobClient = _blobContainerClient.GetBlobClient(fileName);
+            var blobProperties = await blobClient.GetPropertiesAsync();
+            return blobProperties.Value.ContentLength;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, fileName);
+            throw new BlobReaderException(string.Format(ErrorMessage, fileName), ex);
+        }
+    }
 }

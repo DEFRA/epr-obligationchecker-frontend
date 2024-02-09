@@ -1,187 +1,114 @@
 @model PrivacyViewModel
 
 @{
-    ViewData["Title"] = "Privacy";
+    ViewData["Title"] = Localizer["Privacy.Title"];
+
+    var dataProtectionEmail = Model.DataProtectionEmail;
+    var defraGroupProtectionOfficerEmail = Model.DefraGroupProtectionOfficerEmail;
+    var localizerUseAboveAddr = Localizer["Privacy.UseAboveAddr"];
 }
 
 <div class="govuk-width-container">
     <main class="govuk-main-wrapper govuk-!-padding-top-4" id="main-content" role="main">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
-                
-                <h1 class="govuk-heading-l govuk-!-margin-bottom-4">@Localizer["Privacy.Title"]</h1>
-                <p class="govuk-body">@Localizer["Privacy.IfYouUse"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.BeTheDataController"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.BeResponsibleFor"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.PublishAndManage"]</li>
-                </ul>
-                <p class="govuk-body">
-                    @Localizer["Privacy.ADataController"]
-                    <a href="@Model.DataProtectionPublicRegisterUrl" class="govuk-link">@Localizer["Privacy.DataProtectionPublic"]</a>
-                </p>
-                <p class="govuk-body">@Localizer["Privacy.ThePersonalData"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">
-                        @Localizer["Privacy.YourInternetProtocol"]
-                        <a href="@Model.WebBrowserUrl" class="govuk-link">@Localizer["Privacy.WebBrowser"]</a>
-                        @Localizer["Privacy.YouUsed"]
-                    </li>
-                    <li class="govuk-body">
-                        @Localizer["Privacy.InformationOnHowYou"]
-                        <a asp-controller="Cookies" asp-action="Detail" asp-route-returnUrl="@Model.CurrentPage" class="govuk-link">@Localizer["Privacy.UsingCookies"]</a>
-                        @Localizer["Privacy.AndPageTagging"]
-                    </li>
-                    <li class="govuk-body">@Localizer["Privacy.QuestionsQueriesOrFeedback"]</li>
-                </ul>
-                <p class="govuk-body">
-                    @Localizer["Privacy.WhereYouProvide"]
-                    <a href="@Model.GoogleAnalyticsUrl" class="govuk-link">@Localizer["Privacy.GoogleAnalytics"]</a>
-                    @Localizer["Privacy.AndAzureSentinel"]
-                </p>
-                <p class="govuk-body">@Localizer["Privacy.GoogleAnalyticsProcesses"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.ThePagesYouVisit"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.HowLongYouSpend"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.HowYouGotTo"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.WhatYouClickOn"]</li>
-                </ul>
-                <p class="govuk-body">
-                    @Localizer["Privacy.WeMakeSure"]
-                    <a href="@Model.GoogleAnalyticsUrl" class="govuk-link">@Localizer["Privacy.GoogleAnalyticsIpAddressAnonymisation"]</a>
-                    @Localizer["Privacy.FeatureAndByRemoving"]
-                </p>
-                <p class="govuk-body">@Localizer["Privacy.WeWillNotCombine"]</p>
-                <p class="govuk-body"><a asp-controller="Cookies" asp-action="Detail" asp-route-returnUrl="@Model.CurrentPage" class="govuk-link">@Localizer["Privacy.FindOutMore"]</a></p>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhyWeNeedYourData"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.WeCollectYourPersonal"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.GatherFeedBack"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.RespondToAnyFeedback"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.MonitorUse"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.MonitorThePerformance"]</li>
-                </ul>
-                <p class="govuk-body">@Localizer["Privacy.WeUseTheInformation"]</p>
-                <p class="govuk-body">@Localizer["Privacy.WeDoThisToHelp"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.MakeSureThe"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.MakeImprovements"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.MakePerformanceImprovements"]</li>
-                </ul>
-                <p class="govuk-body">@Localizer["Privacy.WeCombineGoogleAnalytics"]</p>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.OurLegalBasis"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.TheLegalBasis"]</p>
-                <p class="govuk-body">@Localizer["Privacy.TheLegalBasisGoogleAnalytics"]</p>
-                <p class="govuk-body">@Localizer["Privacy.TheLegalBasisOther"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.ToPerformATask"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.InTheExerciseOf"]</li>
-                </ul>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhatWeDoWithYourData"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.TheDataWeCollect"]</p>
-                <p class="govuk-body">@Localizer["Privacy.WeWillShareYourData"]</p>
-                <p class="govuk-body">@Localizer["Privacy.TheDataWeCollectGoogleAnalytics"]</p>
-                <p class="govuk-body">@Localizer["Privacy.WeWillNot"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.SellOrRent"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.ShareYourData"]</li>
-                </ul>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.HowLongWeKeep"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.WeWillOnlyRetain"]</p>
-                <p class="govuk-body">@Localizer["Privacy.WeWill"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.KeepYourFeedbackData"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.DeleteAccessLogData"]</li>
-                </ul>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhereYourDataIsProcessed"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.WeDesignBuildAndRun"]</p>
-                <p class="govuk-body">
-                    @Localizer["Privacy.AllPersonalData"]
-                    <a href="@Model.EuropeanEconomicAreaUrl" class="govuk-link">@Localizer["Privacy.EuropeanEconomicArea"]</a>
-                    @Localizer["Privacy.DataCollectedByGoogleAnalytics"]
-                </p>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.HowWeProtect"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.WeAreCommitted"]</p>
-                <p class="govuk-body">@Localizer["Privacy.WeAlsoMakeSure"]</p>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.YourRights"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.YouHaveTheRightToRequest"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.InformationAbout"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.ACopyOf"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.ThatAnythingInaccurate"]</li>
-                </ul>
-                <p class="govuk-body">@Localizer["Privacy.YouCanAlso"]</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li class="govuk-body">@Localizer["Privacy.RaiseAnObjection"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.RequestThatYour"]</li>
-                    <li class="govuk-body">@Localizer["Privacy.AskThatTheProcessing"]</li>
-                </ul>
-                <p class="govuk-body">
-                    @Localizer["Privacy.IfYouHaveAny"]
-                    <a href="mailto:@Model.DataProtectionEmail" class="govuk-link">@Model.DataProtectionEmail</a>.
-                </p>
-
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.LinksToOtherWebsites"]</h2>
-                <p class="govuk-body">@Localizer["Privacy.ContainsLinksToOtherWebsites"]</p>
+                <h1 class="govuk-heading-l govuk-!-margin-bottom-4">@Localizer["Privacy.Heading"]</h1>
                 <p class="govuk-body">@Localizer["Privacy.ThisPrivacyNotice"]</p>
 
-                <h3 class="govuk-heading-s govuk-!-margin-top-6">@Localizer["Privacy.FollowingALinkToAnother"]</h3>
-                <p class="govuk-body">@Localizer["Privacy.IfYouGoTo"]</p>
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhoCollects"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.DefraAsDataProcessor"]</p>
+                <p class="govuk-body">@Localizer["Privacy.DefraCollects"]</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li class="govuk-body">@Localizer["Privacy.EA"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.SEPA"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.NRW"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.NIEA"]</li>
+                </ul>
+                <p class="govuk-body">@Localizer["Privacy.DefrasMainAddress"]</p>
+                <div class="govuk-inset-text">
+                    <p class="govuk-body  govuk-!-margin-bottom-2">
+                        <span class="govuk-heading-s govuk-!-margin-bottom-0">@SharedLocalizer["Defra"]</span>
+                    </p>
+                    <p class="govuk-body">
+                        Seacole Building<br />
+                        2 Marsham Street<br />
+                        London <br />
+                        SW1P 4DF
+                    </p>
+                </div>
+                <p class="govuk-body">
+                    @Localizer["Privacy.IfYouNeedFurtherInformation"]&nbsp;<a href="mailto:@dataProtectionEmail" class="govuk-link">@dataProtectionEmail</a>&nbsp;@localizerUseAboveAddr
+                </p>
+                <p class="govuk-body">
+                    @Localizer["Privacy.DataProtectOfficer"] <a href="mailto:@defraGroupProtectionOfficerEmail" class="govuk-link">@defraGroupProtectionOfficerEmail</a>&nbsp;@localizerUseAboveAddr
+                </p>
+                
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhatDataWeCollect"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.DefraWillCollectYour"]</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li class="govuk-body">@Localizer["Privacy.IP"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.InformationOnHow"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.Questions"]</li>
+                </ul>
+                <p class="govuk-body">@Localizer["Privacy.WeCollectThisDataAnd"]</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li class="govuk-body">@Localizer["Privacy.GatherFeedback"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.RespondToAnyFeedback"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.Monitor"]</li>
+                </ul>
+                
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhoWeShare"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.DefraWillShare"]</p>
+                <p class="govuk-body">@Localizer["Privacy.YouCanLearn"]</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li class="govuk-body"><a href="@Model.ScottishEnvironmentalProtectionAgencyUrl" class="govuk-link">@Localizer["Privacy.ScottishEnvironmentalProtectionAgency"]</a></li>
+                    <li class="govuk-body"><a href="@Model.NationalResourcesWalesUrl" class="govuk-link">@Localizer["Privacy.NationalResourcesWales"]</a></li>
+                    <li class="govuk-body"><a href="@Model.NorthernIrelandEnvironmentAgencyUrl" class="govuk-link">@Localizer["Privacy.NorthernIrelandEnvironmentAgency"]</a></li>
+                    <li class="govuk-body"><a href="@Model.EnvironmentAgencyUrl" class="govuk-link">@Localizer["Privacy.EnvironmentAgency"]</a></li>
+                </ul>
+                <p class="govuk-body">@Localizer["Privacy.DefraRespects"]</p>
 
-                <h3 class="govuk-heading-s govuk-!-margin-top-6">@Localizer["Privacy.FollowingALinkToGovUk"]</h3>
-                <p class="govuk-body">@Localizer["Privacy.IfYouComeTo"]</p>
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.HowLong"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.DefraWillKeep"]</p>
 
-                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.ContactUs"]</h2>
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.WhatHappens"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.IfYouDoNot"]</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.UseOfAutomated"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.NoAutomated"]:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li class="govuk-body">@Localizer["Privacy.AutomatedDecision"]</li>
+                    <li class="govuk-body">@Localizer["Privacy.Profiling"]</li>
+                </ul>
+                
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.Transfer"]</h2>
+                <p class="govuk-body">@Localizer["Privacy.DefraWillOnly"]</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.YourRights"]</h2>
                 <p class="govuk-body">
-                    <a href="@Model.DefrasPersonalInformationCharterUrl" class="govuk-link">@Localizer["Privacy.DefrasPersonal"]</a>
-                    @Localizer["Privacy.ExplainsDefrasStandards"]
+                    @Localizer["Privacy.FindOut"] 
+                    <a href="@Model.DataProtectionPublicRegisterUrl" class="govuk-link">@Localizer["Privacy.IndividualRights"]</a> 
+                    @Localizer["Privacy.UnderTheUK"] 
                 </p>
 
-                <h3 class="govuk-heading-s govuk-!-margin-top-6">@Localizer["Privacy.DefrasDataProtectionOfficer"]</h3>
-                <p class="govuk-body"><a href="mailto:@Model.DefraGroupProtectionOfficerEmail" class="govuk-link">@Model.DefraGroupProtectionOfficerEmail</a></p>
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.Complaints"]</h2>
                 <p class="govuk-body">
-                    Defra Group Data Protection Officer<br/>
-                    Department for Environment, Food and Rural Affairs<br/>
-                    SW Quarter, 2nd floor, Seacole Block<br/>
-                    2 Marsham Street<br/>
-                    London<br/>
-                    SW1P 4DF
+                    @Localizer["Privacy.YouHaveTheRight"] 
+                    <a href="@Model.InformationCommissionerUrl" class="govuk-link">@Localizer["Privacy.MakeAComplaint"]</a>
+                    @Localizer["Privacy.ToTheInformationCommissioner"]
                 </p>
-                <p class="govuk-body">@Localizer["Privacy.TheDpoProvides"]</p>
 
-                <h3 class="govuk-heading-s govuk-!-margin-top-6">@Localizer["Privacy.InformationCommissioner"]</h3>
+                <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.DefrasPersonal"]</h2>
                 <p class="govuk-body">
-                    @Localizer["Privacy.YouAlsoHave"]
-                    <a href="@Model.InformationCommissionerUrl" class="govuk-link">@Localizer["Privacy.InformationCommissioner"]</a>@Localizer["Privacy.WhoIsAnIndependent"]
-                </p>
-                <p class="govuk-body"><a href="mailto:@Model.InformationCommissionerEmail" class="govuk-link">@Model.InformationCommissionerEmail</a></p>
-                <p class="govuk-body">
-                    @Localizer["Privacy.Telephone"]: 0303 123 1113<br/>
-                    @Localizer["Privacy.Textphone"]: 01625 545860
-                </p>
-                <p class="govuk-body">
-                    @Localizer["Privacy.MondayToFriday"]<br/>
-                    <a href="@Model.FindOutAboutCallChargesUrl" class="govuk-link">@Localizer["Privacy.FindOutAboutCallCharges"]</a>
-                </p>
-                <p class="govuk-body">
-                    Information Commissioner’s Office<br/>
-                    Wycliffe House<br/>
-                    Water Lane<br/>
-                    Wilmslow<br/>
-                    Cheshire<br/>
-                    SK9 5AF
+                    @Localizer["Privacy.Defras"] 
+                    <a href="@Model.DefrasPersonalInformationCharterUrl" class="govuk-link">@Localizer["Privacy.PersonalInformationCharter"]</a> 
+                    @Localizer["Privacy.ExplainsMoreAbout"]
                 </p>
 
                 <h2 class="govuk-heading-m govuk-!-margin-top-6">@Localizer["Privacy.ChangesToThisPolicy"]</h2>
                 <p class="govuk-body">@Localizer["Privacy.WeMayChange"]</p>
-                <p class="govuk-body">@Localizer["Privacy.IfTheseChanges"]</p>
+                <p class="govuk-body">@Localizer["Privacy.InThatCase"]</p>
+                <p class="govuk-body">@Localizer["Privacy.AnyChanges"]</p>
                 <p class="govuk-body">@Localizer["Privacy.LastUpdated"]: @Model.LastUpdated</p>
             </div>
         </div>

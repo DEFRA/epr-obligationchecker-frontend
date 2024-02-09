@@ -16,6 +16,7 @@ public static class Options
         services.Configure<SiteDateOptions>(configuration.GetSection(SiteDateOptions.ConfigSection));
         services.Configure<StorageAccountOptions>(configuration.GetSection(StorageAccountOptions.ConfigSection));
         services.Configure<LargeProducerReportFileNamesOptions>(configuration.GetSection(LargeProducerReportFileNamesOptions.ConfigSection));
+        services.Configure<CachingOptions>(configuration.GetSection(CachingOptions.ConfigSection));
 
         return services;
     }

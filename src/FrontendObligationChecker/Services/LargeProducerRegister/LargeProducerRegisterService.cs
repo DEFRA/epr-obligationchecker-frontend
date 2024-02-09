@@ -1,7 +1,10 @@
 ﻿namespace FrontendObligationChecker.Services.LargeProducerRegister;
 
+using ByteSizeLib;
+using Constants;
 using Exceptions;
 using Extensions;
+using Helpers;
 using Interfaces;
 using Microsoft.Extensions.Options;
 using Models.Config;
@@ -11,6 +14,7 @@ public class LargeProducerRegisterService : ILargeProducerRegisterService
 {
     private const string ErrorMessage = "Failed to get report for nation code {0}";
     private const string LogMessage = "Failed to get report for nation code {NationCode}";
+    private const string LogMessageMetadata = "Failed to get report metadata";
 
     private readonly IBlobReader _blobReader;
     private readonly LargeProducerReportFileNamesOptions _largeProducerReportFileNamesConfig;
@@ -38,6 +42,47 @@ public class LargeProducerRegisterService : ILargeProducerRegisterService
             _logger.LogError(ex, LogMessage, nationCode);
             throw new LargeProducerRegisterServiceException(string.Format(ErrorMessage, nationCode), ex);
         }
+    }
 
+    public async Task<Dictionary<string, string>> GetAllReportFileSizesAsync()
+    {
+        var fileNameMapping = _largeProducerReportFileNamesConfig.GetAllNationCodeToFileNameMappings();
+
+        try
+        {
+            return new Dictionary<string, string>()
+            {
+                {
+                    HomeNation.England, FileSizeFormatterHelper.ConvertByteSizeToString(
+                        ByteSize.FromBytes(
+                            await _blobReader.GetFileSizeInBytesAsync(fileNameMapping[HomeNation.England])))
+                },
+                {
+                    HomeNation.Scotland, FileSizeFormatterHelper.ConvertByteSizeToString(
+                        ByteSize.FromBytes(
+                            await _blobReader.GetFileSizeInBytesAsync(fileNameMapping[HomeNation.Scotland])))
+                },
+                {
+                    HomeNation.Wales, FileSizeFormatterHelper.ConvertByteSizeToString(
+                        ByteSize.FromBytes(
+                            await _blobReader.GetFileSizeInBytesAsync(fileNameMapping[HomeNation.Wales])))
+                },
+                {
+                    HomeNation.NorthernIreland, FileSizeFormatterHelper.ConvertByteSizeToString(
+                        ByteSize.FromBytes(
+                            await _blobReader.GetFileSizeInBytesAsync(fileNameMapping[HomeNation.NorthernIreland])))
+                },
+                {
+                    HomeNation.All, FileSizeFormatterHelper.ConvertByteSizeToString(
+                        ByteSize.FromBytes(
+                            await _blobReader.GetFileSizeInBytesAsync(fileNameMapping[HomeNation.All])))
+                }
+            };
+        }
+        catch (BlobReaderException ex)
+        {
+            _logger.LogError(ex, LogMessageMetadata);
+            throw new LargeProducerRegisterServiceException(LogMessageMetadata, ex);
+        }
     }
 }

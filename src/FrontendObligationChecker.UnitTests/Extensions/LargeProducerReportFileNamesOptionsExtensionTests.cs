@@ -57,4 +57,41 @@ public class LargeProducerReportFileNamesOptionsExtensionTests
         // Assert
         act.Should().Throw<HomeNationInvalidException>();
     }
+
+    [TestMethod]
+    public void GetAllNationCodeToFileNameMappings_ReturnsCorrectDictionary()
+    {
+        // Arrange
+        var options = new LargeProducerReportFileNamesOptions
+        {
+            En = "en.csv",
+            Sc = "sc.csv",
+            Wl = "wl.csv",
+            Ni = "ni.csv",
+            All = "all.csv"
+        };
+
+        // Act
+        var result = options.GetAllNationCodeToFileNameMappings();
+
+        // Assert
+        var expectedValue = new Dictionary<string, string>()
+        {
+            {
+                HomeNation.England, "en.csv"
+            },
+            {
+                HomeNation.Scotland, "sc.csv"
+            },
+            {
+                HomeNation.Wales, "wl.csv"
+            },
+            {
+                HomeNation.NorthernIreland, "ni.csv"
+            },
+            {
+                HomeNation.All, "all.csv"
+            },
+        };
+    }
 }

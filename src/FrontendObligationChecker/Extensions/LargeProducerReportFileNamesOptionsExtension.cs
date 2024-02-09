@@ -21,4 +21,26 @@ public static class LargeProducerReportFileNamesOptionsExtension
         };
         return fileName;
     }
+
+    public static Dictionary<string, string> GetAllNationCodeToFileNameMappings(this LargeProducerReportFileNamesOptions options)
+    {
+        return new Dictionary<string, string>
+        {
+            {
+                HomeNation.England, GetFileNameFromNationCode(options, HomeNation.England)
+            },
+            {
+                HomeNation.Scotland, GetFileNameFromNationCode(options, HomeNation.Scotland)
+            },
+            {
+                HomeNation.Wales, GetFileNameFromNationCode(options, HomeNation.Wales)
+            },
+            {
+                HomeNation.NorthernIreland, GetFileNameFromNationCode(options, HomeNation.NorthernIreland)
+            },
+            {
+                HomeNation.All, GetFileNameFromNationCode(options, HomeNation.All)
+            }
+        };
+    }
 }

@@ -1,3 +1,5 @@
+@model LargeProducerRegisterViewModel
+
 @using FrontendObligationChecker.Constants
 @using FrontendObligationChecker.Models.Config
 @using Microsoft.Extensions.Options
@@ -27,25 +29,29 @@
                     <ul class="govuk-list">
                         <feature name="@FeatureFlags.EnglandNationDownloadLink">
                             <li>
-                                @Html.ActionLink(Localizer["LargeProducerRegister.EnglandLink"].Value,
+                                @Html.ActionLink(
+                                    string.Format(Localizer["LargeProducerRegister.EnglandLink"].Value,
+                                    Model.HomeNationFileSizeMapping[HomeNation.England]),
                                     "File",
                                     "LargeProducerRegister",
                                     new {NationCode = HomeNation.England},
                                     new {@class = "govuk-link"})
-                            </li>
+                            </li> 
                         </feature>
                         <feature name="@FeatureFlags.WalesNationDownloadLink">
                             <li>
-                                @Html.ActionLink(Localizer["LargeProducerRegister.WalesLink"].Value,
+                                @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.WalesLink"].Value,
+                                    Model.HomeNationFileSizeMapping[HomeNation.Wales]),
                                     "File",
                                     "LargeProducerRegister",
-                                    new { NationCode = HomeNation.Wales },
-                                    new { @class = "govuk-link" })
+                                    new {NationCode = HomeNation.Wales},
+                                    new {@class = "govuk-link"})
                             </li>
                         </feature>
                         <feature name="@FeatureFlags.NorthernIrelandNationDownloadLink">
                             <li>
-                                @Html.ActionLink(Localizer["LargeProducerRegister.NorthernIrelandLink"].Value,
+                                @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.NorthernIrelandLink"].Value,
+                                    Model.HomeNationFileSizeMapping[HomeNation.NorthernIreland]),
                                     "File",
                                     "LargeProducerRegister",
                                     new {NationCode = HomeNation.NorthernIreland},
@@ -54,7 +60,8 @@
                         </feature>
                         <feature name="@FeatureFlags.ScotlandNationDownloadLink">
                             <li>
-                                @Html.ActionLink(Localizer["LargeProducerRegister.ScotlandLink"].Value,
+                                @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.ScotlandLink"].Value,
+                                    Model.HomeNationFileSizeMapping[HomeNation.Scotland]),
                                     "File",
                                     "LargeProducerRegister",
                                     new {NationCode = HomeNation.Scotland},
@@ -63,7 +70,8 @@
                         </feature>
                         <feature name="@FeatureFlags.AllNationsDownloadLink">
                             <li>
-                                @Html.ActionLink(Localizer["LargeProducerRegister.AllFourRegulatorsLink"].Value,
+                                @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.AllFourRegulatorsLink"].Value,
+                                    Model.HomeNationFileSizeMapping[HomeNation.All]),
                                     "File",
                                     "LargeProducerRegister",
                                     new {NationCode = HomeNation.All},

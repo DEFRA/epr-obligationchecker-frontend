@@ -47,22 +47,22 @@
         <value>W_The information is in CSV files, depending on which environmental regulator the producer is reporting to</value>
     </data>
     <data name="LargeProducerRegister.EnglandLink" xml:space="preserve">
-        <value>W_Environment Agency - England</value>
+        <value>W_Environment Agency - England (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.NorthernIrelandLink" xml:space="preserve">
-        <value>W_Northern Ireland Environment Agency</value>
+        <value>W_Northern Ireland Environment Agency (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.ScotlandLink" xml:space="preserve">
-        <value>W_Scottish Environment Protection Agency</value>
+        <value>W_Scottish Environment Protection Agency (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.WalesLink" xml:space="preserve">
-        <value>W_Natural Resources Wales</value>
+        <value>W_Natural Resources Wales (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.ThisInformationIsUsuallyUpdated" xml:space="preserve">
         <value>W_This information is usually updated every day.</value>
     </data>
     <data name="LargeProducerRegister.AllFourRegulatorsLink" xml:space="preserve">
-        <value>W_All four regulators</value>
+        <value>W_All four regulators (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.Disclaimer" xml:space="preserve">
         <value>W_Disclaimer</value>

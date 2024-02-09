@@ -19,6 +19,8 @@ builder.Services.AddAntiforgery(opts =>
     opts.Cookie.Path = pathBase;
 });
 
+builder.Services.AddMemoryCache();
+
 builder.Services
     .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
     .AddViewLocalization()

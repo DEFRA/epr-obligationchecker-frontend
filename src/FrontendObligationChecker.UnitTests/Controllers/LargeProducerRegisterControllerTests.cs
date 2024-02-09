@@ -4,12 +4,18 @@ using Constants;
 using Exceptions;
 using FluentAssertions;
 using FrontendObligationChecker.Controllers;
+using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Services.LargeProducerRegister.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
+
 using Moq;
+using ViewModels;
 
 [TestClass]
 public class LargeProducerRegisterControllerTests
@@ -24,29 +30,66 @@ public class LargeProducerRegisterControllerTests
     private Mock<IFeatureManager> _featureManager;
 
     private LargeProducerRegisterController _systemUnderTest;
+    private IOptions<CachingOptions> _cachingOptions;
+    private IMemoryCache _memoryCache;
 
     [TestInitialize]
     public void TestInitialize()
     {
         _largeProducerRegisterService = new Mock<ILargeProducerRegisterService>();
         _logger = new Mock<ILogger<LargeProducerRegisterController>>();
+        var services = new ServiceCollection();
+        services.AddMemoryCache();
+        var serviceProvider = services.BuildServiceProvider();
+        _memoryCache = serviceProvider.GetService<IMemoryCache>();
         _featureManager = new Mock<IFeatureManager>();
-
         _featureManager.Setup(x => x.IsEnabledAsync(It.IsRegex(NationLinkFeatureFlagRegex))).ReturnsAsync(true);
+        _cachingOptions = Options.Create(
+            new CachingOptions()
+            {
+                ProducerReportFileSizeDays = 1
+            });
+    }
 
-        _systemUnderTest = new LargeProducerRegisterController(_largeProducerRegisterService.Object, _logger.Object,
-            _featureManager.Object);
+    private LargeProducerRegisterController GetSystemUnderTest()
+    {
+        return new LargeProducerRegisterController(_largeProducerRegisterService.Object, _logger.Object, _featureManager.Object, _memoryCache, _cachingOptions);
     }
 
     [TestMethod]
     public async Task Get_ReturnsLargeProducerRegisterView_WhenCalled()
     {
         // Arrange
+        _largeProducerRegisterService.Setup(x => x.GetAllReportFileSizesAsync())
+            .ReturnsAsync(GetFileSizeMappingDictionary());
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.Get() as ViewResult;
 
         // Assert
+        result.Should().NotBeNull();
+        LargeProducerRegisterViewModel viewModel = (LargeProducerRegisterViewModel)result.ViewData.Model;
+        viewModel.HomeNationFileSizeMapping.Should().BeEquivalentTo(GetFileSizeMappingDictionary());
+        result.ViewName.Should().Be("LargeProducerRegister");
+        _largeProducerRegisterService.Verify(x => x.GetAllReportFileSizesAsync(), Times.Once);
+    }
+
+    [TestMethod]
+    public async Task Get_ReturnsLargeProducerRegisterView_WhenCalledAndCacheExists()
+    {
+        // Arrange
+        _largeProducerRegisterService.Setup(x => x.GetAllReportFileSizesAsync())
+            .ReturnsAsync(GetFileSizeMappingDictionary());
+        _memoryCache.Set("FileSizeMetadataCacheKey", GetFileSizeMappingDictionary());
+        _systemUnderTest = GetSystemUnderTest();
+
+        // Act
+        var result = await _systemUnderTest.Get() as ViewResult;
+
+        // Assert
+        LargeProducerRegisterViewModel viewModel = (LargeProducerRegisterViewModel)result.ViewData.Model;
+        viewModel.HomeNationFileSizeMapping.Should().BeEquivalentTo(GetFileSizeMappingDictionary());
         result.Should().NotBeNull();
         result.ViewName.Should().Be("LargeProducerRegister");
     }
@@ -65,6 +108,7 @@ public class LargeProducerRegisterControllerTests
 
         _largeProducerRegisterService.Setup(x => x.GetReportAsync(It.IsAny<string>()))
             .ReturnsAsync((memoryStream, fileName));
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.File(nationCode) as FileStreamResult;
@@ -86,6 +130,7 @@ public class LargeProducerRegisterControllerTests
         // Arrange
         _largeProducerRegisterService.Setup(x => x.GetReportAsync(It.IsAny<string>()))
             .ThrowsAsync(new LargeProducerRegisterServiceException());
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.File(nationCode) as RedirectToActionResult;
@@ -107,6 +152,7 @@ public class LargeProducerRegisterControllerTests
         _largeProducerRegisterService.Setup(x => x.GetReportAsync(It.IsAny<string>()))
             .ThrowsAsync(new LargeProducerRegisterServiceException());
         _featureManager.Setup(x => x.IsEnabledAsync(It.IsRegex(featureFlag))).ReturnsAsync(false);
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.File(nationCode) as NotFoundResult;
@@ -124,6 +170,7 @@ public class LargeProducerRegisterControllerTests
 
         _largeProducerRegisterService.Setup(x => x.GetReportAsync(It.IsAny<string>()))
             .ThrowsAsync(new LargeProducerRegisterServiceException());
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.File(nationCode) as NotFoundResult;
@@ -142,6 +189,7 @@ public class LargeProducerRegisterControllerTests
     public async Task GetFileNotDownloaded_ReturnsLargeProducerErrorView_WhenCalledWithValidHomeNation(string nationCode)
     {
         // Arrange
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.FileNotDownloaded(nationCode) as ViewResult;
@@ -156,6 +204,7 @@ public class LargeProducerRegisterControllerTests
     {
         // Arrange
         const string nationCode = "XX";
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.FileNotDownloaded(nationCode) as NotFoundResult;
@@ -175,6 +224,7 @@ public class LargeProducerRegisterControllerTests
     {
         // Arrange
         _featureManager.Setup(x => x.IsEnabledAsync(It.IsRegex(featureFlag))).ReturnsAsync(false);
+        _systemUnderTest = GetSystemUnderTest();
 
         // Act
         var result = await _systemUnderTest.FileNotDownloaded(nationCode) as NotFoundResult;
@@ -182,5 +232,27 @@ public class LargeProducerRegisterControllerTests
         // Assert
         result.StatusCode.Should().Be(StatusCodes.Status404NotFound);
         _logger.VerifyLog(logger => logger.LogError(new ArgumentException(DisabledArgumentExceptionLog), InvalidArgumentExceptionLog, nationCode), Times.Once);
+    }
+
+    private static Dictionary<string, string> GetFileSizeMappingDictionary()
+    {
+        return new Dictionary<string, string>()
+        {
+            {
+                HomeNation.England, "10MB"
+            },
+            {
+                HomeNation.Scotland, "10KB"
+            },
+            {
+                HomeNation.Wales, "10MB"
+            },
+            {
+                HomeNation.NorthernIreland, "10MB"
+            },
+            {
+                HomeNation.All, "10MB"
+            }
+        };
     }
 }

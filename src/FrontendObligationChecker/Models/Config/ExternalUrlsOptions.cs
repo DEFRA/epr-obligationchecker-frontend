@@ -23,6 +23,14 @@ public class ExternalUrlsOptions
 
     public string PrivacyFindOutAboutCallCharges { get; set; }
 
+    public string PrivacyScottishEnvironmentalProtectionAgency { get; set; }
+
+    public string PrivacyNationalResourcesWales { get; set; }
+
+    public string PrivacyNorthernIrelandEnvironmentAgency { get; set; }
+
+    public string PrivacyEnvironmentAgency { get; set; }
+
     public string StartPage { get; set; }
 
     public string GovUkHome { get; set; }

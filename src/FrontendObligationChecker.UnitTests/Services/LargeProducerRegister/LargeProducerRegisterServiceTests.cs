@@ -70,6 +70,56 @@ public class LargeProducerRegisterServiceTests
         // Assert
         act.Should().ThrowAsync<LargeProducerRegisterServiceException>();
         _logger.VerifyLog(logger => logger.LogError(logMessage, nationCode), Times.Once);
+    }
 
+    [TestMethod]
+    public async Task GetAllReportFileSizesAsync_ReturnsCorrectDirectory()
+    {
+        // Arrange
+        var expected = new Dictionary<string, string>()
+        {
+            {
+                HomeNation.England, "1KB"
+            },
+            {
+                HomeNation.Scotland, "2KB"
+            },
+            {
+                HomeNation.Wales, "3KB"
+            },
+            {
+                HomeNation.NorthernIreland, "4KB"
+            },
+            {
+                HomeNation.All, "5KB"
+            },
+        };
+
+        _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync("en.csv")).ReturnsAsync(1000);
+        _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync("sc.csv")).ReturnsAsync(2000);
+        _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync("wl.csv")).ReturnsAsync(3000);
+        _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync("ni.csv")).ReturnsAsync(4000);
+        _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync("all.csv")).ReturnsAsync(5000);
+
+        // Act
+        var result = await _systemUnderTest.GetAllReportFileSizesAsync();
+
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+
+    [TestMethod]
+    public async Task GetAllReportFileSizesAsync_BlobReaderThrowsBlobReaderException_ThrowLargeProducerRegisterServiceException()
+    {
+        // Arrange
+        const string logMessage = "Failed to get report metadata";
+        _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync(It.IsAny<string>())).ThrowsAsync(new BlobReaderException());
+
+        // Act
+        var act = () => _systemUnderTest.GetAllReportFileSizesAsync();
+
+        // Assert
+        act.Should().ThrowAsync<LargeProducerRegisterServiceException>();
+        _logger.VerifyLog(logger => logger.LogError(logMessage), Times.Once);
     }
 }

@@ -26,4 +26,12 @@ public class PrivacyViewModel : BaseViewModel
     public string InformationCommissionerEmail { get; set; }
 
     public string LastUpdated { get; set; }
+
+    public string ScottishEnvironmentalProtectionAgencyUrl { get; set; }
+
+    public string NationalResourcesWalesUrl { get; set; }
+
+    public string NorthernIrelandEnvironmentAgencyUrl { get; set; }
+
+    public string EnvironmentAgencyUrl { get; set; }
 }

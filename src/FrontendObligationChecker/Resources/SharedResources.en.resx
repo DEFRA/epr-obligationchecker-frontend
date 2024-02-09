@@ -123,4 +123,7 @@
     <data name="Disclaimer" xml:space="preserve">
         <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice. Please consult the Extended Producer Responsibility for Packaging legislation for comprehensive legal guidance on obligations and responsibilities.</value>
     </data>
+    <data name="Defra" xml:space="preserve">
+        <value>Department for Environment, Food and Rural Affairs</value>
+    </data>
 </root>
