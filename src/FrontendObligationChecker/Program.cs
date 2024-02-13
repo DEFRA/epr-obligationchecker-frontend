@@ -61,6 +61,7 @@ else
 }
 
 app.UseMiddleware<SecurityHeaderMiddleware>();
+app.UseSession();
 
 // This must be put after security headers middleware to prevent executing it twice when error page is rendered
 app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
@@ -70,7 +71,6 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 app.UseRequestLocalization();
-app.UseSession();
 app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
 app.MapControllers();
