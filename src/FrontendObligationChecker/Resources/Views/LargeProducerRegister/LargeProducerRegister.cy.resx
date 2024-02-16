@@ -20,60 +20,61 @@
     </resheader>
 
     <data name="LargeProducerRegister.Title" xml:space="preserve">
-        <value>W_Public list of large producers on the ‘report packaging data’ service</value>
+        <value>Cynhyrchwyr mawr ar y gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’</value>
     </data>
     <data name="LargeProducerRegister.BeforeYouStart" xml:space="preserve">
-        <value>W_Before you start, </value>
+        <value>Cyn ichi ddechrau, </value>
     </data>
     <data name="LargeProducerRegister.FindOutWhatThisLinkIsForLink" xml:space="preserve">
-        <value>W_find out what this list is for and how to use it</value>
+        <value>darllenwch beth yw’r rhestr a sut i’w defnyddio</value>
     </data>
     <data name="LargeProducerRegister.PublicRegisterPostLink" xml:space="preserve">
-        <value>W_.</value>
+        <value>.</value>
     </data>
     <data name="LargeProducerRegister.ForAnythingBeforeReportingYear" xml:space="preserve">
-        <value>W_For anything before reporting year 2023, use the </value>
+        <value>Ar gyfer unrhyw beth cyn blwyddyn adrodd 2023, defnyddiwch y </value>
     </data>
     <data name="LargeProducerRegister.WhoIsAffectedPostLink" xml:space="preserve">
-        <value>W_.</value>
+        <value>.</value>
     </data>
     <data name="LargeProducerRegister.PublicRegisterOfRegisteredProducersLink" xml:space="preserve">
-        <value>W_Public Register of Registered Producers on the National Packaging Waste Database (NPWD)</value>
+        <value>Gofrestr Gyhoeddus o Gynhyrchwyr Cofrestredig ar y Gronfa Ddata Gwastraff Pecynwaith Genedlaethol (NPWD)</value>
     </data>
     <data name="LargeProducerRegister.ListOfLargeProducers" xml:space="preserve">
-        <value>W_List of large producers - download CSV files</value>
+        <value>Rhestr o cynhyrchwyr mawr - lawrlwytho ffeiliau CSV</value>
     </data>
     <data name="LargeProducerRegister.TheInformationIsInCsvFiles" xml:space="preserve">
-        <value>W_The information is in CSV files, depending on which environmental regulator the producer is reporting to</value>
+        <value>Mae’r wybodaeth mewn ffeiliau CSV, gan ddibynnu ar ba reoleiddiwr amgylcheddol mae’r sefydliad yn cyflwyno’i adroddiadau iddo.</value>
     </data>
     <data name="LargeProducerRegister.EnglandLink" xml:space="preserve">
-        <value>W_Environment Agency - England (CSV, {0})</value>
+        <value>Asiantaeth yr Amgylchedd (Lloegr) (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.NorthernIrelandLink" xml:space="preserve">
-        <value>W_Northern Ireland Environment Agency (CSV, {0})</value>
+        <value>Asiantaeth Amgylchedd Gogledd Iwerddon (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.ScotlandLink" xml:space="preserve">
-        <value>W_Scottish Environment Protection Agency (CSV, {0})</value>
+        <value>Asiantaeth Diogelu Amgylchedd yr Alban (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.WalesLink" xml:space="preserve">
-        <value>W_Natural Resources Wales (CSV, {0})</value>
+        <value>Cyfoeth Naturiol Cymru (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.ThisInformationIsUsuallyUpdated" xml:space="preserve">
-        <value>W_This information is usually updated every day.</value>
+        <value>Mae’r wybodaeth yma yn cael ei diweddaru bob dydd fel arfer.</value>
     </data>
     <data name="LargeProducerRegister.AllFourRegulatorsLink" xml:space="preserve">
-        <value>W_All four regulators (CSV, {0})</value>
+        <value>Pob un o’r pedwar rheoleiddiwr (CSV, {0})</value>
     </data>
     <data name="LargeProducerRegister.Disclaimer" xml:space="preserve">
-        <value>W_Disclaimer</value>
+        <value>Ymwadiad</value>
     </data>
     <data name="LargeProducerRegister.TheListsShowTheInformation" xml:space="preserve">
-        <value>W_The lists show the information that producers have submitted to the ‘report packaging data’ service. This means that if a producer has submitted errors, the errors will be shown here.</value>
+        <value>Mae’r rhestrau’n dangos yr wybodaeth y mae cynhyrchwyr wedi’i chyflwyno i’r gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’. Mae hyn yn golygu, os oes sefydliad wedi cyflwyno gwallau y bydd y gwallau’n cael eu dangos yma.</value>
     </data>
     <data name="LargeProducerRegister.SomeFieldsMayBeBlank" xml:space="preserve">
-        <value>W_Some fields may be blank. This could be because they do not apply to the producer in question.</value>
+        <value>Gall rhai meysydd fod yn wag. Un rheswm posibl am hyn yw nad yw’r meysydd yn gymwys i’r cynhyrchydd dan sylw.
+</value>
     </data>
     <data name="LargeProducerRegister.IfYoureUnsureAboutAnything" xml:space="preserve">
-        <value>W_If you’re unsure about anything, check with the producer directly.</value>
+        <value>Os ydych chi’n ansicr ynglŷn ag unrhyw beth, gofynnwch i’r cynhyrchydd yn uniongyrchol.</value>
     </data>
 </root>

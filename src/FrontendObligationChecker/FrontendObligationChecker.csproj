@@ -133,6 +133,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>LargeProducerError.en.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResources.cy.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
