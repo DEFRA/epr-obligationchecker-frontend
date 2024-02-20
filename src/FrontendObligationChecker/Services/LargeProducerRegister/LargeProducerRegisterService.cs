@@ -30,9 +30,9 @@ public class LargeProducerRegisterService : ILargeProducerRegisterService
         _logger = logger;
     }
 
-    public async Task<(Stream Stream, string FileName)> GetReportAsync(string nationCode)
+    public async Task<(Stream Stream, string FileName)> GetReportAsync(string nationCode, string culture)
     {
-        var fileName = _largeProducerReportFileNamesConfig.GetFileNameFromNationCode(nationCode);
+        var fileName = _largeProducerReportFileNamesConfig.GetFileNameFromNationCodeAndCulture(nationCode, culture);
         try
         {
             return (await _blobReader.DownloadBlobToStreamAsync(fileName), fileName);
@@ -44,9 +44,9 @@ public class LargeProducerRegisterService : ILargeProducerRegisterService
         }
     }
 
-    public async Task<Dictionary<string, string>> GetAllReportFileSizesAsync()
+    public async Task<Dictionary<string, string>> GetAllReportFileSizesAsync(string culture)
     {
-        var fileNameMapping = _largeProducerReportFileNamesConfig.GetAllNationCodeToFileNameMappings();
+        var fileNameMapping = _largeProducerReportFileNamesConfig.GetAllNationCodeToFileNameMappings(culture);
 
         try
         {

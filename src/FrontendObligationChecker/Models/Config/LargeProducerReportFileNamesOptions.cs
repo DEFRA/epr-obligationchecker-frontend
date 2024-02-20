@@ -7,17 +7,32 @@ public class LargeProducerReportFileNamesOptions
     public const string ConfigSection = "LargeProducerReportFileNames";
 
     [Required]
-    public string En { get; set; }
+    public string EnglishReportFileName { get; set; }
 
     [Required]
-    public string Sc { get; set; }
+    public string ScottishReportFileName { get; set; }
 
     [Required]
-    public string Wl { get; set; }
+    public string WalesReportFileName { get; set; }
 
     [Required]
-    public string Ni { get; set; }
+    public string NorthernIrelandReportFileName { get; set; }
 
     [Required]
-    public string All { get; set; }
+    public string AllNationsReportFileName { get; set; }
+
+    [Required]
+    public string EnglishReportFileNameInWelsh { get; set; }
+
+    [Required]
+    public string ScottishReportFileNameInWelsh { get; set; }
+
+    [Required]
+    public string WalesReportFileNameInWelsh { get; set; }
+
+    [Required]
+    public string NorthernIrelandReportFileNameInWelsh { get; set; }
+
+    [Required]
+    public string AllNationsReportFileNameInWelsh { get; set; }
 }

@@ -8,6 +8,7 @@ using FrontendObligationChecker.Services.Session.Interfaces;
 using Microsoft.Extensions.Options;
 using Models.Config;
 using Readers;
+using Services.Caching;
 using Services.Infrastructure;
 using Services.Infrastructure.Interfaces;
 using Services.LargeProducerRegister;
@@ -31,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IPageService, PageService>();
         services.AddScoped<IBlobReader, BlobReader>();
         services.AddScoped<ILargeProducerRegisterService, LargeProducerRegisterService>();
+        services.AddScoped<ICacheService, CacheService>();
         services.AddSingleton(x =>
         {
             var storageAccountOptions = x.GetService<IOptions<StorageAccountOptions>>().Value;

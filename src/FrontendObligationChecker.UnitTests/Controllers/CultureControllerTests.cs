@@ -11,7 +11,7 @@ using Moq;
 public class CultureControllerTests
 {
     private const string ReturnUrl = "returnUrl";
-    private const string CultureEn = "en";
+    private const string CultureEn = Language.English;
     private Mock<IResponseCookies>? _responseCookiesMock;
     private Mock<ISession> _sessionMock;
     private Mock<HttpContext>? _httpContextMock;

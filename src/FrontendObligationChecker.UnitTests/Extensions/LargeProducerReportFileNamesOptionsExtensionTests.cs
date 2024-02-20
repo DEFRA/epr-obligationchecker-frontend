@@ -1,5 +1,6 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Extensions;
 
+using System.Runtime.InteropServices;
 using Constants;
 using Exceptions;
 using FluentAssertions;
@@ -22,15 +23,15 @@ public class LargeProducerReportFileNamesOptionsExtensionTests
         // Arrange
         var options = new LargeProducerReportFileNamesOptions
         {
-            En = "en.csv",
-            Sc = "sc.csv",
-            Wl = "wl.csv",
-            Ni = "ni.csv",
-            All = "all.csv"
+            EnglishReportFileName = "en.csv",
+            ScottishReportFileName = "sc.csv",
+            WalesReportFileName = "wl.csv",
+            NorthernIrelandReportFileName = "ni.csv",
+            AllNationsReportFileName = "all.csv"
         };
 
         // Act
-        var result = options.GetFileNameFromNationCode(nationCode);
+        var result = options.GetFileNameFromNationCodeAndCulture(nationCode, Language.English);
 
         // Assert
         result.Should().Be(fileName);
@@ -44,37 +45,37 @@ public class LargeProducerReportFileNamesOptionsExtensionTests
         // Arrange
         var options = new LargeProducerReportFileNamesOptions
         {
-            En = "en.csv",
-            Sc = "sc.csv",
-            Wl = "wl.csv",
-            Ni = "ni.csv",
-            All = "all.csv"
+            EnglishReportFileName = "en.csv",
+            ScottishReportFileName = "sc.csv",
+            WalesReportFileName = "wl.csv",
+            NorthernIrelandReportFileName = "ni.csv",
+            AllNationsReportFileName = "all.csv"
         };
 
         // Act
-        var act = () => options.GetFileNameFromNationCode(nationCode);
+        var act = () => options.GetFileNameFromNationCodeAndCulture(nationCode, Language.English);
 
         // Assert
         act.Should().Throw<HomeNationInvalidException>();
     }
 
     [TestMethod]
-    public void GetAllNationCodeToFileNameMappings_ReturnsCorrectDictionary()
+    public void GetAllNationCodeToFileNameMappings_ReturnsCorrectEnDictionary()
     {
         // Arrange
         var options = new LargeProducerReportFileNamesOptions
         {
-            En = "en.csv",
-            Sc = "sc.csv",
-            Wl = "wl.csv",
-            Ni = "ni.csv",
-            All = "all.csv"
+            EnglishReportFileName = "en.csv",
+            ScottishReportFileName = "sc.csv",
+            WalesReportFileName = "wl.csv",
+            NorthernIrelandReportFileName = "ni.csv",
+            AllNationsReportFileName = "all.csv",
+            EnglishReportFileNameInWelsh = "ency.csv",
+            ScottishReportFileNameInWelsh = "sccy.csv",
+            WalesReportFileNameInWelsh = "wlcy.csv",
+            NorthernIrelandReportFileNameInWelsh = "nicy.csv",
+            AllNationsReportFileNameInWelsh = "allcy.csv"
         };
-
-        // Act
-        var result = options.GetAllNationCodeToFileNameMappings();
-
-        // Assert
         var expectedValue = new Dictionary<string, string>()
         {
             {
@@ -93,5 +94,54 @@ public class LargeProducerReportFileNamesOptionsExtensionTests
                 HomeNation.All, "all.csv"
             },
         };
+
+        // Act
+        var result = options.GetAllNationCodeToFileNameMappings(Language.English);
+
+        // Assert
+        result.Should().BeEquivalentTo(expectedValue);
+    }
+
+    [TestMethod]
+    public void GetAllNationCodeToFileNameMappings_ReturnsCorrectWelshDictionary()
+    {
+        // Arrange
+        var options = new LargeProducerReportFileNamesOptions
+        {
+            EnglishReportFileName = "en.csv",
+            ScottishReportFileName = "sc.csv",
+            WalesReportFileName = "wl.csv",
+            NorthernIrelandReportFileName = "ni.csv",
+            AllNationsReportFileName = "all.csv",
+            EnglishReportFileNameInWelsh = "ency.csv",
+            ScottishReportFileNameInWelsh = "sccy.csv",
+            WalesReportFileNameInWelsh = "wlcy.csv",
+            NorthernIrelandReportFileNameInWelsh = "nicy.csv",
+            AllNationsReportFileNameInWelsh = "allcy.csv"
+        };
+        var expectedValue = new Dictionary<string, string>()
+        {
+            {
+                HomeNation.England, "ency.csv"
+            },
+            {
+                HomeNation.Scotland, "sccy.csv"
+            },
+            {
+                HomeNation.Wales, "wlcy.csv"
+            },
+            {
+                HomeNation.NorthernIreland, "nicy.csv"
+            },
+            {
+                HomeNation.All, "allcy.csv"
+            },
+        };
+
+        // Act
+        var result = options.GetAllNationCodeToFileNameMappings(Language.Welsh);
+
+        // Assert
+        result.Should().BeEquivalentTo(expectedValue);
     }
 }

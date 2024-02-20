@@ -15,7 +15,6 @@ public class LargeProducerRegisterServiceTests
 {
     private Mock<IBlobReader> _blobReaderMock;
     private Mock<ILogger<LargeProducerRegisterService>> _logger;
-
     private LargeProducerRegisterService _systemUnderTest;
 
     [TestInitialize]
@@ -27,11 +26,11 @@ public class LargeProducerRegisterServiceTests
             Options.Create(
                 new LargeProducerReportFileNamesOptions
                 {
-                    En = "en.csv",
-                    Sc = "sc.csv",
-                    Wl = "wl.csv",
-                    Ni = "ni.csv",
-                    All = "all.csv"
+                    EnglishReportFileName = "en.csv",
+                    ScottishReportFileName = "sc.csv",
+                    WalesReportFileName = "wl.csv",
+                    NorthernIrelandReportFileName = "ni.csv",
+                    AllNationsReportFileName = "all.csv"
                 }),
             _logger.Object);
     }
@@ -49,7 +48,7 @@ public class LargeProducerRegisterServiceTests
         _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(It.IsAny<string>())).ReturnsAsync(expected);
 
         // Act
-        var result = await _systemUnderTest.GetReportAsync(nationCode);
+        var result = await _systemUnderTest.GetReportAsync(nationCode, Language.English);
 
         // Assert
         _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(It.IsAny<string>()), Times.Once);
@@ -65,7 +64,7 @@ public class LargeProducerRegisterServiceTests
         _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(It.IsAny<string>())).ThrowsAsync(new BlobReaderException());
 
         // Act
-        var act = () => _systemUnderTest.GetReportAsync(nationCode);
+        var act = () => _systemUnderTest.GetReportAsync(nationCode, Language.English);
 
         // Assert
         act.Should().ThrowAsync<LargeProducerRegisterServiceException>();
@@ -102,7 +101,7 @@ public class LargeProducerRegisterServiceTests
         _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync("all.csv")).ReturnsAsync(5000);
 
         // Act
-        var result = await _systemUnderTest.GetAllReportFileSizesAsync();
+        var result = await _systemUnderTest.GetAllReportFileSizesAsync(Language.English);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -116,7 +115,7 @@ public class LargeProducerRegisterServiceTests
         _blobReaderMock.Setup(x => x.GetFileSizeInBytesAsync(It.IsAny<string>())).ThrowsAsync(new BlobReaderException());
 
         // Act
-        var act = () => _systemUnderTest.GetAllReportFileSizesAsync();
+        var act = () => _systemUnderTest.GetAllReportFileSizesAsync(Language.English);
 
         // Assert
         act.Should().ThrowAsync<LargeProducerRegisterServiceException>();

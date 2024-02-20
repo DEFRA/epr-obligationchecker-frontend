@@ -8,38 +8,50 @@ public static class LargeProducerReportFileNamesOptionsExtension
 {
     private const string HomeNationIsInvalid = "Home nation is invalid";
 
-    public static string GetFileNameFromNationCode(this LargeProducerReportFileNamesOptions options, string nationCode)
+    public static string GetFileNameFromNationCodeAndCulture(this LargeProducerReportFileNamesOptions options, string nationCode, string culture)
     {
-        string fileName = nationCode.ToUpper() switch
+        if (culture == Language.English)
         {
-            HomeNation.England => options.En,
-            HomeNation.Scotland => options.Sc,
-            HomeNation.Wales => options.Wl,
-            HomeNation.NorthernIreland => options.Ni,
-            HomeNation.All => options.All,
+            return nationCode.ToUpper() switch
+            {
+                HomeNation.England => options.EnglishReportFileName,
+                HomeNation.Scotland => options.ScottishReportFileName,
+                HomeNation.Wales => options.WalesReportFileName,
+                HomeNation.NorthernIreland => options.NorthernIrelandReportFileName,
+                HomeNation.All => options.AllNationsReportFileName,
+                _ => throw new HomeNationInvalidException(HomeNationIsInvalid)
+            };
+        }
+
+        return nationCode.ToUpper() switch
+        {
+            HomeNation.England => options.EnglishReportFileNameInWelsh,
+            HomeNation.Scotland => options.ScottishReportFileNameInWelsh,
+            HomeNation.Wales => options.WalesReportFileNameInWelsh,
+            HomeNation.NorthernIreland => options.NorthernIrelandReportFileNameInWelsh,
+            HomeNation.All => options.AllNationsReportFileNameInWelsh,
             _ => throw new HomeNationInvalidException(HomeNationIsInvalid)
         };
-        return fileName;
     }
 
-    public static Dictionary<string, string> GetAllNationCodeToFileNameMappings(this LargeProducerReportFileNamesOptions options)
+    public static Dictionary<string, string> GetAllNationCodeToFileNameMappings(this LargeProducerReportFileNamesOptions options, string culture)
     {
         return new Dictionary<string, string>
         {
             {
-                HomeNation.England, GetFileNameFromNationCode(options, HomeNation.England)
+                HomeNation.England, GetFileNameFromNationCodeAndCulture(options, HomeNation.England, culture)
             },
             {
-                HomeNation.Scotland, GetFileNameFromNationCode(options, HomeNation.Scotland)
+                HomeNation.Scotland, GetFileNameFromNationCodeAndCulture(options, HomeNation.Scotland, culture)
             },
             {
-                HomeNation.Wales, GetFileNameFromNationCode(options, HomeNation.Wales)
+                HomeNation.Wales, GetFileNameFromNationCodeAndCulture(options, HomeNation.Wales, culture)
             },
             {
-                HomeNation.NorthernIreland, GetFileNameFromNationCode(options, HomeNation.NorthernIreland)
+                HomeNation.NorthernIreland, GetFileNameFromNationCodeAndCulture(options, HomeNation.NorthernIreland, culture)
             },
             {
-                HomeNation.All, GetFileNameFromNationCode(options, HomeNation.All)
+                HomeNation.All, GetFileNameFromNationCodeAndCulture(options, HomeNation.All, culture)
             }
         };
     }
