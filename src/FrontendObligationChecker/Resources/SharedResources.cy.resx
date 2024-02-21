@@ -18,7 +18,26 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    
     <data name="ApplicationTitle" xml:space="preserve">
         <value>Cynhyrchwyr mawr ar y gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’</value>
+    </data>
+    <data name="back_link_text" xml:space="preserve">
+        <value>Yn ôl</value>
+    </data>
+    <data name="continue_button_text" xml:space="preserve">
+        <value>Parhau</value>
+    </data>
+    <data name="or_text" xml:space="preserve">
+        <value>neu</value>
+    </data>
+    <data name="Welsh" xml:space="preserve">
+        <value>Cymraeg</value>
+    </data>
+    <data name="Cymraeg" xml:space="preserve">
+        <value>Cymraeg</value>
+    </data>
+    <data name="English" xml:space="preserve">
+        <value>English</value>
     </data>
 </root>

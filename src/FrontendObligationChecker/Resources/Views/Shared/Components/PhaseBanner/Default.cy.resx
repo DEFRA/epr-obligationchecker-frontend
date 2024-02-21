@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
-
-        </xsd:element>
-    </xsd:schema>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -20,21 +13,21 @@
     </resheader>
     
     <data name="PhaseBanner.Alpha" xml:space="preserve">
-        <value>alpha</value>
+        <value>alffa</value>
     </data>
     <data name="PhaseBanner.Beta" xml:space="preserve">
         <value>beta</value>
     </data>
     <data name="PhaseBanner.Live" xml:space="preserve">
-        <value>live</value>
-    </data>
-    <data name="PhaseBanner.ThisIsNewService" xml:space="preserve">
-        <value>This is a new service – your</value>
+        <value>byw</value>
     </data>
     <data name="PhaseBanner.Feedback" xml:space="preserve">
-        <value>feedback</value>
+        <value>adborth</value>
     </data>
     <data name="PhaseBanner.ImproveIt" xml:space="preserve">
-        <value>will help us to improve it.</value>
+        <value>yn ein helpu i’w wella.</value>
+    </data>
+    <data name="PhaseBanner.ThisIsNewService" xml:space="preserve">
+        <value>Mae hwn yn wasanaeth newydd – bydd eich </value>
     </data>
 </root>

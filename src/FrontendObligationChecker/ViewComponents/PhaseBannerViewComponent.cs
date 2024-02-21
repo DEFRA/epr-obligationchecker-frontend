@@ -18,11 +18,9 @@ public class PhaseBannerViewComponent : ViewComponent
 
     public ViewViewComponentResult Invoke()
     {
-        const string phaseBanner = "PhaseBanner";
-
-        var phaseBannerModel = new PhaseBannerModel()
+        var phaseBannerModel = new PhaseBannerModel
         {
-            Status = $"{phaseBanner}.{_bannerOptions!.ApplicationStatus}",
+            Status = $"PhaseBanner.{_bannerOptions!.ApplicationStatus}",
             Url = _bannerOptions!.SurveyUrl,
             ShowBanner = _bannerOptions!.Enabled
         };

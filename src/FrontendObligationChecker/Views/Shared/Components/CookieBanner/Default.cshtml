@@ -2,14 +2,18 @@
 
 @model CookieBannerModel
 
+@{
+    var title = Localizer["CookieBanner.Title"];
+}
+
 @if (Model.ShowBanner)
 {
     <form method="POST" asp-controller="Cookies" asp-action="UpdateAcceptance" asp-route-returnUrl="@Model.ReturnUrl">
-        <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="@Localizer["CookieBanner.Title"]">
+        <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="@title">
             <div class="govuk-cookie-banner__message govuk-width-container">
                 <div class="govuk-grid-row">
                     <div class="govuk-grid-column-two-thirds">
-                        <h2 class="govuk-cookie-banner__heading govuk-heading-m">@Localizer["CookieBanner.Title"]</h2>
+                        <h2 class="govuk-cookie-banner__heading govuk-heading-m">@title</h2>
                         <div class="govuk-cookie-banner__content">
                             <p class="govuk-body">@Localizer["CookieBanner.EssentialParagraph"]</p>
                             <p class="govuk-body">@Localizer["CookieBanner.AnalyticalParagraph"]</p>
@@ -23,7 +27,8 @@
                     <button value="@CookieAcceptance.Reject" type="submit" name="cookies" class="govuk-button" data-module="govuk-button">
                         @Localizer["CookieBanner.RejectAnalyticsCookies"]
                     </button>
-                    <a class="govuk-link" asp-controller="Cookies" asp-action="Detail" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["CookieBanner.ViewCookies"]</a>
+                    <a class="govuk-link" asp-controller="Cookies" asp-action="Detail" 
+                       asp-route-returnUrl="@Model.ReturnUrl">@Localizer["CookieBanner.ViewCookies"]</a>
                 </div>
             </div>
         </div>
@@ -32,13 +37,14 @@
 else if (Model.ShowAcknowledgement)
 {
     <form  method="POST" asp-controller="Cookies" asp-action="ConfirmAcceptance" asp-route-returnUrl="@Model.ReturnUrl">
-        <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="@Localizer["CookieBanner.Title"]">
+        <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="@title">
             <div class="govuk-cookie-banner__message govuk-width-container">
                 <div class="govuk-grid-row">
                     <div class="govuk-grid-column-two-thirds">
                         <div class="govuk-cookie-banner__content">
                             <p class="govuk-body">@Localizer[ Model.AcceptAnalytics ? "CookieBanner.Accepted" : "CookieBanner.Rejected"]
-                                <a class="govuk-link"  asp-controller="Cookies" asp-action="Detail">@Localizer["CookieBanner.ChangeYourCookieSettings"]</a> @Localizer["CookieBanner.AtAnyTime"]
+                                <a class="govuk-link"  asp-controller="Cookies" 
+                                   asp-action="Detail">@Localizer["CookieBanner.ChangeYourCookieSettings"]</a> @Localizer["CookieBanner.AtAnyTime"]
                             </p>
                         </div>
                     </div>
