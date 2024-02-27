@@ -93,7 +93,7 @@
     <value>Cafodd y prawf ei gynnal gan y Ganolfan Hygyrchedd Digidol yn ôl safon WCAG 2.1.</value>
   </data>
   <data name="Accessibility.ThePublicListOfLargeProducers" xml:space="preserve">
-    <value>Mae’r datganiad hygyrchedd yma yn berthnasol i’r gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’.</value>
+    <value>Mae’r rhestr gyhoeddus o gynhyrchwyr mawr yn rhan o gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’.</value>
   </data>
   <data name="Accessibility.ThisStatementWasPrepared" xml:space="preserve">
     <value>Cafodd y datganiad yma ei baratoi ar</value>
@@ -101,15 +101,15 @@
   <data name="Accessibility.ThisWebsiteIsPartially" xml:space="preserve">
     <value>Mae’r wefan yma’n cydymffurfio yn rhannol â</value>
   </data>
-  <data name="Accessibility.ThisWebsiteIsRun" xml:space="preserve">
-    <value>Mae’r wefan yma yn cael ei rhedeg gan Adran yr Amgylchedd, Bwyd a Materion Gwledig (Defra).</value>
-  </data>
+    <data name="Accessibility.ThisWebsiteIsRun" xml:space="preserve">
+        <value>Mae hyn yn cael ei redeg gan Adran yr Amgylchedd, Bwyd a Materion Gwledig (Defra).</value>
+    </data>
   <data name="Accessibility.ThisWebsiteWas" xml:space="preserve">
     <value>Y tro diwethaf i’r wefan yma gael ei phrofi oedd</value>
   </data>
-  <data name="Accessibility.Title" xml:space="preserve">
-    <value>Datganiad hygyrchedd ar gyfer ‘Rhoi gwybod am ddata pecynwaith’ - GOV.UK</value>
-  </data>
+    <data name="Accessibility.Title" xml:space="preserve">
+        <value>Datganiad Hygyrchedd - Cynhyrchwyr mawr ar y gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’</value>
+    </data>
   <data name="Accessibility.WebContentAccessibility" xml:space="preserve">
     <value>safon AA Canllawiau Hygyrchedd Cynnwys y We fersiwn 2.1</value>
   </data>
