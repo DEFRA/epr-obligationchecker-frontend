@@ -20,6 +20,7 @@ builder.Services.AddAntiforgery(opts =>
 });
 
 builder.Services.AddMemoryCache();
+builder.Services.AddHealthChecks();
 
 builder.Services
     .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
@@ -57,14 +58,14 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/error");
+    app.UseExceptionHandler("/error/500");
 }
 
 app.UseMiddleware<SecurityHeaderMiddleware>();
 app.UseSession();
 
 // This must be put after security headers middleware to prevent executing it twice when error page is rendered
-app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
+app.UseStatusCodePagesWithReExecute("/error/{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
