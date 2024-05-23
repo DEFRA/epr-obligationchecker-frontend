@@ -41,6 +41,7 @@ builder.Services.AddHsts(options =>
 builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
 builder.Services.RegisterServices();
+builder.Services.AddHealthChecks();
 
 if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 {
