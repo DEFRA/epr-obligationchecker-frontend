@@ -75,13 +75,18 @@ app.UseAuthorization();
 app.UseRequestLocalization();
 app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
-app.MapHealthChecks("/admin/error", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+
+if (builder.Configuration.GetValue<bool>("FeatureManagement:AllowAlertTestEndpoint"))
 {
-    ResultStatusCodes =
+    app.MapHealthChecks("/admin/error", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+    {
+        ResultStatusCodes =
     {
         [HealthStatus.Healthy] = StatusCodes.Status500InternalServerError
     }
-}).AllowAnonymous();
+    }).AllowAnonymous();
+}
+
 app.MapControllers();
 app.Run();
 
