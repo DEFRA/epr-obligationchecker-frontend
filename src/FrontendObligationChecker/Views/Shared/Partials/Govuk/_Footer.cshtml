@@ -1,9 +1,30 @@
+@using FrontendObligationChecker.Models.Config
+@using Microsoft.Extensions.Options
+@inject IOptions<ExternalUrlsOptions> urlOptions;
 @model string
+@{
+
+ string CultureCodeUrl (string url)
+    {
+        if (string.IsNullOrEmpty(url)) return string.Empty;
+        var cultureCode = ((System.Globalization.CultureInfo)this.Output.FormatProvider).Name switch
+        {
+            ""   => string.Empty,
+            "en" => string.Empty,
+            _ => $".{((System.Globalization.CultureInfo)this.Output.FormatProvider).Name}"
+        };
+        return $"{url}{cultureCode}";
+    }
+    }
 
 <footer class="govuk-footer" role="contentinfo">
     <div class="govuk-width-container ">
         <div class="govuk-footer__meta">
             <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+                <h2 class="govuk-heading-m">@Localizer["_Footer.GetHelp"]</h2>
+                <p class="govuk-body">@Localizer["_Footer.Email"]: <a class="govuk-link govuk-link--no-visited-state" href="mailto:eprcustomerservice@defra.gov.uk">eprcustomerservice@defra.gov.uk</a></p>
+                <p class="govuk-body govuk-!-margin-bottom-2">@Localizer["_Footer.Telephone"]: 0300 060 0002</p>
+                <p class="govuk-body">@Localizer["_Footer.OpeningTime"]</p>
                 <h2 class="govuk-visually-hidden">@Localizer["_Footer.SupportLinks"]</h2>
                 <ul class="govuk-footer__inline-list">
                     <li class="govuk-footer__inline-list-item">
@@ -11,15 +32,13 @@
                             @Localizer["_Footer.Cookies"]
                         </a>
                     </li>
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" asp-controller="Privacy" asp-action="Detail" asp-route-returnurl="@Model">
-                            @Localizer["_Footer.Privacy"]
-                        </a>
+                    <li class="govuk-footer__inline-list-item">                     
+                        <a class="govuk-footer__link" href="@(CultureCodeUrl(urlOptions.Value.PrivacyPage))" rel="noreferrer noopener" target="_blank">@Localizer["_Footer.Privacy"]</a>
+
                     </li>
                     <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" asp-controller="Accessibility" asp-action="Detail" asp-route-returnurl="@Model">
-                            @Localizer["_Footer.Accessibility"]
-                        </a>
+                        <a class="govuk-footer__link" href="@(CultureCodeUrl(urlOptions.Value.AccessibilityPage))" rel="noreferrer noopener" target="_blank">@Localizer["_Footer.Accessibility"]</a>
+
                     </li>
                 </ul>
                 <svg aria-hidden="true" focusable="false" class="govuk-footer__licence-logo" xmlns="http://www.w3.org/2000/svg"
