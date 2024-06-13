@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
@@ -145,13 +145,13 @@
      <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0 and '$(IsCrossTargetingBuild)' == 'true'">
        <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
       <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory="../.." />
-  </Target>
+    </Target>
 
     <ItemGroup>
         <SonarQubeSetting Include="sonar.coverage.exclusions">
             <Value>Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**</Value>
         </SonarQubeSetting>
-        <SonarQubeSetting Include="sonar.spd.exclusions">
+        <SonarQubeSetting Include="sonar.cpd.exclusions">
             <Value>Views/**/*.cshtml</Value>
         </SonarQubeSetting>
     </ItemGroup>
