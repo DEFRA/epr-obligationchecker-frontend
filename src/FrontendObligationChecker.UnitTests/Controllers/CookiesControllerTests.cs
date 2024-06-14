@@ -6,12 +6,12 @@ using FrontendObligationChecker.Extensions;
 using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.Cookies;
 using FrontendObligationChecker.Services.Infrastructure.Interfaces;
+using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using Moq;
-using ViewModels;
 
 [TestClass]
 public class CookiesControllerTests
@@ -119,6 +119,39 @@ public class CookiesControllerTests
         // Assert
         result.Should().BeOfType(typeof(ViewResult));
         cookieDetailViewModel.CurrentPage.Should().Be(homeUrl);
+    }
+
+    [TestMethod]
+    public async Task ConfirmAcceptance_Returns_LocalRedirect()
+    {
+        // Arrange
+        const string returnUrl = "/obligation-checker/question";
+        var expectedUrl = returnUrl;
+
+        // Act
+        var result = _systemUnderTest!.ConfirmAcceptance(returnUrl);
+
+        // Assert
+        result.Should().NotBeNull();
+        result.Url.Should().Be(expectedUrl);
+    }
+
+    [TestMethod]
+    public async Task UpdateAcceptance_Returns_LocalRedirect()
+    {
+        // Arrange
+        const string returnUrl = "/obligation-checker/question";
+        var cookies = CookieAcceptance.Accept;
+        var expectedUrl = returnUrl;
+
+        // Act
+        var result = _systemUnderTest!.UpdateAcceptance(returnUrl, cookies);
+
+        // Assert
+        result.Should().NotBeNull();
+        result.Url.Should().Be(expectedUrl);
+
+        _cookieService.Verify(x => x.SetCookieAcceptance(true, It.IsAny<IRequestCookieCollection>(), It.IsAny<IResponseCookies>()), Times.Once);
     }
 
     private void SetUpConfigOption()

@@ -4,13 +4,13 @@ using FluentAssertions;
 using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Extensions;
 using FrontendObligationChecker.Models.Config;
+using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using ViewModels;
 
 [TestClass]
 public class PrivacyControllerTests
