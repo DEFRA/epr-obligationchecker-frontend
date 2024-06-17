@@ -1,6 +1,9 @@
-﻿using FrontendObligationChecker.Models.ObligationChecker;
+﻿using System.Diagnostics.CodeAnalysis;
+using FrontendObligationChecker.Models.ObligationChecker;
 
 namespace FrontendObligationChecker.ViewModels.GovUk;
+
+[ExcludeFromCodeCoverage]
 public class DetailViewModel
 {
     public string Summary { get; set; } = default!;
