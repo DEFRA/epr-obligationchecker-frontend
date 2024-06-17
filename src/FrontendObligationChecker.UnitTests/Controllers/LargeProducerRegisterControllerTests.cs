@@ -6,11 +6,11 @@ using FluentAssertions;
 using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Services.Caching;
 using FrontendObligationChecker.Services.LargeProducerRegister.Interfaces;
+using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using ViewModels;
 
 [TestClass]
 public class LargeProducerRegisterControllerTests

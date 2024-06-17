@@ -1,5 +1,6 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Controllers;
 
+using System;
 using FluentAssertions;
 using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Extensions;
@@ -8,14 +9,12 @@ using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 
 [TestClass]
-public class PrivacyControllerTests
+public class AccessibilityControllerTests
 {
-    private Mock<ILogger<PrivacyController>>? _loggerMock;
     private Mock<HttpContext>? _httpContextMock;
     private Mock<HttpRequest> _httpRequest;
 
@@ -23,12 +22,11 @@ public class PrivacyControllerTests
     private Mock<IOptions<EmailAddressOptions>>? _emailOptions;
     private Mock<IOptions<SiteDateOptions>>? _siteDateOptions;
 
-    private PrivacyController? _systemUnderTest;
+    private AccessibilityController? _systemUnderTest;
 
     [TestInitialize]
     public void TestInitialize()
     {
-        _loggerMock = new Mock<ILogger<PrivacyController>>();
         _httpContextMock = new Mock<HttpContext>();
         _httpRequest = new Mock<HttpRequest>();
         _urlOptions = new Mock<IOptions<ExternalUrlsOptions>>();
@@ -37,8 +35,7 @@ public class PrivacyControllerTests
 
         SetUpConfigOption();
 
-        _systemUnderTest = new PrivacyController(
-            _loggerMock.Object,
+        _systemUnderTest = new AccessibilityController(
             _urlOptions.Object,
             _emailOptions.Object,
             _siteDateOptions.Object);
@@ -62,21 +59,22 @@ public class PrivacyControllerTests
         // Act
         var result = await _systemUnderTest!.Detail(returnUrl);
         var viewResult = result as ViewResult;
-        var privacyViewModel = (PrivacyViewModel)viewResult.Model;
-        var expectedDate = _siteDateOptions.Object.Value.PrivacyLastUpdated.ToString(_siteDateOptions.Object.Value.DateFormat);
+        var accessibilityViewModel = (AccessibilityViewModel)viewResult.Model;
+        var expectedSiteTestedDate = _siteDateOptions.Object.Value.AccessibilitySiteTested.ToString(_siteDateOptions.Object.Value.DateFormat);
+        var expectedStatementPreparedDate = _siteDateOptions.Object.Value.AccessibilityStatementPrepared.ToString(_siteDateOptions.Object.Value.DateFormat);
+        var expectedStatementReviewedDate = _siteDateOptions.Object.Value.AccessibilityStatementReviewed.ToString(_siteDateOptions.Object.Value.DateFormat);
 
         // Assert
         result.Should().BeOfType(typeof(ViewResult));
-        privacyViewModel.LastUpdated.Should().Be(expectedDate);
-        privacyViewModel.DataProtectionEmail.Should().Be(_emailOptions.Object.Value.DataProtection);
-        privacyViewModel.InformationCommissionerEmail.Should().Be(_emailOptions.Object.Value.InformationCommissioner);
-        privacyViewModel.DefraGroupProtectionOfficerEmail.Should().Be(_emailOptions.Object.Value.DefraGroupProtectionOfficer);
-        privacyViewModel.DataProtectionPublicRegisterUrl.Should().Be(_urlOptions.Object.Value.PrivacyDataProtectionPublicRegister);
-        privacyViewModel.WebBrowserUrl.Should().Be(_urlOptions.Object.Value.PrivacyWebBrowser);
-        privacyViewModel.GoogleAnalyticsUrl.Should().Be(_urlOptions.Object.Value.PrivacyGoogleAnalytics);
-        privacyViewModel.DefrasPersonalInformationCharterUrl.Should().Be(_urlOptions.Object.Value.PrivacyDefrasPersonalInformationCharter);
-        privacyViewModel.InformationCommissionerUrl.Should().Be(_urlOptions.Object.Value.PrivacyInformationCommissioner);
-        privacyViewModel.FindOutAboutCallChargesUrl.Should().Be(_urlOptions.Object.Value.PrivacyFindOutAboutCallCharges);
+        accessibilityViewModel.CurrentPage.Should().Be(returnUrl);
+        accessibilityViewModel.AbilityNetUrl.Should().Be(_urlOptions.Object.Value.AccessibilityAbilityNet);
+        accessibilityViewModel.ContactUsUrl.Should().Be(_urlOptions.Object.Value.AccessibilityContactUs);
+        accessibilityViewModel.EqualityAdvisorySupportServiceUrl.Should().Be(_urlOptions.Object.Value.AccessibilityEqualityAdvisorySupportService);
+        accessibilityViewModel.DefraHelplineEmail.Should().Be(_emailOptions.Object.Value.DefraHelpline);
+        accessibilityViewModel.SiteTestedDate.Should().Be(expectedSiteTestedDate);
+        accessibilityViewModel.StatementPreparedDate.Should().Be(expectedStatementPreparedDate);
+        accessibilityViewModel.StatementReviewedDate.Should().Be(expectedStatementReviewedDate);
+        accessibilityViewModel.WebContentAccessibilityUrl.Should().Be(_urlOptions.Object.Value.AccessibilityWebContentAccessibility);
     }
 
     [TestMethod]
@@ -101,37 +99,33 @@ public class PrivacyControllerTests
         // Act
         var result = await _systemUnderTest!.Detail(returnUrl);
         var viewResult = result as ViewResult;
-        var privacyViewModel = (PrivacyViewModel)viewResult.Model;
+        var accessibilityViewModel = (AccessibilityViewModel)viewResult.Model;
 
         // Assert
         result.Should().BeOfType(typeof(ViewResult));
-        privacyViewModel.CurrentPage.Should().Be(homeUrl);
+        accessibilityViewModel.CurrentPage.Should().Be(homeUrl);
     }
 
     private void SetUpConfigOption()
     {
         var externalUrlsOptions = new ExternalUrlsOptions()
         {
-            EprGuidance = "url1",
-            PrivacyDataProtectionPublicRegister = "url2",
-            PrivacyWebBrowser = "url3",
+            AccessibilityAbilityNet = "url1",
+            AccessibilityContactUs = "url2",
+            AccessibilityEqualityAdvisorySupportService = "url3",
             PrivacyGoogleAnalytics = "url4",
-            PrivacyEuropeanEconomicArea = "url5",
-            PrivacyDefrasPersonalInformationCharter = "url6",
-            PrivacyInformationCommissioner = "url7",
-            PrivacyFindOutAboutCallCharges = "url8"
         };
 
         var emailAddressOptions = new EmailAddressOptions()
         {
-            DataProtection = "1@email.com",
-            DefraGroupProtectionOfficer = "2@email.com",
-            InformationCommissioner = "3@email.com"
+            DefraHelpline = "1@email.com"
         };
 
         var siteDateOptions = new SiteDateOptions()
         {
-            PrivacyLastUpdated = DateTime.Parse("2000-01-01"),
+            AccessibilitySiteTested = DateTime.Parse("2000-01-01"),
+            AccessibilityStatementPrepared = DateTime.Parse("2001-01-01"),
+            AccessibilityStatementReviewed = DateTime.Parse("2002-01-01"),
             DateFormat = "d MMMM yyyy"
         };
 
