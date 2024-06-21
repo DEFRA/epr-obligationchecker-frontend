@@ -3,6 +3,7 @@ using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,7 @@ builder.Services.AddHsts(options =>
 builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
 builder.Services.RegisterServices();
+builder.Services.AddHealthChecks();
 
 if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 {
@@ -73,6 +75,18 @@ app.UseAuthorization();
 app.UseRequestLocalization();
 app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
+
+if (builder.Configuration.GetValue<bool>("FeatureManagement:AllowAlertTestEndpoint"))
+{
+    app.MapHealthChecks("/admin/error", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+    {
+        ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = StatusCodes.Status500InternalServerError
+    }
+    }).AllowAnonymous();
+}
+
 app.MapControllers();
 app.Run();
 
