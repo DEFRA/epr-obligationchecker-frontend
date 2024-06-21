@@ -3,9 +3,6 @@ parameters:
   displayName: 'ObligationChecker branch:'
   type: string
 
-- task: Bash@3
-    displayName: 'Obligation checker test'
-    inputs:
-      targetType: 'inline'
-      script: |
-        echo "buidling obligation frontend on ${{parameters.obligationCheckerBranch}}"
+steps:
+  - script:  echo 'buidling obligation frontend on ${{parameters.obligationCheckerBranch}}'
+         
