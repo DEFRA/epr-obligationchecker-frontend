@@ -36,19 +36,20 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
-      <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+      <PackageReference Include="Azure.Storage.Blobs" Version="12.20.0" />
       <PackageReference Include="ByteSize" Version="2.1.2" />
-      <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-      <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.0" />
+      <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+      <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.6" />
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.8" />
+      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.6" />
       <PackageReference Include="System.Drawing.Common" Version="8.0.6" />
       <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
+      <PackageReference Update="SonarAnalyzer.CSharp" Version="9.27.0.93347" />
       <PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435" />
-      <PackageReference Include="Microsoft.FeatureManagement" Version="3.1.1" />
-      <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.1.1" />
+      <PackageReference Include="Microsoft.FeatureManagement" Version="3.4.0" />
+      <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.4.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="System.IO.Abstractions" Version="17.1.1" />
+      <PackageReference Include="System.IO.Abstractions" Version="21.0.22" />
     </ItemGroup>
 
     <ItemGroup>
