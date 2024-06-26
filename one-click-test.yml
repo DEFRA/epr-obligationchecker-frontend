@@ -9,5 +9,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        echo 'buidling obligation frontend on ${{parameters.obligationCheckerBranch}}
+        echo 'buidling obligation frontend on ${{parameters.obligationCheckerBranch}}'
          
