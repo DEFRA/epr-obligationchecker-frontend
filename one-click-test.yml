@@ -13,7 +13,8 @@ parameters:
   - name: obligationCheckerBranch
     displayName: 'ObligationChecker branch:'
     type: string
-
+    
+- steps:
   - template: epr-build-pipeline.yaml@CommonTemplates
     parameters:
       solutionFolder: ${{ variables.solutionFolder }}
