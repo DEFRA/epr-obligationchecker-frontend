@@ -10,8 +10,7 @@ parameters:
     values:
     - 'SonarQube'
     - 'SonarQubeLatest'
-  - name: obligationCheckerBranch
-    displayName: 'ObligationChecker branch:'
+  - name: branchName
     type: string
   - name: checkoutName
     type: string
@@ -28,7 +27,7 @@ stages:
      azureSubscription: $(azureSubscription)
      acrAzureContainerRegistryName: $(acr.azureContainerRegistryName)
      acrRepositoryName: $(ocf-acr.repositoryName)
-     branchName: ${{ parameters.obligationcheckerBranch }}
+     branchName: ${{ parameters.branchName }}
      runNugetTasks: false
      serviceName: $(ocf-serviceName)
      sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
