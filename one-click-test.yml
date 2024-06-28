@@ -13,6 +13,8 @@ parameters:
   - name: obligationCheckerBranch
     displayName: 'ObligationChecker branch:'
     type: string
+  - name: checkoutName
+    type: string
     
 stages:
   - template: epr-build-pipeline.yaml@CommonTemplates
@@ -30,6 +32,7 @@ stages:
      runNugetTasks: false
      serviceName: $(ocf-serviceName)
      sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
+     checkoutName: ${{ parameters.checkoutName }}
 
 
      
