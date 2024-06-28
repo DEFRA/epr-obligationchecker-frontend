@@ -3,13 +3,7 @@ parameters:
   displayName: 'ObligationChecker branch:'
   type: string
 
-stages:
-- stage: Test
-  jobs: 
-  - job: 
-    steps:
-    - bash: |
-            echo variable: ${{parameters.obligationCheckerBranch}}
+
 
      
              
