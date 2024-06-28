@@ -5,13 +5,13 @@ using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Services.NextFinder.Interfaces;
 using FrontendObligationChecker.Services.PageService.Interfaces;
+using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
-using ViewModels;
 
 [TestClass]
 public class ObligationCheckerControllerTests

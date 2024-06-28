@@ -46,4 +46,8 @@ public class ExternalUrlsOptions
     public string WhoIsAffectedAndWhatToDo { get; set; }
 
     public string NpwdRegister { get; set; }
+
+    public string PrivacyPage { get; set; }
+
+    public string AccessibilityPage { get; set; }
 }
