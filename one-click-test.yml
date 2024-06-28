@@ -17,19 +17,20 @@ parameters:
 stages:
   - template: epr-build-pipeline.yaml@CommonTemplates
     parameters:
-      solutionFolder: ${{ variables.solutionFolder }}
-      projectFolder: ${{ variables.projectFolder }}
-      testProjectFolder: ${{ variables.testProjectFolder }}
-      sonarQubeProjectKey: ${{ variables.sonarQubeProjectKey }}
-      sonarQubeProjectName: ${{ variables.sonarQubeProjectName }}
-      runTests: ${{parameters.runTests}}
-      azureSubscription: $(azureSubscription)
-      acrAzureContainerRegistryName: $(acr.azureContainerRegistryName)
-      acrRepositoryName: $(acr.repositoryName)
-      branchName: ${{ replace(replace(variables['Build.SourceBranch'], 'refs/heads/', ''), '/', '_') }}
-      runNugetTasks: ${{ variables.runNugetTasks }}
-      serviceName: $(serviceName)
-      sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
+     solutionFolder: $(solutionFolder)
+     projectFolder: $(ocf-projectFolder)
+     testProjectFolder: $(ocf-testProjectFolder)
+     sonarQubeProjectKey: $(ocf-sonarQubeProjectKey)
+     sonarQubeProjectName: $(ocf-sonarQubeProjectName)
+     runTests: ${{ parameters.runTests }}
+     azureSubscription: $(azureSubscription)
+     acrAzureContainerRegistryName: $(acr.azureContainerRegistryName)
+     acrRepositoryName: $(ocf-acr.repositoryName)
+     branchName: ${{ parameters.obligationcheckerBranch }}
+     runNugetTasks: $(runNugetTasks)
+     serviceName: $(ocf-serviceName)
+     sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
+
 
      
              
