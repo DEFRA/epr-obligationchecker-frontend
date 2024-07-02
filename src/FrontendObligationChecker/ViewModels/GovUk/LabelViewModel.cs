@@ -1,5 +1,8 @@
 ﻿namespace FrontendObligationChecker.ViewModels.GovUk;
 
+using System.Diagnostics.CodeAnalysis;
+
+[ExcludeFromCodeCoverage]
 public class LabelViewModel
 {
     public string? For { get; set; }
