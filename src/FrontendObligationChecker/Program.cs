@@ -3,6 +3,7 @@ using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +47,12 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 {
     GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
 }
+
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    clientBuilder.AddBlobServiceClient(builder.Configuration["StorageAccount:ConnectionString:blob"], preferMsi: true);
+    clientBuilder.AddQueueServiceClient(builder.Configuration["StorageAccount:ConnectionString:queue"], preferMsi: true);
+});
 
 var app = builder.Build();
 

@@ -3,5 +3,6 @@
 public enum OptionPath
 {
     Primary = 0,
-    Secondary = 1
+    Secondary = 1,
+    Tertiary = 2
 }

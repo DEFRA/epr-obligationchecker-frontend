@@ -2,6 +2,9 @@
 
 public static class PagePath
 {
+    public const string DemoOne = "demo-one";
+    public const string DemoTwo = "demo-two";
+    public const string DemoThree = "demo-three";
     public const string TypeOfOrganisation = "type-of-organisation";
     public const string AnnualTurnover = "annual-turnover";
     public const string OwnBrand = "supplying-goods-under-own-brand";

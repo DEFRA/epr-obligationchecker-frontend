@@ -2,6 +2,9 @@
 
 public static class QuestionKey
 {
+    public const string DemoOne = "demo-one";
+    public const string DemoTwo = "demo-two";
+    public const string DemoThree = "demo-three";
     public const string TypeOfOrganisation = "type-of-organisation";
     public const string AnnualTurnover = "annual-turnover";
     public const string OwnBrand = "supplying-goods-under-own-brand";
@@ -20,6 +23,9 @@ public static class QuestionKey
     {
         return pagePath switch
         {
+            PagePath.DemoOne => DemoOne,
+            PagePath.DemoTwo => DemoTwo,
+            PagePath.DemoThree => DemoThree,
             PagePath.PlaceDrinksOnMarket => SingleUseContainersOnMarket,
             PagePath.ContainerVolume => ContainerVolume,
             PagePath.OwnBrand => OwnBrand,

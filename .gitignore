@@ -413,3 +413,5 @@ src/package-lock.json
 
 # Certificates
 src/kainos-chain.pem
+/src/azurite_workspace/__azurite_db_blob__.json
+/src/azurite_workspace/__azurite_db_table__.json

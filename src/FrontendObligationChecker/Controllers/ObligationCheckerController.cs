@@ -1,7 +1,9 @@
 ﻿namespace FrontendObligationChecker.Controllers;
 
 using Constants;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.FeatureManagement.Mvc;
 using Models.ObligationChecker;
 using Services.NextFinder;
@@ -24,6 +26,7 @@ public class ObligationCheckerController : Controller
     }
 
     [HttpGet]
+    [Route("ObligationChecker/{path}")]
     public async Task<IActionResult> Question(string path)
     {
         var page = await _pageService.GetPageAsync(path);
@@ -38,6 +41,7 @@ public class ObligationCheckerController : Controller
     }
 
     [HttpPost]
+    [Route("ObligationChecker/{path}", Name = "ObligationChecker")]
     public async Task<IActionResult> GetNextPage(string path)
     {
         var page = await _pageService.SetAnswersAndGetPageAsync(path, Request.Form);
@@ -52,8 +56,8 @@ public class ObligationCheckerController : Controller
             return View(page.View, new PageModel(page));
         }
 
-        var nextPath = Url.RouteUrl("ObligationChecker", new { path = PageFinder.GetNextPath(page) });
+        var nextPath = Url.RouteUrl("ObligationChecker", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
 
-        return Redirect(nextPath + Request.QueryString);
+        return Redirect(nextPath);
     }
 }
