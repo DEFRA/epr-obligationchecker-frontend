@@ -9,9 +9,6 @@ public static class PageGenerator
         return new List<Page>
         {
             TypeOfOrganisationPage(),
-            DemoOne(),
-            DemoTwo(),
-            DemoThree(),
             AnnualTurnoverPage(),
             OwnBrandPage(QuestionKey.OwnBrand, PagePath.OwnBrand, PagePath.UnbrandedPackaging),
             UnbrandedPackagingPage(QuestionKey.UnbrandedPackaging, PagePath.UnbrandedPackaging, PagePath.ImportingProducts),
@@ -83,6 +80,7 @@ public static class PageGenerator
         };
     }
 
+    /*
     private static Page DemoTwo()
     {
         return new Page()
@@ -181,6 +179,7 @@ public static class PageGenerator
             }
         };
     }
+    */
 
     private static Page TypeOfOrganisationPage()
     {

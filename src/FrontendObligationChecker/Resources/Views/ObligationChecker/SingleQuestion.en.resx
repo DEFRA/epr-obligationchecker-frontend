@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SingleQuestion.TypeOfOrganisation.Title" xml:space="preserve">
-    <value>What type of organisation are you? - ** DEMO **</value>
+    <value>What type of organisation are you?</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.QuestionDescription" xml:space="preserve">
     <value>Parent companies (sometimes called a holding company) own groups. Subsidiaries are the separate organisations that form a group.</value>
@@ -163,7 +163,7 @@
     <value>No</value>
   </data>
   <data name="SingleQuestion.OwnBrand.Title" xml:space="preserve">
-    <value>Supplying goods to the UK market under your own brand  ** DEMO **</value>
+    <value>Supplying goods to the UK market under your own brand</value>
   </data>
   <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
     <value>supplying goods to the UK market under your own brand</value>
@@ -187,7 +187,7 @@
         &lt;/ul&gt;</value>
   </data>
   <data name="SingleQuestion.OwnBrand.QuestionTile" xml:space="preserve">
-    <value>Do you supply goods to the UK market under your own brand?  ** DEMO **</value>
+    <value>Do you supply goods to the UK market under your own brand?</value>
   </data>
   <data name="SingleQuestion.OwnBrand.QuestionError" xml:space="preserve">
     <value>Select yes if you supply goods to the UK market in primary, secondary, or shipment packaging under your own brand</value>
@@ -231,7 +231,7 @@
         &lt;p class="govuk-body"&gt;&lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;Find out what's classed as a 'large' organisation (opens in a new tab)&lt;/a&gt;&lt;/p&gt;</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.Title" xml:space="preserve">
-    <value>Supplying empty packaging  ** DEMO **</value>
+    <value>Supplying empty packaging</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
     <value>supplying empty packaging to businesses that fall under the higher threshold</value>
@@ -267,7 +267,7 @@
         </value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.Title" xml:space="preserve">
-    <value>Owning an online marketplace  ** DEMO **</value>
+    <value>Owning an online marketplace</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
     <value>owning an online marketplace</value>
@@ -328,7 +328,7 @@
     <value>You told us that you:</value>
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.Title" xml:space="preserve">
-    <value>Do you place drinks on the market in England, Wales or Northern Ireland in single-use containers?  ** DEMO **</value>
+    <value>Do you place drinks on the market in England, Wales or Northern Ireland in single-use containers?</value>
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.ScotlandSummary" xml:space="preserve">
     <value>What to do if you place drinks on the market in Scotland</value>
@@ -357,7 +357,7 @@
     <value>Polyethylene terephthalate (PET) plastic</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.Title" xml:space="preserve">
-    <value>Do you use any of the following materials for the drinks containers?  ** DEMO **</value>
+    <value>Do you use any of the following materials for the drinks containers?</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionError" xml:space="preserve">
     <value>Tell us do you use any of the following materials for the drinks containers?</value>
@@ -381,10 +381,10 @@
     <value>Your packaging activities</value>
   </data>
   <data name="SingleQuestion.DemoOne.Title" xml:space="preserve">
-    <value>Demo Page One  ** DEMO **</value>
+    <value>Demo Page One</value>
   </data>
   <data name="SingleQuestion.DemoTwo.Title" xml:space="preserve">
-    <value>Demo Page Two  ** DEMO **</value>
+    <value>Demo Page Two</value>
   </data>
   <data name="SingleQuestion.DemoOne.AlternateTitle" xml:space="preserve">
     <value />
@@ -426,6 +426,6 @@
     <value>Demo One</value>
   </data>
   <data name="SingleQuestion.DemoThree.Title" xml:space="preserve">
-    <value>Demo Page Three  ** DEMO **</value>
+    <value>Demo Page Three</value>
   </data>
 </root>
