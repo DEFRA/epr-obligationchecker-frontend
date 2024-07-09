@@ -380,52 +380,7 @@
   <data name="SingleQuestion.YourPackagingActivities" xml:space="preserve">
     <value>Your packaging activities</value>
   </data>
-  <data name="SingleQuestion.DemoOne.Title" xml:space="preserve">
-    <value>Demo Page One</value>
-  </data>
-  <data name="SingleQuestion.DemoTwo.Title" xml:space="preserve">
-    <value>Demo Page Two</value>
-  </data>
-  <data name="SingleQuestion.DemoOne.AlternateTitle" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SingleQuestion.DemoTwo.AlternateTitle" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SingleQuestion.DemoOne.Detail" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SingleQuestion.DemoOne.QuestionDescription" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SingleQuestion.DemoOne.Summary" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SingleQuestion.DemoOne.QuestionOptionLabel1" xml:space="preserve">
-    <value>Type Of Organisation</value>
-  </data>
-  <data name="SingleQuestion.DemoOne.QuestionOptionLabel2" xml:space="preserve">
-    <value>Demo Two</value>
-  </data>
-  <data name="SingleQuestion.DemoThree.QuestionDescription" xml:space="preserve">
-    <value>Showing a 3rd demo demo in action</value>
-  </data>
-  <data name="SingleQuestion.DemoThree.QuestionOptionLabel1" xml:space="preserve">
-    <value>Demo Two</value>
-  </data>
-  <data name="SingleQuestion.DemoThree.Summary" xml:space="preserve">
-    <value>A demo of 3rd page</value>
-  </data>
-  <data name="SingleQuestion.DemoTwo.QuestionOptionLabel1" xml:space="preserve">
-    <value>Demo One</value>
-  </data>
-  <data name="SingleQuestion.DemoTwo.QuestionOptionLabel2" xml:space="preserve">
-    <value>Demo Three</value>
-  </data>
   <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4" xml:space="preserve">
     <value>Demo One</value>
-  </data>
-  <data name="SingleQuestion.DemoThree.Title" xml:space="preserve">
-    <value>Demo Page Three</value>
   </data>
 </root>

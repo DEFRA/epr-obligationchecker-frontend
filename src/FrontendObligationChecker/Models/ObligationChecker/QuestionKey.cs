@@ -23,9 +23,6 @@ public static class QuestionKey
     {
         return pagePath switch
         {
-            PagePath.DemoOne => DemoOne,
-            PagePath.DemoTwo => DemoTwo,
-            PagePath.DemoThree => DemoThree,
             PagePath.PlaceDrinksOnMarket => SingleUseContainersOnMarket,
             PagePath.ContainerVolume => ContainerVolume,
             PagePath.OwnBrand => OwnBrand,

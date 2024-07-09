@@ -26,161 +26,6 @@ public static class PageGenerator
         };
     }
 
-    private static Page DemoOne()
-    {
-        return new Page()
-        {
-            Index = 5,
-            Titles = new Dictionary<OptionPath, string>()
-            {
-                {
-                    OptionPath.Primary, "SingleQuestion.DemoOne.Title"
-                }
-            },
-            TitleCaption = "SingleQuestion.DemoOne.Title",
-            Path = PagePath.DemoOne,
-            Paths = new Dictionary<OptionPath, string>()
-            {
-                {
-                    OptionPath.Primary, PagePath.TypeOfOrganisation
-                },
-                {
-                    OptionPath.Secondary, PagePath.DemoTwo
-                }
-            },
-            IsPageHeading = true,
-            AlternateRowTitle = "WhatYouNeedToDo.OrganisationTypeAlternateRowTitle",
-            Questions = new List<Question>()
-            {
-                new()
-                {
-                    Key = QuestionKey.DemoOne,
-                    Description = "SingleQuestion.DemoOne.QuestionDescription",
-                    Summary = "SingleQuestion.DemoOne.Summary",
-                    Detail = "SingleQuestion.DemoOne.Detail",
-                    DetailPosition = DetailPosition.BelowQuestion,
-                    Options = new List<Option>
-                    {
-                        new()
-                        {
-                            Next = OptionPath.Primary,
-                            Title = "SingleQuestion.DemoOne.QuestionOptionLabel1",
-                            Value = "TypeOfOrganisation"
-                        },
-                        new()
-                        {
-                            Next = OptionPath.Secondary,
-                            Title = "SingleQuestion.DemoOne.QuestionOptionLabel2",
-                            Value = "DemoTwo"
-                        }
-                    },
-                    ErrorMessage = "Demo Option Invalid"
-                }
-            }
-        };
-    }
-
-    /*
-    private static Page DemoTwo()
-    {
-        return new Page()
-        {
-            Index = 6,
-            Titles = new Dictionary<OptionPath, string>()
-            {
-                {
-                    OptionPath.Secondary, "SingleQuestion.DemoTwo.Title"
-                }
-            },
-            TitleCaption = "SingleQuestion.DemoTwo.Title",
-            Path = PagePath.DemoTwo,
-            Paths = new Dictionary<OptionPath, string>()
-            {
-                {
-                    OptionPath.Primary, PagePath.DemoOne
-                },
-                {
-                    OptionPath.Secondary, PagePath.DemoThree
-                }
-            },
-            IsPageHeading = true,
-            AlternateRowTitle = "WhatYouNeedToDo.OrganisationTypeAlternateRowTitle",
-            Questions = new List<Question>()
-            {
-                new()
-                {
-                    Key = QuestionKey.DemoTwo,
-                    Description = "SingleQuestion.DemoTwo.QuestionDescription",
-                    Summary = "SingleQuestion.DemoTwo.Summary",
-                    Detail = "SingleQuestion.DemoTwo.Detail",
-                    DetailPosition = DetailPosition.BelowQuestion,
-                    Options = new List<Option>
-                    {
-                        new()
-                        {
-                            Next = OptionPath.Primary,
-                            Title = "SingleQuestion.DemoTwo.QuestionOptionLabel1",
-                            Value = "DemoOne"
-                        },
-                        new()
-                        {
-                            Next = OptionPath.Secondary,
-                            Title = "SingleQuestion.DemoTwo.QuestionOptionLabel2",
-                            Value = "DemoThree"
-                        }
-                    },
-                    ErrorMessage = "Demo Option Invalid"
-                }
-            }
-        };
-    }
-
-    private static Page DemoThree()
-    {
-        return new Page()
-        {
-            Index = 7,
-            Titles = new Dictionary<OptionPath, string>()
-            {
-                {
-                    OptionPath.Secondary, "SingleQuestion.DemoThree.Title"
-                }
-            },
-            TitleCaption = "SingleQuestion.DemoThree.Title",
-            Path = PagePath.DemoThree,
-            Paths = new Dictionary<OptionPath, string>()
-            {
-                {
-                    OptionPath.Primary, PagePath.DemoTwo
-                }
-            },
-            IsPageHeading = true,
-            AlternateRowTitle = "WhatYouNeedToDo.OrganisationTypeAlternateRowTitle",
-            Questions = new List<Question>()
-            {
-                new()
-                {
-                    Key = QuestionKey.DemoThree,
-                    Description = "SingleQuestion.DemoThree.QuestionDescription",
-                    Summary = "SingleQuestion.DemoThree.Summary",
-                    Detail = "SingleQuestion.DemoThree.Detail",
-                    DetailPosition = DetailPosition.BelowQuestion,
-                    Options = new List<Option>
-                    {
-                        new()
-                        {
-                            Next = OptionPath.Primary,
-                            Title = "SingleQuestion.DemoThree.QuestionOptionLabel1",
-                            Value = "DemoTwo"
-                        }
-                    },
-                    ErrorMessage = "Demo Option Invalid"
-                }
-            }
-        };
-    }
-    */
-
     private static Page TypeOfOrganisationPage()
     {
         return new Page()
@@ -201,9 +46,6 @@ public static class PageGenerator
                 },
                 {
                     OptionPath.Secondary, PagePath.AnnualTurnover
-                },
-                {
-                    OptionPath.Tertiary, PagePath.DemoOne
                 },
             },
             IsPageHeading = true,
@@ -236,12 +78,6 @@ public static class PageGenerator
                             Next = OptionPath.Secondary,
                             Title = "SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3",
                             Value = "individual"
-                        },
-                        new()
-                        {
-                            Next = OptionPath.Tertiary,
-                            Title = "SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4",
-                            Value = "DemoOne"
                         },
                     },
                     ErrorMessage = "SingleQuestion.TypeOfOrganisation.QuestionError"
@@ -579,7 +415,8 @@ public static class PageGenerator
             Paths = new Dictionary<OptionPath, string>()
             {
                 { OptionPath.Primary, nextPath },
-                { OptionPath.Secondary, nextPath }
+                // { OptionPath.Primary, PagePath.AmountYouSupply },
+                { OptionPath.Secondary, PagePath.NoActionNeeded } // Page path was previously set to no-action-needed ,i.e. (nextPath)
             },
             IsPageHeading = false,
             Questions = new List<Question>()
@@ -840,6 +677,9 @@ public static class PageGenerator
             },
             {
                 PagePath.AmountYouSupply, GetAmountYouSupplyContents()
+            },
+            {
+                PagePath.OwnBrand, GetOwnBrandContents()
             }
         };
 
@@ -942,6 +782,19 @@ public static class PageGenerator
                 new(ContentType.Heading, "NoActionNeeded.AmountYouSupplyTitle2", associationType: AssociationType.Subsidiary),
                 new(ContentType.Paragraph, "NoActionNeeded.AmountYouSupplyDescription3", associationType: AssociationType.Subsidiary)
             }
+        };
+    }
+
+    private static Content GetOwnBrandContents()
+    {
+        return new Content
+        {
+            ContentItems = new List<ContentItem>()
+            {
+               new(ContentType.Heading, "NoActionNeeded.OwnBrandTitle", associationType: AssociationType.Parent),
+               new(ContentType.Paragraph, "NoActionNeeded.OwnBrandDescription1", associationType: AssociationType.Parent)
+            }
+
         };
     }
 }
