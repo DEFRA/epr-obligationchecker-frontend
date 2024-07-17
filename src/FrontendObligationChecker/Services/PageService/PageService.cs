@@ -269,7 +269,7 @@ public class PageService : IPageService
             .Where(x => producerActivityPagePaths.Contains(x.Path))
             .Select(x => x.FirstQuestion.SelectedOption).ToList();
 
-        if (producerActivities.All(x => x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes)
+        if (producerActivities.All(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes)
         {
             companyModel.SellerType = SellerType.SellerOnly;
         }
@@ -299,6 +299,6 @@ public class PageService : IPageService
 
         companyModel.RequiresNationData =
             amountOfPackaging?.Value != amountOfPackagingNonObligated
-            && selectedOptions.Any(x => x.Value == YesNo.Yes);
+            && selectedOptions.Any(x => x != null && x.Value == YesNo.Yes);
     }
 }
