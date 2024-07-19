@@ -67,7 +67,6 @@ else
     app.UseExceptionHandler("/error");
 }
 
-app.UseMiddleware<SecurityHeaderMiddleware>();
 app.UseSession();
 
 // This must be put after security headers middleware to prevent executing it twice when error page is rendered
@@ -81,16 +80,6 @@ app.UseRequestLocalization();
 app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
 app.MapControllers();
-
-app.Use(async (context, next) =>
-{
-    if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
-    {
-        context.Response.Headers.Add("Content-Security-Policy", "form-action 'self' https://devrwdwebwa5401.azurewebsites.net/obligationchecker/type-of-organisation;");
-    }
-
-    await next();
-});
 
 app.Run();
 
