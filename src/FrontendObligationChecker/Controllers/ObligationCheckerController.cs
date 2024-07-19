@@ -11,7 +11,6 @@ using Services.PageService.Interfaces;
 using ViewModels;
 
 [FeatureGate(FeatureFlags.ObligationCheckerEnabled)]
-[IgnoreAntiforgeryToken]
 public class ObligationCheckerController : Controller
 {
     private readonly ILogger<ObligationCheckerController> _logger;
