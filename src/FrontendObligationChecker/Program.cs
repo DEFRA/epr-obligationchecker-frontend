@@ -67,6 +67,12 @@ else
     app.UseExceptionHandler("/error");
 }
 
+app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("Content-Security-Policy", "form-action 'self' https://devrwdwebwa5401.azurewebsites.net/obligationchecker/type-of-organisation;");
+        await next();
+    });
+
 app.UseMiddleware<SecurityHeaderMiddleware>();
 app.UseSession();
 
