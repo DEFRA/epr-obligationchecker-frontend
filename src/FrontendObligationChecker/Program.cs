@@ -24,7 +24,7 @@ builder.Services.AddAntiforgery(opts =>
 builder.Services.AddMemoryCache();
 
 builder.Services
-    .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
+    .AddControllersWithViews()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization();
 
