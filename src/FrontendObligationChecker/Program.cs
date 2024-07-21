@@ -3,7 +3,6 @@ using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
@@ -49,12 +48,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHostHeaderName = builder.Configuration.GetValue<string>("ForwardedHeaders:ForwardedHostHeaderName");
     options.OriginalHostHeaderName = builder.Configuration.GetValue<string>("ForwardedHeaders:OriginalHostHeaderName");
     options.AllowedHosts = builder.Configuration.GetValue<string>("ForwardedHeaders:AllowedHosts").Split(";");
-});
-
-builder.Services.AddAzureClients(clientBuilder =>
-{
-    clientBuilder.AddBlobServiceClient(builder.Configuration["StorageAccount:ConnectionString:blob"], preferMsi: true);
-    clientBuilder.AddQueueServiceClient(builder.Configuration["StorageAccount:ConnectionString:queue"], preferMsi: true);
 });
 
 var app = builder.Build();
