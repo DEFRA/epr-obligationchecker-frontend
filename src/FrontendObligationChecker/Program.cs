@@ -2,7 +2,7 @@
 using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
@@ -14,16 +14,10 @@ builder.Services.ConfigureOptions(builder.Configuration);
 
 string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
 
-builder.Services.AddAntiforgery(opts =>
-{
-    opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
-    opts.Cookie.Path = pathBase;
-});
-
 builder.Services.AddMemoryCache();
 
 builder.Services
-    .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
+    .AddControllersWithViews()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization();
 
@@ -48,10 +42,12 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
     GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
 }
 
-builder.Services.AddAzureClients(clientBuilder =>
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    clientBuilder.AddBlobServiceClient(builder.Configuration["StorageAccount:ConnectionString:blob"], preferMsi: true);
-    clientBuilder.AddQueueServiceClient(builder.Configuration["StorageAccount:ConnectionString:queue"], preferMsi: true);
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto;
+    options.ForwardedHostHeaderName = builder.Configuration.GetValue<string>("ForwardedHeaders:ForwardedHostHeaderName");
+    options.OriginalHostHeaderName = builder.Configuration.GetValue<string>("ForwardedHeaders:OriginalHostHeaderName");
+    options.AllowedHosts = builder.Configuration.GetValue<string>("ForwardedHeaders:AllowedHosts").Split(";");
 });
 
 var app = builder.Build();
@@ -69,9 +65,7 @@ else
 
 app.UseSession();
 
-// This must be put after security headers middleware to prevent executing it twice when error page is rendered
-app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
-
+app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
