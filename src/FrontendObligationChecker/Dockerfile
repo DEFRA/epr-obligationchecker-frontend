@@ -1,12 +1,12 @@
 ﻿ARG ADD_TRUSTED_CERT=false
 
 # Based on Defra's dotnet image
-FROM defradigital/dotnetcore-development:dotnet8.0 AS build-with-trusted-cert-false
+FROM defradigital/dotnetcore-development:dotnet6.0 AS build-with-trusted-cert-false
 
 # This is for building the docker base on a host machine behind a Corporate proxy or VPN
 # we need to add in the corporate certificate chain
 # e.g. Kainos developers will need the Kainos ZScaler trusted certificate
-FROM defradigital/dotnetcore-development:dotnet8.0 AS build-with-trusted-cert-true
+FROM defradigital/dotnetcore-development:dotnet6.0 AS build-with-trusted-cert-true
 USER root
 ARG TRUSTED_CERT
 COPY ./${TRUSTED_CERT} /usr/local/share/ca-certificates/
