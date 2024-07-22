@@ -28,6 +28,7 @@ public static class Session
                 .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
         }
 
+
         services.AddSession(options =>
         {
             options.Cookie.Name = configuration.GetValue<string>("COOKIE_OPTIONS:SessionCookieName");
