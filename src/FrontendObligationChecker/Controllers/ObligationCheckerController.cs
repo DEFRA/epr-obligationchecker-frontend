@@ -42,7 +42,7 @@ public class ObligationCheckerController : Controller
     }
 
     [HttpPost]
-    [Route("ObligationChecker/{path}", Name = "ObligationChecker")]
+    [Route("ObligationChecker/{path}", Name = "GetNextPage")]
     public async Task<IActionResult> GetNextPage(string path)
     {
         var page = await _pageService.SetAnswersAndGetPageAsync(path, Request.Form);
@@ -57,7 +57,7 @@ public class ObligationCheckerController : Controller
             return View(page.View, new PageModel(page));
         }
 
-        var nextPath = Url.RouteUrl("ObligationChecker", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
+        var nextPath = Url.RouteUrl("GetNextPage", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
 
         return Redirect(nextPath);
     }
