@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WhatYouNeedToDo.AmountYouSupplyAlternateRowTitle" xml:space="preserve">
+    <value>Swm pecynnu</value>
+  </data>
+  <data name="WhatYouNeedToDo.AnnualTurnoverAlternateRowTitle" xml:space="preserve">
+    <value>Trosiant</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContainerVolumeAlternateRowTitle" xml:space="preserve">
+    <value>Cynwysyddion diodydd rhwng 50ml a 3l</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentBanner" xml:space="preserve">
+    <value>Bydd angen i chi roi gwybod am ddata pecynnu</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentDetailsPrnPerns" xml:space="preserve">
+    <value>&lt;details class="govuk-details" data-module="govuk-details"&gt;
+        &lt;summary class="govuk-details__summary"&gt;
+        &lt;span class="govuk-details__summary-text"&gt;Beth yw PRNs a PERNs?
+
+        &lt;/span&gt;
+        &lt;/summary&gt;
+                &lt;div class="govuk-details__text"&gt;
+        &lt;p class="govuk-body"&gt;Mae PRN neu PERN yn dystiolaeth bod gwastraff pecynnu wedi'i ailgylchu.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Gallwch gael PRN gan ailbroseswyr achrededig. Mae ailbroseswyr yn gyfrifol am ailgylchu gwastraff pecynnu. Gallwch hefyd gael PERNs gan allforwyr achrededig.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Trwy gael PRNs a PERNs, rydych chi'n gweithio tuag at gwrdd â'ch rhwymedigaethau ailgylchu.&lt;/p&gt;
+                    &lt;/div&gt;
+            &lt;/details&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading1" xml:space="preserve">
+    <value>Beth mae hyn yn ei olygu i'ch sefydliad</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">
+    <value>Cwrdd â'ch rhwymedigaethau ailgylchu</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
+    <value>Beth ddylech chi ei wneud nesaf</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading5" xml:space="preserve">
+    <value>Yr hyn a ddywedasoch wrthym</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentInset1Large" xml:space="preserve">
+    <value>Ar gyfer y cyfnod Ionawr i Fehefin 2023, adroddwch ar ddata erbyn 1 Hydref 2023.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentInset1Small" xml:space="preserve">
+    <value>Bydd angen i chi gyflwyno eich data erbyn 1 Ebrill 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentInset2Large" xml:space="preserve">
+    <value>Ar gyfer y cyfnod Gorffennaf i Ragfyr 2023, adroddwch ar ddata erbyn 1 Ebrill 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
+    <value>Cyflwyno data cenedl</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
+    <value>Bydd angen i chi gyflwyno data eich cenedl ar gyfer blwyddyn galendr 2023 erbyn 1 Rhagfyr 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
+    <value>Bydd angen i chi gyflwyno data cenedl.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataParagraph2" xml:space="preserve">
+    <value>Mae data cenedl yn wybodaeth am ba wlad yn y deunydd pacio yn y DU y cyflenwir ynddi ac ym mha wlad yn y DU y caiff deunydd pacio ei daflu.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataParagraph3" xml:space="preserve">
+    <value>Dylai data gwlad ddangos ble yn y DU rydych chi wedi cyflenwi deunydd pacio i berson neu fusnes sydd wedi mynd ymlaen i’w daflu.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
+    <value>O dan EPR ar gyfer pecynnu, rydych yn cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen i'ch sefydliad gofnodi a chyflwyno data am y pecyn a gyflenwir neu a fewnforiwyd ganddo. Bydd angen i chi dalu ffioedd hefyd.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1Small" xml:space="preserve">
+    <value>O dan EPR ar gyfer pecynnu, rydych yn cael eich dosbarthu fel sefydliad bach. Mae hyn yn golygu y bydd angen i'ch sefydliad gofnodi a chyflwyno data am y deunydd pacio y mae'n ei drin a'i gyflenwi.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
+    <value>Fel is-gwmni sy'n sefydliad bach, mae'n bosibl y bydd eich rhwymedigaeth yn perthyn i riant-gwmni eich grŵp mewn amgylchiadau lle byddai'r grŵp yn cael ei ddosbarthu fel cynhyrchydd mawr.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae'n rhaid i ti:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;cofnodi data am y deunydd pacio gwag a’r nwyddau wedi’u pecynnu y gwnaethoch eu cyflenwi neu eu mewnforio i farchnad y DU – gwiriwch ‘Pryd i gasglu ac adrodd’ i weld pryd mae angen i chi wneud hyn&lt;/li&gt;
+    &lt;li&gt;creu cyfrif a chofrestru eich sefydliad o fis Gorffennaf 2023&lt;/li&gt;
+    &lt;li&gt;talu ffi i’r rheolydd amgylcheddol&lt;/li&gt;
+    &lt;li&gt;cyflwyno data am becynnu gwag a nwyddau wedi'u pecynnu y gwnaethoch eu cyflenwi neu eu mewnforio drwy farchnad y DU&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2Seller" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae'n rhaid i ti:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;cofnodi data cenedl o 1 Ionawr 2023&lt;/li&gt;
+    &lt;li&gt;creu cyfrif a chofrestru eich sefydliad o fis Ionawr 2024&lt;/li&gt;
+    &lt;li&gt;talu ffi i’r rheolydd amgylcheddol&lt;/li&gt;
+    &lt;li&gt;cyflwyno eich data cenedl&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae'n rhaid i ti:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;cofnodi data am ddeunydd pacio gwag a nwyddau wedi'u pecynnu yr ydych yn eu trin a'u cyflenwi ym marchnad y DU o 1 Ionawr 2023&lt;/li&gt;
+    &lt;li&gt;creu cyfrif a chofrestru eich sefydliad erbyn 1 Ebrill 2024&lt;/li&gt;
+    &lt;li&gt;talu ffi i’r rheolydd amgylcheddol&lt;/li&gt;
+    &lt;li&gt;cyflwyno data am ddeunydd pacio gwag a nwyddau wedi’u pecynnu y gwnaethoch eu trin neu eu cyflenwi drwy farchnad y DU drwy gydol 2023&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
+    <value>Ar gyfer unrhyw ddeunydd pacio rydych chi’n ei gyflenwi neu’n ei fewnforio sy’n cael ei gasglu gan awdurdodau lleol o gartrefi neu finiau cyhoeddus, o fis Ebrill 2024 mae’n rhaid i chi dalu:</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph4Large" xml:space="preserve">
+    <value>Rhaid i chi gael nodiadau ailgylchu gwastraff pecynnu (PRNs) neu nodiadau ailgylchu gwastraff pecynnu (PERNs) yn 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph5Large" xml:space="preserve">
+    <value>Byddwn yn rhoi gwybod i chi faint o PRNs a PERNs sydd angen i chi eu cael. Byddwn yn seilio hyn ar eich data 2023.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentPrint1" xml:space="preserve">
+    <value>Gallwch chi</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentPrint2" xml:space="preserve">
+    <value>argraffu neu arbed y dudalen hon fel PDF</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentUoList1A" xml:space="preserve">
+    <value>ffi rheoli gwastraff</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentUoList1B" xml:space="preserve">
+    <value>costau gweinyddwr y cynllun</value>
+  </data>
+  <data name="WhatYouNeedToDo.HiringLoaning.AlternateRowTitle" xml:space="preserve">
+    <value>Llogi neu fenthyg deunydd pacio y gellir ei ailddefnyddio</value>
+  </data>
+  <data name="WhatYouNeedToDo.ImportingProducts.AlternateRowTitle" xml:space="preserve">
+    <value>Mewnforio cynhyrchion mewn pecynnu</value>
+  </data>
+  <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
+    <value>Deunyddiau a ddefnyddir ar gyfer cynwysyddion diodydd</value>
+  </data>
+  <data name="WhatYouNeedToDo.OnlineMarketplace.AlternateRowTitle" xml:space="preserve">
+    <value>Math o sefydliad</value>
+  </data>
+  <data name="WhatYouNeedToDo.OrganisationTypeAlternateRowTitle" xml:space="preserve">
+    <value>Bod yn berchen ar farchnad ar-lein</value>
+  </data>
+  <data name="WhatYouNeedToDo.OwnBrand.AlternateRowTitle" xml:space="preserve">
+    <value>Cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun</value>
+  </data>
+  <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
+    <value>Rhowch gynwysyddion diodydd ar y farchnad</value>
+  </data>
+  <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">
+    <value>Gwerthu pecynnau gwag i fusnesau eraill</value>
+  </data>
+  <data name="WhatYouNeedToDo.SupplyingPackagingContent" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae cyflenwi pecynnu yn cynnwys:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;gwerthu&lt;/li&gt;
+    &lt;li&gt;llogi&lt;/li&gt;
+    &lt;li&gt;benthyca&lt;/li&gt;
+    &lt;li&gt;anrhegu&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.Title" xml:space="preserve">
+    <value>Bydd angen i chi gymryd camau o dan yr EPR</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerLarge" xml:space="preserve">
+    <value>Mawr</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerSmall" xml:space="preserve">
+    <value>Bach</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerText" xml:space="preserve">
+    <value>Beth sydd angen i chi ei wneud</value>
+  </data>
+  <data name="WhatYouNeedToDo.UnbrandedPackaging.AlternateRowTitle" xml:space="preserve">
+    <value>Rhowch nwyddau mewn pecynnau nad ydynt wedi'u brandio pan gânt eu gwerthu</value>
+  </data>
+  <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
+    <value>Darganfod mwy am y data y bydd angen i chi ei gasglu (yn agor mewn tab newydd)</value>
+  </data>
+  <data name="WhatYouNeedToDo.WhenToCollectAndReportContent" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;
+            Os ydych wedi cofnodi’r holl ddata gofynnol o 1 Ionawr 2023, dylech adrodd ar y data hwn.
+            &lt;/p&gt;
+        &lt;p class="govuk-body"&gt;
+            Os nad yw'r holl ddata gofynnol wedi'i gofnodi gennych o 1 Ionawr, mae'n rhaid i chi roi gwybod am eich holl ddata o 1 Mawrth 2023. Os byddwch yn rhoi gwybod am ddata sy'n cwmpasu cyfnod yn dechrau o 1 Mawrth, caiff hwn ei ddefnyddio i gyfrifo gwerth blwyddyn lawn o data.
+        &lt;/p&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
+    <value>Pryd i gasglu ac adrodd</value>
+  </data>
+</root>

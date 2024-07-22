@@ -124,7 +124,7 @@
     <value>Cymraeg</value>
   </data>
   <data name="AboutYourOrganisation" xml:space="preserve">
-    <value />
+    <value>Am eich sefydliad</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Cynhyrchwyr mawr ar y gwasanaeth ‘Rhoi gwybod am ddata pecynwaith’</value>
@@ -139,6 +139,99 @@
     <value>Cymraeg</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>English</value>
+    <value>Saesneg</value>
+  </data>
+  <data name="AmountOfPackaging" xml:space="preserve">
+    <value>Swm y pecynnu</value>
+  </data>
+  <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
+    <value>25 tunnell i 50 tunnell</value>
+  </data>
+  <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
+    <value>50 tunnell neu fwy</value>
+  </data>
+  <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
+    <value>O dan 25 tunnell</value>
+  </data>
+  <data name="Defra" xml:space="preserve">
+    <value>Adran yr Amgylchedd, Bwyd a Materion Gwledig</value>
+  </data>
+  <data name="Disclaimer" xml:space="preserve">
+    <value>Mae'r offeryn 'Gwirio a oes angen i chi roi gwybod am ddata pecynnu' ar gyfer gwybodaeth a chymorth cyffredinol ond nid yw'n gyfystyr â chyngor cyfreithiol. Darllenwch y ddeddfwriaeth Cyfrifoldeb Estynedig Cynhyrchwyr am Becynnu am ganllawiau cyfreithiol cynhwysfawr ar rwymedigaethau a chyfrifoldebau.</value>
+  </data>
+  <data name="question_option_no" xml:space="preserve">
+    <value>Nac ydw</value>
+  </data>
+  <data name="question_option_yes" xml:space="preserve">
+    <value>Oes</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
+    <value>O dan £1 miliwn</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel2" xml:space="preserve">
+    <value>rhwng £1 miliwn a £2 filiwn</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel3" xml:space="preserve">
+    <value>£2 filiwn neu fwy</value>
+  </data>
+  <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
+    <value>llogi neu fenthyg deunydd pacio y gellir ei ailddefnyddio i sefydliadau yn y DU</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
+    <value>mewnforio cynhyrchion mewn pecynnu</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.AmountHandlePageText" xml:space="preserve">
+    <value>mewnforio cynhyrchion mewn pecynnau sy'n cael eu cyflenwi neu eu taflu yn y DU</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.AluminiumCans" xml:space="preserve">
+    <value>Caniau alwminiwm</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.GlassBottles" xml:space="preserve">
+    <value>Poteli gwydr</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.None" xml:space="preserve">
+    <value>Dim o'r rhestr</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.PlasticBottles" xml:space="preserve">
+    <value>Poteli plastig polyethylen terephthalate (PET).</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.SteelCans" xml:space="preserve">
+    <value>Caniau dur</value>
+  </data>
+  <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
+    <value>bod yn berchen ar farchnad ar-lein</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
+    <value>cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
+    <value>cyflenwi deunydd pacio gwag i fusnesau sy'n dod o dan y trothwy uwch</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.AmountHandlePageText" xml:space="preserve">
+    <value>cyflenwi deunydd pacio gwag i fusnesau nad ydynt yn cael eu dosbarthu fel sefydliad mawr</value>
+  </data>
+  <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
+    <value>cyflenwi deunydd pacio wedi'i lenwi i ddefnyddwyr</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
+    <value>Cwmni Rhiant</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
+    <value>Is-gwmni</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
+    <value>Cwmni unigol</value>
+  </data>
+  <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
+    <value>gosod nwyddau mewn pecynnau sydd heb eu brandio pan gaiff ei gyflenwi</value>
+  </data>
+  <data name="skip_to_main_content_text" xml:space="preserve">
+    <value>Neidio i'r prif gynnwys</value>
+  </data>
+  <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
+    <value>Deunyddiau a ddefnyddir ar gyfer cynwysyddion diodydd</value>
+  </data>
+  <data name="YourPackagingActivities" xml:space="preserve">
+    <value>Eich gweithgareddau pecynnu</value>
   </data>
 </root>
