@@ -42,14 +42,6 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
     GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
 }
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto;
-    options.ForwardedHostHeaderName = builder.Configuration.GetValue<string>("ForwardedHeaders:ForwardedHostHeaderName");
-    options.OriginalHostHeaderName = builder.Configuration.GetValue<string>("ForwardedHeaders:OriginalHostHeaderName");
-    options.AllowedHosts = builder.Configuration.GetValue<string>("ForwardedHeaders:AllowedHosts").Split(";");
-});
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -63,7 +55,6 @@ else
 
 app.UseSession();
 
-app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
