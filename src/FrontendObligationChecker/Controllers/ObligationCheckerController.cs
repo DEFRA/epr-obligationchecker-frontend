@@ -56,7 +56,7 @@ public class ObligationCheckerController : Controller
             return View(page.View, new PageModel(page));
         }
 
-        var nextPath = Url.RouteUrl("GetNextPage", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
+        var nextPath = Url.RouteUrl("obligationchecker", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
 
         return Redirect(nextPath);
     }
