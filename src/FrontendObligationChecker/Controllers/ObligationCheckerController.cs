@@ -26,7 +26,7 @@ public class ObligationCheckerController : Controller
     }
 
     [HttpGet]
-    [Route("ObligationChecker/{path}")]
+    [Route("obligationchecker/{path}")]
     public async Task<IActionResult> Question(string path)
     {
         var page = await _pageService.GetPageAsync(path);
@@ -41,7 +41,7 @@ public class ObligationCheckerController : Controller
     }
 
     [HttpPost]
-    [Route("ObligationChecker/{path}", Name = "GetNextPage")]
+    [Route("obligationchecker/{path}", Name = "obligationchecker")]
     public async Task<IActionResult> GetNextPage(string path)
     {
         var page = await _pageService.SetAnswersAndGetPageAsync(path, Request.Form);
