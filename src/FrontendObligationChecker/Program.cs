@@ -2,7 +2,8 @@
 using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,8 +44,6 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 
 var app = builder.Build();
 
-app.UsePathBase(pathBase);
-
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -54,11 +53,7 @@ else
     app.UseExceptionHandler("/error");
 }
 
-app.UseMiddleware<SecurityHeaderMiddleware>();
 app.UseSession();
-
-// This must be put after security headers middleware to prevent executing it twice when error page is rendered
-app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -68,6 +63,7 @@ app.UseRequestLocalization();
 app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
 app.MapControllers();
+
 app.Run();
 
 public partial class Program
