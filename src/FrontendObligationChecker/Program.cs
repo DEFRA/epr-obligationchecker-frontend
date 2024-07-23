@@ -51,6 +51,8 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 
 var app = builder.Build();
 
+app.UsePathBase(pathBase);
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
