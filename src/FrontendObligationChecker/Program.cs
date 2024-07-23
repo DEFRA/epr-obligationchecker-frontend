@@ -3,6 +3,7 @@ using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
@@ -14,10 +15,16 @@ builder.Services.ConfigureOptions(builder.Configuration);
 
 string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
 
+builder.Services.AddAntiforgery(opts =>
+{
+    opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
+    opts.Cookie.Path = pathBase;
+});
+
 builder.Services.AddMemoryCache();
 
 builder.Services
-    .AddControllersWithViews()
+    .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
     .AddViewLocalization()
     .AddDataAnnotationsLocalization();
 
