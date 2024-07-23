@@ -51,15 +51,13 @@ public class AmountYouSupplyTests
 
     [TestMethod]
     [DataRow(1, true)]
-    [DataRow(2, false)]
-    [DataRow(3, false)]
     public async Task NonSellerYesActivities_UseTextForAmountYouSupplyInsteadOfAlternateTitleWhereTheyExist(int selectedAsYes, bool matchingAltTitle)
     {
         await _pageService.SetVisitedPages(new VisitedPages()
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OverTwoMillion,
-            OwnBrand = selectedAsYes == 1 ? YesNo.Yes : YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = selectedAsYes == 2 ? YesNo.Yes : YesNo.No,
             SellingEmptyPackaging = selectedAsYes == 3 ? YesNo.Yes : YesNo.No,

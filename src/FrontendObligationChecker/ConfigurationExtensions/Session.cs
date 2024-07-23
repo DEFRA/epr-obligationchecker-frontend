@@ -23,7 +23,9 @@ public static class Session
 
             services
                 .AddDataProtection()
-                .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(redisConnection), "DataProtection-Keys");
+                .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(redisConnection), "DataProtection-Keys")
+                .SetApplicationName("Obligation-checker")
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
         }
 
         services.AddSession(options =>

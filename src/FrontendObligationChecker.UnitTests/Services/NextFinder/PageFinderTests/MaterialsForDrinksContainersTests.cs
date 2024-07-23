@@ -74,7 +74,7 @@ public class MaterialsForDrinksContainersTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OverTwoMillion,
-            OwnBrand = YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = YesNo.No,
             SellingEmptyPackaging = YesNo.No,

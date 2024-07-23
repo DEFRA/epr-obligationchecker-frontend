@@ -2,6 +2,7 @@
 using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
@@ -48,12 +49,6 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
     GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
 }
 
-builder.Services.AddAzureClients(clientBuilder =>
-{
-    clientBuilder.AddBlobServiceClient(builder.Configuration["StorageAccount:ConnectionString:blob"], preferMsi: true);
-    clientBuilder.AddQueueServiceClient(builder.Configuration["StorageAccount:ConnectionString:queue"], preferMsi: true);
-});
-
 var app = builder.Build();
 
 app.UsePathBase(pathBase);
@@ -67,11 +62,7 @@ else
     app.UseExceptionHandler("/error");
 }
 
-app.UseMiddleware<SecurityHeaderMiddleware>();
 app.UseSession();
-
-// This must be put after security headers middleware to prevent executing it twice when error page is rendered
-app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -81,6 +72,7 @@ app.UseRequestLocalization();
 app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
 app.MapControllers();
+
 app.Run();
 
 public partial class Program

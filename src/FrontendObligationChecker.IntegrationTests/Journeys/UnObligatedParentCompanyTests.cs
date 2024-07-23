@@ -24,7 +24,7 @@ public class UnObligatedParentCompanyTests : TestBase
         var page = GetPage(path);
 
         // Act
-        var response = await _httpClient.GetAsync($"/check-if-you-need-to-report/{path}");
+        var response = await _httpClient.GetAsync($"/ObligationChecker/{path}");
         var content = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -39,10 +39,10 @@ public class UnObligatedParentCompanyTests : TestBase
     {
         // Arrange
         var page = GetPage(path);
-        var formData = GetFormData(page, path);
+        var formData = await GetFormData(page, path);
 
         // Act
-        var response = await _httpClient.PostAsync($"/check-if-you-need-to-report/get-next-page", formData);
+        var response = await _httpClient.PostAsync($"/ObligationChecker/get-next-page", formData);
         var content = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -55,8 +55,10 @@ public class UnObligatedParentCompanyTests : TestBase
         return _pages?.SingleOrDefault(page => page.Path.Equals(path))!;
     }
 
-    private FormUrlEncodedContent GetFormData(Page page, string path)
+    private async Task<FormUrlEncodedContent> GetFormData(Page page, string path)
     {
+        var tokenValue = await GetAntiForgeryToken($"/ObligationChecker/{PagePath.TypeOfOrganisation}");
+
         page.Questions.ForEach(q => q.SetAnswer(q.Options.FirstOrDefault()!.Value));
 
         var options = page.Questions.Select(x =>
@@ -72,6 +74,11 @@ public class UnObligatedParentCompanyTests : TestBase
             Value = path
         });
 
+        options.Add(new
+        {
+            Key = "__RequestVerificationToken",
+            Value = tokenValue
+        });
         var formValues = options.Select(x =>
             new KeyValuePair<string, string>(x.Key, x.Value));
 
