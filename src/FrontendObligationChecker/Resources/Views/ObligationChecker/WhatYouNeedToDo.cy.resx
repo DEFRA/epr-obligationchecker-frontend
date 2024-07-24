@@ -285,8 +285,11 @@
   <data name="WhatYouNeedToDo.UnbrandedPackaging.AlternateRowTitle" xml:space="preserve">
     <value>Rhowch nwyddau mewn pecynnau nad ydynt wedi'u brandio pan gânt eu gwerthu</value>
   </data>
-  <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
+  <data name="WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription" xml:space="preserve">
     <value>Darganfod mwy am y data y bydd angen i chi ei gasglu (yn agor mewn tab newydd)</value>
+  </data>
+  <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
+    <value>Casglwch ddata am y deunydd pacio a ddarparwyd gennych drwy farchnad y DU neu a fewnforiwyd i'r DU.</value>
   </data>
   <data name="WhatYouNeedToDo.WhenToCollectAndReportContent" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;
