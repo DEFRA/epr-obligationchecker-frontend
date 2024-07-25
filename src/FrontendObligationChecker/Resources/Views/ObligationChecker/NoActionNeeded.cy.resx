@@ -126,6 +126,9 @@
   <data name="NoActionNeeded.AmountYouSupplyDescription2" xml:space="preserve">
     <value>Efallai y bydd angen i chi gydymffurfio â'r rheoliadau cyfrifoldeb estynedig cynhyrchydd am becynnu yn y dyfodol os yw maint y deunydd pacio rydych chi'n ei drin a'i gyflenwi mewn blwyddyn yn 25 tunnell neu fwy.</value>
   </data>
+  <data name="NoActionNeeded.AmountYouSupplyDescription2Parent" xml:space="preserve">
+    <value>Mae’n bosibl y bydd angen i chi gydymffurfio â’r rheoliadau cyfrifoldeb estynedig cynhyrchydd am becynnu yn y dyfodol os yw swm y deunydd pacio y mae eich sefydliad, neu gyfuniad o’ch sefydliad ynghyd ag un neu fwy o’i is-gwmnïau, neu gyfuniad o ddau neu fwy o’i is-gwmnïau, yn cynnwys. trin a chyflenwi mewn blwyddyn yn 25 tunnell neu fwy.</value>
+  </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription3" xml:space="preserve">
     <value>Mae’n bosibl y bydd angen i’ch rhiant-gwmni gofrestru ar gyfer cyfrifoldeb cynhyrchydd estynedig (EPR) am becynnu os yw cyfanswm blynyddol y deunydd pacio sy’n cael ei drin neu ei gyflenwi gan unrhyw is-gwmnïau nad ydynt yn bodloni’r meini prawf yn 25 tunnell neu fwy.</value>
   </data>
