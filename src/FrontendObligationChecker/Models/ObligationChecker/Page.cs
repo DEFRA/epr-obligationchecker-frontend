@@ -54,7 +54,7 @@ public class Page
 
     public string View => PageType.ToString();
 
-    public bool HasError => Questions.Any(question => question.HasError);
+    public bool HasError => Questions.Exists(question => question.HasError);
 
     public bool HasBackLink => !string.IsNullOrEmpty(BackLinkPath);
 
@@ -69,7 +69,7 @@ public class Page
 
     public Page? FindPage(string path)
     {
-        return SessionPages.FirstOrDefault(x => x.Path == path);
+        return SessionPages.Find(x => x.Path == path);
     }
 
     [JsonIgnore]

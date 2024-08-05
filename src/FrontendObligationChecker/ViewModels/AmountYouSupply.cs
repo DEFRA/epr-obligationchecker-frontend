@@ -40,7 +40,7 @@ public class AmountYouSupply
     private static bool CheckHasSingleUseDrinkContainers(Page page)
     {
         var isPlacingDrinksOnMarket =
-            page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions.FirstOrDefault().Answer == YesNo.Yes;
+            page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions.FirstOrDefault() != null && page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions.FirstOrDefault().Answer == YesNo.Yes;
 
         if (!isPlacingDrinksOnMarket)
         {
@@ -48,7 +48,7 @@ public class AmountYouSupply
         }
 
         bool isUsingDrinkContainersMaterials =
-            page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions.FirstOrDefault().Answer != "0";
+            page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions.FirstOrDefault() != null && page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions.FirstOrDefault().Answer != "0";
 
         if (!isUsingDrinkContainersMaterials)
         {
@@ -56,7 +56,7 @@ public class AmountYouSupply
         }
 
         var containerVolumePage = page.FindPage(PagePath.ContainerVolume);
-        return containerVolumePage?.Questions.FirstOrDefault().Answer == YesNo.Yes;
+        return containerVolumePage?.Questions.FirstOrDefault() != null && containerVolumePage?.Questions.FirstOrDefault().Answer == YesNo.Yes;
     }
 
     private static bool CheckIsParentCompany(Page page)
@@ -64,6 +64,6 @@ public class AmountYouSupply
         var typeOfOrganisationPage = page.FindPage(PagePath.TypeOfOrganisation);
 
         return typeOfOrganisationPage.Questions
-            .Any(x => x.Answer == "parent");
+            .Exists(x => x.Answer == "parent");
     }
 }

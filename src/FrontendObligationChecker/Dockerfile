@@ -17,7 +17,7 @@ RUN if [[ -z "$TRUSTED_CERT" ]] ;\
 
 FROM build-with-trusted-cert-${ADD_TRUSTED_CERT} AS build
 USER root
-RUN apk add nodejs npm
+RUN apk --no-cache add nodejs npm
 USER dotnet
 WORKDIR /src
 COPY --chown=dotnet:dotnet ["FrontendObligationChecker/", "FrontendObligationChecker/"]
@@ -46,7 +46,7 @@ RUN if [[ -z "$TRUSTED_CERT" ]] ;\
 
 # Installs globalization tools and sets common environment settings
 FROM base-with-trusted-cert-${ADD_TRUSTED_CERT} AS configured-base
-RUN apk add icu-libs icu-data-full libintl
+RUN apk --no-cache add icu-libs icu-data-full libintl
 USER dotnet
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 

@@ -64,15 +64,15 @@
                                 <dl class="govuk-summary-list govuk-!-margin-bottom-7"><div class="govuk-summary-list__row">&nbsp;</div></dl>
                                 break;
                             case ContentType.Hyperlink:
-                            {
-                                if (item is Hyperlink link)
                                 {
-                                    <p class="govuk-body">
-                                        <a href="@link.Url" class="govuk-link @link.AnalyticsTrackingId" target="_blank">@Localizer[link.Description]</a>
-                                    </p>
+                                    if (item is Hyperlink link)
+                                    {
+                                        <p class="govuk-body">
+                                            <a href="@link.Url" class="govuk-link @link.AnalyticsTrackingId" target="_blank">@Localizer[link.Description]</a>
+                                        </p>
+                                    }
+                                    break;
                                 }
-                                break;
-                            }
                         }
                     }
 
@@ -103,7 +103,7 @@
                             lastPageGroup = sessionPage.PageGroup;
                         }
 
-                        var containsUnansweredQuestion = sessionPage.Questions.Any(q => q.SelectedOption is null);
+                        var containsUnansweredQuestion = sessionPage.Questions.Exists(q => q.SelectedOption is null);
 
                         if (!sessionPage.Questions.Any() || containsUnansweredQuestion)
                         {
@@ -140,7 +140,7 @@
                     }
                     else
                     {
-                        @SharedLocalizer[firstPage.TitleCaption]
+                        @SharedLocalizer[firstPage?.TitleCaption]
                     }
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -150,7 +150,7 @@
 
                         if (currentPage.FirstQuestion?.QuestionType == QuestionType.CheckboxesNone)
                         {
-                            var noneOption = currentPage.FirstQuestion?.Options.FirstOrDefault(o => o.IsSelected == true && o.Value == "0");
+                            var noneOption = currentPage.FirstQuestion?.Options.Find(o => o.IsSelected == true && o.Value == "0");
                             if (noneOption != null)
                             {
                                 <p class="govuk-body">@SharedLocalizer[noneOption.Title]</p>
@@ -158,11 +158,14 @@
                             else
                             {
                                 <ul class="govuk-list govuk-list--bullet">
-                                    @foreach (var option in currentPage.FirstQuestion?.Options.Where(o => o.IsSelected == true))
+                                    @if (currentPage.FirstQuestion?.Options != null)
                                     {
-                                        <li>
-                                            @SharedLocalizer[option.Title]
-                                        </li>
+                                        @foreach (var option in currentPage.FirstQuestion?.Options.Where(o => o.IsSelected == true))
+                                        {
+                                            <li>
+                                                @SharedLocalizer[option.Title]
+                                            </li>
+                                        }
                                     }
                                 </ul>
                             }
@@ -195,18 +198,18 @@
 {
     <script nonce="@scriptNonce">
         document.addEventListener('DOMContentLoaded', WireUpEvents);
-    
+
         function WireUpEvents() {
             if (window.print) {
                 let printParagraph = document.getElementById('printParagraph');
                 printParagraph.className = 'govuk-body';
                 let printLink = document.getElementById('printSummary');
                 printLink.addEventListener('click', printPage);
-            } 
+            }
         }
-    
-         function printPage() {
-                window.print();
-         }
+
+        function printPage() {
+            window.print();
+        }
     </script>
 }

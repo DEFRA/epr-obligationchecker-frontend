@@ -30,7 +30,7 @@ public class Question
 
     public List<Option> Options { get; set; } = new();
 
-    public Option? SelectedOption => Options.FirstOrDefault(option => option.IsSelected == true);
+    public Option? SelectedOption => Options.Find(option => option.IsSelected == true);
 
     public string GetDescription() => !string.IsNullOrEmpty(AlternateDescription) ? AlternateDescription : Description;
 
