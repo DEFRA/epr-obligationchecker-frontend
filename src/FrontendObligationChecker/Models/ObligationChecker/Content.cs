@@ -3,8 +3,8 @@ public class Content
 {
     public List<ContentItem> ContentItems { get; set; }
 
-    public List<ContentItem> GetRelatedContentItems(AssociationType associationType) =>
-        ContentItems.Where(x => associationType == null || x.AssociationType.HasFlag(associationType)).ToList();
+    public List<ContentItem> GetRelatedContentItems(AssociationType? associationType) =>
+        ContentItems.Where(x => associationType == null || x.AssociationType.HasFlag(associationType.Value)).ToList();
 
     public List<ContentItem> GetObligatedContentItems(CompanyModel companyModel, AssociationType associationType)
     {

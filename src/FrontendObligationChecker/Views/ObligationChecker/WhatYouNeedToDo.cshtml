@@ -160,7 +160,7 @@
                                 <ul class="govuk-list govuk-list--bullet">
                                     @if (currentPage.FirstQuestion?.Options != null)
                                     {
-                                        @foreach (var option in currentPage.FirstQuestion?.Options.Where(o => o.IsSelected == true))
+                                        @foreach (var option in currentPage.FirstQuestion.Options.Where(o => o.IsSelected == true))
                                         {
                                             <li>
                                                 @SharedLocalizer[option.Title]
