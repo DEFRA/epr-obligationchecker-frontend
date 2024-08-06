@@ -59,7 +59,7 @@ public class AmountYouSupply
 
         var containerVolumePage = page.FindPage(PagePath.ContainerVolume);
         return containerVolumePage?.Questions.FirstOrDefault()?.Answer != null
-               && containerVolumePage?.Questions.FirstOrDefault()?.Answer == YesNo.Yes;
+               && containerVolumePage?.Questions.FirstOrDefault().Answer == YesNo.Yes;
     }
 
     private static bool CheckIsParentCompany(Page page)
