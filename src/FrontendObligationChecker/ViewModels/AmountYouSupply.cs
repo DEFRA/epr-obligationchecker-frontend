@@ -57,9 +57,8 @@ public class AmountYouSupply
             return false;
         }
 
-        var containerVolumePage = page.FindPage(PagePath.ContainerVolume);
-        return containerVolumePage?.Questions.FirstOrDefault()?.Answer != null
-               && containerVolumePage?.Questions.FirstOrDefault()?.Answer == YesNo.Yes;
+        return page.FindPage(PagePath.ContainerVolume)?.Questions.FirstOrDefault()?.Answer != null
+              && page.FindPage(PagePath.ContainerVolume)?.Questions.FirstOrDefault()?.Answer == YesNo.Yes;
     }
 
     private static bool CheckIsParentCompany(Page page)
