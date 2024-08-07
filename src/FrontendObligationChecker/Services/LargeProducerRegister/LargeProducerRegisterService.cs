@@ -4,6 +4,8 @@ using ByteSizeLib;
 using Constants;
 using Exceptions;
 using Extensions;
+using FrontendObligationChecker.Models.BlobReader;
+using FrontendObligationChecker.ViewModels.LargeProducer;
 using Helpers;
 using Interfaces;
 using Microsoft.Extensions.Options;
@@ -84,5 +86,66 @@ public class LargeProducerRegisterService : ILargeProducerRegisterService
             _logger.LogError(ex, LogMessageMetadata);
             throw new LargeProducerRegisterServiceException(LogMessageMetadata, ex);
         }
+    }
+
+    public async Task<LargeProducerFileInfoViewModel> GetLatestAllNationsFileInfoAsync(string culture)
+    {
+        var prefix = culture == Language.English
+            ? _largeProducerReportFileNamesConfig.LatestAllNationsReportFileNamePrefix
+            : _largeProducerReportFileNamesConfig.LatestAllNationsReportFileNamePrefixInWelsh;
+
+        var latestBlob = await GetLatestBlobAsync(prefix);
+
+        if (latestBlob == null)
+        {
+            _logger.LogError("Latest blob for culture {culture} not found", culture);
+            return null;
+        }
+
+        return new LargeProducerFileInfoViewModel
+        {
+            DateCreated = latestBlob.CreatedOn.Value.Date,
+            DisplayFileSize = FileSizeFormatterHelper.ConvertByteSizeToString(ByteSize.FromBytes(latestBlob.ContentLength.Value))
+        };
+    }
+
+    public async Task<LargeProducerFileViewModel> GetLatestAllNationsFileAsync(string culture)
+    {
+        var prefix = culture == Language.English
+            ? _largeProducerReportFileNamesConfig.LatestAllNationsReportFileNamePrefix
+            : _largeProducerReportFileNamesConfig.LatestAllNationsReportFileNamePrefixInWelsh;
+
+        var latestBlob = await GetLatestBlobAsync(prefix);
+
+        if (latestBlob == null)
+        {
+            _logger.LogError("Latest blob for culture {culture} not found", culture);
+            return null;
+        }
+
+        var downloadFileNamePattern = culture == Language.English
+            ? _largeProducerReportFileNamesConfig.LatestAllNationsReportDownloadFileName
+            : _largeProducerReportFileNamesConfig.LatestAllNationsReportDownloadFileNameInWelsh;
+
+        try
+        {
+            return new LargeProducerFileViewModel
+            {
+                FileName = string.Format(downloadFileNamePattern, latestBlob.CreatedOn.Value.Date),
+                FileContents = await _blobReader.DownloadBlobToStreamAsync(latestBlob.Name)
+            };
+        }
+        catch (BlobReaderException ex)
+        {
+            _logger.LogError(ex, LogMessage, string.Empty);
+            throw new LargeProducerRegisterServiceException(string.Format(ErrorMessage, HomeNation.All), ex);
+        }
+    }
+
+    private async Task<BlobModel> GetLatestBlobAsync(string prefix)
+    {
+        return (await _blobReader.GetBlobsAsync(prefix))
+            .Where(x => x.CreatedOn != null && x.ContentLength != null && x.Name != null)
+            .MaxBy(x => x.CreatedOn);
     }
 }
