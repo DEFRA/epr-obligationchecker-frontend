@@ -92,7 +92,7 @@ public class CookieService : ICookieService
         }
 
         var cookieParts = cookie.Split("|");
-        if (cookieParts.Length > 0 && cookieParts[0].Equals(true.ToString()))
+        if (cookieParts[0].Equals(true.ToString()))
         {
             cookieConsentState.CookiesAccepted = true;
         }

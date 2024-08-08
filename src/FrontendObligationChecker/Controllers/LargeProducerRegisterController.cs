@@ -33,19 +33,17 @@ public class LargeProducerRegisterController : Controller
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var largeProducerViewModel = new LargeProducerRegisterViewModel();
-        if (_sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures != null)
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
+        if (!_cacheService.GetReportFileSizeCache(culture, out Dictionary<string, string> reportFileSizeMapping))
         {
-            var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
-            if (!_cacheService.GetReportFileSizeCache(culture, out Dictionary<string, string> reportFileSizeMapping))
-            {
-                reportFileSizeMapping = await _largeProducerRegisterService.GetAllReportFileSizesAsync(culture);
-                _cacheService.SetReportFileSizeCache(culture, reportFileSizeMapping);
-            }
-
-            largeProducerViewModel.HomeNationFileSizeMapping = reportFileSizeMapping;
+            reportFileSizeMapping = await _largeProducerRegisterService.GetAllReportFileSizesAsync(culture);
+            _cacheService.SetReportFileSizeCache(culture, reportFileSizeMapping);
         }
 
+        var largeProducerViewModel = new LargeProducerRegisterViewModel
+        {
+            HomeNationFileSizeMapping = reportFileSizeMapping
+        };
         return View("LargeProducerRegister", largeProducerViewModel);
     }
 
@@ -55,22 +53,17 @@ public class LargeProducerRegisterController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> File(string nationCode)
     {
-        if (_sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures != null)
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
+        try
         {
-            var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
-            try
-            {
-                var producerReport = await _largeProducerRegisterService.GetReportAsync(nationCode, culture);
-                return File(producerReport.Stream, "text/csv", producerReport.FileName);
-            }
-            catch (LargeProducerRegisterServiceException ex)
-            {
-                _logger.LogError(ex, FileNotDownloadedExceptionLog, nationCode);
-                return RedirectToAction("FileNotDownloaded", new { nationCode });
-            }
+            var producerReport = await _largeProducerRegisterService.GetReportAsync(nationCode, culture);
+            return File(producerReport.Stream, "text/csv", producerReport.FileName);
         }
-
-        return RedirectToAction("FileNotDownloaded", new { nationCode });
+        catch (LargeProducerRegisterServiceException ex)
+        {
+            _logger.LogError(ex, FileNotDownloadedExceptionLog, nationCode);
+            return RedirectToAction("FileNotDownloaded", new { nationCode });
+        }
     }
 
     [HttpGet(PagePath.FileNotDownloaded + "/{nationCode}")]
