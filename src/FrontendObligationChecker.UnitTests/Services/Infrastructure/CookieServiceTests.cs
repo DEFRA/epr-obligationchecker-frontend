@@ -219,7 +219,7 @@ public class CookieServiceTests
         return cookiesFeature.Cookies;
     }
 
-    private string GetCookieValueFromResponse(HttpResponse response, string cookieName)
+    private static string GetCookieValueFromResponse(HttpResponse response, string cookieName)
     {
         foreach (var headers in response.Headers)
         {

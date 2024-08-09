@@ -81,7 +81,7 @@ public class CookieBannerViewComponentTests
 
         var routeData = new Microsoft.AspNetCore.Routing.RouteData();
         routeData.Values.Add("controller", "Test");
-        var component = new CookieBannerViewComponent(_cookieOptions.Object, _cookieService.Object)
+        var component = new CookieBannerViewComponent(_cookieService.Object)
         {
             ViewComponentContext = new ViewComponentContext
             {
@@ -123,7 +123,7 @@ public class CookieBannerViewComponentTests
 
         var routeData = new Microsoft.AspNetCore.Routing.RouteData();
         routeData.Values.Add("controller", "Test");
-        var component = new CookieBannerViewComponent(_cookieOptions.Object, _cookieService.Object)
+        var component = new CookieBannerViewComponent(_cookieService.Object)
         {
             ViewComponentContext = new ViewComponentContext
             {
@@ -166,7 +166,7 @@ public class CookieBannerViewComponentTests
         var routeData = new Microsoft.AspNetCore.Routing.RouteData();
         routeData.Values.Add("controller", "Cookies");
 
-        var component = new CookieBannerViewComponent(_cookieOptions.Object, _cookieService.Object)
+        var component = new CookieBannerViewComponent(_cookieService.Object)
         {
             ViewComponentContext = new ViewComponentContext
             {
@@ -209,7 +209,7 @@ public class CookieBannerViewComponentTests
         var routeData = new Microsoft.AspNetCore.Routing.RouteData();
         routeData.Values.Add("controller", "Cookies");
 
-        var component = new CookieBannerViewComponent(_cookieOptions.Object, _cookieService.Object)
+        var component = new CookieBannerViewComponent(_cookieService.Object)
         {
             ViewComponentContext = new ViewComponentContext
             {

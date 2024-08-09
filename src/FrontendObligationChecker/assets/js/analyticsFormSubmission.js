@@ -19,7 +19,7 @@
     window.dataLayer.push(formData);
 }
 
-var singleQuestionForm = document.getElementsByClassName("single-question-form")
+let singleQuestionForm = document.getElementsByClassName("single-question-form")
 
 if (singleQuestionForm && singleQuestionForm.length === 1) {
     singleQuestionForm[0].addEventListener("submit", singleQuestionFormSubmission)

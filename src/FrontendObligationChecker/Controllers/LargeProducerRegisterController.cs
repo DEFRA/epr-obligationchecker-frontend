@@ -33,7 +33,7 @@ public class LargeProducerRegisterController : Controller
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
         if (!_cacheService.GetReportFileSizeCache(culture, out Dictionary<string, string> reportFileSizeMapping))
         {
             reportFileSizeMapping = await _largeProducerRegisterService.GetAllReportFileSizesAsync(culture);
@@ -53,7 +53,7 @@ public class LargeProducerRegisterController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> File(string nationCode)
     {
-        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
         try
         {
             var producerReport = await _largeProducerRegisterService.GetReportAsync(nationCode, culture);

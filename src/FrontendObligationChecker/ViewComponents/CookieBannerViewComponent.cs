@@ -1,19 +1,15 @@
-﻿using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.Services.Infrastructure.Interfaces;
+﻿using FrontendObligationChecker.Services.Infrastructure.Interfaces;
 using FrontendObligationChecker.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace FrontendObligationChecker.ViewComponents;
 
 public class CookieBannerViewComponent : ViewComponent
 {
-    private readonly EprCookieOptions _options;
     private readonly ICookieService _cookieService;
 
-    public CookieBannerViewComponent(IOptions<EprCookieOptions> options, ICookieService cookieService)
+    public CookieBannerViewComponent(ICookieService cookieService)
     {
-        _options = options.Value;
         _cookieService = cookieService;
     }
 

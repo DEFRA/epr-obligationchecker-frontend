@@ -11,15 +11,12 @@ using ViewModels;
 [FeatureGate(FeatureFlags.ObligationCheckerEnabled)]
 public class ObligationCheckerController : Controller
 {
-    private readonly ILogger<ObligationCheckerController> _logger;
     private readonly IPageService _pageService;
 
     public ObligationCheckerController(
-        ILogger<ObligationCheckerController> logger,
         IPageService pageService,
         IConfiguration configuration)
     {
-        _logger = logger;
         _pageService = pageService;
     }
 

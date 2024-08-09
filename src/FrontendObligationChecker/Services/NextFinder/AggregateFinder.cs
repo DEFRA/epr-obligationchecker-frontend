@@ -10,7 +10,7 @@ public class AggregateFinder : INextFinder
 
         var isEligible = questions
             .Any(question =>
-                question.Options.Any(option => option.IsSelected.GetValueOrDefault() && option.Next == OptionPath.Primary));
+                question.Options.Exists(option => option.IsSelected.GetValueOrDefault() && option.Next == OptionPath.Primary));
         return isEligible
             ? OptionPath.Secondary
             : OptionPath.Primary;

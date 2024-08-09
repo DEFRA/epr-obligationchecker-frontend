@@ -38,7 +38,6 @@ public class PrivacyControllerTests
         SetUpConfigOption();
 
         _systemUnderTest = new PrivacyController(
-            _loggerMock.Object,
             _urlOptions.Object,
             _emailOptions.Object,
             _siteDateOptions.Object);

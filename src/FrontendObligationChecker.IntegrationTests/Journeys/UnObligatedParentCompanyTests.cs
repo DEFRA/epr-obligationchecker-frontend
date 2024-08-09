@@ -14,6 +14,29 @@ public class UnObligatedParentCompanyTests : TestBase
         _pages = PageGenerator.Create(string.Empty);
     }
 
+    private static FormUrlEncodedContent GetFormData(Page page, string path)
+    {
+        page.Questions.ForEach(q => q.SetAnswer(q.Options.FirstOrDefault()!.Value));
+
+        var options = page.Questions.Select(x =>
+                new
+                {
+                    x.Key,
+                    x.Options.FirstOrDefault()!.Value
+                })
+            .ToList();
+        options.Add(new
+        {
+            Key = "path",
+            Value = path
+        });
+
+        var formValues = options.Select(x =>
+            new KeyValuePair<string, string>(x.Key, x.Value));
+
+        return new FormUrlEncodedContent(formValues);
+    }
+
     [TestMethod]
     [DataRow(PagePath.TypeOfOrganisation)]
     [DataRow(PagePath.AnnualTurnover)]
@@ -53,28 +76,5 @@ public class UnObligatedParentCompanyTests : TestBase
     private Page GetPage(string path)
     {
         return _pages?.SingleOrDefault(page => page.Path.Equals(path))!;
-    }
-
-    private FormUrlEncodedContent GetFormData(Page page, string path)
-    {
-        page.Questions.ForEach(q => q.SetAnswer(q.Options.FirstOrDefault()!.Value));
-
-        var options = page.Questions.Select(x =>
-                new
-                {
-                    x.Key,
-                    x.Options.FirstOrDefault()!.Value
-                })
-            .ToList();
-        options.Add(new
-        {
-            Key = "path",
-            Value = path
-        });
-
-        var formValues = options.Select(x =>
-            new KeyValuePair<string, string>(x.Key, x.Value));
-
-        return new FormUrlEncodedContent(formValues);
     }
 }
