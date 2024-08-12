@@ -159,22 +159,17 @@ public class PageService : IPageService
     {
         var sessionJourney = await _journeySession.GetAsync();
 
-        var sessionPage = sessionJourney?.Pages.SingleOrDefault(x => x.Path == PagePath.TypeOfOrganisation);
+        var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
         if (sessionPage != null)
         {
-            var question = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation);
-            if (question != null)
+            var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
+            page.AssociationType = answer switch
             {
-                var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
-
-                page.AssociationType = answer switch
-                {
-                    "parent" => AssociationType.Parent,
-                    "subsidiary" => AssociationType.Subsidiary,
-                    "individual" => AssociationType.Individual,
-                    _ => page.AssociationType
-                };
-            }
+                "parent" => AssociationType.Parent,
+                "subsidiary" => AssociationType.Subsidiary,
+                "individual" => AssociationType.Individual,
+                _ => page.AssociationType
+            };
         }
     }
 

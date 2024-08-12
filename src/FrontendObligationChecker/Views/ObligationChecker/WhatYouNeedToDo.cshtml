@@ -140,7 +140,7 @@
                     }
                     else
                     {
-                        @SharedLocalizer[firstPage?.TitleCaption]
+                        @SharedLocalizer[firstPage.TitleCaption]
                     }
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -158,14 +158,11 @@
                             else
                             {
                                 <ul class="govuk-list govuk-list--bullet">
-                                    @if (currentPage.FirstQuestion?.Options != null)
+                                    @foreach (var option in currentPage.FirstQuestion?.Options?.Where(o => o.IsSelected == true))
                                     {
-                                        @foreach (var option in currentPage.FirstQuestion.Options.Where(o => o.IsSelected == true))
-                                        {
-                                            <li>
-                                                @SharedLocalizer[option.Title]
-                                            </li>
-                                        }
+                                        <li>
+                                            @SharedLocalizer[option.Title]
+                                        </li>
                                     }
                                 </ul>
                             }

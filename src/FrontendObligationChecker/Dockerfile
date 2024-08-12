@@ -2,7 +2,7 @@
 
 # Based on Defra's dotnet image
 FROM defradigital/dotnetcore-development:dotnet6.0 AS build-with-trusted-cert-false
-
+USER root
 # This is for building the docker base on a host machine behind a Corporate proxy or VPN
 # we need to add in the corporate certificate chain
 # e.g. Kainos developers will need the Kainos ZScaler trusted certificate
@@ -20,7 +20,7 @@ USER root
 RUN apk --no-cache add nodejs npm
 USER dotnet
 WORKDIR /src
-COPY --chown=dotnet:dotnet ["FrontendObligationChecker/", "FrontendObligationChecker/"]
+COPY ["FrontendObligationChecker/", "FrontendObligationChecker/"]
 RUN dotnet restore "FrontendObligationChecker/FrontendObligationChecker.csproj"
 WORKDIR "/src/FrontendObligationChecker"
 RUN dotnet build "FrontendObligationChecker.csproj" -c Release -o /home/dotnet/build

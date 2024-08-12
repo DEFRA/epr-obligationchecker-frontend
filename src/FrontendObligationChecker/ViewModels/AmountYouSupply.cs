@@ -39,26 +39,24 @@ public class AmountYouSupply
 
     private static bool CheckHasSingleUseDrinkContainers(Page page)
     {
-        var isPlacingDrinksOnMarket =
-        page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions.FirstOrDefault()?.Answer != null
-            && page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions.FirstOrDefault()?.Answer == YesNo.Yes;
+        var placingDrinksOnMarket = page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions?.FirstOrDefault().Answer;
+        var isPlacingDrinksOnMarket = placingDrinksOnMarket == YesNo.Yes;
 
         if (!isPlacingDrinksOnMarket)
         {
             return false;
         }
 
-        bool isUsingDrinkContainersMaterials =
-        page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions.FirstOrDefault()?.Answer != null
-              && page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions.FirstOrDefault()?.Answer != "0";
+        var drinkContainersMaterials = page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions?.FirstOrDefault().Answer;
+        bool isUsingDrinkContainersMaterials = drinkContainersMaterials != "0";
 
         if (!isUsingDrinkContainersMaterials)
         {
             return false;
         }
 
-        return page.FindPage(PagePath.ContainerVolume)?.Questions.FirstOrDefault()?.Answer != null
-              && page.FindPage(PagePath.ContainerVolume)?.Questions.FirstOrDefault()?.Answer == YesNo.Yes;
+        var answer = page.FindPage(PagePath.ContainerVolume)?.Questions?.FirstOrDefault().Answer;
+        return answer == YesNo.Yes;
     }
 
     private static bool CheckIsParentCompany(Page page)
