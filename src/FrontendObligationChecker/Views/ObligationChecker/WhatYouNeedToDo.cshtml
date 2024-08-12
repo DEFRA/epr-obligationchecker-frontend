@@ -158,7 +158,7 @@
                             else
                             {
                                 <ul class="govuk-list govuk-list--bullet">
-                                        @foreach (var option in currentPage.FirstQuestion?.Options?.Where(o => o.IsSelected == true))
+                                        @foreach (var option in currentPage?.FirstQuestion?.Options?.Where(o => o.IsSelected == true))
                                         {
                                             <li>
                                                 @SharedLocalizer[option.Title]
@@ -169,7 +169,7 @@
                         }
                         else
                         {
-                            @SharedLocalizer[currentPage.FirstQuestion?.SelectedOption?.Title]
+                            @SharedLocalizer[currentPage?.FirstQuestion?.SelectedOption?.Title]
                         }
                     }
                     else
