@@ -148,7 +148,7 @@
                     {
                         var currentPage = pages[0];
 
-                        if (currentPage?.FirstQuestion?.QuestionType == QuestionType.CheckboxesNone)
+                        if (currentPage.FirstQuestion?.QuestionType == QuestionType.CheckboxesNone)
                         {
                             var noneOption = currentPage.FirstQuestion?.Options.Find(o => o.IsSelected == true && o.Value == "0");
                             if (noneOption != null)
@@ -158,18 +158,18 @@
                             else
                             {
                                 <ul class="govuk-list govuk-list--bullet">
-                                        @foreach (var option in currentPage?.FirstQuestion?.Options?.Where(o => o.IsSelected == true))
-                                        {
-                                            <li>
-                                                @SharedLocalizer[option.Title]
-                                            </li>
-                                        }
+                                    @foreach (var option in currentPage.FirstQuestion?.Options?.Where(o => o.IsSelected == true) ?? Enumerable.Empty<Option>())
+                                    {
+                                        <li>
+                                            @SharedLocalizer[option.Title]
+                                        </li>
+                                    }
                                 </ul>
                             }
                         }
                         else
                         {
-                            @SharedLocalizer[currentPage?.FirstQuestion?.SelectedOption?.Title]
+                            @SharedLocalizer[currentPage.FirstQuestion?.SelectedOption?.Title]
                         }
                     }
                     else
