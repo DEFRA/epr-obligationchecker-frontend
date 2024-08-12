@@ -150,15 +150,16 @@
 
                         if (currentPage.FirstQuestion?.QuestionType == QuestionType.CheckboxesNone)
                         {
-                            var noneOption = currentPage?.FirstQuestion?.Options.Find(o => o.IsSelected == true && o.Value == "0");
+                            var noneOption = currentPage.FirstQuestion?.Options.Find(o => o.IsSelected == true && o.Value == "0");
                             if (noneOption != null)
                             {
                                 <p class="govuk-body">@SharedLocalizer[noneOption.Title]</p>
                             }
                             else
                             {
+                                var options = currentPage?.FirstQuestion?.Options;
                                 <ul class="govuk-list govuk-list--bullet">
-                                    @foreach (var option in currentPage.FirstQuestion?.Options?.Where(o => o.IsSelected == true))
+                                    @foreach (var option in options?.Where(o => o.IsSelected == true))
                                     {
                                         <li>
                                             @SharedLocalizer[option.Title]
