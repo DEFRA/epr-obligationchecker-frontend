@@ -47,7 +47,7 @@ public class AmountYouSupply
             return false;
         }
 
-        var drinkContainersMaterials = page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions?.FirstOrDefault().Answer;
+        var drinkContainersMaterials = page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions?.FirstOrDefault()?.Answer;
         bool isUsingDrinkContainersMaterials = drinkContainersMaterials != "0";
 
         if (!isUsingDrinkContainersMaterials)
@@ -55,7 +55,7 @@ public class AmountYouSupply
             return false;
         }
 
-        var answer = page.FindPage(PagePath.ContainerVolume)?.Questions?.FirstOrDefault().Answer;
+        var answer = page.FindPage(PagePath.ContainerVolume)?.Questions?.FirstOrDefault()?.Answer;
         return answer == YesNo.Yes;
     }
 
