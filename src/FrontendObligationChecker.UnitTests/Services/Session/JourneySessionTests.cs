@@ -60,6 +60,6 @@ public class JourneySessionTests
         await _systemUnderTest.RemovePagesAfterCurrentAsync(currentPage);
 
         // Assert
-        _loggerMock.VerifyLog(logger => logger.LogError(It.IsAny<Exception>(), It.IsAny<string>()), Times.Once);
+        _loggerMock.VerifyLog(logger => logger.LogError(It.IsAny<Exception>(), "Error adding page to session"), Times.Once);
     }
 }
