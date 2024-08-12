@@ -39,7 +39,7 @@ public class AmountYouSupply
 
     private static bool CheckHasSingleUseDrinkContainers(Page page)
     {
-        var placingDrinksOnMarket = page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions?.FirstOrDefault().Answer;
+        var placingDrinksOnMarket = page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions?.FirstOrDefault()?.Answer;
         var isPlacingDrinksOnMarket = placingDrinksOnMarket == YesNo.Yes;
 
         if (!isPlacingDrinksOnMarket)
