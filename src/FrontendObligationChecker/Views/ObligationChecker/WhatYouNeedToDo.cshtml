@@ -140,7 +140,7 @@
                     }
                     else
                     {
-                        @SharedLocalizer[firstPage.TitleCaption]
+                        @SharedLocalizer[firstPage?.TitleCaption]
                     }
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -150,7 +150,7 @@
 
                         if (currentPage.FirstQuestion?.QuestionType == QuestionType.CheckboxesNone)
                         {
-                            var noneOption = currentPage.FirstQuestion?.Options.Find(o => o.IsSelected == true && o.Value == "0");
+                            var noneOption = currentPage?.FirstQuestion?.Options.Find(o => o.IsSelected == true && o.Value == "0");
                             if (noneOption != null)
                             {
                                 <p class="govuk-body">@SharedLocalizer[noneOption.Title]</p>
