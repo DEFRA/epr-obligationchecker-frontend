@@ -157,13 +157,15 @@
                             }
                             else
                             {
-                                var options = currentPage?.FirstQuestion?.Options;
                                 <ul class="govuk-list govuk-list--bullet">
-                                    @foreach (var option in options?.Where(o => o.IsSelected == true))
+                                    @if (currentPage.FirstQuestion?.Options != null)
                                     {
-                                        <li>
-                                            @SharedLocalizer[option.Title]
-                                        </li>
+                                        @foreach (var option in currentPage.FirstQuestion?.Options.Where(o => o.IsSelected == true))
+                                        {
+                                            <li>
+                                                @SharedLocalizer[option.Title]
+                                            </li>
+                                        }
                                     }
                                 </ul>
                             }
