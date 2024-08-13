@@ -20,7 +20,7 @@ USER root
 RUN apk --no-cache add nodejs npm
 USER dotnet
 WORKDIR /src
-COPY --chown=dotnet:dotnet ["FrontendObligationChecker/", "FrontendObligationChecker/"]
+COPY ["FrontendObligationChecker/", "FrontendObligationChecker/"]
 RUN dotnet restore "FrontendObligationChecker/FrontendObligationChecker.csproj"
 WORKDIR "/src/FrontendObligationChecker"
 RUN dotnet build "FrontendObligationChecker.csproj" -c Release -o /home/dotnet/build
