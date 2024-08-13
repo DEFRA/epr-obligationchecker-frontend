@@ -39,24 +39,21 @@ public class AmountYouSupply
 
     private static bool CheckHasSingleUseDrinkContainers(Page page)
     {
-        var placingDrinksOnMarket = page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions?.FirstOrDefault()?.Answer;
-        var isPlacingDrinksOnMarket = placingDrinksOnMarket == YesNo.Yes;
+        var isPlacingDrinksOnMarket = page.FindPage(PagePath.PlaceDrinksOnMarket)?.Questions?.FirstOrDefault()?.Answer == YesNo.Yes;
 
         if (!isPlacingDrinksOnMarket)
         {
             return false;
         }
 
-        var drinkContainersMaterials = page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions?.FirstOrDefault()?.Answer;
-        bool isUsingDrinkContainersMaterials = drinkContainersMaterials != "0";
+        bool isUsingDrinkContainersMaterials = page.FindPage(PagePath.MaterialsForDrinksContainers)?.Questions?.FirstOrDefault()?.Answer != "0";
 
         if (!isUsingDrinkContainersMaterials)
         {
             return false;
         }
 
-        var answer = page.FindPage(PagePath.ContainerVolume)?.Questions?.FirstOrDefault()?.Answer;
-        return answer == YesNo.Yes;
+        return page.FindPage(PagePath.ContainerVolume)?.Questions?.FirstOrDefault()?.Answer == YesNo.Yes;
     }
 
     private static bool CheckIsParentCompany(Page page)

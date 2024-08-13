@@ -18,7 +18,6 @@ RUN if [[ -z "$TRUSTED_CERT" ]] ;\
 FROM build-with-trusted-cert-${ADD_TRUSTED_CERT} AS build
 USER root
 RUN apk --no-cache add nodejs npm
-USER dotnet
 WORKDIR /src
 COPY ["FrontendObligationChecker/", "FrontendObligationChecker/"]
 RUN dotnet restore "FrontendObligationChecker/FrontendObligationChecker.csproj"
