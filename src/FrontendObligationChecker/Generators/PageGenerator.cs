@@ -8,6 +8,7 @@ public static class PageGenerator
     {
         return new List<Page>
         {
+            StartPage(),
             TypeOfOrganisationPage(),
             AnnualTurnoverPage(),
             OwnBrandPage(QuestionKey.OwnBrand, PagePath.OwnBrand, PagePath.UnbrandedPackaging),
@@ -23,6 +24,16 @@ public static class PageGenerator
             AmountYouSupplyPage(),
             NoActionNeededPage(),
             WhatYouNeedToDoPage(eprGuidanceUrl)
+        };
+    }
+
+    private static Page StartPage()
+    {
+        return new Page()
+        {
+            Index = 1,
+            PageType = PageType.StartPage,
+            Path = PagePath.StartPage
         };
     }
 

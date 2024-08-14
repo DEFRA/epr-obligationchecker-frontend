@@ -2,6 +2,7 @@
 
 using FluentAssertions;
 using FrontendObligationChecker.Controllers;
+using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Services.NextFinder.Interfaces;
 using FrontendObligationChecker.Services.PageService.Interfaces;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 
 [TestClass]
@@ -23,6 +25,7 @@ public class ObligationCheckerControllerTests
     private Mock<HttpRequest> _httpRequestMock;
     private ObligationCheckerController? _systemUnderTest;
     private Mock<IConfiguration>? _configurationMock;
+    private Mock<IOptions<SiteDateOptions>>? _siteDateOptions;
 
     [TestInitialize]
     public void TestInitialize()
@@ -32,11 +35,13 @@ public class ObligationCheckerControllerTests
         _httpContextMock = new Mock<HttpContext>();
         _httpRequestMock = new Mock<HttpRequest>();
         _configurationMock = new Mock<IConfiguration>();
+        _siteDateOptions = new Mock<IOptions<SiteDateOptions>>();
 
         _systemUnderTest = new ObligationCheckerController(
             _loggerMock.Object,
             _pageServiceMock.Object,
-            _configurationMock.Object);
+            _configurationMock.Object,
+            _siteDateOptions.Object);
 
         _systemUnderTest.ControllerContext.HttpContext = _httpContextMock.Object;
         _httpContextMock.Setup(x => x.Request).Returns(_httpRequestMock.Object);

@@ -1,0 +1,99 @@
+@model PageModel
+@using FrontendObligationChecker.Models.Config
+@using Microsoft.Extensions.Options
+@inject IOptions<SiteDateOptions> _siteDateOptions
+
+<div class="govuk-width-container ">
+
+    <div class="govuk-breadcrumbs">
+        <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="#">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="#">Manufacturing</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="#">Collection and packaging reforms</a>
+            </li>
+        </ol>
+    </div>
+
+    <main class="govuk-main-wrapper govuk-!-padding-top-4" id="main-content" role="main">
+
+        <div class="govuk-grid-row">
+
+            @using (Html.BeginRouteForm("GetNextPage", FormMethod.Post, new { @class = "single-question-form" }))
+            {
+                <div class="govuk-grid-column-two-thirds">
+                    <h1 class="govuk-heading-l govuk-!-margin-top-4 govuk-!-margin-bottom-7">
+                        <span class="govuk-caption-xl">Guidance</span>
+                        @Localizer["StartPage.Title"].Value
+                    </h1>
+                    <p class="govuk-body-l">
+                        @Localizer["StartPage.AlternateTitleFirstParagraph"].Value
+                    </p>
+                </div>
+
+                <div class="govuk-grid-column-full">
+                    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+                </div>
+
+                <div class="govuk-grid-column-two-thirds">
+                    <p class="govuk-body-s govuk-!-margin-bottom-2">
+                        @Localizer["StartPage.From"]
+                    </p>
+                    <p class="govuk-body-s">
+                        Published: Published @_siteDateOptions.Value.ObligationCheckerPublishedDate.ToString("dd MMM yyyy")
+                    </p>
+
+                    <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+
+                </div>
+
+                <div class="govuk-grid-column-two-thirds">
+
+                    <p class="govuk-body">@Localizer["StartPage.Body1"]</p>
+                    <p class="govuk-body">@Localizer["StartPage.Body2"]</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>@Localizer["StartPage.UseThisTool.List1"]</li>
+                        <li>@Localizer["StartPage.UseThisTool.List2"]</li>
+                        <li>@Localizer["StartPage.UseThisTool.List3"]</li>
+                    </ul>
+
+                    <p class="govuk-body">You'll need to know:</p>
+                    <ul class="govuk-list govuk-list--bullet ">
+                        <li>@Localizer["StartPage.YouWillNeedToKnow.List1"]</li>
+                        <li>@Localizer["StartPage.YouWillNeedToKnow.List2"]</li>
+                        <li>@Localizer["StartPage.YouWillNeedToKnow.List3"]</li>
+                    </ul>
+
+                    <div class="govuk-inset-text govuk-!-margin-bottom-7">
+                        <p class="govuk-body "> @Localizer["StartPage.InsetText"]</p>
+                    </div>
+
+                    @await Html.PartialAsync("Partials/Govuk/_Button", new ButtonViewModel
+                    {
+                        Text = @Localizer["Startnow_Button_Text"].Value
+                    })
+
+                    <div class="guidance-sidebar" style="padding-top: 15px; margin-top: 70px; border-top: #1d70b8 2px solid;">
+                        <h2 class="govuk-heading-s">@Localizer["StartPage.ExploreTheTopic"]</h2>
+                        <p class="govuk-body-s"><a href="#">@Localizer["StartPage.Waste"]</a></p>
+                    </div>
+
+                </div>
+
+                <div class="govuk-grid-column-one-third" style="padding: 0px 15px;">
+                    <div class="guidance-sidebar" style="padding: 15px 0px 0px 0px; border-top: #1d70b8 2px solid;">
+                        <h2 class="govuk-heading-s">@Localizer["StartPage.Related_Content"]</h2>
+                    </div>
+                    <div class="guidance-sidebar" style="padding-top: 15px; border-top: #B1B4B6 1px solid;">
+                        <h2 class="govuk-body-s">@Localizer["StartPage.Collection"]</h2>
+                        <p class="govuk-body-s"><a href="../../guidance/colletion/collection-epr.html">@Localizer["StartPage.Erp"]</a></p>
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
+</div>

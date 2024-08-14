@@ -2,6 +2,7 @@
 
 public static class PagePath
 {
+    public const string StartPage = "start-page";
     public const string TypeOfOrganisation = "type-of-organisation";
     public const string AnnualTurnover = "annual-turnover";
     public const string OwnBrand = "supplying-goods-under-own-brand";

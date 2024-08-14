@@ -108,6 +108,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\ObligationChecker\StartPage.en.resx">
+        <SubType>Designer</SubType>
+        <LastGenOutput>SingleQuestion.en.Designer.cs</LastGenOutput>
+        <Generator>ResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Views\ObligationChecker\SingleQuestion.en.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>SingleQuestion.en.Designer.cs</LastGenOutput>

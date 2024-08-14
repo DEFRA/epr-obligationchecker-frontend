@@ -8,5 +8,6 @@ public enum PageType
     WhatYouNeedToDo,
     Error,
     AmountYouSupply,
-    PageNotFound
+    PageNotFound,
+    StartPage
 }

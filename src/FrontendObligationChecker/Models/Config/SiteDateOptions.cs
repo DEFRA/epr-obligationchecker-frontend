@@ -16,4 +16,6 @@ public class SiteDateOptions
     public DateTime AccessibilityStatementReviewed { get; set; }
 
     public DateTime AccessibilitySiteTested { get; set; }
+
+    public DateTime ObligationCheckerPublishedDate { get; set; }
 }

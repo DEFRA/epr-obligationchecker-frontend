@@ -8,6 +8,8 @@ public static class PageFinder
     {
         switch (page.Path)
         {
+            case PagePath.StartPage:
+                return GetNextOfStartPage(page);
             case PagePath.SupplyingFilledPackaging:
                 return GetNextOfHandlePackaging(page);
             case PagePath.AmountYouSupply:
@@ -21,6 +23,11 @@ public static class PageFinder
             default:
                 return page.NextValue();
         }
+    }
+
+    private static string GetNextOfStartPage(Page page)
+    {
+        return PagePath.TypeOfOrganisation;
     }
 
     private static string GetNextOfMaterialsForDrinksContainers(Page page)

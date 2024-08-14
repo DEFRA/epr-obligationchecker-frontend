@@ -25,7 +25,7 @@ public class PageService : IPageService
     {
         var sessionJourney = await _journeySession.GetAsync();
 
-        if (!GlobalData.ByPassSessionValidation && sessionJourney == null && path != PagePath.TypeOfOrganisation)
+        if (!GlobalData.ByPassSessionValidation && sessionJourney == null && path != PagePath.StartPage)
         {
             return null;
         }
@@ -60,7 +60,7 @@ public class PageService : IPageService
     {
         var sessionJourney = await _journeySession.GetAsync();
 
-        if (!GlobalData.ByPassSessionValidation && sessionJourney == null && path != PagePath.TypeOfOrganisation)
+        if (!GlobalData.ByPassSessionValidation && sessionJourney == null && path != PagePath.StartPage)
         {
             return null;
         }

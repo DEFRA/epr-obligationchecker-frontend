@@ -1,9 +1,11 @@
 ﻿namespace FrontendObligationChecker.Controllers;
 
 using Constants;
+using FrontendObligationChecker.Models.Config;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement.Mvc;
 using Models.ObligationChecker;
 using Services.NextFinder;
@@ -13,16 +15,19 @@ using ViewModels;
 [FeatureGate(FeatureFlags.ObligationCheckerEnabled)]
 public class ObligationCheckerController : Controller
 {
+    private readonly SiteDateOptions _siteDateOptions;
     private readonly ILogger<ObligationCheckerController> _logger;
     private readonly IPageService _pageService;
 
     public ObligationCheckerController(
         ILogger<ObligationCheckerController> logger,
         IPageService pageService,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        IOptions<SiteDateOptions> siteDateOptions)
     {
         _logger = logger;
         _pageService = pageService;
+        _siteDateOptions = siteDateOptions?.Value;
     }
 
     [HttpGet]
