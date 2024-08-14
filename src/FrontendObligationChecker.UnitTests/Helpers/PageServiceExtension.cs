@@ -17,6 +17,7 @@ public static class PageServiceExtension
             {
                 case PagePath.StartPage:
                     pagePath = await GetNextOfStartPage();
+                    pageService._journeySession.AddPageAsync(new Page() { Path = PagePath.StartPage });
                     continue;
 
                 case PagePath.TypeOfOrganisation:

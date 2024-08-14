@@ -11,7 +11,7 @@ using YesNo = FrontendObligationChecker.Models.ObligationChecker.YesNo;
 namespace FrontendObligationChecker.Services.PageService;
 public class PageService : IPageService
 {
-    private readonly IJourneySession _journeySession;
+    public readonly IJourneySession _journeySession;
     private readonly ExternalUrlsOptions _externalUrls;
     private IEnumerable<Page>? _pages;
 

@@ -19,9 +19,9 @@ public class PageContentTests
     [TestMethod]
     public async Task PageService_WhenFirstPageIsLoadedWithoutAnySetup_ThenItsContentIsEmpty()
     {
-        Page page = await _pageService.GetPageAsync(PagePath.TypeOfOrganisation);
+        Page page = await _pageService.GetPageAsync(PagePath.StartPage);
 
-        Assert.AreEqual(PagePath.TypeOfOrganisation, page.Path);
+        Assert.AreEqual(PagePath.StartPage, page.Path);
         Assert.IsNull(page.BackLinkPath);
         Assert.IsFalse(page.HasBackLink);
         Assert.IsNull(page.GetAlternateTitleFirstParagraph());
