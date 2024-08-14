@@ -186,7 +186,7 @@
         &lt;li&gt;import goods for you&lt;/li&gt;
         &lt;/ul&gt;</value>
   </data>
-  <data name="SingleQuestion.OwnBrand.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.OwnBrand.QuestionTitle" xml:space="preserve">
     <value>Do you supply goods to the UK market under your own brand?</value>
   </data>
   <data name="SingleQuestion.OwnBrand.QuestionError" xml:space="preserve">
@@ -198,7 +198,7 @@
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
     <value>placing goods into packaging that's unbranded when it's supplied</value>
   </data>
-  <data name="SingleQuestion.UnbrandedPackaging.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.UnbrandedPackaging.QuestionTitle" xml:space="preserve">
     <value>Do you place goods into packaging that's unbranded when it's supplied?</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.QuestionError" xml:space="preserve">
@@ -214,7 +214,7 @@
   <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
     <value>importing products in packaging</value>
   </data>
-  <data name="SingleQuestion.ImportingProducts.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.ImportingProducts.QuestionTitle" xml:space="preserve">
     <value>Do you import packaging that contains goods into the UK to supply?</value>
   </data>
   <data name="SingleQuestion.ImportingProducts.QuestionError" xml:space="preserve">
@@ -236,7 +236,7 @@
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
     <value>supplying empty packaging to businesses that fall under the higher threshold</value>
   </data>
-  <data name="SingleQuestion.SellingEmptyPackaging.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.SellingEmptyPackaging.QuestionTitle" xml:space="preserve">
     <value>Do you sell empty packaging to businesses that fall under the higher threshold?</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.QuestionError" xml:space="preserve">
@@ -256,7 +256,7 @@
   <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
     <value>hiring or loaning out reusable packaging to UK organisations</value>
   </data>
-  <data name="SingleQuestion.HiringLoaning.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.HiringLoaning.QuestionTitle" xml:space="preserve">
     <value>Do you hire or loan out reusable packaging to UK organisations?</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.QuestionError" xml:space="preserve">
@@ -272,7 +272,7 @@
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
     <value>owning an online marketplace</value>
   </data>
-  <data name="SingleQuestion.OnlineMarketplace.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.OnlineMarketplace.QuestionTitle" xml:space="preserve">
     <value>Do you own an online marketplace that allows non-UK organisations to sell packaged products in the UK?</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.QuestionError" xml:space="preserve">
@@ -289,7 +289,7 @@
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
     <value>supplying filled packaging to individual customers</value>
   </data>
-  <data name="SingleQuestion.SupplyingFilledPackaging.QuestionTile" xml:space="preserve">
+  <data name="SingleQuestion.SupplyingFilledPackaging.QuestionTitle" xml:space="preserve">
     <value>Do you supply filled packaging to individual customers?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.QuestionError" xml:space="preserve">
@@ -379,8 +379,5 @@
   </data>
   <data name="SingleQuestion.YourPackagingActivities" xml:space="preserve">
     <value>Your packaging activities</value>
-  </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4" xml:space="preserve">
-    <value>Demo One</value>
   </data>
 </root>

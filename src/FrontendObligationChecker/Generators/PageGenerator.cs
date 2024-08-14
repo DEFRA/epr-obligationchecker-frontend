@@ -400,7 +400,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.SupplyingFilledPackaging.QuestionTile",
+                    Title = "SingleQuestion.SupplyingFilledPackaging.QuestionTitle",
                     AlternateTitle = "SingleQuestion.SupplyingFilledPackaging.AlternateTitle",
                     ErrorMessage = "SingleQuestion.SupplyingFilledPackaging.QuestionError",
                 }
@@ -436,7 +436,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.OwnBrand.QuestionTile",
+                    Title = "SingleQuestion.OwnBrand.QuestionTitle",
                     AlternateTitle = "SingleQuestion.OwnBrand.AlternateTitle",
                     ErrorMessage = "SingleQuestion.OwnBrand.QuestionError",
                 }
@@ -475,7 +475,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.UnbrandedPackaging.QuestionTile",
+                    Title = "SingleQuestion.UnbrandedPackaging.QuestionTitle",
                     AlternateTitle = "SingleQuestion.UnbrandedPackaging.AlternateTitle",
                     ErrorMessage = "SingleQuestion.UnbrandedPackaging.QuestionError",
                 }
@@ -510,7 +510,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.ImportingProducts.QuestionTile",
+                    Title = "SingleQuestion.ImportingProducts.QuestionTitle",
                     AlternateTitle = "SingleQuestion.ImportingProducts.AlternateTitle",
                     AmountHandlePageText = "SingleQuestion.ImportingProducts.AmountHandlePageText",
                     ErrorMessage = "SingleQuestion.ImportingProducts.QuestionError",
@@ -546,7 +546,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.SellingEmptyPackaging.QuestionTile",
+                    Title = "SingleQuestion.SellingEmptyPackaging.QuestionTitle",
                     AlternateTitle = "SingleQuestion.SellingEmptyPackaging.AlternateTitle",
                     AmountHandlePageText = "SingleQuestion.SellingEmptyPackaging.AmountHandlePageText",
                     ErrorMessage = "SingleQuestion.SellingEmptyPackaging.QuestionError",
@@ -582,7 +582,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.HiringLoaning.QuestionTile",
+                    Title = "SingleQuestion.HiringLoaning.QuestionTitle",
                     AlternateTitle = "SingleQuestion.HiringLoaning.AlternateTitle",
                     ErrorMessage = "SingleQuestion.HiringLoaning.QuestionError",
                 }
@@ -617,7 +617,7 @@ public static class PageGenerator
                 {
                     Key = questionKey,
                     Options = BooleanOptions,
-                    Title = "SingleQuestion.OnlineMarketplace.QuestionTile",
+                    Title = "SingleQuestion.OnlineMarketplace.QuestionTitle",
                     AlternateTitle = "SingleQuestion.OnlineMarketplace.AlternateTitle",
                     ErrorMessage = "SingleQuestion.OnlineMarketplace.QuestionError",
                 }

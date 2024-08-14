@@ -121,16 +121,16 @@
 
                 <dl class="govuk-summary-list govuk-!-margin-bottom-0">
                     <dt class="govuk-summary-list__key">
-                        Type of Producer
+                        @Localizer["WhatYouNeedToDo.TypeOfProducerText"]
                     </dt>
 
                     @if (Model.Page.CompanyModel.CompanySize == CompanySize.Large)
                     {
-                        <dd class="govuk-summary-list__value">Large</dd>
+                        <dd class="govuk-summary-list__value">@Localizer["WhatYouNeedToDo.TypeOfProducerLarge"]</dd>
                     }
                     else
                     {
-                        <dd class="govuk-summary-list__value">Small</dd>
+                        <dd class="govuk-summary-list__value">@Localizer["WhatYouNeedToDo.TypeOfProducerSmall"]</dd>
                     }
                 </dl>
 

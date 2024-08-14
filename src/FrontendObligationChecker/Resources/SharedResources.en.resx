@@ -234,19 +234,4 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="SingleQuestion.DemoMessage.Header" xml:space="preserve">
-    <value>THIS IS FOR DEMO ONLY</value>
-  </data>
-  <data name="SingleQuestion.DemoOne.QuestionOptionLabel1" xml:space="preserve">
-    <value>Type Of Organisation</value>
-  </data>
-  <data name="SingleQuestion.DemoOne.Title" xml:space="preserve">
-    <value>Demo One</value>
-  </data>
-  <data name="SingleQuestion.DemoThree.Title" xml:space="preserve">
-    <value>Demo Three</value>
-  </data>
-  <data name="SingleQuestion.DemoTwo.Title" xml:space="preserve">
-    <value>Demo Two</value>
-  </data>
 </root>

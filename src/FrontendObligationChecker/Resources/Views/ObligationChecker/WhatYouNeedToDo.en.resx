@@ -298,7 +298,13 @@
   <data name="WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription" xml:space="preserve">
     <value>Find out more about the data you'll need to collect (opens in a new tab)</value>
   </data>
-  <data name="WhatYouNeedToDo." xml:space="preserve">
-    <value />
+  <data name="WhatYouNeedToDo.TypeOfProducerSmall" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerLarge" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerText" xml:space="preserve">
+    <value>Type Of Producer</value>
   </data>
 </root>
