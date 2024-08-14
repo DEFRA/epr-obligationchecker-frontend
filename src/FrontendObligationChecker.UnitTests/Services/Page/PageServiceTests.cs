@@ -75,7 +75,7 @@ public class PageServiceTests
     public async Task GetPage_DoesNotReturnNull_WhenSessionIsNullAndPagePathIsOrganisationType()
     {
         // Arrange
-        const string path = PagePath.TypeOfOrganisation;
+        const string path = PagePath.StartPage;
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult<SessionJourney>(null));
 
         // Act
@@ -117,7 +117,7 @@ public class PageServiceTests
     public async Task GetPageSetAnswersAndGetPage_DoesNotReturnNull_WhenSessionIsNullAndPagePathIsOrganisationType()
     {
         // Arrange
-        const string path = PagePath.TypeOfOrganisation;
+        const string path = PagePath.StartPage;
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult<SessionJourney>(null));
 
         // Act

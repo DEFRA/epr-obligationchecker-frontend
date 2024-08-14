@@ -9,12 +9,16 @@ public static class PageServiceExtension
 {
     public static async Task SetVisitedPages(this PageService pageService, VisitedPages visitedPages)
     {
-        string pagePath = PagePath.TypeOfOrganisation;
+        string pagePath = PagePath.StartPage;
 
         while (!string.IsNullOrEmpty(pagePath))
         {
             switch (pagePath)
             {
+                case PagePath.StartPage:
+                    pagePath = await GetNextOfStartPage();
+                    continue;
+
                 case PagePath.TypeOfOrganisation:
                     pagePath = await GetNextOfTypeOfOrganisation(pageService, visitedPages.TypeOfOrganisation);
                     continue;
@@ -53,6 +57,11 @@ public static class PageServiceExtension
                     throw new ArgumentException("Unhandled case");
             }
         }
+    }
+
+    private static async Task<string> GetNextOfStartPage()
+    {
+        return PagePath.TypeOfOrganisation;
     }
 
     private static async Task<string> GetNextOfTypeOfOrganisation(IPageService pageService, TypeOfOrganisation typeOfOrganisation)
