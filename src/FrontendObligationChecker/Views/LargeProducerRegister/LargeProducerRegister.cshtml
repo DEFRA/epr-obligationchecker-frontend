@@ -25,52 +25,18 @@
                 <p class="govuk-body">@Localizer["LargeProducerRegister.TheInformationIsInCsvFiles"]</p>
                 @using (Html.BeginForm(FormMethod.Post))
                 {
-                    <ul class="govuk-list">
-                        <li>
-                            @Html.ActionLink(
-                                string.Format(Localizer["LargeProducerRegister.EnglandLink"].Value,
-                                Model.HomeNationFileSizeMapping[HomeNation.England]),
-                                "File",
-                                "LargeProducerRegister",
-                                new {NationCode = HomeNation.England},
-                                new {@class = "govuk-link"})
-                        </li>
-                        <li>
-                            @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.WalesLink"].Value,
-                                Model.HomeNationFileSizeMapping[HomeNation.Wales]),
-                                "File",
-                                "LargeProducerRegister",
-                                new {NationCode = HomeNation.Wales},
-                                new {@class = "govuk-link"})
-                        </li>
-                        <li>
-                            @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.NorthernIrelandLink"].Value,
-                                Model.HomeNationFileSizeMapping[HomeNation.NorthernIreland]),
-                                "File",
-                                "LargeProducerRegister",
-                                new {NationCode = HomeNation.NorthernIreland},
-                                new {@class = "govuk-link"})
-                        </li>
-                        <li>
-                            @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.ScotlandLink"].Value,
-                                Model.HomeNationFileSizeMapping[HomeNation.Scotland]),
-                                "File",
-                                "LargeProducerRegister",
-                                new {NationCode = HomeNation.Scotland},
-                                new {@class = "govuk-link"})
-                        </li>
-                        <li>
-                            @Html.ActionLink(string.Format(Localizer["LargeProducerRegister.AllFourRegulatorsLink"].Value,
-                                Model.HomeNationFileSizeMapping[HomeNation.All]),
-                                "File",
-                                "LargeProducerRegister",
-                                new {NationCode = HomeNation.All},
-                                new {@class = "govuk-link"})
-                        </li>
-                    </ul>
+                    @if (Model.LatestAllNationsFile != null)
+                    {
+                        <ul class="govuk-list">
+                            <li>
+                                <a href="/large-producers/report" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.ListOfLargeProducersFile", Model.LatestAllNationsFile.DateCreated, Model.LatestAllNationsFile.DisplayFileSize]</a>
+                            </li>
+                        </ul>
+                    }
+                    
                 }
 
-                <p class="govuk-body">@Localizer["LargeProducerRegister.ThisInformationIsUsuallyUpdated"]</p>
+                <p class="govuk-body">@Localizer["LargeProducerRegister.ThisInformationIsUpdated"]</p>
 
                 <h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.Disclaimer"]</h2>
                 <p class="govuk-body">@Localizer["LargeProducerRegister.TheListsShowTheInformation"]</p>
