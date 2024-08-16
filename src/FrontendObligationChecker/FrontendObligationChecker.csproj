@@ -38,7 +38,6 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
       <PackageReference Include="Azure.Storage.Blobs" Version="12.21.1" />
-      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />      
       <PackageReference Include="Azure.Storage.Files.Shares" Version="12.1.0" />
       <PackageReference Include="Azure.Storage.Queues" Version="12.11.1" />
       <PackageReference Include="Azurite" Version="2.6.5" />
