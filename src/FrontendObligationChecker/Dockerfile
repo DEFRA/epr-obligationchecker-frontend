@@ -1,12 +1,13 @@
 ﻿ARG ADD_TRUSTED_CERT=false
 
 # Based on Defra's dotnet image
-FROM defradigital/dotnetcore-development:dotnet6.0 AS build-with-trusted-cert-false
+FROM defradigital/dotnetcore-development:dotnet8.0 AS build-with-trusted-cert-false
+USER root
 
 # This is for building the docker base on a host machine behind a Corporate proxy or VPN
 # we need to add in the corporate certificate chain
 # e.g. Kainos developers will need the Kainos ZScaler trusted certificate
-FROM defradigital/dotnetcore-development:dotnet6.0 AS build-with-trusted-cert-true
+FROM defradigital/dotnetcore-development:dotnet8.0 AS build-with-trusted-cert-true
 USER root
 ARG TRUSTED_CERT
 COPY ./${TRUSTED_CERT} /usr/local/share/ca-certificates/
@@ -29,13 +30,13 @@ FROM build AS publish
 RUN dotnet publish "FrontendObligationChecker.csproj" -c Release -o /home/dotnet/publish
 
 # Based on Defra's dotnet image
-FROM defradigital/dotnetcore:dotnet6.0 AS base-with-trusted-cert-false
+FROM defradigital/dotnetcore:dotnet8.0 AS base-with-trusted-cert-false
 USER root
 
 # This is for building the docker base on a host machine behind a Corporate proxy or VPN
 # we need to add in the corporate certificate chain
 # e.g. Kainos developers will need the Kainos ZScaler trusted certificate
-FROM defradigital/dotnetcore:dotnet6.0 AS base-with-trusted-cert-true
+FROM defradigital/dotnetcore:dotnet8.0 AS base-with-trusted-cert-true
 USER root
 ARG TRUSTED_CERT
 COPY ./${TRUSTED_CERT} /usr/local/share/ca-certificates/
