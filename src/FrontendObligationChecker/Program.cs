@@ -51,6 +51,7 @@ if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
 app.UsePathBase(pathBase);
 
 if (app.Environment.IsDevelopment())
@@ -64,7 +65,6 @@ else
 
 app.UseSession();
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
