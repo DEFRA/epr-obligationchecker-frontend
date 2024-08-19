@@ -24,7 +24,7 @@ You will need docker desktop, please download that [here](https://www.docker.com
 ### Prerequisites for Local
 
 To run the application locally, you will need:
-Dotnet 6.0 SDK which you can install from [Microsoft Dotnet Download](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+Dotnet 8.0 SDK which you can install from [Microsoft Dotnet Download](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 Npm which you can install through [Node.Js Downloads](https://nodejs.org/en/download)
 
 ## Running the Application Through Docker
