@@ -21,6 +21,7 @@ public class BlobReaderException : Exception
     }
 
     protected BlobReaderException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
     {
     }
 }

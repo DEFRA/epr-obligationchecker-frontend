@@ -25,6 +25,9 @@ public class AmountYouSupplyTests
     private static readonly int[] TestScenario16 =[0, 0, 1, 1, 0, 0, 0];
     private static readonly int[] TestScenario17 =[0, 0, 0, 0, 1, 1, 1];
     private static readonly int[] TestScenario18 =[1, 1, 1, 0, 0, 0, 0];
+    private static readonly string[] TestScenario19 =["Under 25 tonnes", "1"];
+    private static readonly string[] TestScenario20 =["25 tonnes to 50 tonnes", "2"];
+    private static readonly string[] TestScenario21 =["More than 50 tonnes", "3"];
 
     [TestMethod]
     [DataRow(nameof(TestScenario1))]
@@ -180,11 +183,13 @@ public class AmountYouSupplyTests
     }
 
     [TestMethod]
-    [DataRow(new[] { "Under 25 tonnes", "1" })]
-    [DataRow(new[] { "25 tonnes to 50 tonnes", "2" })]
-    [DataRow(new[] { "More than 50 tonnes", "3" })]
-    public void NoActionNeeded_is_next_for_all_tonnage_when_no_to_all_packaging_activities(string[] tonnage)
+    [DataRow(nameof(TestScenario19))]
+    [DataRow(nameof(TestScenario20))]
+    [DataRow(nameof(TestScenario21))]
+    public void NoActionNeeded_is_next_for_all_tonnage_when_no_to_all_packaging_activities(string tonnage)
     {
+        var tonnageValue = (string[])typeof(AmountYouSupplyTests).GetField(tonnage, BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+
         var answers = new[] { 0, 0, 0, 0, 0, 0, 0 };
         var lastActivityPage = PageHelper.GetLastActivityPageFromAnswers(answers);
         var page = new Page()
@@ -210,8 +215,8 @@ public class AmountYouSupplyTests
                         new Option()
                         {
                             Next = OptionPath.Primary,
-                            Title = tonnage[0],
-                            Value = tonnage[1],
+                            Title = tonnageValue[0],
+                            Value = tonnageValue[1],
                             IsSelected = true
                         }
                     }
