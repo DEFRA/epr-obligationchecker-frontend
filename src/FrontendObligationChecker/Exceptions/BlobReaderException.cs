@@ -1,5 +1,7 @@
 ﻿namespace FrontendObligationChecker.Exceptions;
+
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 [Serializable]
 [ExcludeFromCodeCoverage]
@@ -17,4 +19,11 @@ public class BlobReaderException : Exception
         : base(message, inner)
     {
     }
+
+#pragma warning disable SYSLIB0051
+    protected BlobReaderException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
+    }
+#pragma warning restore SYSLIB0051
 }
