@@ -43,7 +43,7 @@ public class Question
             Options.ForEach(option => option.IsSelected = null);
             var answerList = questionAnswer.Split(",");
             var optionList = Options.Where(option => answerList.Contains(option.Value)).ToList();
-            if (optionList.Any())
+            if (optionList.Count != 0)
             {
                 foreach (var option in optionList)
                 {

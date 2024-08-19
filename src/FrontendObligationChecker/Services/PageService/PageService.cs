@@ -245,7 +245,7 @@ public class PageService : IPageService
     {
         var activityPages = _pages.Where(x => PagePath.IsActivityPagePath(x.Path)).ToList();
 
-        if (!activityPages.Any())
+        if (activityPages.Count == 0)
         {
             return;
         }

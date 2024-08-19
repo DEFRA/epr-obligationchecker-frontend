@@ -14,7 +14,7 @@ public class JourneySessionTests
 {
     private const string JourneySessionKey = nameof(SessionJourney);
 
-    private IJourneySession _systemUnderTest;
+    private JourneySession _systemUnderTest;
     private Mock<IDistributedSession<SessionJourney>> _distributedSessionMock;
     private Mock<IMapper> _mapperMock;
     private Mock<ILogger<JourneySession>> _loggerMock;

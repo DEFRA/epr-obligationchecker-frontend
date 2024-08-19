@@ -6,7 +6,7 @@ public class OptionFinder : INextFinder
 {
     public OptionPath? Next(IList<Question> questions)
     {
-        if (questions == null) throw new ArgumentNullException(nameof(questions));
+        ArgumentNullException.ThrowIfNull(questions);
         if (questions.Count > 1) throw new InvalidOperationException("List should have only one question");
         if (!questions.Any())
             return null;

@@ -21,7 +21,6 @@ public class LargeProducerRegisterServiceException : Exception
     }
 
     protected LargeProducerRegisterServiceException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 }

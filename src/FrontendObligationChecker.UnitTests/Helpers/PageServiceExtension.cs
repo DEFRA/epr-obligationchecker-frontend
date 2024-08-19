@@ -55,7 +55,7 @@ public static class PageServiceExtension
         }
     }
 
-    private static async Task<string> GetNextOfTypeOfOrganisation(IPageService pageService, TypeOfOrganisation typeOfOrganisation)
+    private static async Task<string> GetNextOfTypeOfOrganisation(PageService pageService, TypeOfOrganisation typeOfOrganisation)
     {
         if (typeOfOrganisation == TypeOfOrganisation.NotSet)
         {
@@ -67,7 +67,7 @@ public static class PageServiceExtension
         return PageFinder.GetNextPath(page);
     }
 
-    private static async Task<string> GetNextOfAnnualTurnover(IPageService pageService, AnnualTurnover annualTurnover)
+    private static async Task<string> GetNextOfAnnualTurnover(PageService pageService, AnnualTurnover annualTurnover)
     {
         if (annualTurnover == AnnualTurnover.NotSet)
         {
@@ -79,7 +79,7 @@ public static class PageServiceExtension
         return PageFinder.GetNextPath(page);
     }
 
-    private static async Task<string> GetNextOfMaterialsForDrinksContainers(IPageService pageService, MaterialsForDrinksContainers materialsForDrinksContainers)
+    private static async Task<string> GetNextOfMaterialsForDrinksContainers(PageService pageService, MaterialsForDrinksContainers materialsForDrinksContainers)
     {
         if (materialsForDrinksContainers == MaterialsForDrinksContainers.NotSet)
         {
@@ -91,7 +91,7 @@ public static class PageServiceExtension
         return PageFinder.GetNextPath(page);
     }
 
-    private static async Task<string> GetNextOfAmountYouSupply(IPageService pageService, AmountYouSupply amountYouHandle)
+    private static async Task<string> GetNextOfAmountYouSupply(PageService pageService, AmountYouSupply amountYouHandle)
     {
         if (amountYouHandle == AmountYouSupply.NotSet)
         {
@@ -103,7 +103,7 @@ public static class PageServiceExtension
         return PageFinder.GetNextPath(page);
     }
 
-    private static async Task<string> GetNextOfYesNoPage(IPageService pageService, string pagePath, VisitedPages visitedPages)
+    private static async Task<string> GetNextOfYesNoPage(PageService pageService, string pagePath, VisitedPages visitedPages)
     {
         YesNo yesNo = pagePath switch
         {
