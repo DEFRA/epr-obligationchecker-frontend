@@ -62,9 +62,9 @@ public class ObligationCheckerController : Controller
         }
 
         _logger.LogWarning("HELLO6");
-        var nextPath = Url.RouteUrl("GetNextPage", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
+        var nextPath = Url.RouteUrl("GetNextPage", new { path = PageFinder.GetNextPath(page) });
 
-        _logger.LogWarning("HELLO7 " + nextPath);
+        _logger.LogWarning("HELLO7 " + nextPath + " - requestScheme = " + Request.Scheme);
         return Redirect(nextPath);
     }
 }
