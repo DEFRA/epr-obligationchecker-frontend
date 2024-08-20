@@ -22,6 +22,7 @@ public class ObligationCheckerController : Controller
         IConfiguration configuration)
     {
         _logger = logger;
+        _logger.LogWarning("HELLO1");
         _pageService = pageService;
     }
 
@@ -29,6 +30,7 @@ public class ObligationCheckerController : Controller
     [Route("ObligationChecker/{path}")]
     public async Task<IActionResult> Question(string path)
     {
+        _logger.LogWarning("HELLO2");
         var page = await _pageService.GetPageAsync(path);
 
         if (page == null)
@@ -44,20 +46,25 @@ public class ObligationCheckerController : Controller
     [Route("ObligationChecker/{path}", Name = "GetNextPage")]
     public async Task<IActionResult> GetNextPage(string path)
     {
+        _logger.LogWarning("HELLO3");
         var page = await _pageService.SetAnswersAndGetPageAsync(path, Request.Form);
 
         if (page == null)
         {
+            _logger.LogWarning("HELLO4");
             return Redirect(PagePath.TypeOfOrganisation);
         }
 
         if (page.HasError)
         {
+            _logger.LogWarning("HELLO5");
             return View(page.View, new PageModel(page));
         }
 
+        _logger.LogWarning("HELLO6");
         var nextPath = Url.RouteUrl("GetNextPage", new { path = PageFinder.GetNextPath(page) }, protocol: Request.Scheme);
 
+        _logger.LogWarning("HELLO7 " + nextPath);
         return Redirect(nextPath);
     }
 }
