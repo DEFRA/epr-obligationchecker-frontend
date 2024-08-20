@@ -33,13 +33,13 @@ public class SecurityHeaderMiddlewareTests
         Assert.IsTrue(responseHeaders.ContainsKey("X-Robots-Tag"));
 
         // Verify the content of the headers, especially those that are dynamic
-        Assert.IsTrue(responseHeaders["Content-Security-Policy"].ToString().Contains("script-src 'self' 'nonce-"));
+        Assert.IsTrue(responseHeaders.ContentSecurityPolicy.ToString().Contains("script-src 'self' 'nonce-"));
         Assert.AreEqual("require-corp", responseHeaders["Cross-Origin-Embedder-Policy"].ToString());
         Assert.AreEqual("same-origin", responseHeaders["Cross-Origin-Opener-Policy"].ToString());
         Assert.AreEqual("same-origin", responseHeaders["Cross-Origin-Resource-Policy"].ToString());
         Assert.AreEqual("strict-origin-when-cross-origin", responseHeaders["Referrer-Policy"].ToString());
-        Assert.AreEqual("nosniff", responseHeaders["X-Content-Type-Options"].ToString());
-        Assert.AreEqual("deny", responseHeaders["X-Frame-Options"].ToString());
+        Assert.AreEqual("nosniff", responseHeaders.XContentTypeOptions.ToString());
+        Assert.AreEqual("deny", responseHeaders.XFrameOptions.ToString());
         Assert.AreEqual("none", responseHeaders["X-Permitted-Cross-Domain-Policies"].ToString());
         Assert.AreEqual("noindex, nofollow", responseHeaders["X-Robots-Tag"].ToString());
     }
