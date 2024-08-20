@@ -73,6 +73,8 @@ app.UseMiddleware<AnalyticsCookieMiddleware>();
 app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
 app.MapControllers();
 
+app.UseHttpsRedirection();
+
 app.Run();
 
 public partial class Program
