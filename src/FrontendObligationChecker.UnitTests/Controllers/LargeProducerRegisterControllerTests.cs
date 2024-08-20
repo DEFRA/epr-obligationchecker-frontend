@@ -40,10 +40,13 @@ public class LargeProducerRegisterControllerTests
     public async Task Get_ReturnsLargeProducerRegisterView_WhenCalled()
     {
         // Arrange
-        var expected = new LargeProducerFileInfoViewModel
+        var expected = new List<LargeProducerFileInfoViewModel>
         {
-            DisplayFileSize = "2MB",
-            DateCreated = new DateTime(1970, 1, 1)
+            new LargeProducerFileInfoViewModel
+            {
+                DisplayFileSize = "2MB",
+                DateCreated = new DateTime(1970, 1, 1)
+            }
         };
 
         _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileInfoAsync(It.IsAny<string>()))
@@ -55,25 +58,37 @@ public class LargeProducerRegisterControllerTests
         // Assert
         result.Should().NotBeNull();
         LargeProducerRegisterViewModel viewModelResult = (LargeProducerRegisterViewModel)result.ViewData.Model;
-        viewModelResult.LatestAllNationsFile.Should().BeEquivalentTo(expected);
+        viewModelResult.LatestAllNationsFiles.Should().BeEquivalentTo(expected);
         result.ViewName.Should().Be("LargeProducerRegister");
         _largeProducerRegisterService.Verify(x => x.GetLatestAllNationsFileInfoAsync(It.IsAny<string>()), Times.Once);
     }
 
     [TestMethod]
-    public async Task GetFile_ValidNationCodeAndLargeProducerRegisterServiceReturnsFile_ReturnFile()
+    public async Task GetFile_WhenReportingYearIsNull_RedirectBackToLargeProducersPage()
+    {
+        // Act
+        var result = await _systemUnderTest.File(null) as RedirectToActionResult;
+
+        // Assert
+        result.ActionName.Should().Be("Get");
+    }
+
+    [TestMethod]
+    public async Task GetFile_LargeProducerRegisterServiceReturnsFile_ReturnFile()
     {
         // Arrange
+        const int ReportingYear = 1970;
+
         var viewModel = new LargeProducerFileViewModel
         {
             FileName = "example error report.csv",
             FileContents = new MemoryStream()
         };
 
-        _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileAsync(It.IsAny<string>())).ReturnsAsync(viewModel);
+        _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileAsync(ReportingYear, It.IsAny<string>())).ReturnsAsync(viewModel);
 
         // Act
-        var result = await _systemUnderTest.File() as FileStreamResult;
+        var result = await _systemUnderTest.File(ReportingYear) as FileStreamResult;
 
         // Assert
         result.FileDownloadName.Should().Be(viewModel.FileName);
@@ -85,11 +100,13 @@ public class LargeProducerRegisterControllerTests
     public async Task GetFile_LargeProducerRegisterServiceThrowsException_RedirectToLargeProducerErrorPage()
     {
         // Arrange
-        _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileAsync(It.IsAny<string>()))
+        const int ReportingYear = 1970;
+
+        _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileAsync(ReportingYear, It.IsAny<string>()))
             .ThrowsAsync(new LargeProducerRegisterServiceException());
 
         // Act
-        var result = await _systemUnderTest.File() as RedirectToActionResult;
+        var result = await _systemUnderTest.File(ReportingYear) as RedirectToActionResult;
 
         // Assert
         result.ActionName.Should().Be("FileNotDownloaded");
@@ -100,11 +117,13 @@ public class LargeProducerRegisterControllerTests
     public async Task GetFile_FileNotFound_RedirectToLargeProducerErrorPage()
     {
         // Arrange
-        _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileAsync(It.IsAny<string>()))
+        const int ReportingYear = 1970;
+
+        _largeProducerRegisterService.Setup(x => x.GetLatestAllNationsFileAsync(ReportingYear, It.IsAny<string>()))
             .ReturnsAsync((LargeProducerFileViewModel)null);
 
         // Act
-        var result = await _systemUnderTest.File() as RedirectToActionResult;
+        var result = await _systemUnderTest.File(ReportingYear) as RedirectToActionResult;
 
         // Assert
         result.ActionName.Should().Be("FileNotDownloaded");

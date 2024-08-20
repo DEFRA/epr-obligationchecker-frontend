@@ -2,6 +2,7 @@
 
 using Constants;
 using FluentAssertions;
+using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Services.Caching;
 using Microsoft.Extensions.Caching.Memory;
@@ -91,6 +92,102 @@ public class CacheServiceTests
         // Assert
         _memoryCache.TryGetValue("en-FileSizeMetadataCacheKey", out Dictionary<string, string> fileSizeMapping);
         fileSizeMapping.Should().BeEquivalentTo(GetFileSizeMappingDictionary());
+    }
+
+    [TestMethod]
+    public async Task GetReportDirectoriesCache_ReturnsCache_WhenCalledAndCacheExists()
+    {
+        // Arrange
+        var expected = new string[] { "1970" };
+
+        _memoryCache.Set("ReportDirectoriesCacheKey", expected);
+
+        // Act
+        var result = _systemUnderTest.GetReportDirectoriesCache(out IEnumerable<string> reportDirectories);
+
+        // Assert
+        result.Should().BeTrue();
+        reportDirectories.Should().BeEquivalentTo(expected);
+    }
+
+    [TestMethod]
+    public async Task GetReportDirectoriesCache_ReturnsFalse_WhenCalledAndCacheDoesNotExists()
+    {
+        // Act
+        var result = _systemUnderTest.GetReportDirectoriesCache(out IEnumerable<string> reportDirectories);
+
+        // Assert
+        result.Should().BeFalse();
+        reportDirectories.Should().BeNull();
+    }
+
+    [TestMethod]
+    public async Task SetReportDirectoriesCache_UpdatesCache_WhenCalled()
+    {
+        // Arrange
+        var expected = new string[] { "1970" };
+
+        // Act
+        _systemUnderTest.SetReportDirectoriesCache(expected);
+
+        // Assert
+        _memoryCache.TryGetValue("ReportDirectoriesCacheKey", out IEnumerable<string> reportDirectories);
+        reportDirectories.Should().BeEquivalentTo(expected);
+    }
+
+    [TestMethod]
+    public async Task GetBlobModelCache_ReturnsCache_WhenCalledAndCacheExists()
+    {
+        // Arrange
+        const string Prefix = "t";
+
+        var expected = new BlobModel
+        {
+            ContentLength = 1,
+            CreatedOn = new DateTime(1970, 1, 1),
+            Name = "test"
+        };
+
+        _memoryCache.Set($"BlobModelCacheKey-{Prefix}", expected);
+
+        // Act
+        var result = _systemUnderTest.GetBlobModelCache(Prefix, out var blobModel);
+
+        // Assert
+        result.Should().BeTrue();
+        blobModel.Should().BeEquivalentTo(expected);
+    }
+
+    [TestMethod]
+    public async Task GetBlobModelCache_ReturnsFalse_WhenCalledAndCacheDoesNotExists()
+    {
+        // Act
+        var result = _systemUnderTest.GetBlobModelCache("t", out var blobModel);
+
+        // Assert
+        result.Should().BeFalse();
+        blobModel.Should().BeNull();
+    }
+
+    [TestMethod]
+    public async Task SetBlobModelCache_UpdatesCache_WhenCalled()
+    {
+        // Arrange
+        const string Prefix = "t";
+
+        var expected = new BlobModel
+        {
+            ContentLength = 1,
+            CreatedOn = new DateTime(1970, 1, 1),
+            Name = "test"
+        };
+
+        // Act
+        _systemUnderTest.SetBlobModelCache(Prefix, expected);
+
+        // Assert
+        _memoryCache.TryGetValue($"BlobModelCacheKey-{Prefix}", out var blobModel);
+        blobModel.Should().BeEquivalentTo(expected);
     }
 
     private static Dictionary<string, string> GetFileSizeMappingDictionary()

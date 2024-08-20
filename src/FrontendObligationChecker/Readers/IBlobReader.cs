@@ -9,4 +9,6 @@ public interface IBlobReader
     Task<long> GetFileSizeInBytesAsync(string fileName);
 
     Task<IEnumerable<BlobModel>> GetBlobsAsync(string prefix);
+
+    Task<IEnumerable<string>> GetDirectories();
 }

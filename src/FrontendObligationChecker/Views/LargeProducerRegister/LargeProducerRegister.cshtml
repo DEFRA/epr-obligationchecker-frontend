@@ -25,15 +25,15 @@
                 <p class="govuk-body">@Localizer["LargeProducerRegister.TheInformationIsInCsvFiles"]</p>
                 @using (Html.BeginForm(FormMethod.Post))
                 {
-                    @if (Model.LatestAllNationsFile != null)
+                    @foreach (var file in Model.LatestAllNationsFiles)
                     {
                         <ul class="govuk-list">
                             <li>
-                                <a href="/large-producers/report" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.ListOfLargeProducersFile", Model.LatestAllNationsFile.DateCreated, Model.LatestAllNationsFile.DisplayFileSize]</a>
+                                <h3 class="govuk-heading-s">@file.ReportingYear</h3>
+                                <a href="/large-producers/report?reportingYear=@file.ReportingYear" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.ListOfLargeProducersFile", file.ReportingYear, file.DateCreated, file.DisplayFileSize]</a>
                             </li>
                         </ul>
                     }
-                    
                 }
 
                 <p class="govuk-body">@Localizer["LargeProducerRegister.ThisInformationIsUpdated"]</p>

@@ -34,9 +34,9 @@ public class LargeProducerRegisterController : Controller
     {
         var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
 
-        var latestFile = await _largeProducerRegisterService.GetLatestAllNationsFileInfoAsync(culture);
+        var latestFiles = await _largeProducerRegisterService.GetLatestAllNationsFileInfoAsync(culture);
 
-        var largeProducerViewModel = new LargeProducerRegisterViewModel { LatestAllNationsFile = latestFile };
+        var largeProducerViewModel = new LargeProducerRegisterViewModel { LatestAllNationsFiles = latestFiles };
 
         return View("LargeProducerRegister", largeProducerViewModel);
     }
@@ -45,13 +45,18 @@ public class LargeProducerRegisterController : Controller
     [Produces("text/csv")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> File()
+    public async Task<IActionResult> File(int? reportingYear)
     {
+        if (reportingYear == null)
+        {
+            return RedirectToAction("Get");
+        }
+
         var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
 
         try
         {
-            var latestFile = await _largeProducerRegisterService.GetLatestAllNationsFileAsync(culture);
+            var latestFile = await _largeProducerRegisterService.GetLatestAllNationsFileAsync((int)reportingYear, culture);
 
             if (latestFile == null)
             {

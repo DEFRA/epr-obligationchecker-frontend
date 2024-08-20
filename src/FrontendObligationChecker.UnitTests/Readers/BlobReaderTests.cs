@@ -108,7 +108,6 @@ public class BlobReaderTests
     public async Task GetBlobsAsync_BlobContainerFindsFiles_ReturnsBlobs()
     {
         // Arrange
-
         const string Prefix = "t";
 
         var expectedBlobs = new BlobModel[]
@@ -159,7 +158,6 @@ public class BlobReaderTests
     public async Task GetBlobsAsync_BlobContainerThrowsException_ThrowsRequestFailedException()
     {
         // Arrange
-
         const string Prefix = "t";
 
         _blobContainerClient.Setup(x => x.GetBlobsAsync(BlobTraits.None, BlobStates.None, Prefix, default))
@@ -171,5 +169,47 @@ public class BlobReaderTests
         // Assert
         act.Should().ThrowAsync<BlobReaderException>();
         _blobContainerClient.Verify(x => x.GetBlobsAsync(BlobTraits.None, BlobStates.None, Prefix, default), Times.Once);
+    }
+
+    [TestMethod]
+    public async Task GetDirectories_BlobContainerFindsFilesDirectories_ReturnsDirectoryList()
+    {
+        // Arrange
+        var expected = new string[] { "1970", "1971" };
+
+        var blobHierarchyItemList = new BlobHierarchyItem[]
+        {
+            BlobsModelFactory.BlobHierarchyItem(expected[0],  BlobsModelFactory.BlobItem(name: "test")),
+            BlobsModelFactory.BlobHierarchyItem(expected[1],  BlobsModelFactory.BlobItem(name: "test")),
+            BlobsModelFactory.BlobHierarchyItem(null,  BlobsModelFactory.BlobItem(name: "test")),
+        };
+
+        var pageableBlobList = AsyncPageable<BlobHierarchyItem>.FromPages(
+            new[] { Page<BlobHierarchyItem>.FromValues(blobHierarchyItemList, null, Mock.Of<Response>()) });
+
+        _blobContainerClient.Setup(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default))
+            .Returns(pageableBlobList);
+
+        // Act
+        var result = await _systemUnderTest.GetDirectories();
+
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+        _blobContainerClient.Verify(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default), Times.Once);
+    }
+
+    [TestMethod]
+    public async Task GetDirectories_BlobContainerThrowsException_ThrowsRequestFailedException()
+    {
+        // Arrange
+        _blobContainerClient.Setup(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default))
+            .Throws(new RequestFailedException(It.IsAny<string>()));
+
+        // Act
+        var act = () => _systemUnderTest.GetDirectories();
+
+        // Assert
+        act.Should().ThrowAsync<BlobReaderException>();
+        _blobContainerClient.Verify(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default), Times.Once);
     }
 }
