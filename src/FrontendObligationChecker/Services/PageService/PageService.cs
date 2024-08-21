@@ -254,6 +254,10 @@ public class PageService : IPageService
             .SelectMany(x => x.Questions)
             .First(x => x.Key == QuestionKey.SellingEmptyPackaging);
 
+        var supplyFilledPackagingQuestion = activityPages
+            .SelectMany(x => x.Questions)
+            .First(x => x.Key == QuestionKey.SupplyingFilledPackaging);
+
         // Pages belonging to producer activities other than Seller
         string[] producerActivityPagePaths =
         {
@@ -261,15 +265,14 @@ public class PageService : IPageService
             PagePath.UnbrandedPackaging,
             PagePath.ImportingProducts,
             PagePath.HiringLoaning,
-            PagePath.OnlineMarketplace,
-            PagePath.SupplyingFilledPackaging
+            PagePath.OnlineMarketplace
         };
 
         var producerActivities = _pages
             .Where(x => producerActivityPagePaths.Contains(x.Path))
             .Select(x => x.FirstQuestion.SelectedOption).ToList();
 
-        if (producerActivities.All(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes)
+        if (producerActivities.All(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes && supplyFilledPackagingQuestion.Answer == YesNo.Yes)
         {
             companyModel.SellerType = SellerType.SellerOnly;
         }
