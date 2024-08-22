@@ -39,7 +39,7 @@ public class CacheServiceTests
             new CachingOptions()
             {
                 ProducerReportFileSizeDays = 1,
-                HourLargeProducersFileGeneratedAt = 0,
+                HourLargeProducersFileGeneratedAt = DateTime.Now.Hour == 23 ? 0 : DateTime.Now.Hour + 1,
                 MinutesToWaitUntilLargeProducersFileIsGenerated = 30
             });
 
