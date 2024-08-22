@@ -47,7 +47,7 @@ public class LargeProducerRegisterController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> File(int? reportingYear)
     {
-        if (reportingYear == null)
+        if (!reportingYear.HasValue)
         {
             return RedirectToAction("Get");
         }
@@ -56,7 +56,7 @@ public class LargeProducerRegisterController : Controller
 
         try
         {
-            var latestFile = await _largeProducerRegisterService.GetLatestAllNationsFileAsync((int)reportingYear, culture);
+            var latestFile = await _largeProducerRegisterService.GetLatestAllNationsFileAsync(reportingYear.Value, culture);
 
             if (latestFile == null)
             {
