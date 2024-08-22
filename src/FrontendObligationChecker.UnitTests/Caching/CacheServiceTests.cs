@@ -38,7 +38,9 @@ public class CacheServiceTests
         _cachingOptions = Options.Create(
             new CachingOptions()
             {
-                ProducerReportFileSizeDays = 1
+                ProducerReportFileSizeDays = 1,
+                HourLargeProducersFileGeneratedAt = 0,
+                MinutesToWaitUntilLargeProducersFileIsGenerated = 30
             });
 
         _systemUnderTest = new CacheService(_memoryCache, _cachingOptions, _logger.Object);

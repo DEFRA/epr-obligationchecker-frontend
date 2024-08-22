@@ -8,4 +8,8 @@ public class CachingOptions
     public const string ConfigSection = "Caching";
 
     public int ProducerReportFileSizeDays { get; init; }
+
+    public int HourLargeProducersFileGeneratedAt { get; init; }
+
+    public int MinutesToWaitUntilLargeProducersFileIsGenerated { get; init; }
 }

@@ -62,8 +62,7 @@ public class CacheService : ICacheService
 
     public void SetReportDirectoriesCache(IEnumerable<string> reportDirectories)
     {
-        var cacheEntryOptions = new MemoryCacheEntryOptions()
-            .SetAbsoluteExpiration(TimeSpan.FromDays(_cachingOptions.ProducerReportFileSizeDays));
+        var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(GetExpiryDateForLargeProducersData());
 
         _cache.Set(ReportDirectoriesCacheKey, reportDirectories, cacheEntryOptions);
 
@@ -86,8 +85,7 @@ public class CacheService : ICacheService
 
     public void SetBlobModelCache(string prefix, BlobModel blobModel)
     {
-        var cacheEntryOptions = new MemoryCacheEntryOptions()
-            .SetAbsoluteExpiration(TimeSpan.FromDays(_cachingOptions.ProducerReportFileSizeDays));
+        var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(GetExpiryDateForLargeProducersData());
 
         _cache.Set(GetBlobModelCacheKey(prefix), blobModel, cacheEntryOptions);
 
@@ -102,5 +100,29 @@ public class CacheService : ICacheService
     private static string GetBlobModelCacheKey(string prefix)
     {
         return $"{BlobModelCacheKey}-{prefix}";
+    }
+
+    private DateTime GetExpiryDateForLargeProducersData()
+    {
+        var expiryDate = new DateTime(
+           DateTime.Now.Year,
+           DateTime.Now.Month,
+           DateTime.Now.Day,
+           _cachingOptions.HourLargeProducersFileGeneratedAt,
+           0,
+           0,
+           DateTimeKind.Local);
+
+        expiryDate = expiryDate.AddMinutes(_cachingOptions.MinutesToWaitUntilLargeProducersFileIsGenerated);
+
+        var currentDayMinutes = (DateTime.Now.Hour * 60) + DateTime.Now.Minute;
+        var newFileGeneratedAtDayMinutes = (_cachingOptions.HourLargeProducersFileGeneratedAt * 60) + _cachingOptions.MinutesToWaitUntilLargeProducersFileIsGenerated;
+
+        if (currentDayMinutes >= newFileGeneratedAtDayMinutes)
+        {
+            expiryDate = expiryDate.AddDays(1);
+        }
+
+        return expiryDate;
     }
 }
