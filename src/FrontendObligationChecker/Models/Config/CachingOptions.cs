@@ -9,7 +9,7 @@ public class CachingOptions
 
     public int ProducerReportFileSizeDays { get; init; }
 
-    public int HourLargeProducersFileGeneratedAt { get; init; }
+    public int LargeProducersFileGeneratedHour { get; init; }
 
-    public int MinutesToWaitUntilLargeProducersFileIsGenerated { get; init; }
+    public int LargeProducersFileGenerationWaitMinutes { get; init; }
 }

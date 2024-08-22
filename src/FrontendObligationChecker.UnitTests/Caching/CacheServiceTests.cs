@@ -39,8 +39,8 @@ public class CacheServiceTests
             new CachingOptions()
             {
                 ProducerReportFileSizeDays = 1,
-                HourLargeProducersFileGeneratedAt = DateTime.Now.Hour == 23 ? 0 : DateTime.Now.Hour + 1,
-                MinutesToWaitUntilLargeProducersFileIsGenerated = 30
+                LargeProducersFileGeneratedHour = DateTime.Now.Hour == 23 ? 0 : DateTime.Now.Hour + 1,
+                LargeProducersFileGenerationWaitMinutes = 30
             });
 
         _systemUnderTest = new CacheService(_memoryCache, _cachingOptions, _logger.Object);

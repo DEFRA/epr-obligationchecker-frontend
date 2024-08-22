@@ -108,15 +108,15 @@ public class CacheService : ICacheService
            DateTime.Now.Year,
            DateTime.Now.Month,
            DateTime.Now.Day,
-           _cachingOptions.HourLargeProducersFileGeneratedAt,
+           _cachingOptions.LargeProducersFileGeneratedHour,
            0,
            0,
            DateTimeKind.Local);
 
-        expiryDate = expiryDate.AddMinutes(_cachingOptions.MinutesToWaitUntilLargeProducersFileIsGenerated);
+        expiryDate = expiryDate.AddMinutes(_cachingOptions.LargeProducersFileGenerationWaitMinutes);
 
         var currentDayMinutes = (DateTime.Now.Hour * 60) + DateTime.Now.Minute;
-        var newFileGeneratedAtDayMinutes = (_cachingOptions.HourLargeProducersFileGeneratedAt * 60) + _cachingOptions.MinutesToWaitUntilLargeProducersFileIsGenerated;
+        var newFileGeneratedAtDayMinutes = (_cachingOptions.LargeProducersFileGeneratedHour * 60) + _cachingOptions.LargeProducersFileGenerationWaitMinutes;
 
         if (currentDayMinutes >= newFileGeneratedAtDayMinutes)
         {
