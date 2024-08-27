@@ -10,9 +10,9 @@ public class TestDistributedSession<T> : IDistributedSession<T>
     {
         T result = default;
 
-        if (_session.ContainsKey(key))
+        if (_session.TryGetValue(key, out T? value))
         {
-            result = _session[key];
+            result = value;
         }
 
         return await Task.FromResult(result);

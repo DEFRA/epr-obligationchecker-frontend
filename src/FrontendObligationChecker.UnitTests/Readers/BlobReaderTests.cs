@@ -1,5 +1,6 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Readers;
 
+using System.Runtime.Serialization;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;

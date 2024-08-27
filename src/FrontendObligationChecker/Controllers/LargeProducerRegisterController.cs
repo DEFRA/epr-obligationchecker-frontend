@@ -32,7 +32,7 @@ public class LargeProducerRegisterController : Controller
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
 
         var latestFile = await _largeProducerRegisterService.GetLatestAllNationsFileInfoAsync(culture);
 
@@ -47,7 +47,7 @@ public class LargeProducerRegisterController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> File()
     {
-        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
 
         try
         {
