@@ -44,6 +44,11 @@ resources:
       name: RWD-CPR-EPR4P-ADO/epr-webapps-code-deploy-templates
       type: git
       ref: main
+  repositories:
+    - repository: AutomationTesting
+      name: RWD-CPR-EPR4P-ADO/epr-playwright-bdd
+      type: git
+      ref: automation-testing-sam
 
 extends:
   template: epr-build-pipeline.yaml@CommonTemplates
