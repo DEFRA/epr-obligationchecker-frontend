@@ -20,8 +20,10 @@ public class BlobReaderException : Exception
     {
     }
 
-    private BlobReaderException(SerializationInfo info, StreamingContext context)
+#pragma warning disable SYSLIB0051
+    protected BlobReaderException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
     }
+#pragma warning restore SYSLIB0051
 }

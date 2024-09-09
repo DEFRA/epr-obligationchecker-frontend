@@ -10,18 +10,15 @@ using ViewModels;
 [Route(PagePath.Privacy)]
 public class PrivacyController : Controller
 {
-    private readonly ILogger<PrivacyController> _logger;
     private readonly ExternalUrlsOptions _urlOptions;
     private readonly EmailAddressOptions _emailOptions;
     private readonly SiteDateOptions _siteDateOptions;
 
     public PrivacyController(
-        ILogger<PrivacyController> logger,
         IOptions<ExternalUrlsOptions> urlOptions,
         IOptions<EmailAddressOptions> emailOptions,
         IOptions<SiteDateOptions> siteDateOptions)
     {
-        _logger = logger;
         _urlOptions = urlOptions?.Value;
         _emailOptions = emailOptions?.Value;
         _siteDateOptions = siteDateOptions?.Value;

@@ -20,8 +20,11 @@ public class LargeProducerRegisterServiceException : Exception
     {
     }
 
-    private LargeProducerRegisterServiceException(SerializationInfo info, StreamingContext context)
+#pragma warning disable SYSLIB0051
+    protected LargeProducerRegisterServiceException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
     }
+#pragma warning restore SYSLIB0051
+
 }

@@ -14,7 +14,7 @@ public class JourneySessionTests
 {
     private const string JourneySessionKey = nameof(SessionJourney);
 
-    private IJourneySession _systemUnderTest;
+    private JourneySession _systemUnderTest;
     private Mock<IDistributedSession<SessionJourney>> _distributedSessionMock;
     private Mock<IMapper> _mapperMock;
     private Mock<ILogger<JourneySession>> _loggerMock;
@@ -60,6 +60,6 @@ public class JourneySessionTests
         await _systemUnderTest.RemovePagesAfterCurrentAsync(currentPage);
 
         // Assert
-        _loggerMock.VerifyLog(logger => logger.LogError(It.IsAny<Exception>(), It.IsAny<string>()), Times.Once);
+        _loggerMock.VerifyLog(logger => logger.LogError(It.IsAny<Exception>(), "Error adding page to session"), Times.Once);
     }
 }

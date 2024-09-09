@@ -26,10 +26,10 @@ public class CacheService : ICacheService
         _logger = logger;
     }
 
-    public bool GetReportFileSizeCache(string culture, out Dictionary<string, string> fileSizeCacheMapping)
+    public bool GetReportFileSizeCache(string culture, out Dictionary<string, string> reportFileSizeMapping)
     {
-        _cache.TryGetValue(GetCacheKey(culture), out fileSizeCacheMapping);
-        if (fileSizeCacheMapping is null)
+        _cache.TryGetValue(GetCacheKey(culture), out reportFileSizeMapping);
+        if (reportFileSizeMapping is null)
         {
             return false;
         }

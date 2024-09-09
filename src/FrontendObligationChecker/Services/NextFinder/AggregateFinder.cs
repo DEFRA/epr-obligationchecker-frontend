@@ -6,11 +6,11 @@ public class AggregateFinder : INextFinder
 {
     public OptionPath? Next(IList<Question> questions)
     {
-        if (questions == null) throw new ArgumentNullException(nameof(questions));
+        ArgumentNullException.ThrowIfNull(questions);
 
         var isEligible = questions
             .Any(question =>
-                question.Options.Any(option => option.IsSelected.GetValueOrDefault() && option.Next == OptionPath.Primary));
+                question.Options.Exists(option => option.IsSelected.GetValueOrDefault() && option.Next == OptionPath.Primary));
         return isEligible
             ? OptionPath.Secondary
             : OptionPath.Primary;

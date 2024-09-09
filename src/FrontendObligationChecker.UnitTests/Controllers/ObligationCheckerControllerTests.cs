@@ -34,7 +34,6 @@ public class ObligationCheckerControllerTests
         _configurationMock = new Mock<IConfiguration>();
 
         _systemUnderTest = new ObligationCheckerController(
-            _loggerMock.Object,
             _pageServiceMock.Object,
             _configurationMock.Object);
 

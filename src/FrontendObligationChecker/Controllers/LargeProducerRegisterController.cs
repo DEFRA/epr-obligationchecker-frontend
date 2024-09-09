@@ -32,7 +32,7 @@ public class LargeProducerRegisterController : Controller
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
 
         var latestFiles = await _largeProducerRegisterService.GetLatestAllNationsFileInfoAsync(culture);
 
@@ -52,7 +52,7 @@ public class LargeProducerRegisterController : Controller
             return RedirectToAction("Get");
         }
 
-        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures.First().ToString();
+        var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
 
         try
         {

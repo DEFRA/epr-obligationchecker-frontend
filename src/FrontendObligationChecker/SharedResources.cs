@@ -1,5 +1,3 @@
-﻿namespace FrontendObligationChecker;
-
-public class SharedResources
+﻿public class SharedResources
 {
 }
