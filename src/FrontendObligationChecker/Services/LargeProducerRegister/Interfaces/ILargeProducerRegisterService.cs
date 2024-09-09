@@ -8,7 +8,7 @@ public interface ILargeProducerRegisterService
 
     Task<Dictionary<string, string>> GetAllReportFileSizesAsync(string culture);
 
-    Task<LargeProducerFileInfoViewModel> GetLatestAllNationsFileInfoAsync(string culture);
+    Task<IEnumerable<LargeProducerFileInfoViewModel>> GetLatestAllNationsFileInfoAsync(string culture);
 
-    Task<LargeProducerFileViewModel> GetLatestAllNationsFileAsync(string culture);
+    Task<LargeProducerFileViewModel> GetLatestAllNationsFileAsync(int reportingYear, string culture);
 }
