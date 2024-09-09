@@ -175,6 +175,6 @@
     <value>Os nad ydych chi’n siŵr am unrhyw beth, cysylltwch â’r cynhyrchydd yn uniongyrchol.</value>
   </data>
   <data name="LargeProducerRegister.ListOfLargeProducersFile" xml:space="preserve">
-    <value>Rhestr_o_gynhyrchwyr_mawr_{0:dd}_{0:MMMM}_{0:yyyy} (CSV {1})</value>
+    <value>Rhestr_o_gynhyrchwyr_mawr_{0}_{1:dd}_{1:MMMM}_{1:yyyy} (CSV {2})</value>
   </data>
 </root>

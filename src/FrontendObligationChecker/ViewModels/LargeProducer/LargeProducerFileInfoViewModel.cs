@@ -5,6 +5,8 @@
     [ExcludeFromCodeCoverage]
     public class LargeProducerFileInfoViewModel
     {
+        public int ReportingYear { get; set; }
+
         public string DisplayFileSize { get; set; }
 
         public DateTime DateCreated { get; set; }

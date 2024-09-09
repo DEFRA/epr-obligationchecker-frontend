@@ -82,4 +82,32 @@ public class BlobReader : IBlobReader
             throw new BlobReaderException(string.Format(ErrorMessage, prefix), ex);
         }
     }
+
+    public async Task<IEnumerable<string>> GetDirectories()
+    {
+        try
+        {
+            var directories = new List<string>();
+
+            var resultSegment = _blobContainerClient.GetBlobsByHierarchyAsync(delimiter: "/").AsPages(default);
+
+            await foreach (Page<BlobHierarchyItem> blobHierarchyItemPage in resultSegment)
+            {
+                foreach (BlobHierarchyItem blobHierarchyItem in blobHierarchyItemPage.Values)
+                {
+                    if (blobHierarchyItem.IsPrefix)
+                    {
+                        directories.Add(blobHierarchyItem.Prefix);
+                    }
+                }
+            }
+
+            return directories;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, "directories");
+            throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
+        }
+    }
 }

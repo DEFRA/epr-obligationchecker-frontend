@@ -175,6 +175,6 @@
     <value>If you’re unsure about anything, check with the producer directly.</value>
   </data>
   <data name="LargeProducerRegister.ListOfLargeProducersFile" xml:space="preserve">
-    <value>List_of_large_producers_to_{0:dd}_{0:MMMM}_{0:yyyy} (CSV {1})</value>
+    <value>List_of_large_producers_to_{0}_{1:dd}_{1:MMMM}_{1:yyyy} (CSV {2})</value>
   </data>
 </root>
