@@ -1,3 +1,6 @@
+@using FrontendObligationChecker.ViewModels
+@model BaseViewModel
+
 @{
     ViewData["Title"] = @Localizer["Error.PageTitle"];
 }
@@ -10,6 +13,7 @@
                     @Localizer["Error.Title"]
                 </h1>
                 <p class="govuk-body">@Localizer["Error.TryAgainLater"]</p>
+                <p><b>@Html.Raw(Model.Timestamp)</b></p>
             </div>
         </div>
     </main>
