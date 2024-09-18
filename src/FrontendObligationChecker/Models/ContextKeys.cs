@@ -4,7 +4,7 @@
     {
         public const string UseGoogleAnalyticsCookieKey = "UseGoogleAnalyticsCookie";
 
-        public const string TagManagerContainerIdKey = "TagmanagerContainerId";
+        public const string TagManagerContainerIdKey = "TagManagerContainerId";
 
         public const string ScriptNonceKey = "ScriptNonce";
     }
