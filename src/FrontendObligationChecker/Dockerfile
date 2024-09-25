@@ -46,9 +46,9 @@ RUN if [[ -z "$TRUSTED_CERT" ]] ;\
 
 # Installs globalization tools and sets common environment settings
 FROM base-with-trusted-cert-${ADD_TRUSTED_CERT} AS configured-base
-RUN apk --no-cache add icu-libs icu-data-full libintl
+RUN apk --no-cache add icu-libs icu-data-full libintl tzdata
 USER dotnet
-ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
 
 FROM configured-base AS final
 USER dotnet

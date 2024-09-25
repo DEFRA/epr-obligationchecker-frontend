@@ -9,6 +9,6 @@ public class ErrorController : Controller
 {
     public ViewResult Error(int? statusCode)
     {
-        return View(nameof(PageType.Error), new BaseViewModel());
+        return View(nameof(PageType.Error), new BaseViewModel() { });
     }
 }
