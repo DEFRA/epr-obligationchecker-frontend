@@ -92,7 +92,7 @@ public class CookieService : ICookieService
         }
 
         var cookieParts = cookie.Split("|");
-        if (cookieParts.First().Equals(true.ToString()))
+        if (cookieParts[0].Equals(true.ToString()))
         {
             cookieConsentState.CookiesAccepted = true;
         }
@@ -102,7 +102,7 @@ public class CookieService : ICookieService
             cookieConsentState.CookieAcknowledgementRequired = true;
             responseCookies.Append(
                 key: _eprCookieOptions.CookiePolicyCookieName,
-                value: cookie.Split("|").First(),
+                value: cookie.Split("|")[0],
                 options: new CookieOptions()
                 {
                     Expires = _dateTimeWrapper.UtcNow.AddMonths(CookieAcceptance.CookieDurationInMonths),

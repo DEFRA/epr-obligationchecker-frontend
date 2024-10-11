@@ -11,5 +11,6 @@ public static class FeatureFlags
     public const string ScotlandNationDownloadLink = "ScotlandNationDownloadLink";
     public const string WalesNationDownloadLink = "WalesNationDownloadLink";
     public const string AllNationsDownloadLink = "AllNationsDownloadLink";
+    public const string LargeProducerRegisterEnabled = "LargeProducerRegisterEnabled";
 
 }

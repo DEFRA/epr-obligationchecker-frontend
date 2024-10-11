@@ -30,7 +30,7 @@ public class Question
 
     public List<Option> Options { get; set; } = new();
 
-    public Option? SelectedOption => Options.FirstOrDefault(option => option.IsSelected == true);
+    public Option? SelectedOption => Options.Find(option => option.IsSelected == true);
 
     public string GetDescription() => !string.IsNullOrEmpty(AlternateDescription) ? AlternateDescription : Description;
 
@@ -43,7 +43,7 @@ public class Question
             Options.ForEach(option => option.IsSelected = null);
             var answerList = questionAnswer.Split(",");
             var optionList = Options.Where(option => answerList.Contains(option.Value)).ToList();
-            if (optionList.Any())
+            if (optionList.Count != 0)
             {
                 foreach (var option in optionList)
                 {

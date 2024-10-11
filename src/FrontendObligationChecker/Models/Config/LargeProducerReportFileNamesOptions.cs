@@ -35,4 +35,16 @@ public class LargeProducerReportFileNamesOptions
 
     [Required]
     public string AllNationsReportFileNameInWelsh { get; set; }
+
+    [Required]
+    public string LatestAllNationsReportFileNamePrefix { get; set; }
+
+    [Required]
+    public string LatestAllNationsReportFileNamePrefixInWelsh { get; set; }
+
+    [Required]
+    public string LatestAllNationsReportDownloadFileName { get; set; }
+
+    [Required]
+    public string LatestAllNationsReportDownloadFileNameInWelsh { get; set; }
 }

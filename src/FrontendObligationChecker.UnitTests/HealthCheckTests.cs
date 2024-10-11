@@ -24,7 +24,7 @@ public class HealthCheckTests
         httpContext.Response.StatusCode.Should().Be(StatusCodes.Status200OK);
     }
 
-    private string ReadResponseBody(DefaultHttpContext httpContext)
+    private static string ReadResponseBody(DefaultHttpContext httpContext)
     {
         httpContext.Response.Body.Seek(0, SeekOrigin.Begin);
         var reader = new StreamReader(httpContext.Response.Body);

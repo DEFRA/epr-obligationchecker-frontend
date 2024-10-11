@@ -90,7 +90,7 @@ public class PageService : IPageService
 
     private static bool HasAnswersChanged(Page page, SessionJourney? sessionJourney, IFormCollection formCollection)
     {
-        var providedAnswers = page.Questions.ToDictionary(q => q.Key, q => string.Join(",", formCollection[q.Key]));
+        var providedAnswers = page.Questions.ToDictionary(q => q.Key, q => string.Join(",", formCollection[q.Key].ToArray()));
         var storedAnswers = sessionJourney.Pages.SingleOrDefault(x => x.Path == page.Path)?.Questions
             .ToDictionary(q => q.Key, q => q.Answer);
 
@@ -159,10 +159,10 @@ public class PageService : IPageService
     {
         var sessionJourney = await _journeySession.GetAsync();
 
-        var sessionPage = sessionJourney?.Pages.SingleOrDefault(x => x.Path == PagePath.TypeOfOrganisation);
+        var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
         if (sessionPage != null)
         {
-            var answer = sessionPage.Questions.FirstOrDefault(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
+            var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
             page.AssociationType = answer switch
             {
                 "parent" => AssociationType.Parent,
@@ -245,7 +245,7 @@ public class PageService : IPageService
     {
         var activityPages = _pages.Where(x => PagePath.IsActivityPagePath(x.Path)).ToList();
 
-        if (!activityPages.Any())
+        if (activityPages.Count == 0)
         {
             return;
         }
@@ -302,6 +302,6 @@ public class PageService : IPageService
 
         companyModel.RequiresNationData =
             amountOfPackaging?.Value != amountOfPackagingNonObligated
-            && selectedOptions.Any(x => x != null && x.Value == YesNo.Yes);
+            && selectedOptions.Exists(x => x.Value == YesNo.Yes);
     }
 }

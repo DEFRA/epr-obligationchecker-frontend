@@ -1,8 +1,11 @@
 ﻿namespace FrontendObligationChecker.Readers;
 
+using System.Collections.Generic;
 using Azure;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Exceptions;
+using FrontendObligationChecker.Models.BlobReader;
 
 public class BlobReader : IBlobReader
 {
@@ -47,6 +50,64 @@ public class BlobReader : IBlobReader
         {
             _logger.LogError(ex, LogMessage, fileName);
             throw new BlobReaderException(string.Format(ErrorMessage, fileName), ex);
+        }
+    }
+
+    public async Task<IEnumerable<BlobModel>> GetBlobsAsync(string prefix)
+    {
+        try
+        {
+            var list = new List<BlobModel>();
+
+            var resultSegment = _blobContainerClient.GetBlobsAsync(prefix: prefix).AsPages(default);
+
+            await foreach (Page<BlobItem> blobPage in resultSegment)
+            {
+                foreach (BlobItem blobItem in blobPage.Values)
+                {
+                    list.Add(new BlobModel
+                    {
+                        Name = blobItem.Name,
+                        ContentLength = blobItem.Properties.ContentLength,
+                        CreatedOn = blobItem.Properties.CreatedOn?.LocalDateTime,
+                    });
+                }
+            }
+
+            return list;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, prefix);
+            throw new BlobReaderException(string.Format(ErrorMessage, prefix), ex);
+        }
+    }
+
+    public async Task<IEnumerable<string>> GetDirectories()
+    {
+        try
+        {
+            var directories = new List<string>();
+
+            var resultSegment = _blobContainerClient.GetBlobsByHierarchyAsync(delimiter: "/").AsPages(default);
+
+            await foreach (Page<BlobHierarchyItem> blobHierarchyItemPage in resultSegment)
+            {
+                foreach (BlobHierarchyItem blobHierarchyItem in blobHierarchyItemPage.Values)
+                {
+                    if (blobHierarchyItem.IsPrefix)
+                    {
+                        directories.Add(blobHierarchyItem.Prefix);
+                    }
+                }
+            }
+
+            return directories;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, "directories");
+            throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
         }
     }
 }

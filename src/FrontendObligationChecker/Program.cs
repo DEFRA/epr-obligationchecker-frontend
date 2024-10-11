@@ -1,5 +1,4 @@
-﻿using FrontendObligationChecker;
-using FrontendObligationChecker.ConfigurationExtensions;
+﻿using FrontendObligationChecker.ConfigurationExtensions;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -7,74 +6,82 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddFeatureManagement();
-
-builder.Services.ConfigureOptions(builder.Configuration);
-
-string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
-
-builder.Services.AddAntiforgery(opts =>
+namespace FrontendObligationChecker
 {
-    opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
-    opts.Cookie.Path = pathBase;
-});
+    public partial class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMemoryCache();
+            builder.Services.AddFeatureManagement();
 
-builder.Services
-    .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
-    .AddViewLocalization()
-    .AddDataAnnotationsLocalization();
+            builder.Services.ConfigureOptions(builder.Configuration);
 
-builder.Services
-    .ConfigureLocalization()
-    .ConfigureSession(builder.Configuration);
+            string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
 
-builder.Services.AddApplicationInsightsTelemetry();
+            builder.Services.AddAntiforgery(opts =>
+            {
+                opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
+                opts.Cookie.Path = pathBase;
+            });
 
-builder.Services.AddHsts(options =>
-{
-    options.IncludeSubDomains = true;
-    options.MaxAge = TimeSpan.FromDays(365);
-});
+            builder.Services.AddMemoryCache();
 
-builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
+            builder.Services
+                .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
 
-builder.Services.RegisterServices();
+            builder.Services
+                .ConfigureLocalization()
+                .ConfigureSession(builder.Configuration);
 
-if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
-{
-    GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
-}
+            builder.Services.AddApplicationInsightsTelemetry();
 
-var app = builder.Build();
+            builder.Services.AddHsts(options =>
+            {
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
 
-app.UsePathBase(pathBase);
+            builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/error");
-}
+            builder.Services.RegisterServices();
 
-app.UseSession();
+            if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
+            {
+                GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
+            }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
-app.UseRequestLocalization();
-app.UseMiddleware<AnalyticsCookieMiddleware>();
-app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
-app.MapControllers();
+            var app = builder.Build();
 
-app.Run();
+            app.UsePathBase(pathBase);
 
-public partial class Program
-{
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
+
+            app.UseMiddleware<SecurityHeaderMiddleware>();
+            app.UseSession();
+
+            // This must be put after security headers middleware to prevent executing it twice when error page is rendered
+            app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseRequestLocalization();
+            app.UseMiddleware<AnalyticsCookieMiddleware>();
+            app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
+            app.MapControllers();
+            app.Run();
+        }
+    }
 }

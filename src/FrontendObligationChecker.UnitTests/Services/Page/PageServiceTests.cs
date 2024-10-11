@@ -4,7 +4,6 @@ using FrontendObligationChecker.Generators;
 using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
-using FrontendObligationChecker.Services.PageService.Interfaces;
 using FrontendObligationChecker.Services.Session.Interfaces;
 using FrontendObligationChecker.UnitTests.Helpers;
 
@@ -18,7 +17,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PageService;
 [TestClass]
 public class PageServiceTests
 {
-    private IPageService _systemUnderTest;
+    private FrontendObligationChecker.Services.PageService.PageService _systemUnderTest;
     private Mock<IJourneySession> _journeySessionMock;
     private Mock<IOptions<ExternalUrlsOptions>> _externalUrls;
 
