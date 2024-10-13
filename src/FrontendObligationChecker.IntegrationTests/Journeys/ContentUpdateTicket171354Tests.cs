@@ -18,7 +18,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("<title>Supplying goods to the UK market under your own brand - GOV.UK</title>");
+        pageContent.Should().Contain("<title>Supplying goods to the UK market under your own brand</title>");
         pageContent.Should().Contain("You supply goods under your own brand even if you pay or license another company to do any of the following for you");
         pageContent.Should().Contain("import goods for you");
     }

@@ -43,7 +43,7 @@ public class MaterialsForDrinksContainersTests
     }
 
     [TestMethod]
-    public async Task OnMaterialsForDrinksContainersPage_WhenHasNoneOfMaterialsSelected_ThenNextPathIsAmountYouSupply()
+    public async Task OnMaterialsForDrinksContainersPage_WhenHasNoneOfMaterialsSelected_ThenNextPathIsWhatYouNeedToDo()
     {
         await _pageService.SetVisitedPages(new VisitedPages()
         {
@@ -62,9 +62,11 @@ public class MaterialsForDrinksContainersTests
 
         Page page = await _pageService.GetPageAsync(PagePath.MaterialsForDrinksContainers);
 
+        page.FirstQuestion.Options.Where(o => o.Title == "SingleQuestion.MaterialsForDrinksContainers.None").FirstOrDefault().IsSelected = true;
+
         string nextPath = PageFinder.GetNextPath(page);
 
-        Assert.AreEqual(PagePath.AmountYouSupply, nextPath);
+        Assert.AreEqual(PagePath.WhatYouNeedToDo, nextPath);
     }
 
     [TestMethod]
@@ -74,6 +76,7 @@ public class MaterialsForDrinksContainersTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OverTwoMillion,
+            AmountYouSupply = AmountYouSupply.HandleUnder25Tonnes,
             OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = YesNo.No,
@@ -87,8 +90,10 @@ public class MaterialsForDrinksContainersTests
 
         Page page = await _pageService.GetPageAsync(PagePath.MaterialsForDrinksContainers);
 
+        page.FirstQuestion.Options.Where(o => o.Title == "SingleQuestion.MaterialsForDrinksContainers.None").FirstOrDefault().IsSelected = true;
+
         string nextPath = PageFinder.GetNextPath(page);
 
-        Assert.AreEqual(PagePath.AmountYouSupply, nextPath);
+        Assert.AreEqual(PagePath.WhatYouNeedToDo, nextPath);
     }
 }

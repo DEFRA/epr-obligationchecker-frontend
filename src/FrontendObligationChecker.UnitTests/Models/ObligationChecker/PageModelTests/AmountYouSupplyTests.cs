@@ -20,6 +20,9 @@ public class AmountYouSupplyTests
         _pageService = TestPageService.GetPageService();
     }
 
+    // Due to repositioning of Amount You Supply page this unit test is no longer relevant.
+
+    /*
     [TestMethod]
     public async Task OnAmountYouSupplyPage_WhenOnPreviousPagesSellerAndSomeOtherActivityAndAlsoDrinksWereSelected_ThenPagePropertiesReflectTheirValues()
     {
@@ -47,7 +50,7 @@ public class AmountYouSupplyTests
         Assert.IsFalse(amountYouHandle.IsParentCompany);
         Assert.IsTrue(amountYouHandle.HasSingleUseDrinkContainers);
         amountYouHandle.NonSellerYesActivities.Should().NotBeEmpty();
-    }
+    }*/
 
     [TestMethod]
     [DataRow(1, true)]
@@ -72,7 +75,7 @@ public class AmountYouSupplyTests
             PagePath.SupplyingEmptyPackaging,
         };
         var yesQuestion = page.SessionPages
-            .Find(p => nonSellerYesPages.Contains(p.Path) && p.FirstQuestion.Answer == FrontendObligationChecker.Models.ObligationChecker.YesNo.Yes)
+            .Find(p => nonSellerYesPages.Contains(p.Path) && p.FirstQuestion?.Answer == FrontendObligationChecker.Models.ObligationChecker.YesNo.Yes)
             .FirstQuestion;
         var expectedResourceString = matchingAltTitle ? yesQuestion.AlternateTitle : yesQuestion.AmountHandlePageText;
 

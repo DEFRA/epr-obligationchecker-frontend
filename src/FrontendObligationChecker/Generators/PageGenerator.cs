@@ -10,6 +10,7 @@ public static class PageGenerator
         {
             TypeOfOrganisationPage(),
             AnnualTurnoverPage(),
+            AmountYouSupplyPage(),
             OwnBrandPage(QuestionKey.OwnBrand, PagePath.OwnBrand, PagePath.UnbrandedPackaging),
             UnbrandedPackagingPage(QuestionKey.UnbrandedPackaging, PagePath.UnbrandedPackaging, PagePath.ImportingProducts),
             ImportingProductsPage(QuestionKey.ImportingProducts , PagePath.ImportingProducts, PagePath.SupplyingEmptyPackaging),
@@ -20,7 +21,6 @@ public static class PageGenerator
             PlaceDrinksOnMarketPage(),
             MaterialsForDrinksContainersPage(),
             ContainerVolumePage(),
-            AmountYouSupplyPage(),
             NoActionNeededPage(),
             WhatYouNeedToDoPage(eprGuidanceUrl)
         };
@@ -108,7 +108,8 @@ public static class PageGenerator
                     OptionPath.Primary, PagePath.NoActionNeeded
                 },
                 {
-                    OptionPath.Secondary, PagePath.OwnBrand
+                    // OptionPath.Secondary, PagePath.OwnBrand
+                    OptionPath.Secondary, PagePath.AmountYouSupply
                 }
             },
             IsPageHeading = true,
@@ -156,7 +157,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 40,
+            Index = 21,
             Titles = new Dictionary<OptionPath, string>()
             {
                 {
@@ -175,7 +176,8 @@ public static class PageGenerator
                     OptionPath.Primary, PagePath.NoActionNeeded
                 },
                 {
-                    OptionPath.Secondary, PagePath.WhatYouNeedToDo
+                    // OptionPath.Secondary, PagePath.WhatYouNeedToDo
+                    OptionPath.Secondary, PagePath.OwnBrand
                 }
             },
             IsPageHeading = false,
@@ -235,7 +237,8 @@ public static class PageGenerator
                     OptionPath.Primary, PagePath.ContainerVolume
                 },
                 {
-                    OptionPath.Secondary, PagePath.AmountYouSupply
+                    // OptionPath.Secondary, PagePath.AmountYouSupply
+                    OptionPath.Secondary, PagePath.WhatYouNeedToDo
                 }
             },
             IsPageHeading = true,
@@ -346,7 +349,8 @@ public static class PageGenerator
             Paths = new Dictionary<OptionPath, string>()
             {
                 { OptionPath.Primary, PagePath.MaterialsForDrinksContainers },
-                { OptionPath.Secondary, PagePath.AmountYouSupply }
+                 { OptionPath.Secondary, PagePath.WhatYouNeedToDo }
+                // { OptionPath.Secondary, PagePath.AmountYouSupply }
             },
             IsPageHeading = true,
             Questions = new List<Question>()
@@ -368,7 +372,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 27,
+            Index = 28,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.SupplyingFilledPackaging.Title" },
@@ -403,7 +407,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 21,
+            Index = 22,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.OwnBrand.Title" },
@@ -442,7 +446,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 22,
+            Index = 23,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.UnbrandedPackaging.Title" },
@@ -477,7 +481,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 23,
+            Index = 24,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.ImportingProducts.Title" },
@@ -513,7 +517,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 24,
+            Index = 25,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.SellingEmptyPackaging.Title" },
@@ -549,7 +553,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 25,
+            Index = 26,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.HiringLoaning.Title" },
@@ -584,7 +588,7 @@ public static class PageGenerator
     {
         return new Page()
         {
-            Index = 26,
+            Index = 27,
             Titles = new Dictionary<OptionPath, string>
             {
                 { OptionPath.Primary, "SingleQuestion.OnlineMarketplace.Title" },
@@ -631,7 +635,8 @@ public static class PageGenerator
             Paths = new Dictionary<OptionPath, string>()
             {
                 { OptionPath.Primary, PagePath.MaterialsForDrinksContainers },
-                { OptionPath.Secondary, PagePath.AmountYouSupply }
+                { OptionPath.Secondary, PagePath.WhatYouNeedToDo }
+                // { OptionPath.Secondary, PagePath.AmountYouSupply }
             },
             IsPageHeading = true,
             Questions = new List<Question>()

@@ -29,7 +29,7 @@ public class PlaceDrinksOnMarketTests
         // Act
         var nextPath = PageFinder.GetNextPath(page);
 
-        Assert.AreEqual(PagePath.AmountYouSupply, nextPath);
+        Assert.AreEqual(PagePath.WhatYouNeedToDo, nextPath);
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class PlaceDrinksOnMarketTests
         // Act
         var nextPath = PageFinder.GetNextPath(page);
 
-        Assert.AreEqual(PagePath.AmountYouSupply, nextPath);
+        Assert.AreEqual(PagePath.WhatYouNeedToDo, nextPath);
     }
 
     [TestMethod]
