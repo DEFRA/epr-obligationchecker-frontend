@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 public class AnalyticsOptions
 {
-    public const string ConfigSection = "GOOGLE_ANALYTICS";
+    public const string ConfigSection = "GoogleAnalytics";
 
     public string CookiePrefix { get; set; }
 
