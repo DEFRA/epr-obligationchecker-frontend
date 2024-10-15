@@ -39,9 +39,11 @@
                     {
                         <p class="govuk-body">@Localizer[alternateTitleSubContent]</p>
                     }
-                }
-
-                @using (Html.BeginRouteForm("GetNextPage", FormMethod.Post,new { @class="single-question-form" }))
+                }               
+                
+               
+                
+                @using (Html.BeginRouteForm("GetNextPage", FormMethod.Post, new { @class = "single-question-form" }))
                 {
                     
                     @if (Model.Page.FirstQuestion.QuestionType == QuestionType.CheckboxesNone)

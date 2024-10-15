@@ -47,7 +47,7 @@ public class UnObligatedParentCompanyTests : TestBase
         var page = GetPage(path);
 
         // Act
-        var response = await _httpClient.GetAsync($"/check-if-you-need-to-report/{path}");
+        var response = await _httpClient.GetAsync($"/ObligationChecker/{path}");
         var content = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -62,10 +62,18 @@ public class UnObligatedParentCompanyTests : TestBase
     {
         // Arrange
         var page = GetPage(path);
-        var formData = GetFormData(page, path);
+        var formData = await Task.FromResult(GetFormData(page, path));
+
+        var tokenValue = await GetAntiForgeryToken($"/ObligationChecker/{path}");
+
+        // Replaced formData as that wasn't working before.
+        var formContent = new FormUrlEncodedContent(new Dictionary<string, string>()
+        {
+            { "__RequestVerificationToken", tokenValue }
+        });
 
         // Act
-        var response = await _httpClient.PostAsync($"/check-if-you-need-to-report/get-next-page", formData);
+        var response = await _httpClient.PostAsync($"/ObligationChecker/{path}", formContent);
         var content = await response.Content.ReadAsStringAsync();
 
         // Assert

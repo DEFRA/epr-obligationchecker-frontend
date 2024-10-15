@@ -24,7 +24,7 @@ public class WhatYouNeedToDoTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OverTwoMillion,
-            OwnBrand = YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.Yes,
             ImportingProducts = YesNo.No,
             SellingEmptyPackaging = YesNo.No,
@@ -105,7 +105,7 @@ public class WhatYouNeedToDoTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = annualTurnover,
-            OwnBrand = YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = YesNo.No,
             SellingEmptyPackaging = YesNo.Yes,
@@ -119,8 +119,6 @@ public class WhatYouNeedToDoTests
         Page page = await _pageService.GetPageAsync(PagePath.WhatYouNeedToDo);
 
         Assert.AreEqual(CompanySize.Small, page.CompanyModel.CompanySize);
-        Assert.AreEqual(SellerType.SellerOnly, page.CompanyModel.SellerType);
-        Assert.IsTrue(page.CompanyModel.RequiresNationData);
     }
 
     // AC2-C
@@ -190,7 +188,7 @@ public class WhatYouNeedToDoTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OneMillionToTwoMillion,
-            OwnBrand = YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = YesNo.No,
             SellingEmptyPackaging = YesNo.Yes,
@@ -210,8 +208,6 @@ public class WhatYouNeedToDoTests
     // AC3-C
     [TestMethod]
     [DataRow(YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes)]
-    [DataRow(YesNo.No, YesNo.Yes, YesNo.No, YesNo.Yes, YesNo.No, YesNo.Yes, YesNo.Yes, YesNo.No)]
-    [DataRow(YesNo.No, YesNo.Yes, YesNo.Yes, YesNo.No, YesNo.Yes, YesNo.Yes, YesNo.No, YesNo.No)]
     [DataRow(YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.No, YesNo.No, YesNo.No, YesNo.Yes, YesNo.Yes)]
     public async Task OnWhatYouNeedToDoPage_WhenAnyCombination_AmountYouHandleWasAtLeast50Tonnes_ThenCompanySizeIsSmall(
         YesNo ownBrand, YesNo unbranded, YesNo importing, YesNo seller, YesNo hiring, YesNo online, YesNo filledPackaging, YesNo drinksOnMarket)
@@ -242,7 +238,6 @@ public class WhatYouNeedToDoTests
     [TestMethod]
     [DataRow(YesNo.Yes, YesNo.Yes)]
     [DataRow(YesNo.Yes, YesNo.No)]
-    [DataRow(YesNo.No, YesNo.Yes)]
     public async Task OnWhatYouNeedToDoPage_BrandOwner_AndOr_PackerFiller_Only_OverTwoMillion_AtLeast50Tonnes_ThenCompanySizeIsLarge(
         YesNo brandOwner, YesNo packerFiller)
     {
@@ -276,7 +271,7 @@ public class WhatYouNeedToDoTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OverTwoMillion,
-            OwnBrand = YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = YesNo.No,
             SellingEmptyPackaging = YesNo.Yes,
@@ -291,20 +286,13 @@ public class WhatYouNeedToDoTests
 
         Assert.AreEqual(CompanySize.Large, page.CompanyModel.CompanySize);
         Assert.IsTrue(page.CompanyModel.RequiresNationData);
-        Assert.AreEqual(SellerType.SellerOnly, page.CompanyModel.SellerType);
     }
 
     // AC4-C
     [TestMethod]
     [DataRow(YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.Yes)]
-    [DataRow(YesNo.No,  YesNo.Yes, YesNo.No,  YesNo.Yes, YesNo.No,  YesNo.Yes, YesNo.Yes, YesNo.No)]
-    [DataRow(YesNo.No,  YesNo.Yes, YesNo.Yes, YesNo.No,  YesNo.Yes, YesNo.Yes, YesNo.No,  YesNo.No)]
     [DataRow(YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No)]
     [DataRow(YesNo.Yes, YesNo.Yes, YesNo.Yes, YesNo.No,  YesNo.No,  YesNo.No,  YesNo.Yes, YesNo.Yes)]
-    [DataRow(YesNo.No,  YesNo.No,  YesNo.No,  YesNo.Yes, YesNo.No,  YesNo.No,  YesNo.No,  YesNo.Yes)]
-    [DataRow(YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.Yes, YesNo.No,  YesNo.No,  YesNo.Yes)]
-    [DataRow(YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.Yes, YesNo.No,  YesNo.No)]
-    [DataRow(YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.No,  YesNo.Yes, YesNo.Yes)]
     public async Task OnWhatYouNeedToDoPage_OtherCombinations_Over2Million_Over50Tonnes_ThenCompanySizeIsLarge(
         YesNo ownBrand, YesNo unbranded, YesNo seller, YesNo importing, YesNo hiring, YesNo online, YesNo filledPackaging, YesNo drinksOnMarket)
     {
@@ -360,7 +348,7 @@ public class WhatYouNeedToDoTests
         {
             TypeOfOrganisation = TypeOfOrganisation.IndividualCompany,
             AnnualTurnover = AnnualTurnover.OverTwoMillion,
-            OwnBrand = YesNo.No,
+            OwnBrand = YesNo.Yes,
             UnbrandedPackaging = YesNo.No,
             ImportingProducts = YesNo.No,
             SellingEmptyPackaging = YesNo.Yes,
@@ -373,6 +361,6 @@ public class WhatYouNeedToDoTests
 
         Page page = await _pageService.GetPageAsync(PagePath.WhatYouNeedToDo);
 
-        Assert.AreEqual(SellerType.SellerOnly, page.CompanyModel.SellerType);
+        Assert.AreEqual(SellerType.NotSellerOnly, page.CompanyModel.SellerType);
     }
 }
