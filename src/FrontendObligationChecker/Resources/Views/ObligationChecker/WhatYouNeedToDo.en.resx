@@ -1,58 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089
-        </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089
-        </value>
-    </resheader>
-    <data name="WhatYouNeedToDo.Title" xml:space="preserve">
-        <value>You will need to take action under the EPR</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentBanner" xml:space="preserve">
-        <value>You will need to report packaging data</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentPrint1" xml:space="preserve">
-        <value>You can</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentPrint2" xml:space="preserve">
-        <value>print or save this page as a PDF</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentHeading1" xml:space="preserve">
-        <value>What this means for your organisation</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
-       <value>Submit nation data</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
-       <value>You will need to submit nation data.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentNationDataParagraph2" xml:space="preserve">
-        <value>Nation data is information about which nation in the UK packaging is supplied in and which nation in the UK packaging is discarded in.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentNationDataParagraph3" xml:space="preserve">
-        <value>Nation data should show where in the UK you’ve supplied packaging to a person or business who’s gone on to discard it.</value>
-    </data>
-
-    <data name="WhatYouNeedToDo.SupplyingPackagingContent" xml:space="preserve">
-        <value>&lt;p class="govuk-body"&gt;Supplying packaging includes:&lt;/p&gt;
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WhatYouNeedToDo.Title" xml:space="preserve">
+    <value>You will need to take action under the EPR</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentBanner" xml:space="preserve">
+    <value>You will need to report packaging data</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentPrint1" xml:space="preserve">
+    <value>You can</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentPrint2" xml:space="preserve">
+    <value>print or save this page as a PDF</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading1" xml:space="preserve">
+    <value>What this means for your organisation</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
+    <value>Submit nation data</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
+    <value>You will need to submit nation data.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataParagraph2" xml:space="preserve">
+    <value>Nation data is information about which nation in the UK packaging is supplied in and which nation in the UK packaging is discarded in.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataParagraph3" xml:space="preserve">
+    <value>Nation data should show where in the UK you’ve supplied packaging to a person or business who’s gone on to discard it.</value>
+  </data>
+  <data name="WhatYouNeedToDo.SupplyingPackagingContent" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Supplying packaging includes:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
     &lt;li&gt;selling&lt;/li&gt;
     &lt;li&gt;hiring&lt;/li&gt;
@@ -60,66 +153,66 @@
     &lt;li&gt;gifting&lt;/li&gt;
 &lt;/ul&gt;
  </value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
-       <value>You'll need to submit your nation data for the 2023 calendar year by 1 December 2024.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
-        <value>What you should do next</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentHeading5" xml:space="preserve">
-        <value>What you told us</value>
-    </data>
-    <data name="WhatYouNeedToDo.OrganisationTypeAlternateRowTitle" xml:space="preserve">
-        <value>Organisation type</value>
-    </data>
-    <data name="WhatYouNeedToDo.AnnualTurnoverAlternateRowTitle" xml:space="preserve">
-        <value>Turnover</value>
-    </data>
-    <data name="WhatYouNeedToDo.OwnBrand.AlternateRowTitle" xml:space="preserve">
-        <value>Supply goods to the UK market under your own brand</value>
-    </data>
-    <data name="WhatYouNeedToDo.UnbrandedPackaging.AlternateRowTitle" xml:space="preserve">
-        <value>Place goods into packaging that's unbranded when sold</value>
-    </data>
-    <data name="WhatYouNeedToDo.ImportingProducts.AlternateRowTitle" xml:space="preserve">
-        <value>Importing products in packaging</value>
-    </data>
-    <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">
-        <value>Selling empty packaging to other businesses</value>
-    </data>
-    <data name="WhatYouNeedToDo.HiringLoaning.AlternateRowTitle" xml:space="preserve">
-        <value>Hiring or loaning out reusable packaging</value>
-    </data>
-    <data name="WhatYouNeedToDo.OnlineMarketplace.AlternateRowTitle" xml:space="preserve">
-        <value>Owning an online marketplace</value>
-    </data>
-    <data name="WhatYouNeedToDo.SupplyingFilledPackaging.AlternateRowTitle" xml:space="preserve">
-        <value>Supplying filled packaging to consumers</value>
-    </data>
-    <data name="WhatYouNeedToDo.AmountYouSupplyAlternateRowTitle" xml:space="preserve">
-        <value>Packaging amount</value>
-    </data>
-    <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
-        <value>Place drinks containers on the market</value>
-    </data>
-    <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
-        <value>Materials used for drinks containers</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContainerVolumeAlternateRowTitle" xml:space="preserve">
-        <value>Drinks containers between 50ml and 3l</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph1Small" xml:space="preserve">
-        <value>Under EPR for packaging, you're classed as a small organisation. This means your organisation will need to record and submit data about the packaging it handles and supplies.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
-        <value>As a subsidiary that is a small organisation your obligation may fall to the parent company of your group in circumstances where the group would be classed as a large producer.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
-        <value>Under EPR for packaging, you're classed as a large organisation. This means your organisation will need to record and submit data about the packaging it supplied or imported. You'll also need to pay fees.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">
-        <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
+    <value>You'll need to submit your nation data for the 2023 calendar year by 1 December 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
+    <value>What you should do next</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading5" xml:space="preserve">
+    <value>What you told us</value>
+  </data>
+  <data name="WhatYouNeedToDo.OrganisationTypeAlternateRowTitle" xml:space="preserve">
+    <value>Organisation type</value>
+  </data>
+  <data name="WhatYouNeedToDo.AnnualTurnoverAlternateRowTitle" xml:space="preserve">
+    <value>Turnover</value>
+  </data>
+  <data name="WhatYouNeedToDo.OwnBrand.AlternateRowTitle" xml:space="preserve">
+    <value>Supply goods to the UK market under your own brand</value>
+  </data>
+  <data name="WhatYouNeedToDo.UnbrandedPackaging.AlternateRowTitle" xml:space="preserve">
+    <value>Place goods into packaging that's unbranded when sold</value>
+  </data>
+  <data name="WhatYouNeedToDo.ImportingProducts.AlternateRowTitle" xml:space="preserve">
+    <value>Importing products in packaging</value>
+  </data>
+  <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">
+    <value>Selling empty packaging to other businesses</value>
+  </data>
+  <data name="WhatYouNeedToDo.HiringLoaning.AlternateRowTitle" xml:space="preserve">
+    <value>Hiring or loaning out reusable packaging</value>
+  </data>
+  <data name="WhatYouNeedToDo.OnlineMarketplace.AlternateRowTitle" xml:space="preserve">
+    <value>Owning an online marketplace</value>
+  </data>
+  <data name="WhatYouNeedToDo.SupplyingFilledPackaging.AlternateRowTitle" xml:space="preserve">
+    <value>Supplying filled packaging to consumers</value>
+  </data>
+  <data name="WhatYouNeedToDo.AmountYouSupplyAlternateRowTitle" xml:space="preserve">
+    <value>Packaging amount</value>
+  </data>
+  <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
+    <value>Place drinks containers on the market</value>
+  </data>
+  <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
+    <value>Materials used for drinks containers</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContainerVolumeAlternateRowTitle" xml:space="preserve">
+    <value>Drinks containers between 50ml and 3l</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1Small" xml:space="preserve">
+    <value>Under EPR for packaging, you're classed as a small organisation. This means your organisation will need to record and submit data about the packaging it handles and supplies.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
+    <value>As a subsidiary that is a small organisation your obligation may fall to the parent company of your group in circumstances where the group would be classed as a large producer.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
+    <value>Under EPR for packaging, you're classed as a large organisation. This means your organisation will need to record and submit data about the packaging it supplied or imported. You'll also need to pay fees.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
     &lt;li&gt;record data about empty packaging and packaged goods you handle and supply in the UK market from 1 January 2023&lt;/li&gt;
     &lt;li&gt;create an account and register your organisation by 1 April 2024&lt;/li&gt;
@@ -127,56 +220,56 @@
     &lt;li&gt;submit data about empty packaging and packaged goods you handled or supplied through the UK market throughout 2023&lt;/li&gt;
 &lt;/ul&gt;
  </value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
-        <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
     &lt;li&gt;record data about the empty packaging and packaged goods you supplied or imported to the UK market- check 'When to collect and report' to see when you need to do this&lt;/li&gt;
     &lt;li&gt;create an account and register your organisation from July 2023&lt;/li&gt;
     &lt;li&gt;pay a fee to the environmental regulator&lt;/li&gt;
     &lt;li&gt;submit data about empty packaging and packaged goods you supplied or imported through the UK market&lt;/li&gt;
 &lt;/ul&gt;</value>
-    </data>
-    <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
-        <value>When to collect and report</value>
-    </data>
-    <data name="WhatYouNeedToDo.WhenToCollectAndReportContent" xml:space="preserve">
-        <value>&lt;p class="govuk-body"&gt;
+  </data>
+  <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
+    <value>When to collect and report</value>
+  </data>
+  <data name="WhatYouNeedToDo.WhenToCollectAndReportContent" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;
             If you have all the required data recorded from 1 January 2023, you should report this data.
             &lt;/p&gt;
         &lt;p class="govuk-body"&gt;
             If you do not have all the required data recorded from 1 January, you must report all of your data from 1 March 2023. If you report data that covers a period starting from 1 March, this will be used to calculate a full year’s worth of data.
         &lt;/p&gt;</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentInset1Small" xml:space="preserve">
-        <value>You’ll need to submit your data by 1 April 2024.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentInset1Large" xml:space="preserve">
-        <value>For the period January to June 2023, report data by 1 October 2023.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentInset2Large" xml:space="preserve">
-        <value>For the period July to December 2023, report data by 1 April 2024.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
-        <value>For any packaging that you supply or import that is collected by local authorities from households or public bins, from April 2024 you must pay:</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">
-        <value>Meet your recycling obligations</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentUoList1A" xml:space="preserve">
-        <value>a waste management fee</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentUoList1B" xml:space="preserve">
-        <value>scheme administrator costs</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph4Large" xml:space="preserve">
-        <value>You must get packaging waste recycling notes (PRNs) or packaging waste export recycling notes (PERNs) in 2024.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph5Large" xml:space="preserve">
-        <value>We’ll let you know how many PRNs and PERNs you need to get. We’ll base this on your 2023 data.</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentDetailsPrnPerns" xml:space="preserve">
-        <value>   &lt;details class="govuk-details" data-module="govuk-details"&gt;
+  </data>
+  <data name="WhatYouNeedToDo.ContentInset1Small" xml:space="preserve">
+    <value>You’ll need to submit your data by 1 April 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentInset1Large" xml:space="preserve">
+    <value>For the period January to June 2023, report data by 1 October 2023.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentInset2Large" xml:space="preserve">
+    <value>For the period July to December 2023, report data by 1 April 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
+    <value>For any packaging that you supply or import that is collected by local authorities from households or public bins, from April 2024 you must pay:</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">
+    <value>Meet your recycling obligations</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentUoList1A" xml:space="preserve">
+    <value>a waste management fee</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentUoList1B" xml:space="preserve">
+    <value>scheme administrator costs</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph4Large" xml:space="preserve">
+    <value>You must get packaging waste recycling notes (PRNs) or packaging waste export recycling notes (PERNs) in 2024.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph5Large" xml:space="preserve">
+    <value>We’ll let you know how many PRNs and PERNs you need to get. We’ll base this on your 2023 data.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentDetailsPrnPerns" xml:space="preserve">
+    <value>   &lt;details class="govuk-details" data-module="govuk-details"&gt;
         &lt;summary class="govuk-details__summary"&gt;
         &lt;span class="govuk-details__summary-text"&gt;What are PRNs and PERNs?
 
@@ -188,9 +281,9 @@
         &lt;p class="govuk-body"&gt;By getting PRNs and PERNs, you work towards meeting your recycling obligations.&lt;/p&gt;
                     &lt;/div&gt;
             &lt;/details&gt;</value>
-    </data>
-    <data name="WhatYouNeedToDo.ContentParagraph2Seller" xml:space="preserve">
-        <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2Seller" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
     &lt;li&gt;record nation data from 1 January 2023&lt;/li&gt;
     &lt;li&gt;create an account and register your organisation from January 2024&lt;/li&gt;
@@ -198,11 +291,20 @@
     &lt;li&gt;submit your nation data&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/ul&gt;</value>
-    </data>
-    <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
-        <value>Collect data about the packaging you supplied through the UK market or imported into the UK.</value>
-    </data>
-    <data name="WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription" xml:space="preserve">
-        <value>Find out more about the data you'll need to collect (opens in a new tab)</value>
-    </data>
+  </data>
+  <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
+    <value>Collect data about the packaging you supplied through the UK market or imported into the UK.</value>
+  </data>
+  <data name="WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription" xml:space="preserve">
+    <value>Find out more about the data you'll need to collect (opens in a new tab)</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerSmall" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerLarge" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="WhatYouNeedToDo.TypeOfProducerText" xml:space="preserve">
+    <value>Type Of Producer</value>
+  </data>
 </root>

@@ -18,8 +18,32 @@ public class TestBase
         _httpClient = application.CreateClient();
     }
 
-    protected async Task<HttpResponseMessage> PostForm(string pagePath, FormUrlEncodedContent content)
+    protected async Task<HttpResponseMessage> PostForm(string pagePath, FormUrlEncodedContent existingContent)
     {
-        return await _httpClient.PostAsync($"/check-if-you-need-to-report/{pagePath}", content);
+        var token = await GetAntiForgeryToken($"/ObligationChecker/{pagePath}");
+
+        // Extract the existing key-value pairs
+        var keyValuePairs = new List<KeyValuePair<string, string>>(existingContent.ReadAsStringAsync().Result.Split('&').Select(pair =>
+        {
+            var parts = pair.Split('=');
+            return new KeyValuePair<string, string>(parts[0], parts[1]);
+        }));
+
+        // Add the new key-value pair
+        keyValuePairs.Add(new KeyValuePair<string, string>("__RequestVerificationToken", token));
+
+        var updatedContent = new FormUrlEncodedContent(keyValuePairs);
+
+        return await _httpClient.PostAsync($"/ObligationChecker/{pagePath}", updatedContent);
+    }
+
+    protected async Task<string> GetAntiForgeryToken(string path)
+    {
+        var initialResponse = await _httpClient.GetAsync(path);
+        initialResponse.EnsureSuccessStatusCode();
+
+        var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+        htmlDoc.LoadHtml(await initialResponse.Content.ReadAsStringAsync());
+        return htmlDoc.DocumentNode.SelectSingleNode("//input[@name='__RequestVerificationToken']").Attributes["value"].Value.ToString();
     }
 }

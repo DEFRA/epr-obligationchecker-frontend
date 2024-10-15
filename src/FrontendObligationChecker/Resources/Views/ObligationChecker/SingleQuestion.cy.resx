@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="question_option_no" xml:space="preserve">
+    <value>Nac ydw</value>
+  </data>
+  <data name="question_option_yes" xml:space="preserve">
+    <value>Oes</value>
+  </data>
+  <data name="SingleQuestion.AmountYouSupply.Header" xml:space="preserve">
+    <value>Dywedasoch wrthym eich bod yn:</value>
+  </data>
+  <data name="SingleQuestion.AmountYouSupply.QuestionTitle" xml:space="preserve">
+    <value>Faint o ddeunydd pacio i gyd wnaethoch chi ei gyflenwi neu ei fewnforio yn y ffyrdd hyn, yn 2022?</value>
+  </data>
+  <data name="SingleQuestion.AmountYouSupply.QuestionTitleSingular" xml:space="preserve">
+    <value>Faint o ddeunydd pacio i gyd wnaethoch chi ei gyflenwi neu ei fewnforio fel hyn, yn 2022?</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.AdditionalDescription1" xml:space="preserve">
+    <value>Dylai eich ateb gynnwys trosiant blynyddol y rhiant-gwmni a'r holl is-sefydliadau sy'n trin ac yn cyflenwi (creu, mewnforio, dosbarthu neu werthu) pecynnu.</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
+    <value>Cyfeiriwch at eich cyfrifon blynyddol diweddaraf.</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionError" xml:space="preserve">
+    <value>Dywedwch wrthym beth oedd trosiant blynyddol diwethaf eich sefydliad</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
+    <value>O dan £1 miliwn</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel2" xml:space="preserve">
+    <value>rhwng £1 miliwn a £2 filiwn</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel3" xml:space="preserve">
+    <value>£2 filiwn neu fwy</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.Title1" xml:space="preserve">
+    <value>Beth oedd trosiant blynyddol diwethaf eich grŵp?</value>
+  </data>
+  <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">
+    <value>Beth oedd trosiant blynyddol diwethaf eich sefydliad?</value>
+  </data>
+  <data name="SingleQuestion.ContainerVolume.QuestionDescription" xml:space="preserve">
+    <value>Mae hyn yn cynnwys cynwysyddion rhwng 50ml a 3l sy'n cael eu gwerthu mewn pecynnau lluosog.</value>
+  </data>
+  <data name="SingleQuestion.ContainerVolume.QuestionError" xml:space="preserve">
+    <value>Dywedwch a yw hyn yn cynnwys cynwysyddion rhwng 50ml a 3l sy'n cael eu gwerthu mewn pecynnau lluosog.</value>
+  </data>
+  <data name="SingleQuestion.ContainerVolume.Title" xml:space="preserve">
+    <value>A oes unrhyw un o'r cynwysyddion rhwng 50ml a 3l?</value>
+  </data>
+  <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
+    <value>llogi neu fenthyca deunydd pacio y gellir ei ailddefnyddio i sefydliadau yn y DU</value>
+  </data>
+  <data name="SingleQuestion.HiringLoaning.PackagingHireLoanDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae rhai sefydliadau'n llogi neu'n benthyca pecynnau y gellir eu hailddefnyddio, megis paledi pren, i sefydliadau eraill ar gyfer cludo neu ddiogelu nwyddau. Mae'r pecyn yn cael ei ddychwelyd ar ôl ei ddefnyddio a'i fenthyg eto.&lt;/p&gt;</value>
+  </data>
+  <data name="SingleQuestion.HiringLoaning.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych yn llogi neu’n rhoi benthyg deunydd pacio y gellir ei ailddefnyddio i sefydliadau yn y DU?</value>
+  </data>
+  <data name="SingleQuestion.HiringLoaning.QuestionTitle" xml:space="preserve">
+    <value>Ydych chi'n mewnforio deunydd pacio sy'n cynnwys nwyddau i'r DU i'w gyflenwi?</value>
+  </data>
+  <data name="SingleQuestion.HiringLoaning.Title" xml:space="preserve">
+    <value>Llogi neu fenthyg deunydd pacio y gellir ei ailddefnyddio</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
+    <value>mewnforio cynhyrchion mewn pecynnu</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.PackagingImportDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Byddwch yn cael eich dosbarthu fel sefydliad sy'n mewnforio deunydd pacio os ydych yn mewnforio cynhyrchion o'r tu allan i'r DU sydd mewn pecynnau ac yn mynd ymlaen i gyflenwi'r cynhyrchion hyn i farchnad y DU.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Byddwch hefyd yn cael eich dosbarthu fel sefydliad sy'n mewnforio deunydd pacio os byddwch yn taflu'r pecyn yn y DU cyn cyflenwi'r nwyddau.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Nid ydych yn cael eich ystyried yn sefydliad sy'n mewnforio cynhyrchion mewn pecynnau os ydych yn mewnforio deunydd pacio wedi'i lenwi sydd:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;wedi'i frandio, ac rydych chi wedi'i fewnforio ar ran perchennog brand sydd wedi'i sefydlu yn y DU&lt;/li&gt;
+        &lt;li&gt;heb frand, ac rydych yn mynd ymlaen i'w gyflenwi i sefydliad 'mawr' sy'n cymhwyso ei frand cyn ei gyflenwi&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p class="govuk-body"&gt;&lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;Darganfod beth sy'n cael ei ystyried yn sefydliad 'mawr' (yn agor mewn tab newydd)&lt;/a&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych yn mewnforio deunydd pacio sy'n cynnwys nwyddau i'r DU?</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.QuestionTitle" xml:space="preserve">
+    <value>Ydych chi'n mewnforio deunydd pacio sy'n cynnwys nwyddau i'r DU i'w gyflenwi?</value>
+  </data>
+  <data name="SingleQuestion.ImportingProducts.Title" xml:space="preserve">
+    <value>Mewnforio cynhyrchion mewn pecynnu</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.AluminiumCans" xml:space="preserve">
+    <value>Alwminiwm</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.GlassBottles" xml:space="preserve">
+    <value>Gwydr</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.None" xml:space="preserve">
+    <value>Dim un o'r uchod</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.PlasticBottles" xml:space="preserve">
+    <value>Plastig polyethylen terephthalate (PET).</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionDescription" xml:space="preserve">
+    <value>Dewiswch bob un sy'n berthnasol</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionError" xml:space="preserve">
+    <value>Dywedwch wrthym a ydych chi'n defnyddio unrhyw un o'r deunyddiau canlynol ar gyfer y cynwysyddion diodydd?</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionTitle" xml:space="preserve">
+    <value>Ydych chi'n defnyddio unrhyw un o'r deunyddiau canlynol ar gyfer y cynwysyddion diodydd?</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.SteelCans" xml:space="preserve">
+    <value>Dur</value>
+  </data>
+  <data name="SingleQuestion.MaterialsForDrinksContainers.Title" xml:space="preserve">
+    <value>Ydych chi'n defnyddio unrhyw un o'r deunyddiau canlynol ar gyfer y cynwysyddion diodydd?</value>
+  </data>
+  <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
+    <value>bod yn berchen ar farchnad ar-lein</value>
+  </data>
+  <data name="SingleQuestion.OnlineMarketplace.OnlineMarketplaceDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;O dan EPR ar gyfer pecynnu, dyma pan fyddwch yn gweithredu gwefan neu ap sy'n caniatáu i fusnesau nad ydynt yn dod o'r DU werthu eu nwyddau i'r DU.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Os yw'ch sefydliad yn berchen ar wefan neu ap sy'n gwerthu nwyddau gan sefydliadau yn y DU yn unig, nid yw hyn yn cael ei ddosbarthu fel bod yn berchen ar farchnad ar-lein.&lt;/p&gt;</value>
+  </data>
+  <data name="SingleQuestion.OnlineMarketplace.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych yn berchen ar farchnad ar-lein sy'n caniatáu i sefydliadau y tu allan i'r DU werthu cynhyrchion wedi'u pecynnu yn y DU?</value>
+  </data>
+  <data name="SingleQuestion.OnlineMarketplace.QuestionTitle" xml:space="preserve">
+    <value>A ydych chi’n berchen ar farchnad ar-lein sy’n caniatáu i sefydliadau nad ydynt yn perthyn i’r DU werthu cynhyrchion wedi’u pecynnu yn y DU?</value>
+  </data>
+  <data name="SingleQuestion.OnlineMarketplace.Title" xml:space="preserve">
+    <value>Bod yn berchen ar farchnad ar-lein</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
+    <value>cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.AnotherOrganisationTasks" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Rydych chi'n cyflenwi nwyddau o dan eich brand eich hun hyd yn oed os ydych chi'n talu neu'n trwyddedu cwmni arall i wneud unrhyw un o'r canlynol ar eich rhan:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;cynhyrchu nwyddau a fydd yn cael eu gwerthu o dan eich enw brand&lt;/li&gt;
+        &lt;li&gt;pecyn nwyddau a fydd yn cael eu gwerthu o dan eich enw brand&lt;/li&gt;
+        &lt;li&gt;rhoi eich nwyddau brand ar farchnad y DU&lt;/li&gt;
+        &lt;li&gt;mewnforio nwyddau i chi&lt;/li&gt;
+        &lt;/ul&gt;</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.BrandDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Dyma pryd mae nwyddau wedi'u pecynnu sydd wedi'u labelu â'ch brand yn cael eu cyflenwi i farchnad y DU.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Mae brand yn cynnwys unrhyw un o'r canlynol:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;enw&lt;/li&gt;
+        &lt;li&gt;nod masnach&lt;/li&gt;
+        &lt;li&gt;unrhyw farc gwahaniaethol&lt;/li&gt;
+        &lt;/ul&gt;</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych yn cyflenwi nwyddau i farchnad y DU mewn pecynnau cynradd, eilaidd neu gludo nwyddau o dan eich brand eich hun</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.QuestionTitle" xml:space="preserve">
+    <value>A ydych yn cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun?</value>
+  </data>
+  <data name="SingleQuestion.OwnBrand.Title" xml:space="preserve">
+    <value>Cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun</value>
+  </data>
+  <data name="SingleQuestion.PlaceDrinksOnMarket.Error" xml:space="preserve">
+    <value>Dywedwch wrthym a ydych yn rhoi diodydd ar y farchnad yng Nghymru, Lloegr neu Ogledd Iwerddon mewn cynwysyddion untro?</value>
+  </data>
+  <data name="SingleQuestion.PlaceDrinksOnMarket.ScotlandDetail" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;O fis Awst 2023, bydd yr Alban yn gweithredu Cynllun Dychwelyd Ernes.&lt;/p&gt;
+&lt;p class="govuk-body"&gt;Gall hyn effeithio ar sefydliadau sy’n rhoi diodydd ar y farchnad yn yr Alban.&lt;/p&gt;
+&lt;a href="https://www.sepa.org.uk/regulations/waste/deposit-return-scheme/producers/" class="govuk-link" target="_blank"&gt;Darganfod mwy am Gynllun Dychwelyd Ernes yr Alban (yn agor mewn tab newydd)&lt;/a&gt;</value>
+  </data>
+  <data name="SingleQuestion.PlaceDrinksOnMarket.ScotlandSummary" xml:space="preserve">
+    <value>Beth i'w wneud os rhowch ddiodydd ar y farchnad yn yr Alban</value>
+  </data>
+  <data name="SingleQuestion.PlaceDrinksOnMarket.Title" xml:space="preserve">
+    <value>A ydych yn rhoi diodydd ar y farchnad yng Nghymru, Lloegr neu Ogledd Iwerddon mewn cynwysyddion untro?</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
+    <value>cyflenwi deunydd pacio gwag i fusnesau sy'n dod o dan y trothwy uwch</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.HigherThresholdDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae hyn yn golygu gweithgynhyrchu neu fewnforio deunydd pacio gwag a'i gyflenwi i fusnes sydd &lt;span class="govuk-!-font-weight-bold"&gt;not&lt;/span&gt; cael ei ddosbarthu fel sefydliad 'mawr'.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Sefydliadau mawr: &lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;â throsiant blynyddol o £2 filiwn neu fwy&lt;/li&gt;
+        &lt;li&gt;cyflenwi neu fewnforio mwy na 50 tunnell o ddeunydd pacio gwag neu nwyddau wedi'u pecynnu&lt;/li&gt;
+        &lt;/ul&gt;</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych yn gwerthu deunydd pacio gwag i fusnesau sydd â throthwy uwch?</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.QuestionTitle" xml:space="preserve">
+    <value>A ydych yn gwerthu deunydd pacio gwag i fusnesau sy’n dod o dan y trothwy uwch?</value>
+  </data>
+  <data name="SingleQuestion.SellingEmptyPackaging.Title" xml:space="preserve">
+    <value>Cyflenwi deunydd pacio gwag</value>
+  </data>
+  <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
+    <value>cyflenwi pecynnau wedi'u llenwi i gwsmeriaid unigol</value>
+  </data>
+  <data name="SingleQuestion.SupplyingFilledPackaging.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych yn cyflenwi deunydd pacio wedi'i lenwi i gwsmeriaid unigol?</value>
+  </data>
+  <data name="SingleQuestion.SupplyingFilledPackaging.QuestionTitle" xml:space="preserve">
+    <value>Ydych chi'n cyflenwi deunydd pacio wedi'i lenwi i gwsmeriaid unigol?</value>
+  </data>
+  <data name="SingleQuestion.SupplyingFilledPackaging.SupplierConsumerDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Mae hyn yn cyfeirio at unrhyw sefydliadau sy'n cyflenwi pecynnau wedi'u llenwi yn uniongyrchol i gwsmeriaid unigol yn y DU, lle mai nhw yw defnyddiwr terfynol y pecyn.&lt;/p&gt;
+            &lt;p class="govuk-body"&gt;Nid yw'n cyfeirio at becynnu wedi'i lenwi a gyflenwir i fusnesau.&lt;/p&gt;</value>
+  </data>
+  <data name="SingleQuestion.SupplyingFilledPackaging.Title" xml:space="preserve">
+    <value>Cyflenwi deunydd pacio wedi'i lenwi i gwsmeriaid unigol</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.Detail" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Ar gyfer rhiant-gwmnïau a'u his-gwmnïau, mae yna wahanol ffyrdd y gallwch gydymffurfio ag EPR ar gyfer pecynnu. Gallwch gofrestru fel:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;grŵp cyfan (yn yr achos hwn, mae’r rhiant grŵp yn cydymffurfio ag EPR ar gyfer pecynnu ar ran pob is-gwmni o fewn y grŵp)&lt;/li&gt;
+    &lt;li&gt;is-gwmnïau unigol (yn yr achos hwn, mae’r is-gwmnïau sy’n bodloni’r gofynion trosiant a thunelledd yn cydymffurfio ag EPR ar gyfer pecynnu’n annibynnol)&lt;/li&gt;
+    &lt;li&gt;rhiant-gwmni ar gyfer rhan o’r grŵp (dyma lle mae’r rhiant-gwmni yn cofrestru i gydymffurfio ag EPR ar gyfer pecynnu ar ran rhai, ond nid pob un o’i is-gwmnïau)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="govuk-body"&gt;Dylech gofrestru fel rhiant-gwmni ar gyfer rhan o'r grŵp os nad yw rhai o'ch is-gwmnïau yn bodloni'r gofynion trosiant a thunelledd yn eu rhinwedd eu hunain, ond eu bod yn bodloni'r gofynion o'u cyfuno. Yn yr achos hwn, bydd y rhiant-gwmni yn cydymffurfio ag EPR ar gyfer pecynnu ar ran yr is-gwmnïau cyfun.&lt;/p&gt;</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionDescription" xml:space="preserve">
+    <value>Mae rhiant-gwmnïau (a elwir weithiau yn gwmni daliannol) yn berchen ar grwpiau. Is-gwmnïau yw'r sefydliadau ar wahân sy'n ffurfio grŵp.</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionError" xml:space="preserve">
+    <value>Dywedwch wrthym pa fath o sefydliad ydych chi</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
+    <value>Rhiant-gwmni</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
+    <value>Is-gwmni</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
+    <value>Cwmni unigol</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.Summary" xml:space="preserve">
+    <value>Sut mae EPR ar gyfer pecynnu yn effeithio ar riant-gwmnïau ac is-gwmnïau</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.Title" xml:space="preserve">
+    <value>Pa fath o sefydliad ydych chi?</value>
+  </data>
+  <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
+    <value>gosod nwyddau mewn pecynnau sydd heb eu brandio pan gaiff ei gyflenwi</value>
+  </data>
+  <data name="SingleQuestion.UnbrandedPackaging.PlacingGoodsDescriptions" xml:space="preserve">
+    <value>&lt;p class="govuk-body"&gt;Dyma pan fyddwch chi'n gosod nwyddau mewn pecynnau a'r pecynnu hwnnw heb frand pan gaiff ei gyflenwi. Gallai hyn fod yn nwyddau y gwnaethoch eu pecynnu ar gyfer eich sefydliad eich hun neu ar gyfer sefydliad arall.&lt;/p&gt;</value>
+  </data>
+  <data name="SingleQuestion.UnbrandedPackaging.QuestionError" xml:space="preserve">
+    <value>Dewiswch ie os ydych chi'n gosod nwyddau mewn pecynnau heb frand</value>
+  </data>
+  <data name="SingleQuestion.UnbrandedPackaging.QuestionTitle" xml:space="preserve">
+    <value>Ydych chi'n gosod nwyddau mewn pecynnau sydd heb eu brandio pan gaiff eu cyflenwi?</value>
+  </data>
+  <data name="SingleQuestion.UnbrandedPackaging.Title" xml:space="preserve">
+    <value>Rhoi nwyddau mewn deunydd pacio sydd heb ei frandio pan gaiff ei gyflenwi</value>
+  </data>
+  <data name="SingleQuestion.YourPackagingActivities" xml:space="preserve">
+    <value>Eich gweithgareddau pecynnu</value>
+  </data>
+  <data name="SingleQuestion.YouToldUsHeader" xml:space="preserve">
+    <value>Dywedasoch wrthym eich bod yn:</value>
+  </data>
+</root>

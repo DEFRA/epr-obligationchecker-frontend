@@ -117,10 +117,29 @@
                     {
                         RenderAnswers(groupedPages.ToArray());
                     }
-                </div>
-                <p class="govuk-body">
+                </div>                
+
+                <dl class="govuk-summary-list govuk-!-margin-bottom-0">
+                    <dt class="govuk-summary-list__key">
+                        @Localizer["WhatYouNeedToDo.TypeOfProducerText"]
+                    </dt>
+
+                    @if (Model.Page.CompanyModel.CompanySize == CompanySize.Large)
+                    {
+                        <dd class="govuk-summary-list__value">@Localizer["WhatYouNeedToDo.TypeOfProducerLarge"]</dd>
+                    }
+                    else
+                    {
+                        <dd class="govuk-summary-list__value">@Localizer["WhatYouNeedToDo.TypeOfProducerSmall"]</dd>
+                    }
+                </dl>
+
+                <dl class="govuk-summary-list govuk-!-margin-bottom-0"><div class="govuk-summary-list__row">&nbsp;</div></dl>
+
+                <p class="govuk-body govuk-!-margin-top-5">
                     @SharedLocalizer["Disclaimer"]
                 </p>
+
             </div>
         </div>
     </main>
@@ -184,10 +203,9 @@
                             }
                         </ul>
                     }
-                </dd>
-            </div>
+                </dd> 
+            </div>            
         </dl>
-
     }
 }
 

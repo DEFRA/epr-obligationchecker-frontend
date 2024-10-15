@@ -10,7 +10,7 @@ public class TypeOfOrganisationTests : TestBase
     [TestMethod]
     public async Task OnTypeOfOrganisationPage_WhenNoSelectionWasMade_ThenShowThereIsAProblemText()
     {
-        var response = await _httpClient.GetAsync($"/check-if-you-need-to-report/{PagePath.TypeOfOrganisation}");
+        var response = await _httpClient.GetAsync($"/ObligationChecker/{PagePath.TypeOfOrganisation}");
         var content = await response.Content.ReadAsStringAsync();
 
         response.Should().BeSuccessful();
@@ -21,11 +21,16 @@ public class TypeOfOrganisationTests : TestBase
     [TestMethod]
     public async Task OnTypeOfOrganisationPage_WhenEmptyFormWasSubmitted_ThenShowThereIsAProblemText()
     {
-        var emptyData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>());
+        var tokenValue = await GetAntiForgeryToken($"/ObligationChecker/{PagePath.TypeOfOrganisation}");
 
-        var response = await _httpClient.PostAsync($"/check-if-you-need-to-report/{PagePath.TypeOfOrganisation}", emptyData);
+        var response = await _httpClient.PostAsync(
+        $"/ObligationChecker/{PagePath.TypeOfOrganisation}",
+        new FormUrlEncodedContent(new Dictionary<string, string>()
+        {
+            { "__RequestVerificationToken", tokenValue }
+        }));
+
         var content = await response.Content.ReadAsStringAsync();
-
         response.Should().BeSuccessful();
         content.Should().Contain("There is a problem");
     }
@@ -33,12 +38,15 @@ public class TypeOfOrganisationTests : TestBase
     [TestMethod]
     public async Task OnTypeOfOrganisationPage_WhenASelectionWasMade_ThenTheNextPageIsAnnualTurnover()
     {
+        var tokenValue = await GetAntiForgeryToken($"/ObligationChecker/{PagePath.TypeOfOrganisation}");
+
         var response = await _httpClient.PostAsync(
-            $"/check-if-you-need-to-report/{PagePath.TypeOfOrganisation}",
-            new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
-            {
-                new(QuestionKey.TypeOfOrganisation, "parent")
-            }));
+        $"/ObligationChecker/{PagePath.TypeOfOrganisation}",
+        new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
+        {
+            new ("__RequestVerificationToken", tokenValue),
+            new(QuestionKey.TypeOfOrganisation, "parent")
+        }));
 
         var content = await response.Content.ReadAsStringAsync();
 

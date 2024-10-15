@@ -117,45 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AmountYouSupply.Title" xml:space="preserve">
-    <value>The amount of packaging you supply or import</value>
-  </data>
-  <data name="AmountYouSupply.SingleActivityQuestionTitle" xml:space="preserve">
-    <value>How much packaging in total did you supply or import in this way, in 2022?</value>
-  </data>
-  <data name="AmountYouSupply.MultipleActivitiesQuestionTitle" xml:space="preserve">
-    <value>How much packaging in total did you supply or import in these ways, in 2022?</value>
-  </data>
-  <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
-    <value>Under 25 tonnes</value>
-  </data>
   <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
-    <value>25 tonnes to 50 tonnes</value>
+    <value>25 tunnell i 50 tunnell</value>
   </data>
   <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
-    <value>More than 50 tonnes</value>
+    <value>Mwy na 50 tunnell</value>
+  </data>
+  <data name="AmountYouSupply.Description" xml:space="preserve">
+    <value>Dylech gyfrifo cyfanswm y deunydd pacio a drafodwyd neu a gyflenwir yn y ffyrdd hyn ar draws eich sefydliad a'i is-gwmnïau.</value>
+  </data>
+  <data name="AmountYouSupply.DescriptionAlternate" xml:space="preserve">
+    <value>Dylech gyfrifo cyfanswm y deunydd pacio a drafodwyd neu a gyflenwir yn y modd hwn ar draws eich sefydliad a'i is-gwmnïau.</value>
+  </data>
+  <data name="AmountYouSupply.DrinksParagraph" xml:space="preserve">
+    <value>Dywedasoch wrthym hefyd eich bod yn gosod cynwysyddion diodydd untro ar y farchnad yng Nghymru, Lloegr neu Ogledd Iwerddon. Dylech gynnwys y pecyn hwn yng nghyfanswm eich tunelledd.</value>
+  </data>
+  <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
+    <value>Mae’n bosibl y bydd rhai o’r ffyrdd rydych chi’n cyflenwi neu’n mewnforio deunydd pacio yn golygu bod rhwymedigaeth gyfreithiol arnoch o dan EPR am becynnu. Mae’r rhain yn cynnwys:</value>
+  </data>
+  <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
+    <value>Dywedwch wrthym faint o ddeunydd pacio y gwnaethoch ei gyflenwi neu ei fewnforio yn y ffyrdd hyn, yn 2022</value>
+  </data>
+  <data name="AmountYouSupply.MultipleActivitiesQuestionTitle" xml:space="preserve">
+    <value>Faint o ddeunydd pacio i gyd wnaethoch chi ei gyflenwi neu ei fewnforio yn y ffyrdd hyn, yn 2022?</value>
   </data>
   <data name="AmountYouSupply.SingleActivityParagraph" xml:space="preserve">
     <value>Whether you're obligated under EPR for packaging depends on how much packaging you supplied or imported when you:</value>
   </data>
-  <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
-    <value>Some of the ways you supply or import packaging may make you legally obligated under EPR for packaging. These include:
-        </value>
-  </data>
-  <data name="AmountYouSupply.Description" xml:space="preserve">
-    <value>You should calculate the total amount of packaging handled or supplied in these ways across your organisation and its subsidiaries.</value>
-  </data>
-  <data name="AmountYouSupply.DescriptionAlternate" xml:space="preserve">
-    <value>You should calculate the total amount of packaging handled or supplied in this way across your organisation and its subsidiaries.</value>
-  </data>
-  <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
-    <value>Tell us how much packaging in total did you supply or import in these ways, in 2022</value>
-  </data>
   <data name="AmountYouSupply.SingleActivityQuestionError" xml:space="preserve">
-    <value>Tell us how much packaging in total did you supply or import in this way, in 2022</value>
+    <value>Dywedwch wrthym faint o ddeunydd pacio y gwnaethoch ei gyflenwi neu ei fewnforio fel hyn, yn 2022</value>
   </data>
-  <data name="AmountYouSupply.DrinksParagraph" xml:space="preserve">
-    <value>You also told us that you place single-use drinks containers on the market in England, Wales or Northern Ireland. You should include this packaging in your total tonnage.
-        </value>
+  <data name="AmountYouSupply.SingleActivityQuestionTitle" xml:space="preserve">
+    <value>Faint o ddeunydd pacio i gyd wnaethoch chi ei gyflenwi neu ei fewnforio fel hyn, yn 2022?</value>
+  </data>
+  <data name="AmountYouSupply.Title" xml:space="preserve">
+    <value>Faint o becynnu rydych chi'n ei gyflenwi neu'n ei fewnforio</value>
+  </data>
+  <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
+    <value>O dan 25 tunnell</value>
   </data>
 </root>
