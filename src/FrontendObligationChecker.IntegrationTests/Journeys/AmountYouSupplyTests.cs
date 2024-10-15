@@ -10,7 +10,7 @@ namespace FrontendObligationChecker.IntegrationTests.Journeys;
 [TestClass]
 public class AmountYouSupplyTests : TestBase
 {
-    // -- TODO -- Will revisit this.
+    // -- TODO -- Rafactor this.
 
     /*
     [TestMethod]
@@ -37,7 +37,7 @@ public class AmountYouSupplyTests : TestBase
     }
     */
 
-    // -- TODO -- Will revisit this.
+    // -- TODO -- Rafactor this.
     /*
     [TestMethod]
     public async Task OnAmountYouSupplyPage_WhenMultipleActivitiesWereSelected_ThenShowPluralText()

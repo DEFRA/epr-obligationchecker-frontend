@@ -11,7 +11,7 @@ namespace FrontendObligationChecker.IntegrationTests.Journeys;
 [TestClass]
 public class ContentUpdateTicket171354Tests : TestBase
 {
-    // -- TODO -- Will revisit this.
+    // -- TODO -- Rafactor this.
 
     /*
     [TestMethod]
@@ -27,7 +27,7 @@ public class ContentUpdateTicket171354Tests : TestBase
     }
     */
 
-    // -- TODO -- Will revisit this.
+    // -- TODO -- Rafactor this.
 
     /*
     [TestMethod]
