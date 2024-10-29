@@ -68,7 +68,7 @@ public class Page
         {
             return PreviousPage switch
             {
-                null => null,
+                null => _additionalDescription,
                 _ => AdditionalDescriptions.FirstOrDefault(x => x.Key == PreviousPage.Next().Key).Value
             };
         }
@@ -77,7 +77,7 @@ public class Page
         // value could changed depending on answers selected from a previous page.
         set
         {
-            _additionalDescription = value;
+           _additionalDescription = value;
         }
     }
 
