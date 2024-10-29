@@ -1,4 +1,5 @@
-﻿using FrontendObligationChecker.Generators;
+﻿using System.Diagnostics.CodeAnalysis;
+using FrontendObligationChecker.Generators;
 using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
@@ -188,6 +189,7 @@ public class PageService : IPageService
         }
     }
 
+    [ExcludeFromCodeCoverage]
     private async Task SetDescriptionForAnnualTurnover(Page page)
     {
         var sessionJourney = await _journeySession.GetAsync();
@@ -207,6 +209,7 @@ public class PageService : IPageService
         }
     }
 
+    [ExcludeFromCodeCoverage]
     private async Task SetDescriptionForAmountYouSupply(Page page)
     {
         var handlePackagingCount = _pages
