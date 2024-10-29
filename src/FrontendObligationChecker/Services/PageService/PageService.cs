@@ -184,24 +184,7 @@ public class PageService : IPageService
 
         if (page.Path == PagePath.AmountYouSupply)
         {
-            var handlePackagingCount = _pages
-                                            .Where(x => PagePath.IsActivityPagePath(x.Path))
-                                            .SelectMany(x => x.Questions)
-                                            .Count(x => x.SelectedOption is { Next: OptionPath.Primary });
-
-            if (handlePackagingCount > 0)
-            {
-                page.FirstQuestion.Title = handlePackagingCount > 1
-                    ? "SingleQuestion.AmountYouSupply.QuestionTitle"
-                    : "SingleQuestion.AmountYouSupply.QuestionTitleSingular";
-
-                if (page.AssociationType == AssociationType.Parent)
-                {
-                    page.FirstQuestion.AlternateDescription = handlePackagingCount > 1
-                        ? "AmountYouSupply.Description"
-                        : "AmountYouSupply.DescriptionAlternate";
-                }
-            }
+            SetDescriptionForAmountYouSupply(page);
         }
     }
 
@@ -221,6 +204,28 @@ public class PageService : IPageService
                 "individual" => null,
                 _ => page.AdditionalDescription
             };
+        }
+    }
+
+    private async Task SetDescriptionForAmountYouSupply(Page page)
+    {
+        var handlePackagingCount = _pages
+                                        .Where(x => PagePath.IsActivityPagePath(x.Path))
+                                        .SelectMany(x => x.Questions)
+                                        .Count(x => x.SelectedOption is { Next: OptionPath.Primary });
+
+        if (handlePackagingCount > 0)
+        {
+            page.FirstQuestion.Title = handlePackagingCount > 1
+                ? "SingleQuestion.AmountYouSupply.QuestionTitle"
+                : "SingleQuestion.AmountYouSupply.QuestionTitleSingular";
+
+            if (page.AssociationType == AssociationType.Parent)
+            {
+                page.FirstQuestion.AlternateDescription = handlePackagingCount > 1
+                    ? "AmountYouSupply.Description"
+                    : "AmountYouSupply.DescriptionAlternate";
+            }
         }
     }
 
