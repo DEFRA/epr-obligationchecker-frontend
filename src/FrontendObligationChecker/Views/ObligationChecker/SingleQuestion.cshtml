@@ -29,7 +29,7 @@
 
                     <p class="govuk-body">@Localizer[Model.Page.GetAlternateTitleFirstParagraph() ?? "SingleQuestion.YouToldUsHeader"]</p>
 
-                    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+                    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-5">
                         @foreach (var alternateTitle in Model.Page.GetAlternateTitles())
                         {
                             <li>@Localizer[alternateTitle].Value</li>

@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AmountYouSupply.Title" xml:space="preserve">
-    <value>The amount of packaging you supply or import</value>
+    <value>How much packaging in total do you handle and supply?</value>
   </data>
   <data name="AmountYouSupply.SingleActivityQuestionTitle" xml:space="preserve">
-    <value>How much packaging in total did you supply or import in this way, in 2022?</value>
+    <value />
   </data>
   <data name="AmountYouSupply.MultipleActivitiesQuestionTitle" xml:space="preserve">
-    <value>How much packaging in total did you supply or import in these ways, in 2022?</value>
+    <value />
   </data>
   <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
     <value>Under 25 tonnes</value>
@@ -139,14 +139,13 @@
     <value>Whether you're obligated under EPR for packaging depends on how much packaging you supplied or imported when you:</value>
   </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
-    <value>Some of the ways you supply or import packaging may make you legally obligated under EPR for packaging. These include:
-        </value>
+    <value />
   </data>
   <data name="AmountYouSupply.Description" xml:space="preserve">
-    <value>You should calculate the total amount of packaging handled or supplied in these ways across your organisation and its subsidiaries.</value>
+    <value />
   </data>
   <data name="AmountYouSupply.DescriptionAlternate" xml:space="preserve">
-    <value>You should calculate the total amount of packaging handled or supplied in this way across your organisation and its subsidiaries.</value>
+    <value />
   </data>
   <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
     <value>Tell us how much packaging in total did you supply or import in these ways, in 2022</value>

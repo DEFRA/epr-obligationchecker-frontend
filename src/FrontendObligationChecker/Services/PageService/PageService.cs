@@ -175,24 +175,46 @@ public class PageService : IPageService
 
     private async Task SetAlternateDescriptionsAsync(Page page)
     {
-        if (page.Path != PagePath.AmountYouSupply) return;
+        if (page.Path != PagePath.AmountYouSupply && page.Path != PagePath.AnnualTurnover) return;
 
-        var handlePackagingCount = _pages
-                                        .Where(x => PagePath.IsActivityPagePath(x.Path))
-                                        .SelectMany(x => x.Questions)
-                                        .Count(x => x.SelectedOption is { Next: OptionPath.Primary });
-
-        if (handlePackagingCount > 0)
+        if (page.Path == PagePath.AnnualTurnover)
         {
-            page.FirstQuestion.Title = handlePackagingCount > 1
-                ? "SingleQuestion.AmountYouSupply.QuestionTitle"
-                : "SingleQuestion.AmountYouSupply.QuestionTitleSingular";
+            var sessionJourney = await _journeySession.GetAsync();
+            var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
 
-            if (page.AssociationType == AssociationType.Parent)
+            if (sessionPage != null)
             {
-                page.FirstQuestion.AlternateDescription = handlePackagingCount > 1
-                    ? "AmountYouSupply.Description"
-                    : "AmountYouSupply.DescriptionAlternate";
+                var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
+
+                page.AdditionalDescription = answer switch
+                {
+                    "parent" => page.AdditionalDescription,
+                    "subsidary" => null,
+                    "individual" => null,
+                    _ => page.AdditionalDescription
+                };
+            }
+        }
+
+        if (page.Path == PagePath.AmountYouSupply)
+        {
+            var handlePackagingCount = _pages
+                                            .Where(x => PagePath.IsActivityPagePath(x.Path))
+                                            .SelectMany(x => x.Questions)
+                                            .Count(x => x.SelectedOption is { Next: OptionPath.Primary });
+
+            if (handlePackagingCount > 0)
+            {
+                page.FirstQuestion.Title = handlePackagingCount > 1
+                    ? "SingleQuestion.AmountYouSupply.QuestionTitle"
+                    : "SingleQuestion.AmountYouSupply.QuestionTitleSingular";
+
+                if (page.AssociationType == AssociationType.Parent)
+                {
+                    page.FirstQuestion.AlternateDescription = handlePackagingCount > 1
+                        ? "AmountYouSupply.Description"
+                        : "AmountYouSupply.DescriptionAlternate";
+                }
             }
         }
     }
@@ -302,6 +324,6 @@ public class PageService : IPageService
 
         companyModel.RequiresNationData =
             amountOfPackaging?.Value != amountOfPackagingNonObligated
-            && selectedOptions.Exists(x => x.Value == YesNo.Yes);
+            && selectedOptions.Exists(x => x != null && x.Value == YesNo.Yes);
     }
 }

@@ -237,7 +237,6 @@ public static class PageGenerator
                     OptionPath.Primary, PagePath.ContainerVolume
                 },
                 {
-                    // OptionPath.Secondary, PagePath.AmountYouSupply
                     OptionPath.Secondary, PagePath.WhatYouNeedToDo
                 }
             },
@@ -419,7 +418,7 @@ public static class PageGenerator
             Paths = new Dictionary<OptionPath, string>()
             {
                 { OptionPath.Primary, nextPath },
-                { OptionPath.Secondary, nextPath } // Page path was previously set to no-action-needed i.e. PagePath.NoActionNeeded.
+                { OptionPath.Secondary, nextPath }
             },
             IsPageHeading = false,
             Questions = new List<Question>()

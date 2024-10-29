@@ -26,6 +26,8 @@ public class AmountYouSupplyTests : TestBase
         await PostForm(PagePath.OnlineMarketplace, new PageForm(QuestionKey.OnlineMarketplace, YesNo.No).FormUrlEncodedContent);
         await PostForm(PagePath.SupplyingFilledPackaging, new PageForm(QuestionKey.SellingEmptyPackaging, YesNo.No).FormUrlEncodedContent);
 
+        // await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
+
         var redirectToAmountYouSupply = await PostForm(PagePath.PlaceDrinksOnMarket, new PageForm(QuestionKey.SingleUseContainersOnMarket, YesNo.No).FormUrlEncodedContent);
 
         var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync();
