@@ -118,63 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LargeProducerRegister.Title" xml:space="preserve">
-    <value>Rhestr gyhoeddus o gynhyrchwyr mawr sy’n rhan o’r gwasanaeth ‘rhoi gwybod am ddata pecynwaith’</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.BeforeYouStart" xml:space="preserve">
-    <value>Cyn i chi ddechrau, </value>
+    <value />
   </data>
   <data name="LargeProducerRegister.FindOutWhatThisLinkIsForLink" xml:space="preserve">
-    <value>dysgwch beth yw pwrpas y rhestr hon a sut i’w defnyddio</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.PublicRegisterPostLink" xml:space="preserve">
-    <value>.</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.ForAnythingBeforeReportingYear" xml:space="preserve">
-    <value>Ar gyfer unrhyw beth cyn blwyddyn adrodd 2023, defnyddiwch y </value>
+    <value />
   </data>
   <data name="LargeProducerRegister.WhoIsAffectedPostLink" xml:space="preserve">
-    <value>.</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.PublicRegisterOfRegisteredProducersLink" xml:space="preserve">
-    <value>Gofrestr Gyhoeddus o Gynhyrchwyr Cofrestredig ar y Gronfa Ddata Genedlaethol ar gyfer Gwastraff Pecynwaith (NPWD)</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.ListOfLargeProducers" xml:space="preserve">
-    <value>Rhestr o gynhyrchwyr mawr - llwythwch y ffeil CSV i lawr</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.TheInformationIsInCsvFiles" xml:space="preserve">
-    <value>Mae’r wybodaeth yn y ffeil CSV hon yn berthnasol i bob gwlad – Cymru, Lloegr, yr Alban a Gogledd Iwerddon</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.EnglandLink" xml:space="preserve">
-    <value>Asiantaeth yr Amgylchedd (Lloegr) (CSV, {0})</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.NorthernIrelandLink" xml:space="preserve">
-    <value>Asiantaeth Amgylchedd Gogledd Iwerddon (CSV, {0})</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.ScotlandLink" xml:space="preserve">
-    <value>Asiantaeth Diogelu Amgylchedd yr Alban (CSV, {0})</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.WalesLink" xml:space="preserve">
-    <value>Cyfoeth Naturiol Cymru (CSV, {0})</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.ThisInformationIsUpdated" xml:space="preserve">
-    <value>Mae’r wybodaeth hon yn cael ei diweddaru bob dydd.</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.AllFourRegulatorsLink" xml:space="preserve">
-    <value>Pob un o’r pedwar rheoleiddiwr (CSV, {0})</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.Disclaimer" xml:space="preserve">
-    <value>Ymwadiad</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.TheListsShowTheInformation" xml:space="preserve">
-    <value>Mae’r rhestr yn dangos yr wybodaeth mae cynhyrchwyr wedi’i chyflwyno i’r gwasanaeth ‘rhoi gwybod am ddata pecynwaith’. Mae hyn yn golygu y bydd gwallau’n ymddangos yma os bydd cynhyrchydd wedi cyflwyno gwallau.</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.SomeFieldsMayBeBlank" xml:space="preserve">
-    <value>Mae'n bosibl y bydd rhai meysydd yn wag. Efallai am nad ydynt yn berthnasol i’r cynhyrchydd dan sylw.</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.IfYoureUnsureAboutAnything" xml:space="preserve">
-    <value>Os nad ydych chi’n siŵr am unrhyw beth, cysylltwch â’r cynhyrchydd yn uniongyrchol.</value>
+    <value />
   </data>
   <data name="LargeProducerRegister.ListOfLargeProducersFile" xml:space="preserve">
-    <value>Rhestr_o_gynhyrchwyr_mawr_{0}_{1:dd}_{1:MMMM}_{1:yyyy} (CSV {2})</value>
+    <value />
   </data>
 </root>

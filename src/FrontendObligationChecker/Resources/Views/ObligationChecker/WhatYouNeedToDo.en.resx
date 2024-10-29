@@ -176,16 +176,16 @@
     <value>Place goods into packaging that's unbranded when sold</value>
   </data>
   <data name="WhatYouNeedToDo.ImportingProducts.AlternateRowTitle" xml:space="preserve">
-    <value>Importing products in packaging</value>
+    <value>Do you import packaged goods to supply to the UK market?</value>
   </data>
   <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">
     <value>Selling empty packaging to other businesses</value>
   </data>
   <data name="WhatYouNeedToDo.HiringLoaning.AlternateRowTitle" xml:space="preserve">
-    <value>Hiring or loaning out reusable packaging</value>
+    <value>Do you hire or loan out reusable packaging to UK organisations?</value>
   </data>
   <data name="WhatYouNeedToDo.OnlineMarketplace.AlternateRowTitle" xml:space="preserve">
-    <value>Owning an online marketplace</value>
+    <value>Do you own an online maketplace allowing non-UK companies to sell packaged goods in the UK?</value>
   </data>
   <data name="WhatYouNeedToDo.SupplyingFilledPackaging.AlternateRowTitle" xml:space="preserve">
     <value>Supplying filled packaging to consumers</value>

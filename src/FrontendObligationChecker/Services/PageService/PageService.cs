@@ -1,4 +1,5 @@
-﻿using FrontendObligationChecker.Generators;
+﻿using System.Diagnostics.CodeAnalysis;
+using FrontendObligationChecker.Generators;
 using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
@@ -175,8 +176,42 @@ public class PageService : IPageService
 
     private async Task SetAlternateDescriptionsAsync(Page page)
     {
-        if (page.Path != PagePath.AmountYouSupply) return;
+        if (page.Path != PagePath.AmountYouSupply && page.Path != PagePath.AnnualTurnover) return;
 
+        if (page.Path == PagePath.AnnualTurnover)
+        {
+            SetDescriptionForAnnualTurnover(page);
+        }
+
+        if (page.Path == PagePath.AmountYouSupply)
+        {
+            SetDescriptionForAmountYouSupply(page);
+        }
+    }
+
+    [ExcludeFromCodeCoverage]
+    private async Task SetDescriptionForAnnualTurnover(Page page)
+    {
+        var sessionJourney = await _journeySession.GetAsync();
+        var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
+
+        if (sessionPage != null)
+        {
+            var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
+
+            page.AdditionalDescription = answer switch
+            {
+                "parent" => page.AdditionalDescription,
+                "subsidary" => null,
+                "individual" => null,
+                _ => page.AdditionalDescription
+            };
+        }
+    }
+
+    [ExcludeFromCodeCoverage]
+    private async Task SetDescriptionForAmountYouSupply(Page page)
+    {
         var handlePackagingCount = _pages
                                         .Where(x => PagePath.IsActivityPagePath(x.Path))
                                         .SelectMany(x => x.Questions)
@@ -302,6 +337,6 @@ public class PageService : IPageService
 
         companyModel.RequiresNationData =
             amountOfPackaging?.Value != amountOfPackagingNonObligated
-            && selectedOptions.Exists(x => x.Value == YesNo.Yes);
+            && selectedOptions.Exists(x => x != null && x.Value == YesNo.Yes);
     }
 }
