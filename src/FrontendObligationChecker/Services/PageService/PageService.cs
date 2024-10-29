@@ -179,21 +179,7 @@ public class PageService : IPageService
 
         if (page.Path == PagePath.AnnualTurnover)
         {
-            var sessionJourney = await _journeySession.GetAsync();
-            var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
-
-            if (sessionPage != null)
-            {
-                var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
-
-                page.AdditionalDescription = answer switch
-                {
-                    "parent" => page.AdditionalDescription,
-                    "subsidary" => null,
-                    "individual" => null,
-                    _ => page.AdditionalDescription
-                };
-            }
+            SetDescriptionForAnnualTurnover(page);
         }
 
         if (page.Path == PagePath.AmountYouSupply)
@@ -216,6 +202,25 @@ public class PageService : IPageService
                         : "AmountYouSupply.DescriptionAlternate";
                 }
             }
+        }
+    }
+
+    private async Task SetDescriptionForAnnualTurnover(Page page)
+    {
+        var sessionJourney = await _journeySession.GetAsync();
+        var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
+
+        if (sessionPage != null)
+        {
+            var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
+
+            page.AdditionalDescription = answer switch
+            {
+                "parent" => page.AdditionalDescription,
+                "subsidary" => null,
+                "individual" => null,
+                _ => page.AdditionalDescription
+            };
         }
     }
 

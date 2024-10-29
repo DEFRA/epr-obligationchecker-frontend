@@ -7,6 +7,8 @@ namespace FrontendObligationChecker.Models.ObligationChecker;
 
 public class Page
 {
+    private string _additionalDescription;
+
     public INextFinder NextFinder { get; init; } = new OptionFinder();
 
     public short Index { get; init; }
@@ -75,6 +77,7 @@ public class Page
         // value could changed depending on answers selected from a previous page.
         set
         {
+            _additionalDescription = value;
         }
     }
 
