@@ -4,7 +4,9 @@
 
 @if (Model.SupportedCultures!.Count > 1)
 {
-    <ul class="language-toggle">
+    @* Temporary removal of language which will be reinstated *@
+
+    @* <ul class="language-toggle">
         @foreach (var culture in Model.SupportedCultures!)
         {
             <li class="language-toggle__option">
@@ -19,9 +21,9 @@
                 }
             </li>
         }
-    </ul>
+    </ul> *@
 }
 else
 {
-    <div class="language-toggle govuk-!-padding-bottom-8"></div>
+    @* <div class="language-toggle govuk-!-padding-bottom-8"></div>  *@
 }

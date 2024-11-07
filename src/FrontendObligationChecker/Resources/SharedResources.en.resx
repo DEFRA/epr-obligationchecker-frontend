@@ -133,7 +133,7 @@
     <value>No</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
-    <value>Parent Company</value>
+    <value>Parent company</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
     <value>Subsidiary</value>
@@ -151,34 +151,34 @@
     <value>£2 million or more</value>
   </data>
   <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
-    <value>supplying goods to the UK market under your own brand</value>
+    <value>Supplying goods to the UK market under your own brand</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
-    <value>Do you place goods for sale into packaging?</value>
+    <value>Placing goods for sale into packaging</value>
   </data>
   <data name="SingleQuestion.ImportingProducts.AmountHandlePageText" xml:space="preserve">
     <value>importing products in packaging which are supplied or discarded in the UK</value>
   </data>
   <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
-    <value>Do you import packaged goods to supply to the UK market?</value>
+    <value>Importing packaged goods to supply to the UK market</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
-    <value>Do you own an online marketplace allowing non-UK companies to sell packaged goods in the UK?</value>
+    <value>Owning an online marketplace allowing non-UK companies to sell packaged goods in the UK</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
-    <value>supplying empty packaging to businesses that fall under the higher threshold</value>
+    <value>Supplying empty packaging to businesses that fall under the higher threshold</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AmountHandlePageText" xml:space="preserve">
     <value>supplying empty packaging to businesses that aren't classed as a large organisation</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
-    <value>hiring or loaning out reusable packaging to UK organisations</value>
+    <value>Hiring or loaning out reusable packaging to UK organisations</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
-    <value>supplying filled packaging to consumers</value>
+    <value>Supplying filled packaging to consumers</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Large producers on the ‘report packaging data’ service</value>
+    <value>Create an account to report packaging data</value>
   </data>
   <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
     <value>25 tonnes to 50 tonnes</value>
@@ -220,7 +220,16 @@
     <value></value>
   </data>
   <data name="Disclaimer" xml:space="preserve">
-    <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice. Please consult the Extended Producer Responsibility for Packaging legislation for comprehensive legal guidance on obligations and responsibilities.</value>
+    <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice. for more information about obligations and responsibilities.</value>
+  </data>
+    <data name ="DisclaimerLink" xml:space="preserve">
+        <value>https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do</value>
+    </data>
+    <data name="DisclaimerPart2">
+        <value>Read the Extended Producer Responsibility for Packaging guidance</value>
+    </data>    
+    <data name="DisclaimerPart3" xml:space="preserve">
+    <value>for more information about obligations and responsibilities.</value>
   </data>
   <data name="Defra" xml:space="preserve">
     <value>Department for Environment, Food and Rural Affairs</value>

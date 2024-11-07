@@ -12,14 +12,19 @@
 
                 @if (Model.Page.FirstQuestion.HasError)
                 {
-                    @await Html.PartialAsync("Partials/Govuk/_ErrorSummary", Model.Page.Errors.ToDictionary(error => error.Key, error => Localizer[error.Value].Value))
+                   @await Html.PartialAsync("Partials/Govuk/_ErrorSummary", Model.Page.Errors.ToDictionary(error => error.Key, error => Localizer[error.Value].Value))
                 }
 
                 @if (!Model.Page.IsPageHeading)
                 {
                     @if (Model.Page.HasTitleCaption)
                     {
-                        <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span>
+                        @*
+                            There's a request from Defra not to show Title Caption at this time. However this also appears in the report summary
+                            page where it's needed hence why it's commented out and not removed completely
+                        *@
+
+                        @* <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span> *@
                     }
                     <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
                 }
@@ -60,7 +65,7 @@
                                         Localizer[Model.Page.Title].Value
                                         : Localizer[Model.Page.FirstQuestion.Title].Value,
                                     Classes = "govuk-!-margin-bottom-5",
-                                    Caption = Model.Page.HasTitleCaption ? SharedLocalizer[Model.Page.TitleCaption]?.Value : null
+                                    Caption = Model.Page.HasTitleCaption ? string.Empty /*SharedLocalizer[Model.Page.TitleCaption]?.Value*/ : null
                                 },
                                 DescribedBy = Model.Page.FirstQuestion.HasError ? $"{Model.Page.FirstQuestion.Key}-error" : null
                             },
@@ -123,7 +128,7 @@
                                         Localizer[Model.Page.Title].Value
                                         : Localizer[Model.Page.FirstQuestion.Title].Value,
                                     Classes = "govuk-!-margin-bottom-5",
-                                    Caption = Model.Page.HasTitleCaption ? SharedLocalizer[Model.Page.TitleCaption]?.Value : null
+                    Caption = Model.Page.HasTitleCaption ? string.Empty /*SharedLocalizer[Model.Page.TitleCaption]?.Value*/ : null
                                 },
                                 DescribedBy = Model.Page.FirstQuestion.HasError ? $"{Model.Page.FirstQuestion.Key}-error" : null
                             },

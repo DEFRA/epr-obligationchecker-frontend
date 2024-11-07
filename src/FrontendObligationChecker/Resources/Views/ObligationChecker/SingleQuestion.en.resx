@@ -136,7 +136,7 @@
     <value>What was your group's last annual turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">
-    <value>What was your group’s last reported turnover?</value>
+    <value>What was your group's last reported turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
     <value>
@@ -234,10 +234,10 @@
         &lt;p class="govuk-body"&gt;&lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;Find out what's classed as a 'large' organisation (opens in a new tab)&lt;/a&gt;&lt;/p&gt;</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.Title" xml:space="preserve">
-    <value>Do you sell empty packaging to organisations which are not classed as 'large'?</value>
+    <value>Do you supply empty packaging to organisations which are not classed as 'large'?</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
-    <value>supplying empty packaging to businesses that fall under the higher threshold</value>
+    <value>Supplying empty packaging to businesses that fall under the higher threshold</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.QuestionTitle" xml:space="preserve">
     <value />
@@ -252,7 +252,7 @@
         &lt;li&gt;have an annual turnover of more than than £2m&lt;/li&gt;
         &lt;li&gt;import or supply more than 50 tonnes of empty packaging or packaged goods&lt;/li&gt;
         &lt;/ul&gt;
-        &lt;p class="govuk-body"&gt;&lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;Find out what's classed as a 'large' organisation (opens in a new tab)&lt;/a&gt;&lt;/p&gt;
+        &lt;p class="govuk-body"&gt; If you are unsure, &lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;check the list of large organisations&lt;/a&gt;&lt;/p&gt;
     </value>
   </data>
   <data name="SingleQuestion.HiringLoaning.Title" xml:space="preserve">
@@ -289,10 +289,10 @@
         </value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.Title" xml:space="preserve">
-    <value>Do you supply filled packaging to end consumers, including businesses?</value>
+    <value>Do you supply filled packaging to end users, including businesses?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
-    <value>Do you supply filled packaging to end consumers, including businesses?</value>
+    <value>Do you supply filled packaging to end users, including businesses?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.QuestionTitle" xml:space="preserve">
     <value />
@@ -301,7 +301,7 @@
     <value>Select yes if you supply filled packaging to individual customers?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.SupplierConsumerDescriptions" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;An end consumer is the last person to use packaging before discarding it. This could be an individual or a business.&lt;/p&gt;            
+    <value>&lt;p class="govuk-body"&gt;An end user is the last person to use packaging before discarding it. This could be an individual or a business.&lt;/p&gt;            
         </value>
   </data>
   <data name="SingleQuestion.AmountYouSupply.Header" xml:space="preserve">
@@ -332,7 +332,7 @@
     <value>You told us that you:</value>
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.Title" xml:space="preserve">
-    <value>Do you sell or supply drinks in single-use containers in England, Wales or Northern Ireland?</value>
+    <value>Do you supply drinks in single-use containers in the UK?</value>
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.ScotlandSummary" xml:space="preserve">
     <value>What to do if you place drinks on the market in Scotland</value>
@@ -340,7 +340,7 @@
   <data name="SingleQuestion.PlaceDrinksOnMarket.ScotlandDetail" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;From October 2025, Scotland will operate a Deposit Return Scheme.&lt;/p&gt;
 &lt;p class="govuk-body"&gt;This may affect organisations that place drinks on the market in Scotland.&lt;/p&gt;
-&lt;a href="https://www.sepa.org.uk/regulations/waste/deposit-return-scheme/producers/" class="govuk-link" target="_blank"&gt;Find out more about Scotland's Deposit Return Scheme (opens in new tab)&lt;/a&gt;</value>
+&lt;a href="https://www.sepa.org.uk/regulations/waste/deposit-return-scheme/" class="govuk-link" target="_blank"&gt;Find out more about Scotland's Deposit Return Scheme (opens in new tab)&lt;/a&gt;</value>
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.Error" xml:space="preserve">
     <value>Tell us if you place drinks on the market in England, Wales or Northern Ireland in single-use containers?</value>

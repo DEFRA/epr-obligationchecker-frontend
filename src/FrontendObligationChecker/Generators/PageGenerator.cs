@@ -176,7 +176,6 @@ public static class PageGenerator
                     OptionPath.Primary, PagePath.NoActionNeeded
                 },
                 {
-                    // OptionPath.Secondary, PagePath.WhatYouNeedToDo
                     OptionPath.Secondary, PagePath.OwnBrand
                 }
             },
@@ -349,7 +348,6 @@ public static class PageGenerator
             {
                 { OptionPath.Primary, PagePath.MaterialsForDrinksContainers },
                  { OptionPath.Secondary, PagePath.WhatYouNeedToDo }
-                // { OptionPath.Secondary, PagePath.AmountYouSupply }
             },
             IsPageHeading = true,
             Questions = new List<Question>()
@@ -357,8 +355,8 @@ public static class PageGenerator
                 new()
                 {
                     Key = QuestionKey.SingleUseContainersOnMarket,
-                    Summary = "SingleQuestion.PlaceDrinksOnMarket.ScotlandSummary",
-                    Detail = "SingleQuestion.PlaceDrinksOnMarket.ScotlandDetail",
+                    Summary = string.Empty,
+                    Detail = string.Empty,
                     DetailPosition = DetailPosition.BelowQuestion,
                     Options = BooleanOptions,
                     ErrorMessage = "SingleQuestion.PlaceDrinksOnMarket.Error",
@@ -635,7 +633,6 @@ public static class PageGenerator
             {
                 { OptionPath.Primary, PagePath.MaterialsForDrinksContainers },
                 { OptionPath.Secondary, PagePath.WhatYouNeedToDo }
-                // { OptionPath.Secondary, PagePath.AmountYouSupply }
             },
             IsPageHeading = true,
             Questions = new List<Question>()
@@ -699,23 +696,30 @@ public static class PageGenerator
                     ContentItems = new List<ContentItem>()
                     {
                         new(ContentType.Banner, "WhatYouNeedToDo.ContentBanner", CompanySize.All),
-                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1Small", CompanySize.Small, SellerType.NotSellerOnly),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1Small", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Individual),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1SmallParent", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Parent),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2SmallParent", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Parent),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1SmallSubsidiary", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Subsidiary),
-                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1Large", CompanySize.Large, SellerType.NotSellerOnly),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2SmallSubsidiary", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Subsidiary),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1Large", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Individual),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1LargeParent", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Parent),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2LargeParent", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Parent),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph1LargeSubsidiary", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Subsidiary),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2LargeSubsidiary", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Subsidiary),
                         new(ContentType.Print, new List<string>() { "WhatYouNeedToDo.ContentPrint1", "WhatYouNeedToDo.ContentPrint2" }, CompanySize.All),
                         new(ContentType.Heading, "WhatYouNeedToDo.ContentHeading1", CompanySize.All),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2Small", CompanySize.Small, SellerType.NotSellerOnly),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2Large", CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.Heading, "WhatYouNeedToDo.WhenToCollectAndReportHeader", CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.Paragraph, "WhatYouNeedToDo.WhenToCollectAndReportContent", CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.Inset, new List<string>() { "WhatYouNeedToDo.ContentInset1Small" }, CompanySize.Small, SellerType.NotSellerOnly),
-                        new(ContentType.Inset, new List<string>() { "WhatYouNeedToDo.ContentInset1Large", "WhatYouNeedToDo.ContentInset2Large" }, CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.Heading, "WhatYouNeedToDo.WhenToCollectAndReportHeader", CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.Paragraph, "WhatYouNeedToDo.WhenToCollectAndReportContent", CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.Inset, new List<string>() { "WhatYouNeedToDo.ContentInset1Small" }, CompanySize.Small, SellerType.NotSellerOnly),
+                        // new(ContentType.Inset, new List<string>() { "WhatYouNeedToDo.ContentInset1Large", "WhatYouNeedToDo.ContentInset2Large" }, CompanySize.Large, SellerType.NotSellerOnly),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph3Large", CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.UnorderedList, new List<string>() { "WhatYouNeedToDo.ContentUoList1A", "WhatYouNeedToDo.ContentUoList1B" }, CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.Heading3, "WhatYouNeedToDo.ContentHeading2Large", CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.UnorderedList, new List<string>() { "WhatYouNeedToDo.ContentUoList1A", "WhatYouNeedToDo.ContentUoList1B" }, CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.Heading3, "WhatYouNeedToDo.ContentHeading2Large", CompanySize.Large, SellerType.NotSellerOnly),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph4Large", CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph5Large", CompanySize.Large, SellerType.NotSellerOnly),
-                        new(ContentType.Details, "WhatYouNeedToDo.ContentDetailsPrnPerns", CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph5Large", CompanySize.Large, SellerType.NotSellerOnly),
+                        // new(ContentType.Details, "WhatYouNeedToDo.ContentDetailsPrnPerns", CompanySize.Large, SellerType.NotSellerOnly),
                         new(ContentType.Heading3, "WhatYouNeedToDo.ContentNationDataHeading", CompanySize.All, requiresNationData: true, sellerType: SellerType.NotSellerOnly),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentNationDataParagraph1", CompanySize.All, requiresNationData: true),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentNationDataParagraph2", CompanySize.All, requiresNationData: true),
@@ -728,6 +732,7 @@ public static class PageGenerator
                         new(ContentType.Paragraph, "WhatYouNeedToDo.WhatYouShouldDoNextParagraph", CompanySize.Large, SellerType.NotSellerOnly),
                         new Hyperlink(guidanceUrl, "WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription","find-out-more", CompanySize.Large),
                         new Hyperlink(guidanceUrl, "WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription","find-out-more", CompanySize.Small, SellerType.SellerOnly),
+                        new Hyperlink(guidanceUrl, "WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription","find-out-more", CompanySize.Small, SellerType.NotSellerOnly),
                         new(ContentType.Inset, new List<string>() { "WhatYouNeedToDo.ContentNationDataInset1" }, CompanySize.All, SellerType.SellerOnly, requiresNationData: true),
                         new(ContentType.SeparatorLine),
                         new(ContentType.Heading, "WhatYouNeedToDo.ContentHeading5", CompanySize.All),

@@ -133,7 +133,7 @@
     <value>What this means for your organisation</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
-    <value>Submit nation data</value>
+    <value>Submit nation data &lt;IF NATION DATA IS APPLICABLE&gt;</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
     <value>You will need to submit nation data.</value>
@@ -155,7 +155,7 @@
  </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
-    <value>You'll need to submit your nation data for the 2023 calendar year by 1 December 2024.</value>
+    <value>You'll need to submit your nation data for the 2024 calendar year by 1 December 2025.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
     <value>What you should do next</value>
@@ -201,35 +201,59 @@
   </data>
   <data name="WhatYouNeedToDo.ContainerVolumeAlternateRowTitle" xml:space="preserve">
     <value>Drinks containers between 50ml and 3l</value>
-  </data>
+  </data>  
   <data name="WhatYouNeedToDo.ContentParagraph1Small" xml:space="preserve">
-    <value>Under EPR for packaging, you're classed as a small organisation. This means your organisation will need to record and submit data about the packaging it handles and supplies.</value>
+    <value>Under EPR for packaging, you're classed as a small organisation. This means you will need to record and submit data about the packaging you import and supply.</value>
   </data>
+    <data name="WhatYouNeedToDo.ContentParagraph1SmallParent" xml:space="preserve">
+    <value>Under EPR for packaging, you're classed as a small organisation. This means you will need to record and submit data about the packaging you import and supply.
+</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentParagraph2SmallParent" xml:space="preserve">
+    <value>As a parent company, you must submit data separately for each of the subsidiaries within your group registration. You do not need to include data for any of your subsidiaries that have registered independently.</value>
+  </data>   
   <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
-    <value>As a subsidiary that is a small organisation your obligation may fall to the parent company of your group in circumstances where the group would be classed as a large producer.</value>
+    <value>Under EPR for packaging, you're classed as a small organisation. This means you will need to record and submit data about the packaging you import and supply.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2SmallSubsidiary" xml:space="preserve">
+    <value>As a subsidiary, your parent company may need to report data on your behalf if it’s classed as a large organisation. Sign in to your EPR account or create an account</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
-    <value>Under EPR for packaging, you're classed as a large organisation. This means your organisation will need to record and submit data about the packaging it supplied or imported. You'll also need to pay fees.</value>
+    <value>Under EPR for packaging, you're classed as a large organisation. This means you will need to record and submit data about the packaging you import and supply.
+</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;record data about empty packaging and packaged goods you handle and supply in the UK market from 1 January 2023&lt;/li&gt;
-    &lt;li&gt;create an account and register your organisation by 1 April 2024&lt;/li&gt;
-    &lt;li&gt;pay a fee to the environmental regulator&lt;/li&gt;
-    &lt;li&gt;submit data about empty packaging and packaged goods you handled or supplied through the UK market throughout 2023&lt;/li&gt;
+    &lt;li&gt;record data about empty packaging and packaged goods you import and supply in the UK market from 1 January 2024&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;create an account&lt;/a&gt; and register your organisation by 1 April 2025&lt;/li&gt;
+    &lt;li&gt;pay a fee to the environmental regulator - contact your UK nation's regulator for more information about fees&lt;/li&gt;
+    &lt;li&gt;submit data about empty packaging and packaged goods you imported or supplied through the UK market throughout 2024&lt;/li&gt;
 &lt;/ul&gt;
  </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;record data about the empty packaging and packaged goods you supplied or imported to the UK market- check 'When to collect and report' to see when you need to do this&lt;/li&gt;
-    &lt;li&gt;create an account and register your organisation from July 2023&lt;/li&gt;
-    &lt;li&gt;pay a fee to the environmental regulator&lt;/li&gt;
-    &lt;li&gt;submit data about empty packaging and packaged goods you supplied or imported through the UK market&lt;/li&gt;
+    &lt;li&gt;record data about empty packaging and packaged goods you import and supply in the UK market from 1 January 2024&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;create an account&lt;/a&gt; and register your organisation by 1 April 2025&lt;/li&gt;
+    &lt;li&gt;pay a fee to the environmental regulator - contact your UK country’s regulator for more information about fees&lt;/li&gt;
+    &lt;li&gt;submit data about empty packaging and packaged goods you imported or supplied through the UK market every six months&lt;/li&gt;
 &lt;/ul&gt;</value>
   </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1LargeSubsidiary" xml:space="preserve">
+    <value>Under EPR for packaging, you're classed as a large organisation. This means you’ll need to record and submit data about the packaging you import and supply.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2LargeSubsidiary" xml:space="preserve">
+    <value>As a subsidiary, your parent company may need to report data on your behalf if it's also classed as a large organisation. Sign in to your EPR account or create an account.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1LargeParent" xml:space="preserve">
+    <value>Under EPR for packaging, you're classed as a large organisation. This means you will need to record and submit data about the packaging you import and supply.</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentParagraph2LargeParent" xml:space="preserve">
+    <value>As a parent company, you must submit data separately for each of the subsidiaries within your group registration. You do not need to include data for any of your subsidiaries that have registered independently.</value>
+  </data> 
+    
   <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
     <value>When to collect and report</value>
   </data>
@@ -285,10 +309,10 @@
   <data name="WhatYouNeedToDo.ContentParagraph2Seller" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;record nation data from 1 January 2023&lt;/li&gt;
-    &lt;li&gt;create an account and register your organisation from January 2024&lt;/li&gt;
-    &lt;li&gt;pay a fee to the environmental regulator&lt;/li&gt;
-    &lt;li&gt;submit your nation data&lt;/li&gt;
+    &lt;li&gt;record data about empty packaging and packaged goods you import and supply in the UK market from 1 January 2024&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;create an account&lt;/a&gt; and register your organisation by 1 April 2025&lt;/li&gt;
+    &lt;li&gt;pay a fee to the environmental regulator - contact your UK country’s regulator for more information about fees&lt;/li&gt;
+    &lt;li&gt;submit data about empty packaging and packaged goods you importd or supplied through the UK market&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/ul&gt;</value>
   </data>
@@ -305,6 +329,6 @@
     <value>Large</value>
   </data>
   <data name="WhatYouNeedToDo.TypeOfProducerText" xml:space="preserve">
-    <value>Type Of Producer</value>
+    <value>Organisation size</value>
   </data>
 </root>
