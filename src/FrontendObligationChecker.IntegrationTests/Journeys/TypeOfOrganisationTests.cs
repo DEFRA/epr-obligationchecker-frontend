@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-
+using FrontendObligationChecker.IntegrationTests.Extensions;
 using FrontendObligationChecker.Models.ObligationChecker;
 
 namespace FrontendObligationChecker.IntegrationTests.Journeys;
@@ -51,6 +51,6 @@ public class TypeOfOrganisationTests : TestBase
         var content = await response.Content.ReadAsStringAsync();
 
         response.Should().BeSuccessful();
-        content.Should().Contain("<title>What was your group&#x27;s last annual turnover? - GOV.UK</title>");
+        content.Should().Contain("<title>What was your group’s last annual turnover? - GOV.UK</title>".CurvedApostropheToHex());
     }
 }

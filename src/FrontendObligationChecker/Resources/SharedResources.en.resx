@@ -220,7 +220,7 @@
     <value></value>
   </data>
   <data name="Disclaimer" xml:space="preserve">
-    <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice. for more information about obligations and responsibilities.</value>
+    <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice.</value>
   </data>
     <data name ="DisclaimerLink" xml:space="preserve">
         <value>https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do</value>

@@ -133,10 +133,10 @@
     <value>Individual company</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title1" xml:space="preserve">
-    <value>What was your group's last annual turnover?</value>
+    <value>What was your group’s last annual turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">
-    <value>What was your group's last reported turnover?</value>
+    <value>What was your group’s last reported turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
     <value>
@@ -153,7 +153,7 @@
     <value>£2 million or more</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionError" xml:space="preserve">
-    <value>Tell us what was your organisation's last annual turnover</value>
+    <value>Tell us what was your organisation’s last annual turnover</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.AdditionalDescription1" xml:space="preserve">
     <value>
