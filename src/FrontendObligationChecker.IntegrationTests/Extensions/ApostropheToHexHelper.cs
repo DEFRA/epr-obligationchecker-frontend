@@ -6,4 +6,9 @@ public static class ApostropheToHexHelper
     {
         return text.Replace("'", "&#x27;");
     }
+
+    public static string CurvedApostropheToHex(this string text)
+    {
+        return text.Replace("’", "&#x2019;");
+    }
 }

@@ -13,6 +13,16 @@ namespace FrontendObligationChecker.IntegrationTests.Journeys;
 public class ContentUpdateTicket171354Tests : TestBase
 {
     [TestMethod]
+    public async Task AnnualTurnover_PageContents_AreUpdated()
+    {
+        var page = await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
+
+        var pageContent = await page.Content.ReadAsStringAsync();
+
+        pageContent.Should().Contain("What was your group’s last reported turnover?".CurvedApostropheToHex());
+    }
+
+    [TestMethod]
     public async Task OwnBrand_PageContents_AreUpdated()
     {
         await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
