@@ -202,11 +202,13 @@ public class ContentUpdateTicket171354Tests : TestBase
         pageContent.Should().Contain("This is because your organisation will handle or supply less than 25 tonnes of packaging in 2024.");
     }
 
+    // Needs to be updated.
     [TestMethod]
     public async Task WhatYouNeedToDo_PageContents_AreUpdated()
     {
         await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
         await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
+        await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
         await PostForm(PagePath.OwnBrand, new PageForm(QuestionKey.OwnBrand, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.UnbrandedPackaging, new PageForm(QuestionKey.UnbrandedPackaging, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.ImportingProducts, new PageForm(QuestionKey.ImportingProducts, YesNo.Yes).FormUrlEncodedContent);
@@ -220,8 +222,8 @@ public class ContentUpdateTicket171354Tests : TestBase
                                                                                      MaterialsForDrinksContainers.PlasticBottles |
                                                                                      MaterialsForDrinksContainers.SteelCans;
         await PostForm(PagePath.MaterialsForDrinksContainers, new PageForm(allMaterialsForDrinksContainersSelected).FormUrlEncodedContent);
-        await PostForm(PagePath.ContainerVolume, new PageForm(QuestionKey.ContainerVolume, YesNo.Yes).FormUrlEncodedContent);
-        var page = await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
+
+        var page = await PostForm(PagePath.ContainerVolume, new PageForm(QuestionKey.ContainerVolume, YesNo.Yes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
         pageContent.Should().Contain("What this means for your organisation");
@@ -231,5 +233,9 @@ public class ContentUpdateTicket171354Tests : TestBase
         pageContent.Should().NotContain("a charge to the environmental regulator");
         pageContent.Should().NotContain("importing products in packaging which are supplied or discarded in the UK");
         pageContent.Should().NotContain("supplying empty packaging to businesses that aren't classed as a large organisation".ApostropheToHex());
+
+        pageContent.Should().NotContain("For any packaging that you supply or import that is collected by local authorities from households or public bins, from April 2024 you must pay:");
+        pageContent.Should().NotContain("You must get packaging waste recycling notes (PRNs) or packaging waste export recycling notes (PERNs) in 2024.");
+
     }
 }
