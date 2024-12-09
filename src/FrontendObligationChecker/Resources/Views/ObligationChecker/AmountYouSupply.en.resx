@@ -148,10 +148,10 @@
     <value />
   </data>
   <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
-    <value>Tell us how much packaging in total did you supply or import in these ways, in 2022</value>
+    <value>Select a tonnage option.</value>
   </data>
   <data name="AmountYouSupply.SingleActivityQuestionError" xml:space="preserve">
-    <value>Tell us how much packaging in total did you supply or import in this way, in 2022</value>
+    <value>Select a tonnage option.</value>
   </data>
   <data name="AmountYouSupply.DrinksParagraph" xml:space="preserve">
     <value>You also told us that you place single-use drinks containers on the market in England, Wales or Northern Ireland. You should include this packaging in your total tonnage.
