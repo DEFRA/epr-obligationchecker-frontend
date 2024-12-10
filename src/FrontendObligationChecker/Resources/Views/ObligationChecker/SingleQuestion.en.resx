@@ -210,7 +210,7 @@
   <data name="SingleQuestion.UnbrandedPackaging.PlacingGoodsDescriptions" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;This could be goods you packaged for your own organisation or for another organisation.&lt;/p&gt;
             &lt;p class="govuk-body"&gt;Select no if you only pack goods which another large organisation is responsible for. &lt;/p&gt;
-            &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Learn more about responsibilities. &lt;/a&gt;  &lt;/p&gt;
+            &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Learn more about responsibilities &lt;/a&gt;  &lt;/p&gt;
         </value>
   </data>
   <data name="SingleQuestion.ImportingProducts.Title" xml:space="preserve">
@@ -271,10 +271,10 @@
         </value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.Title" xml:space="preserve">
-    <value>Do you own an online maketplace allowing non-UK companies to sell packaged goods in the UK?</value>
+    <value>Do you own an online marketplace allowing non-UK companies to sell packaged goods in the UK?</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
-    <value>Do you own an online maketplace allowing non-UK companies to sell packaged goods in the UK?</value>
+    <value>Do you own an online marketplace allowing non-UK companies to sell packaged goods in the UK?</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.QuestionTitle" xml:space="preserve">
     <value />
@@ -320,7 +320,7 @@
     &lt;li&gt;individual subsidiaries (in this instance, the subsidiaries that meet the turnover and tonnage requirements comply with EPR for packaging independently)&lt;/li&gt;
     &lt;li&gt;a parent company for part of the group (this is where the parent company registers to comply with EPR for packaging on behalf of some, but not all of its subsidiaries)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p class="govuk-body"&gt;Check which type of organisation you should &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#if-youre-a-parent-company-group-or-subsidiary" class="govuk-link" target="_blank"&gt; select &lt;/a&gt;  &lt;/p&gt;</value>
+&lt;p class="govuk-body"&gt; &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#if-youre-a-parent-company-group-or-subsidiary" class="govuk-link" target="_blank"&gt; Check which type of organisation you should select &lt;/a&gt;  &lt;/p&gt;</value>
   </data>
   <data name="SingleQuestion.AmountYouSupply.QuestionTitleSingular" xml:space="preserve">
     <value>How much packaging in total did you supply or import in this way, in 2022?</value>
