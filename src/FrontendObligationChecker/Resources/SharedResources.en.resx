@@ -123,6 +123,9 @@
   <data name="continue_button_text" xml:space="preserve">
     <value>Continue</value>
   </data>
+    <data name="Return_To_EPR_button_text" xml:space="preserve">
+    <value>Return to EPR Guidance</value>
+  </data>
   <data name="skip_to_main_content_text" xml:space="preserve">
     <value>Skip to main content</value>
   </data>
@@ -218,6 +221,9 @@
   </data>
   <data name="YourPackagingActivities" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="ConsiderPackagingActivity" xml:space="preserve">
+    <value>Only consider your relevant packaging activities when calculating the amount you supply.</value>
   </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice.</value>

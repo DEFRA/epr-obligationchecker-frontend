@@ -133,7 +133,7 @@
     <value>What this means for your organisation</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
-    <value>Submit nation data &lt;IF NATION DATA IS APPLICABLE&gt;</value>
+    <value>Submit nation data</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
     <value>You will need to submit nation data.</value>
@@ -162,6 +162,12 @@
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
     <value>You'll need to submit your nation data for the 2024 calendar year by 1 December 2025.</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset2" xml:space="preserve">
+    <value></value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
     <value>What you should do next</value>
