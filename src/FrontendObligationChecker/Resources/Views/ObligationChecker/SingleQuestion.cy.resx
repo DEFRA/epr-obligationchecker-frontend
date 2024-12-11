@@ -118,10 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="question_option_no" xml:space="preserve">
-    <value />
+    <value>
+        Nac ydyn
+    </value>
   </data>
   <data name="question_option_yes" xml:space="preserve">
-    <value />
+    <value>
+        Ydyn
+    </value>
   </data>
   <data name="SingleQuestion.AmountYouSupply.Header" xml:space="preserve">
     <value />
@@ -133,127 +137,176 @@
     <value />
   </data>
   <data name="SingleQuestion.AnnualTurnover.AdditionalDescription1" xml:space="preserve">
-    <value />
+    <value>
+        Cyfeiriwch at eich cyfrifon blynyddol diweddaraf hyd at 7 Ebrill.
+    </value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
-    <value />
+    <value>        
+        Dylai'ch ateb gynnwys trosiant yr holl is-gwmnïau perthnasol yn eich grŵp sy'n trin ac yn cyflenwi (creu, mewnforio, dosbarthu neu werthu) pecynwaith.
+    </value>
   </data>
-  <data name="SingleQuestion.AnnualTurnover.QuestionError" xml:space="preserve">
-    <value />
+   <data name="SingleQuestion.AnnualTurnover.QuestionError" xml:space="preserve">
+    <value>Dewiswch opsiwn trosiant.</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
-    <value />
+    <value>O dan £1 miliwn</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel2" xml:space="preserve">
-    <value />
+    <value>£1 miliwn i £2 filiwn</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel3" xml:space="preserve">
-    <value />
+    <value>£2 filiwn neu fwy</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title1" xml:space="preserve">
-    <value />
+    <value>Beth oedd trosiant eich grŵp yn yr adroddiad diwethaf?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">
-    <value />
+    <value>Beth oedd trosiant eich grŵp yn yr adroddiad diwethaf?</value>
   </data>
   <data name="SingleQuestion.ContainerVolume.QuestionDescription" xml:space="preserve">
-    <value />
+    <value>Mae hyn yn cynnwys cynwysyddion rhwng 150ml a 3l sy'n cael eu gwerthu mewn aml-becyn</value>
   </data>
-  <data name="SingleQuestion.ContainerVolume.QuestionError" xml:space="preserve">
-    <value />
+   <data name="SingleQuestion.ContainerVolume.QuestionError" xml:space="preserve">
+    <value>Dewiswch Oes os oes unrhyw un neu ragor o'r cynwysyddion rhwng 150ml a 3l.</value>
   </data>
   <data name="SingleQuestion.ContainerVolume.Title" xml:space="preserve">
-    <value />
+    <value>Oes unrhyw un neu ragor o'r cynwysyddion rhwng 150ml a 3l?</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.HiringLoaning.PackagingHireLoanDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        Mae rhai sefydliadau'n llogi neu'n rhoi benthyg pecynwaith a all gael ei ailddefnyddio, fel paledi pren, i sefydliadau eraill ar gyfer cludo neu ddiogelu nwyddau. Mae'r pecynwaith yn cael ei ddychwelyd ar ôl ei ddefnyddio ac yn cael ei roi ar fenthyg eto.
+    </value>
   </data>
   <data name="SingleQuestion.HiringLoaning.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch Ydyn os ydych chi'n llogi neu'n rhoi benthyg pecynwaith a all gael ei ailddefnyddio i sefydliadau yn y Deyrnas Unedig.</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.QuestionTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.HiringLoaning.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n llogi neu'n rhoi benthyg pecynwaith a all gael ei ailddefnyddio i sefydliadau yn y Deyrnas Unedig?
+    </value>
   </data>
   <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n mewnforio nwyddau wedi'u pecynnu i'w cyflenwi i farchnad y Deyrnas Unedig?
+    </value>
   </data>
   <data name="SingleQuestion.ImportingProducts.PackagingImportDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        &lt;p class="govuk-body"&gt;Mae hyn yn gymwys i chi hefyd os ydych chi'n gwaredu'r pecynwaith cyn cyflenwi'r nwyddau.&lt;/p&gt;        
+        &lt;p class="govuk-body"&gt;Dewiswch Nac ydyn os ydych chi ond yn mewnforio pecynwaith wedi'i frandio, sydd wedi'i lenwi ar ran perchennog brand sy'n cael ei ystyried yn sefydliad mawr sydd wedi'i sefydlu yn y Deyrnas Unedig.&lt;/p&gt;
+    </value>
   </data>
   <data name="SingleQuestion.ImportingProducts.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch Ydyn os ydych chi'n mewnforio nwyddau wedi'u pecynnu i'w cyflenwi i farchnad y Deyrnas Unedig.</value>
   </data>
   <data name="SingleQuestion.ImportingProducts.QuestionTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.ImportingProducts.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n mewnforio nwyddau wedi'u pecynnu i'w cyflenwi i farchnad y Deyrnas Unedig?
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.AluminiumCans" xml:space="preserve">
-    <value />
+    <value>Caniau alwminiwm</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.GlassBottles" xml:space="preserve">
-    <value />
+    <value>
+        Poteli gwydr
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.None" xml:space="preserve">
-    <value />
+    <value>Dim un o'r uchod</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.PlasticBottles" xml:space="preserve">
-    <value />
+    <value>
+        Poteli plastig polyethylen tereffthalat (PET)
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionDescription" xml:space="preserve">
-    <value />
+    <value>
+        Dewiswch bob un sy'n gymwys.
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch un neu ragor o'r opsiynau deunyddiau.</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionTitle" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n defnyddio unrhyw un neu ragor o'r deunyddiau canlynol ar gyfer y cynwysyddion diodydd?
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.SteelCans" xml:space="preserve">
-    <value />
+    <value>
+        Caniau dur
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.Title" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n berchen ar farchnad ar-lein sy'n caniatáu i gwmnïau o'r tu allan i'r Deyrnas Unedig werthu nwyddau sydd wedi'u pecynnu yn y Deyrnas Unedig?
+    </value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.OnlineMarketplaceDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        &lt;p class="govuk-body"&gt;O dan yr EPR dros becynwaith, mae marchnad ar-lein yn wefan neu ap sy'n caniatáu i sefydliadau y tu allan i'r Deyrnas Unedig werthu eu nwyddau yn y Deyrnas Unedig.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Os yw'ch sefydliad chi yn berchen ar wefan sy'n gwerthu nwyddau oddi wrth sefydliadau'r Deyrnas Unedig yn unig, nid yw hyn yn cael ei ystyried yn farchnad ar-lein.&lt;/p&gt;
+    </value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch Ydyn os ydych chi'n berchen ar farchnad ar-lein sy'n caniatáu i gwmnïau o'r tu allan i'r Deyrnas Unedig werthu.</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.QuestionTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.OnlineMarketplace.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n berchen ar farchnad ar-lein sy'n caniatáu i gwmnïau o'r tu allan i'r Deyrnas Unedig werthu nwyddau sydd wedi'u pecynnu yn y Deyrnas Unedig?
+    </value>
   </data>
   <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.OwnBrand.AnotherOrganisationTasks" xml:space="preserve">
-    <value />
+    <value>
+        >&lt;p class="govuk-body"&gt;Rydych chi'n cyflenwi nwyddau o dan eich brand eich hun hyd yn oed os ydych chi'n talu neu'n trwyddedu cwmni arall i wneud y canlynol:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;cynhyrchu nwyddau a fydd yn cael eu cyflenwi o dan eich enw brand chi&lt;/li&gt;
+        &lt;li&gt;pecynnu nwyddau a fydd yn cael eu cyflenwi o dan eich enw brand chi&lt;/li&gt;
+        &lt;li&gt;cyflenwi'ch nwyddau wedi'u brandio yn y Deyrnas Unedig&lt;/li&gt;
+        &lt;li&gt;mewnforio nwyddau wedi'u brandio sydd wedi'u pecynnu ar eich rhan&lt;/li&gt;
+        &lt;/ul&gt;
+    </value>
   </data>
   <data name="SingleQuestion.OwnBrand.BrandDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        &lt;p class="govuk-body"&gt;Mae brand yn rhywbeth y gallai'ch busnes gael ei adnabod yn amlwg yn ei sgil, gan gynnwys:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;enw&lt;/li&gt;
+        &lt;li&gt;nod masnach&lt;/li&gt;
+        &lt;li&gt;unrhyw farc unigryw&lt;/li&gt;
+        &lt;/ul&gt;
+    </value>
   </data>
   <data name="SingleQuestion.OwnBrand.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch Ydyn os ydych chi'n cyflenwi nwyddau i farchnad y Deyrnas Unedig o dan eich brand eich hun.</value>
   </data>
   <data name="SingleQuestion.OwnBrand.QuestionTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.OwnBrand.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n cyflenwi nwyddau i farchnad y Deyrnas Unedig o dan eich brand eich hun?
+    </value>
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.Error" xml:space="preserve">
     <value />
@@ -265,25 +318,38 @@
     <value />
   </data>
   <data name="SingleQuestion.PlaceDrinksOnMarket.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n cyflenwi diodydd mewn cynwysyddion untro yn y Deyrnas Unedig?
+    </value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.HigherThresholdDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        &lt;p class="govuk-body"&gt;Dewiswch Ydyn os ydych chi'n cyflenwi:&lt;/p&gt;        
+        &lt;p class="govuk-body"&gt;&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;sefydliadau mawr nad ydyn nhw'n pacio neu'n llenwi'r pecynwaith, neu sy'n berchnogion brand y pecynwaith&lt;/li&gt;
+        &lt;li&gt;sefydliadau bach&lt;/li&gt;
+        &lt;li&gt; sefydliadau o dan y trothwy cynhyrchwyr bach&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p class="govuk-body"&gt; &lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;Darllenwch ragor am ddosbarthiadau a throthwyon&lt;/a&gt;&lt;/p&gt;
+    </value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch Ydyn os ydych chi'n cyflenwi pecynwaith gwag rydych chi wedi'i fewnforio neu wedi'i weithgynhyrchu.</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.QuestionTitle" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n cyflenwi pecynwaith gwag rydych chi wedi'i fewnforio neu wedi'i weithgynhyrchu?
+    </value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Ydych chi'n cyflenwi pecynwaith wedi'i lenwi i ddefnyddwyr terfynol?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.QuestionError" xml:space="preserve">
     <value />
@@ -292,40 +358,55 @@
     <value />
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.SupplierConsumerDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        Defnyddiwr terfynol yw'r person olaf i ddefnyddio pecynwaith cyn ei waredu. Gallai hyn fod yn ddefnyddiwr unigol neu'n fusnes.
+    </value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.Title" xml:space="preserve">
-    <value />
+    <value>Ydych chi'n cyflenwi diodydd mewn cynwysyddion untro yn y Deyrnas Unedig?</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.Detail" xml:space="preserve">
-    <value />
+    <value>&lt;p class="govuk-body"&gt;Mae yna wahanol ffyrdd y gallwch chi gydymffurfio â'r EPR dros becynwaith.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Gallwch gofrestru fel: &lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt; grŵp cyfan (yn yr achos hwn, mae'r rhiant-grŵp yn cydymffurfio â'r EPR dros becynwaith ar ran pob is-gwmni yn y grŵp)&lt;/li&gt;
+    &lt;li&gt; is-gwmnïau unigol (yn yr achos hwn, mae'r is-gwmnïau sy'n bodloni'r gofynion ynglŷn â throsiant a thunelledd yn cydymffurfio â'r EPR dros becynwaith yn annibynnol)&lt;/li&gt;
+    &lt;li&gt; rhiant-gwmni ar gyfer rhan o'r grŵp (sef lle mae'r rhiant-gwmni yn cofrestru i gydymffurfio â'r EPR dros becynwaith ar ran rhai o'i is-gwmnïau ond nid pob un)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="govuk-body"&gt; &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#if-youre-a-parent-company-group-or-subsidiary" class="govuk-link" target="_blank"&gt; Gwiriwch pa fath o sefydliad y dylech ei ddewis &lt;/a&gt;  &lt;/p&gt;</value>
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionDescription" xml:space="preserve">
-    <value />
+   <data name="SingleQuestion.TypeOfOrganisation.QuestionDescription" xml:space="preserve">
+    <value>Mae rhiant-gwmnïau (sydd weithiau'n cael eu galw'n gwmnïau daliannol) yn berchen ar grwpiau. Is-gwmnïau yw'r sefydliadau gwahanol sy'n ffurfio grŵp. Rydych chi'n rhiant-gwmni os yw'ch busnes yn berchen ar unrhyw is-gwmnïau. Mae hyn yn cynnwys unrhyw is-gwmnïau sydd wedi'u cofrestru y tu allan i'r Deyrnas Unedig.</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.QuestionError" xml:space="preserve">
-    <value />
+    <value>Dewiswch fath o sefydliad.</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
-    <value />
+    <value>Rhiant-gwmni</value>
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
-    <value />
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
+    <value>Is-gwmni</value>
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
-    <value />
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
+    <value>Cwmni unigol</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.Summary" xml:space="preserve">
-    <value />
+    <value>Sut mae'r EPR dros becynwaith yn effeithio ar riant-gwmnïau ac is-gwmnïau</value>
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.Title" xml:space="preserve">
-    <value />
+ <data name="SingleQuestion.TypeOfOrganisation.Title" xml:space="preserve">
+    <value>Pa fath o sefydliad ydych chi?</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n gosod nwyddau mewn pecynwaith
+    </value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.PlacingGoodsDescriptions" xml:space="preserve">
-    <value />
+    <value>
+        &lt;p class="govuk-body"&gt;Gallai hyn fod yn nwyddau rydych chi'n eu pecynnu i'ch sefydliad eich hun neu ar ran sefydliad arall.&lt;/p&gt;
+            &lt;p class="govuk-body"&gt; &lt;/p&gt;
+            &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Rhagor o wybodaeth am gyfrifoldebau. &lt;/a&gt;  &lt;/p&gt;
+    </value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.QuestionError" xml:space="preserve">
     <value />
@@ -334,7 +415,9 @@
     <value />
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.Title" xml:space="preserve">
-    <value />
+    <value>
+        Ydych chi'n gosod nwyddau mewn pecynwaith
+    </value>
   </data>
   <data name="SingleQuestion.YourPackagingActivities" xml:space="preserve">
     <value />

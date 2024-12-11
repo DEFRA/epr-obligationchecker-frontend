@@ -139,7 +139,7 @@
     <value>You will need to submit nation data.</value>
   </data>    
   <data name="WhatYouNeedToDo.ContentNationDataParagraph2" xml:space="preserve">
-    <value>Nation data is information about which UK nation you:</value>
+    <value>Nation data is information about which UK country you:</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataDetails" xml:space="preserve">
     <value>       
@@ -148,6 +148,7 @@
             &lt;li&gt;discarded packaging yourself&lt;/li&gt;           
         &lt;/ul&gt;
         &lt;p class="govuk-body"&gt; If you have supplied packaging to a customer, you only need to report data about the UK country it was sold to. You will not need to report data about where the packaging was discarded. &lt;/p&gt;
+        &lt;p class="govuk-body"&gt; If you have discarded the packaging ,you’ll need to report data about the UK country the packaging was discarded. &lt;/p&gt;
         &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#check-if-you-need-to-report-nation-data" target="_blank" &gt;  Learn more about nation data  &lt;/a&gt; &lt;/p&gt;  
     </value>
   </data>
@@ -248,7 +249,7 @@
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3SmallParent" xml:space="preserve">
     <value>
-        &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" target="_blank" &gt; Find out what to collect for EPR&lt;/a&gt;
+        
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4SmallParent" xml:space="preserve">
@@ -262,7 +263,7 @@
     <value>As a subsidiary, your parent company may need to report data on your behalf if it’s classed as a large organisation.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3SmallSubsidiary" xml:space="preserve">
-    <value>You'll need to submit your data by 1 April 2025.</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4SmallSubsidiary" xml:space="preserve">
     <value></value>
@@ -296,7 +297,7 @@
     &lt;li&gt;record data about empty packaging and packaged goods you import and supply in the UK market from 1 January 2024&lt;/li&gt;
     &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;create an account&lt;/a&gt; and register your organisation by 1 April 2025&lt;/li&gt;
     &lt;li&gt;pay a fee to the environmental regulator - contact your UK country’s regulator for more information about fees&lt;/li&gt;
-    &lt;li&gt;submit data about empty packaging and packaged goods you imported or supplied through the UK market every six months&lt;/li&gt;
+    &lt;li&gt;submit data about empty packaging and packaged goods you importd or supplied through the UK market&lt;/li&gt;
 &lt;/ul&gt;</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1LargeSubsidiary" xml:space="preserve">
@@ -306,7 +307,15 @@
     <value>As a subsidiary, your parent company may need to report data on your behalf if it's also classed as a large organisation.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3LargeSubsidiary" xml:space="preserve">
-    <value>You'll need to submit your data by 1 April 2025.</value>
+    <value>
+        &lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;record data about empty packaging and packaged goods you import and supply in the UK market from 1 January 2024&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;create an account&lt;/a&gt; and register your organisation by 1 April 2025&lt;/li&gt;
+    &lt;li&gt;pay a fee to the environmental regulator - contact your UK country’s regulator for more information about fees&lt;/li&gt;
+    &lt;li&gt;submit data about empty packaging and packaged goods you imported or supplied through the UK market every six months&lt;/li&gt;
+&lt;/ul&gt;
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4LargeSubsidiary" xml:space="preserve">
     <value></value>
@@ -321,7 +330,9 @@
     <value>As a parent company, you must submit data separately for each of the subsidiaries within your group registration. You do not need to include data for any of your subsidiaries that have registered independently.</value>
   </data>
     <data name="WhatYouNeedToDo.ContentParagraph3LargeParent" xml:space="preserve">
-    <value>You'll need to submit your data by 1 April 2025.</value>
+    <value>
+        
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4LargeParent" xml:space="preserve">
     <value></value>
@@ -351,7 +362,13 @@
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
     <value>
-       
+       >&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
+&lt;ul class="govuk-list govuk-list--bullet"&gt;
+    &lt;li&gt;record data about empty packaging and packaged goods you import and supply in the UK market from 1 January 2024&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;create an account&lt;/a&gt; and register your organisation by 1 April 2025&lt;/li&gt;
+    &lt;li&gt;pay a fee to the environmental regulator - contact your UK nation's regulator for more information about fees&lt;/li&gt;
+    &lt;li&gt;submit data about empty packaging and packaged goods you imported or supplied through the UK market throughout 2024&lt;/li&gt;
+&lt;/ul&gt;
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">

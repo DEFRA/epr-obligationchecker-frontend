@@ -283,8 +283,8 @@
     <value>Select yes if you own an online marketplace allowing non-UK companies to sell packaged goods in the UK.</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.OnlineMarketplaceDescriptions" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Under EPR for packaging, this is when you operate a website or app that allows non-UK businesses to sell their goods into the UK.&lt;/p&gt;
-        &lt;p class="govuk-body"&gt;If your organisation owns a website or app that sells goods from UK organisations only, this is not classed as owning an online marketplace.&lt;/p&gt;
+    <value>&lt;p class="govuk-body"&gt;Under EPR for packaging, an online marketplace is a website or app that allows non-UK organisations to sell their goods in the UK.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;If your organisation owns a website that sells goods from UK organisations only, this is not classed as an online marketplace.&lt;/p&gt;
         </value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.Title" xml:space="preserve">
@@ -326,7 +326,7 @@
     <value>How much packaging in total did you supply or import in this way, in 2022?</value>
   </data>
   <data name="SingleQuestion.AmountYouSupply.QuestionTitle" xml:space="preserve">
-    <value>How much packaging in total do you handle and supply?</value>
+    <value>How much packaging in total do you supply?</value>
   </data>
   <data name="SingleQuestion.YouToldUsHeader" xml:space="preserve">
     <value>You told us that you:</value>
@@ -370,7 +370,7 @@
     <value>Do you use any of the following materials for the drinks containers?</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.QuestionDescription" xml:space="preserve">
-    <value>Select all that apply</value>
+    <value>Select all that apply.</value>
   </data>
   <data name="SingleQuestion.ContainerVolume.Title" xml:space="preserve">
     <value>Are any of the containers between 150ml and 3l?</value>

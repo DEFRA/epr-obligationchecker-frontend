@@ -118,7 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="or_text" xml:space="preserve">
-    <value />
+    <value>
+        neu
+    </value>
   </data>
   <data name="Welsh" xml:space="preserve">
     <value />
@@ -133,7 +135,9 @@
     <value />
   </data>
   <data name="continue_button_text" xml:space="preserve">
-    <value />
+    <value>
+        Parhau
+    </value>
   </data>
   <data name="Cymraeg" xml:space="preserve">
     <value />
@@ -157,7 +161,16 @@
     <value />
   </data>
   <data name="Disclaimer" xml:space="preserve">
-    <value />
+    <value>Mae'r adnodd 'Gwirio a oes angen ichi roi gwybod am ddata pecynwaith' yn rhoi gwybodaeth a chefnogaeth gyffredinol ond nid yw'n gyngor cyfreithiol.</value>
+  </data>
+    <data name ="DisclaimerLink" xml:space="preserve">
+        <value>https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do</value>
+    </data>
+    <data name="DisclaimerPart2">
+        <value> Darllenwch y canllawiau Cyfrifoldeb Estynedig Cynhyrchwyr dros Becynwaith</value>
+    </data>
+    <data name="DisclaimerPart3" xml:space="preserve">
+    <value> i gael rhagor o wybodaeth am rwymedigaethau a chyfrifoldebau.</value>
   </data>
   <data name="question_option_no" xml:space="preserve">
     <value />
@@ -184,19 +197,25 @@
     <value />
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.AluminiumCans" xml:space="preserve">
-    <value />
+    <value>
+        Caniau alwminiwm
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.GlassBottles" xml:space="preserve">
-    <value />
+    <value>
+        Poteli gwydr
+    </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.None" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.PlasticBottles" xml:space="preserve">
-    <value />
+    <value>Poteli plastig polyethylen tereffthalat (PET)</value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.SteelCans" xml:space="preserve">
-    <value />
+    <value>
+        Caniau dur
+    </value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
     <value />
@@ -213,14 +232,14 @@
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
     <value />
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
-    <value />
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
+    <value>Rhiant-gwmni</value>
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
-    <value />
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
+    <value>Is-gwmni</value>
   </data>
-  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
-    <value />
+    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
+    <value>Cwmni unigol</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
     <value />

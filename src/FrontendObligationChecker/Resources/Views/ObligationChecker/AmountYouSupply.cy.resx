@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
-    <value />
+    <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
+    <value>25 tunnell i 50 tunnell</value>
   </data>
-  <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
-    <value />
+    <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
+    <value>Mwy na 50 tunnell</value>
   </data>
   <data name="AmountYouSupply.Description" xml:space="preserve">
     <value />
@@ -133,10 +133,15 @@
     <value />
   </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
-    <value />
+    <value> 
+         &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Gwiriwch y canllawiau &lt;/a&gt; i gael y diffiniad o becynwaith a gwybodaeth am weithgareddau pecynnu perthnasol (cyfeirir at y rhain hefyd fel 'swyddogaethau pecynnu').     
+    </value>
   </data>
-  <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
-    <value />
+  <data name="AmountYouSupply.MultipleActivitiesParagraph2" xml:space="preserve">
+    <value>Does dim angen ichi gynnwys unrhyw becynwaith nad yw'n cael ei ystyried yn weithgaredd pecynnu</value>
+  </data>
+    <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
+    <value>Dewiswch opsiwn tunelledd.</value>
   </data>
   <data name="AmountYouSupply.MultipleActivitiesQuestionTitle" xml:space="preserve">
     <value />
@@ -144,16 +149,18 @@
   <data name="AmountYouSupply.SingleActivityParagraph" xml:space="preserve">
     <value />
   </data>
-  <data name="AmountYouSupply.SingleActivityQuestionError" xml:space="preserve">
-    <value />
+    <data name="AmountYouSupply.SingleActivityQuestionError" xml:space="preserve">
+    <value>Dewiswch opsiwn tunelledd.</value>
   </data>
   <data name="AmountYouSupply.SingleActivityQuestionTitle" xml:space="preserve">
     <value />
   </data>
   <data name="AmountYouSupply.Title" xml:space="preserve">
-    <value />
+    <value>
+        Beth yw cyfanswm y pecynwaith rydych chi'n ei gyflenwi?
+    </value>
   </data>
-  <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
-    <value />
+    <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
+    <value>O dan 25 tunnell</value>
   </data>
 </root>
