@@ -139,8 +139,7 @@
     <value>What was your group’s last reported turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
-    <value>
-        Refer to your  most recent annual accounts up until 7 April.
+    <value>        
         Your answer should include the reported turnover of all relevant subsidiaries in your group that handle and supply (create, import, distribute or sell) packaging.
     </value>
   </data>
@@ -178,7 +177,7 @@
         &lt;ul class="govuk-list govuk-list--bullet"&gt;
         &lt;li&gt;a name&lt;/li&gt;
         &lt;li&gt;a trademark&lt;/li&gt;
-        &lt;li&gt;any distinguishing mark&lt;/li&gt;
+        &lt;li&gt;any distinctive mark&lt;/li&gt;
         &lt;/ul&gt;</value>
   </data>
   <data name="SingleQuestion.OwnBrand.AnotherOrganisationTasks" xml:space="preserve">
@@ -197,10 +196,10 @@
     <value>Select yes if you supply goods to the UK market under your own brand.</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.Title" xml:space="preserve">
-    <value>Do you place goods for sale into packaging?</value>
+    <value>Do you place goods into packaging?</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
-    <value>Do you place goods for sale into packaging?</value>
+    <value>Do you place goods into packaging?</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.QuestionTitle" xml:space="preserve">
     <value />
@@ -210,6 +209,8 @@
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.PlacingGoodsDescriptions" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;This could be goods you packaged for your own organisation or for another organisation.&lt;/p&gt;
+            &lt;p class="govuk-body"&gt;Select no if you only pack goods which another large organisation is responsible for. &lt;/p&gt;
+            &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Learn more about responsibilities &lt;/a&gt;  &lt;/p&gt;
         </value>
   </data>
   <data name="SingleQuestion.ImportingProducts.Title" xml:space="preserve">
@@ -243,13 +244,14 @@
     <value>Select yes if you supply empty packaging you've imported or manufactured.</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.HigherThresholdDescriptions" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Under EPR, large organisations:&lt;/p&gt;        
+    <value>&lt;p class="govuk-body"&gt;Select yes if you supply to:&lt;/p&gt;        
         &lt;p class="govuk-body"&gt;&lt;/p&gt;
         &lt;ul class="govuk-list govuk-list--bullet"&gt;
-        &lt;li&gt;have an annual turnover of more than than £2m&lt;/li&gt;
-        &lt;li&gt;import or supply more than 50 tonnes of empty packaging or packaged goods&lt;/li&gt;
+        &lt;li&gt;large organisations which do not pack or fill the packaging, or are brand owners of the packaging&lt;/li&gt;
+        &lt;li&gt;small organisations&lt;/li&gt;
+        &lt;li&gt; organisations below the small producer threshold&lt;/li&gt;
         &lt;/ul&gt;
-        &lt;p class="govuk-body"&gt; If you are unsure, &lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;check the list of large organisations&lt;/a&gt;&lt;/p&gt;
+        &lt;p class="govuk-body"&gt; &lt;a href="https://www.gov.uk/guidance/packaging-waste-prepare-for-extended-producer-responsibility#what-you-may-need-to-do" class="govuk-link" target="_blank"&gt;Read more about classifications and thresholds&lt;/a&gt;&lt;/p&gt;
     </value>
   </data>
   <data name="SingleQuestion.HiringLoaning.Title" xml:space="preserve">
@@ -269,10 +271,10 @@
         </value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.Title" xml:space="preserve">
-    <value>Do you own an online maketplace allowing non-UK companies to sell packaged goods in the UK?</value>
+    <value>Do you own an online marketplace allowing non-UK companies to sell packaged goods in the UK?</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
-    <value>Do you own an online maketplace allowing non-UK companies to sell packaged goods in the UK?</value>
+    <value>Do you own an online marketplace allowing non-UK companies to sell packaged goods in the UK?</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.QuestionTitle" xml:space="preserve">
     <value />
@@ -286,10 +288,10 @@
         </value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.Title" xml:space="preserve">
-    <value>Do you supply filled packaging to end users, including businesses?</value>
+    <value>Do you supply filled packaging to end users?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
-    <value>Do you supply filled packaging to end users, including businesses?</value>
+    <value>Do you supply filled packaging to end users?</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.QuestionTitle" xml:space="preserve">
     <value />
@@ -298,7 +300,7 @@
     <value>Select yes if you supply filled packaging to end users.</value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.SupplierConsumerDescriptions" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;An end user is the last person to use packaging before discarding it. This could be an individual or a business.&lt;/p&gt;            
+    <value>&lt;p class="govuk-body"&gt;An end user is the last person to use packaging before discarding it. This could be a consumer or a business.&lt;/p&gt;            
         </value>
   </data>
   <data name="SingleQuestion.AmountYouSupply.Header" xml:space="preserve">
@@ -311,13 +313,14 @@
     <value>How EPR for packaging affects parent companies and subsidiaries</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.Detail" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Parent companies &lt;/p&gt;
+    <value>&lt;p class="govuk-body"&gt;There are different ways you can comply with EPR for packaging.&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;You can register as: &lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
     &lt;li&gt;a whole group (in this instance, the parent group complies with EPR for packaging on behalf of every subsidiary within the group)&lt;/li&gt;
     &lt;li&gt;individual subsidiaries (in this instance, the subsidiaries that meet the turnover and tonnage requirements comply with EPR for packaging independently)&lt;/li&gt;
     &lt;li&gt;a parent company for part of the group (this is where the parent company registers to comply with EPR for packaging on behalf of some, but not all of its subsidiaries)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p class="govuk-body"&gt;Check which type of organisation you should select &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#if-youre-a-parent-company-group-or-subsidiary" class="govuk-link" target="_blank"&gt; here  &lt;/a&gt;  &lt;/p&gt;</value>
+&lt;p class="govuk-body"&gt; &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#if-youre-a-parent-company-group-or-subsidiary" class="govuk-link" target="_blank"&gt; Check which type of organisation you should select &lt;/a&gt;  &lt;/p&gt;</value>
   </data>
   <data name="SingleQuestion.AmountYouSupply.QuestionTitleSingular" xml:space="preserve">
     <value>How much packaging in total did you supply or import in this way, in 2022?</value>
@@ -373,7 +376,7 @@
     <value>Are any of the containers between 150ml and 3l?</value>
   </data>
   <data name="SingleQuestion.ContainerVolume.QuestionDescription" xml:space="preserve">
-    <value>This includes containers between 50ml and 3l that are sold in multipacks.</value>
+    <value>This includes containers between 150ml and 3l that are sold in multipacks.</value>
   </data>
   <data name="SingleQuestion.ContainerVolume.QuestionError" xml:space="preserve">
     <value>Select yes if any of the containers are between 150ml and 3l.</value>

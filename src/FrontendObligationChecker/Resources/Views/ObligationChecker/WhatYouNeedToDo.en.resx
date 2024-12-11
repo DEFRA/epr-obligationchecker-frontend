@@ -133,13 +133,23 @@
     <value>What this means for your organisation</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
-    <value>Submit nation data &lt;IF NATION DATA IS APPLICABLE&gt;</value>
+    <value>Submit nation data</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
     <value>You will need to submit nation data.</value>
-  </data>
+  </data>    
   <data name="WhatYouNeedToDo.ContentNationDataParagraph2" xml:space="preserve">
-    <value>Nation data is information about which nation in the UK packaging is supplied in and which nation in the UK packaging is discarded in.</value>
+    <value>Nation data is information about which UK nation you:</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataDetails" xml:space="preserve">
+    <value>       
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+            &lt;li&gt;supplied packaging to customers&lt;/li&gt;
+            &lt;li&gt;discarded packaging yourself&lt;/li&gt;           
+        &lt;/ul&gt;
+        &lt;p class="govuk-body"&gt; If you have supplied packaging to a customer, you only need to report data about the UK country it was sold to. You will not need to report data about where the packaging was discarded. &lt;/p&gt;
+        &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#check-if-you-need-to-report-nation-data" target="_blank" &gt;  Learn more about nation data  &lt;/a&gt; &lt;/p&gt;  
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph3" xml:space="preserve">
     <value>
@@ -161,7 +171,25 @@
  </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
-    <value>You'll need to submit your nation data for the 2024 calendar year by 1 December 2025.</value>
+    <value>
+        &lt;a href="" target="_blank" &gt; Sign in &lt;/a&gt; or &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; create an account &lt;/a&gt;
+    </value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset2" xml:space="preserve">
+    <value>You'll need to submit your data by 1 April 2025</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
+    <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataInset4" xml:space="preserve">
+    <value>
+        You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; Read the guidance  &lt;/a&gt; to check if there's anything else you need to do.
+    </value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataInset5" xml:space="preserve">
+    <value>
+        You'll need to submit your nation data for the 2024 calendar year by 1 December 2025.
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
     <value>What you should do next</value>
@@ -191,7 +219,7 @@
     <value>Do you hire or loan out reusable packaging to UK organisations?</value>
   </data>
   <data name="WhatYouNeedToDo.OnlineMarketplace.AlternateRowTitle" xml:space="preserve">
-    <value>Do you own an online maketplace allowing non-UK companies to sell packaged goods in the UK?</value>
+    <value>Do you own an online marketplace allowing non-UK companies to sell packaged goods in the UK?</value>
   </data>
   <data name="WhatYouNeedToDo.SupplyingFilledPackaging.AlternateRowTitle" xml:space="preserve">
     <value>Supplying filled packaging to consumers</value>
@@ -206,7 +234,7 @@
     <value>Materials used for drinks containers</value>
   </data>
   <data name="WhatYouNeedToDo.ContainerVolumeAlternateRowTitle" xml:space="preserve">
-    <value>Drinks containers between 50ml and 3l</value>
+    <value>Drinks containers between 150ml and 3l</value>
   </data>  
   <data name="WhatYouNeedToDo.ContentParagraph1Small" xml:space="preserve">
     <value>Under EPR for packaging, you're classed as a small organisation. This means you will need to record and submit data about the packaging you import and supply.</value>
@@ -224,24 +252,23 @@
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4SmallParent" xml:space="preserve">
-    <value>
-        You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#what-you-may-need-to-do" target="_blank" &gt; Read the guidance to check if there's anything else you need to do. &lt;/a&gt;
+    <value>       
     </value>
   </data>
     <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
     <value>Under EPR for packaging, you're classed as a small organisation. This means you will need to record and submit data about the packaging you import and supply.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2SmallSubsidiary" xml:space="preserve">
-    <value>As a subsidiary, your parent company may need to report data on your behalf if it’s classed as a large organisation. Sign in to your EPR account or create an account</value>
+    <value>As a subsidiary, your parent company may need to report data on your behalf if it’s classed as a large organisation.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3SmallSubsidiary" xml:space="preserve">
     <value>You'll need to submit your data by 1 April 2025.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4SmallSubsidiary" xml:space="preserve">
-    <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph5SmallSubsidiary" xml:space="preserve">
-    <value>You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#what-you-may-need-to-do" &gt; Read the guidance to check if there's anything else you need to do. &lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
     <value>Under EPR for packaging, you're classed as a large organisation. This means you will need to record and submit data about the packaging you import and supply.
@@ -258,10 +285,10 @@
  </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3Small" xml:space="preserve">
-    <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4Small" xml:space="preserve">
-    <value>You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#what-you-may-need-to-do" &gt; Read the guidance to check if there's anything else you need to do. &lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;You must:&lt;/p&gt;
@@ -276,16 +303,16 @@
     <value>Under EPR for packaging, you're classed as a large organisation. This means you’ll need to record and submit data about the packaging you import and supply.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2LargeSubsidiary" xml:space="preserve">
-    <value>As a subsidiary, your parent company may need to report data on your behalf if it's also classed as a large organisation. Sign in to your EPR account or create an account.</value>
+    <value>As a subsidiary, your parent company may need to report data on your behalf if it's also classed as a large organisation.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3LargeSubsidiary" xml:space="preserve">
     <value>You'll need to submit your data by 1 April 2025.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4LargeSubsidiary" xml:space="preserve">
-    <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph5LargeSubsidiary" xml:space="preserve">
-    <value>You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#what-you-may-need-to-do" &gt; Read the guidance to check if there's anything else you need to do. &lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1LargeParent" xml:space="preserve">
     <value>Under EPR for packaging, you're classed as a large organisation. This means you will need to record and submit data about the packaging you import and supply.</value>
@@ -297,10 +324,10 @@
     <value>You'll need to submit your data by 1 April 2025.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4LargeParent" xml:space="preserve">
-    <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph5LargeParent" xml:space="preserve">
-    <value>You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#what-you-may-need-to-do" &gt; Read the guidance to check if there's anything else you need to do. &lt;/a&gt;</value>
+    <value></value>
   </data>
   <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
     <value>When to collect and report</value>
@@ -324,7 +351,7 @@
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
     <value>
-        &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;
+       
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">
@@ -337,8 +364,7 @@
     <value>scheme administrator costs</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4Large" xml:space="preserve">
-    <value>
-        You may also have other obligations under EPR for packaging. &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#what-you-may-need-to-do" &gt; Read the guidance to check if there's anything else you need to do. &lt;/a&gt;
+    <value>        
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph5Large" xml:space="preserve">
@@ -382,5 +408,12 @@
   </data>
   <data name="WhatYouNeedToDo.TypeOfProducerText" xml:space="preserve">
     <value>Organisation size</value>
+  </data>
+  <data name="WhatYouNeedToDo.ReturnToGuidanceButton" xml:space="preserve">
+    <value>
+        &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button" &gt;
+          Return to EPR guidance
+        &lt;/a&gt;
+    </value>      
   </data>
 </root>
