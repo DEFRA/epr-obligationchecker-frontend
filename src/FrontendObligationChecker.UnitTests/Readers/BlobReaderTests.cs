@@ -62,7 +62,7 @@ public class BlobReaderTests
         // Assert
         result.Should().BeOfType<MemoryStream>();
         var actualByteStart = new byte[3];
-        await result.ReadAsync(actualByteStart, 0, 3);
+        await result.ReadAsync(actualByteStart.AsMemory(0, 3));
         actualByteStart[0].Should().Be(0xEF);
         actualByteStart[1].Should().Be(0xBB);
         actualByteStart[2].Should().Be(0xBF);

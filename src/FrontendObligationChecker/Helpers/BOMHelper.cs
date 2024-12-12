@@ -2,7 +2,7 @@
 
 namespace FrontendObligationChecker.Helpers
 {
-    public static class BOMHelper
+    public static class BomHelper
     {
         /// <summary>
         /// BOM sequence is added to the start of the file. This helps programs like Excel ensure that all non-standard characters eg (C) and TM

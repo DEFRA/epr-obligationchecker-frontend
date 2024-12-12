@@ -33,7 +33,7 @@ public class BlobReader : IBlobReader
 
             if (prependBOM)
             {
-                BOMHelper.PrependBOMBytes(memoryStream);
+                BomHelper.PrependBOMBytes(memoryStream);
             }
 
             return memoryStream;
