@@ -1,0 +1,6 @@
+variables:
+  azureSubscription: 'AZD-RWD-DEV13'
+  docker.imageName: 'obligationregistry'
+  acr.azureContainerRegistryName: 'devrwdinfac1401'
+  acr.repositoryName: 'obligationregistry'
+  serviceName: 'devrwdwebwad401'

@@ -158,11 +158,11 @@
 
     <ItemGroup>
         <SonarQubeSetting Include="sonar.coverage.exclusions">
-            <Value>Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**</Value>
+            <Value>Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**,Views/Shared/Components/LanguageSwitcher/Default.cshtml</Value>
         </SonarQubeSetting>
         <SonarQubeSetting Include="sonar.cpd.exclusions">
             <Value>
-                Views/**/*.cshtml,Generators/PageGenerator.cs
+                Views/**/*.cshtml,Generators/PageGenerator.cs,Views/Shared/Components/LanguageSwitcher/Default.cshtml
             </Value>
         </SonarQubeSetting>
     </ItemGroup>

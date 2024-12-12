@@ -22,12 +22,14 @@
                 @if (!Model.Page.IsPageHeading)
                 {
                     @if (Model.Page.HasTitleCaption)
-                    {
+                    {   
                         <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span>
                     }
                     <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
                 }
 
+
+                @* This check may no long be relevant since this page has been repositioned *@
                 @if (page.HasSingleActivity)
                 {
                     <p class="govuk-body">
@@ -37,7 +39,11 @@
                 else
                 {
                     <p class="govuk-body">
-                        @Localizer["AmountYouSupply.MultipleActivitiesParagraph"]
+                        @Localizer["AmountYouSupply.MultipleActivitiesParagraph"]                        
+                    </p>
+
+                    <p class="govuk-body">
+                        @Localizer["AmountYouSupply.MultipleActivitiesParagraph2"]
                     </p>
                 }
 

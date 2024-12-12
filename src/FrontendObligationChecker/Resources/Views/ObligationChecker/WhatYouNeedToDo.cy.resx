@@ -118,188 +118,258 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="WhatYouNeedToDo.AmountYouSupplyAlternateRowTitle" xml:space="preserve">
-    <value>Swm pecynnu</value>
+    <value>
+        Swm y pecynwaith
+    </value>
   </data>
   <data name="WhatYouNeedToDo.AnnualTurnoverAlternateRowTitle" xml:space="preserve">
     <value>Trosiant</value>
   </data>
   <data name="WhatYouNeedToDo.ContainerVolumeAlternateRowTitle" xml:space="preserve">
-    <value>Cynwysyddion diodydd rhwng 50ml a 3l</value>
+    <value>
+        Cynwysyddion diodydd rhwng 150ml a 3l
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentBanner" xml:space="preserve">
-    <value>Bydd angen i chi roi gwybod am ddata pecynnu</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentDetailsPrnPerns" xml:space="preserve">
-    <value>&lt;details class="govuk-details" data-module="govuk-details"&gt;
-        &lt;summary class="govuk-details__summary"&gt;
-        &lt;span class="govuk-details__summary-text"&gt;Beth yw PRNs a PERNs?
-
-        &lt;/span&gt;
-        &lt;/summary&gt;
-                &lt;div class="govuk-details__text"&gt;
-        &lt;p class="govuk-body"&gt;Mae PRN neu PERN yn dystiolaeth bod gwastraff pecynnu wedi'i ailgylchu.&lt;/p&gt;
-        &lt;p class="govuk-body"&gt;Gallwch gael PRN gan ailbroseswyr achrededig. Mae ailbroseswyr yn gyfrifol am ailgylchu gwastraff pecynnu. Gallwch hefyd gael PERNs gan allforwyr achrededig.&lt;/p&gt;
-        &lt;p class="govuk-body"&gt;Trwy gael PRNs a PERNs, rydych chi'n gweithio tuag at gwrdd â'ch rhwymedigaethau ailgylchu.&lt;/p&gt;
-                    &lt;/div&gt;
-            &lt;/details&gt;</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentHeading1" xml:space="preserve">
-    <value>Beth mae hyn yn ei olygu i'ch sefydliad</value>
+    <value>Beth mae hyn yn ei olygu i'ch sefydliad chi</value>
   </data>
   <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">
-    <value>Cwrdd â'ch rhwymedigaethau ailgylchu</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
-    <value>Beth ddylech chi ei wneud nesaf</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentHeading5" xml:space="preserve">
-    <value>Yr hyn a ddywedasoch wrthym</value>
+    <value>
+        Yr hyn rydych chi wedi'i ddweud wrthon ni
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentInset1Large" xml:space="preserve">
-    <value>Ar gyfer y cyfnod Ionawr i Fehefin 2023, adroddwch ar ddata erbyn 1 Hydref 2023.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentInset1Small" xml:space="preserve">
-    <value>Bydd angen i chi gyflwyno eich data erbyn 1 Ebrill 2024.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentInset2Large" xml:space="preserve">
-    <value>Ar gyfer y cyfnod Gorffennaf i Ragfyr 2023, adroddwch ar ddata erbyn 1 Ebrill 2024.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
-    <value>Cyflwyno data cenedl</value>
+    <value>Cyflwyno data gwlad</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
-    <value>Bydd angen i chi gyflwyno data eich cenedl ar gyfer blwyddyn galendr 2023 erbyn 1 Rhagfyr 2024.</value>
+    <value>&lt;a href="" target="_blank" &gt; Mewngofnodi i'ch cyfrif EPR &lt;/a&gt; neu  &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; greu cyfrif &lt;/a&gt; </value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataInset2" xml:space="preserve">
+    <value>Bydd angen ichi gyflwyno'ch data erbyn 1 Ebrill 2025</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
+    <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt;Rhagor o wybodaeth am beth i'w gasglu ar gyfer EPR&lt;/a&gt;</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset4" xml:space="preserve">
+    <value>
+        Efallai y bydd gennych rwymedigaethau eraill hefyd o dan yr EPR dros becynwaith. &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; Darllenwch y canllawiau &lt;/a&gt; i weld a oes unrhyw beth arall y mae angen ichi ei wneud.
+    </value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentNationDataInset5" xml:space="preserve">
+    <value>
+        Bydd angen ichi gyflwyno'ch data gwlad am flwyddyn galendr 2024 erbyn 1 Rhagfyr 2025.
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph1" xml:space="preserve">
-    <value>Bydd angen i chi gyflwyno data cenedl.</value>
+    <value>
+        Bydd angen ichi gyflwyno data gwlad.
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph2" xml:space="preserve">
-    <value>Mae data cenedl yn wybodaeth am ba wlad yn y deunydd pacio yn y DU y cyflenwir ynddi ac ym mha wlad yn y DU y caiff deunydd pacio ei daflu.</value>
+    <value>
+        Data gwlad yw gwybodaeth am ba wlad yn y Deyrnas Unedig rydych chi:
+    </value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentNationDataDetails" xml:space="preserve">
+    <value>       
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+            &lt;li&gt;wedi cyflenwi pecynwaith i gwsmeriaid ynddi&lt;/li&gt;
+            &lt;li&gt;wedi gwaredu'r pecynwaith ynddi &lt;/li&gt;           
+        &lt;/ul&gt;
+        &lt;p class="govuk-body"&gt; Os ydych chi wedi darparu pecynwaith i gwsmer, dim ond am y wlad yn y Deyrnas Unedig y cafodd ei werthu iddi y mae angen ichi roi gwybod. Fydd dim angen ichi roi gwybod am ddata ynghylch ble cafodd y pecynwaith ei waredu. &lt;/p&gt;
+        &lt;p class="govuk-body"&gt; Os ydych chi wedi gwaredu'r pecynwaith, bydd angen ichi roi gwybod am ddata am y wlad yn y Deyrnas Unedig ble cafodd y pecynwaith ei waredu. &lt;/p&gt;
+        &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#check-if-you-need-to-report-nation-data" target="_blank" &gt;  Rhagor o wybodaeth am ddata gwlad.  &lt;/a&gt; &lt;/p&gt;  
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataParagraph3" xml:space="preserve">
-    <value>Dylai data gwlad ddangos ble yn y DU rydych chi wedi cyflenwi deunydd pacio i berson neu fusnes sydd wedi mynd ymlaen i’w daflu.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
-    <value>O dan EPR ar gyfer pecynnu, rydych yn cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen i'ch sefydliad gofnodi a chyflwyno data am y pecyn a gyflenwir neu a fewnforiwyd ganddo. Bydd angen i chi dalu ffioedd hefyd.</value>
+    <value>
+        O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad bach. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1Small" xml:space="preserve">
-    <value>O dan EPR ar gyfer pecynnu, rydych yn cael eich dosbarthu fel sefydliad bach. Mae hyn yn golygu y bydd angen i'ch sefydliad gofnodi a chyflwyno data am y deunydd pacio y mae'n ei drin a'i gyflenwi.</value>
+    <value>
+        O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad bach. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.
+    </value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2SmallParent" xml:space="preserve">
+    <value>Fel rhiant-gwmni, rhaid ichi gyflwyno data ar wahân ar gyfer pob un o'r is-gwmnïau o fewn cofrestriad eich grŵp. 
+Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau sydd wedi'u cofrestru'n annibynnol.
+    </value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1LargeParent" xml:space="preserve">
+    <value>O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentParagraph2LargeParent" xml:space="preserve">
+    <value>Fel rhiant-gwmni, rhaid ichi gyflwyno data ar wahân ar gyfer pob un o'r is-gwmnïau o fewn cofrestriad eich grŵp. Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau sydd wedi'u cofrestru'n annibynnol.</value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentParagraph3LargeParent" xml:space="preserve">
+    <value>
+        
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
-    <value>Fel is-gwmni sy'n sefydliad bach, mae'n bosibl y bydd eich rhwymedigaeth yn perthyn i riant-gwmni eich grŵp mewn amgylchiadau lle byddai'r grŵp yn cael ei ddosbarthu fel cynhyrchydd mawr.</value>
+    <value>O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Mae'n rhaid i ti:&lt;/p&gt;
+    <value>
+        &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
 &lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;cofnodi data am y deunydd pacio gwag a’r nwyddau wedi’u pecynnu y gwnaethoch eu cyflenwi neu eu mewnforio i farchnad y DU – gwiriwch ‘Pryd i gasglu ac adrodd’ i weld pryd mae angen i chi wneud hyn&lt;/li&gt;
-    &lt;li&gt;creu cyfrif a chofrestru eich sefydliad o fis Gorffennaf 2023&lt;/li&gt;
-    &lt;li&gt;talu ffi i’r rheolydd amgylcheddol&lt;/li&gt;
-    &lt;li&gt;cyflwyno data am becynnu gwag a nwyddau wedi'u pecynnu y gwnaethoch eu cyflenwi neu eu mewnforio drwy farchnad y DU&lt;/li&gt;
-&lt;/ul&gt;</value>
+    &lt;li&gt;cofnodi data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi'n eu mewnforio a'u cyflenwi ym marchnad y Deyrnas Unedig o 1 Ionawr 2024 ymlaen&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;creu cyfrif&lt;/a&gt; a chofrestru'ch sefydliad erbyn 1 Ebrill 2025&lt;/li&gt;
+    &lt;li&gt;talu ffi i'r rheoleiddiwr amgylcheddol - cysylltwch â rheoleiddiwr eich gwlad chi yn y Deyrnas Unedig i gael rhagor o wybodaeth am ffioedd &lt;/li&gt;
+    &lt;li&gt;cyflwyno data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi wedi'u mewnforio neu wedi'u cyflenwi drwy farchnad y Deyrnas Unedig &lt;/li&gt;
+&lt;/ul&gt;
+    </value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph1LargeSubsidiary" xml:space="preserve">
+    <value>O dan yr dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2LargeSubsidiary" xml:space="preserve">
+    <value>As a subsidiary, your parent company may need to report data on your behalf if it's also classed as a large organisation.</value>
+  </data>
+  <data name="WhatYouNeedToDo.ContentParagraph3LargeSubsidiary" xml:space="preserve">
+    <value>
+        &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+            &lt;li&gt;cofnodi data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi'n eu mewnforio a'u cyflenwi ym marchnad y Deyrnas Unedig o 1 Ionawr 2024 ymlaen&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;creu cyfrif&lt;/a&gt; a chofrestru'ch sefydliad erbyn 1 Ebrill 2025&lt;/li&gt;
+            &lt;li&gt;talu ffi i'r rheoleiddiwr amgylcheddol - cysylltwch â rheoleiddiwr eich gwlad chi yn y Deyrnas Unedig i gael rhagor o wybodaeth am ffioedd &lt;/li&gt;
+            &lt;li&gt;cyflwyno data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi wedi'u mewnforio neu wedi'u cyflenwi drwy farchnad y Deyrnas Unedig bob chwe mis&lt;/li&gt;
+        &lt;/ul&gt;
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2Seller" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Mae'n rhaid i ti:&lt;/p&gt;
-&lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;cofnodi data cenedl o 1 Ionawr 2023&lt;/li&gt;
-    &lt;li&gt;creu cyfrif a chofrestru eich sefydliad o fis Ionawr 2024&lt;/li&gt;
-    &lt;li&gt;talu ffi i’r rheolydd amgylcheddol&lt;/li&gt;
-    &lt;li&gt;cyflwyno eich data cenedl&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/ul&gt;</value>
+    <value />
   </data>
-  <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Mae'n rhaid i ti:&lt;/p&gt;
-&lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;cofnodi data am ddeunydd pacio gwag a nwyddau wedi'u pecynnu yr ydych yn eu trin a'u cyflenwi ym marchnad y DU o 1 Ionawr 2023&lt;/li&gt;
-    &lt;li&gt;creu cyfrif a chofrestru eich sefydliad erbyn 1 Ebrill 2024&lt;/li&gt;
-    &lt;li&gt;talu ffi i’r rheolydd amgylcheddol&lt;/li&gt;
-    &lt;li&gt;cyflwyno data am ddeunydd pacio gwag a nwyddau wedi’u pecynnu y gwnaethoch eu trin neu eu cyflenwi drwy farchnad y DU drwy gydol 2023&lt;/li&gt;
-&lt;/ul&gt;</value>
+  <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">      
+    <value>
+        &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+        &lt;li&gt;cofnodi data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi'n eu mewnforio a'u cyflenwi ym marchnad y Deyrnas Unedig o 1 Ionawr 2024 ymlaen&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;creu cyfrif&lt;/a&gt; a chofrestru'ch sefydliad erbyn 1 Ebrill 2025&lt;/li&gt;
+        &lt;li&gt;talu ffi i'r rheoleiddiwr amgylcheddol - cysylltwch â rheoleiddiwr eich gwlad chi yn y Deyrnas Unedig i gael rhagor o wybodaeth am ffioedd &lt;/li&gt;
+        &lt;li&gt;cyflwyno data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi wedi'u mewnforio neu wedi'u cyflenwi drwy farchnad y Deyrnas Unedig &lt;/li&gt;
+        &lt;/ul&gt;
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
-    <value>Ar gyfer unrhyw ddeunydd pacio rydych chi’n ei gyflenwi neu’n ei fewnforio sy’n cael ei gasglu gan awdurdodau lleol o gartrefi neu finiau cyhoeddus, o fis Ebrill 2024 mae’n rhaid i chi dalu:</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph4Large" xml:space="preserve">
-    <value>Rhaid i chi gael nodiadau ailgylchu gwastraff pecynnu (PRNs) neu nodiadau ailgylchu gwastraff pecynnu (PERNs) yn 2024.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph5Large" xml:space="preserve">
-    <value>Byddwn yn rhoi gwybod i chi faint o PRNs a PERNs sydd angen i chi eu cael. Byddwn yn seilio hyn ar eich data 2023.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentPrint1" xml:space="preserve">
-    <value>Gallwch chi</value>
+    <value>Gallwch</value>
   </data>
   <data name="WhatYouNeedToDo.ContentPrint2" xml:space="preserve">
-    <value>argraffu neu arbed y dudalen hon fel PDF</value>
+    <value>argraffu'r tudalen yma neu ei gadw fel PDF</value>
   </data>
   <data name="WhatYouNeedToDo.ContentUoList1A" xml:space="preserve">
-    <value>ffi rheoli gwastraff</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentUoList1B" xml:space="preserve">
-    <value>costau gweinyddwr y cynllun</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.HiringLoaning.AlternateRowTitle" xml:space="preserve">
-    <value>Llogi neu fenthyg deunydd pacio y gellir ei ailddefnyddio</value>
+    <value>
+        Ydych chi'n llogi neu'n rhoi benthyg pecynwaith a all gael ei ailddefnyddio i sefydliadau yn y Deyrnas Unedig?
+    </value>
   </data>
   <data name="WhatYouNeedToDo.ImportingProducts.AlternateRowTitle" xml:space="preserve">
-    <value>Mewnforio cynhyrchion mewn pecynnu</value>
+    <value>
+        Ydych chi'n mewnforio nwyddau wedi'u pecynnu i'w cyflenwi i farchnad y Deyrnas Unedig?
+    </value>
   </data>
   <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
-    <value>Deunyddiau a ddefnyddir ar gyfer cynwysyddion diodydd</value>
+    <value>
+        Deunyddiau a ddefnyddir ar gyfer cynwysyddion diodydd 
+    </value>
   </data>
   <data name="WhatYouNeedToDo.OnlineMarketplace.AlternateRowTitle" xml:space="preserve">
-    <value>Math o sefydliad</value>
+    <value>
+        Ydych chi'n berchen ar farchnad ar-lein sy'n caniatáu i gwmnïau o'r tu allan i'r Deyrnas Unedig werthu nwyddau sydd wedi'u pecynnu yn y Deyrnas Unedig?
+    </value>
   </data>
   <data name="WhatYouNeedToDo.OrganisationTypeAlternateRowTitle" xml:space="preserve">
-    <value>Bod yn berchen ar farchnad ar-lein</value>
+    <value>
+        Math o sefydliad 
+    </value>
   </data>
   <data name="WhatYouNeedToDo.OwnBrand.AlternateRowTitle" xml:space="preserve">
-    <value>Cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
-    <value>Rhowch gynwysyddion diodydd ar y farchnad</value>
+    <value>
+        
+    </value>
   </data>
   <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">
-    <value>Gwerthu pecynnau gwag i fusnesau eraill</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.SupplyingPackagingContent" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;Mae cyflenwi pecynnu yn cynnwys:&lt;/p&gt;
-&lt;ul class="govuk-list govuk-list--bullet"&gt;
-    &lt;li&gt;gwerthu&lt;/li&gt;
-    &lt;li&gt;llogi&lt;/li&gt;
-    &lt;li&gt;benthyca&lt;/li&gt;
-    &lt;li&gt;anrhegu&lt;/li&gt;
-&lt;/ul&gt;</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.Title" xml:space="preserve">
-    <value>Bydd angen i chi gymryd camau o dan yr EPR</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.TypeOfProducerLarge" xml:space="preserve">
-    <value>Mawr</value>
+    <value>mawr</value>
   </data>
   <data name="WhatYouNeedToDo.TypeOfProducerSmall" xml:space="preserve">
-    <value>Bach</value>
+    <value>bach</value>
   </data>
   <data name="WhatYouNeedToDo.TypeOfProducerText" xml:space="preserve">
-    <value>Math o Gynhyrchydd</value>
+    <value>
+        Maint y sefydliad
+    </value>
   </data>
   <data name="WhatYouNeedToDo.UnbrandedPackaging.AlternateRowTitle" xml:space="preserve">
-    <value>Rhowch nwyddau mewn pecynnau nad ydynt wedi'u brandio pan gânt eu gwerthu</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription" xml:space="preserve">
-    <value>Darganfod mwy am y data y bydd angen i chi ei gasglu (yn agor mewn tab newydd)</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
-    <value>Casglwch ddata am y deunydd pacio a ddarparwyd gennych drwy farchnad y DU neu a fewnforiwyd i'r DU.</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.WhenToCollectAndReportContent" xml:space="preserve">
-    <value>&lt;p class="govuk-body"&gt;
-            Os ydych wedi cofnodi’r holl ddata gofynnol o 1 Ionawr 2023, dylech adrodd ar y data hwn.
-            &lt;/p&gt;
-        &lt;p class="govuk-body"&gt;
-            Os nad yw'r holl ddata gofynnol wedi'i gofnodi gennych o 1 Ionawr, mae'n rhaid i chi roi gwybod am eich holl ddata o 1 Mawrth 2023. Os byddwch yn rhoi gwybod am ddata sy'n cwmpasu cyfnod yn dechrau o 1 Mawrth, caiff hwn ei ddefnyddio i gyfrifo gwerth blwyddyn lawn o data.
-        &lt;/p&gt;</value>
+    <value />
   </data>
   <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
-    <value>Pryd i gasglu ac adrodd</value>
+    <value />
   </data>
+    <data name="WhatYouNeedToDo.ReturnToGuidanceButton" xml:space="preserve">
+    <value>
+        &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button" &gt;
+          Yn ôl i'r canllawiau ar yr EPR
+        &lt;/a&gt;
+    </value>      
+  </data>   
 </root>
