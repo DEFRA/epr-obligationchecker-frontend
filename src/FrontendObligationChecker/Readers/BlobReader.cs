@@ -5,6 +5,7 @@ using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Exceptions;
+using FrontendObligationChecker.Helpers;
 using FrontendObligationChecker.Models.BlobReader;
 
 public class BlobReader : IBlobReader
@@ -21,7 +22,7 @@ public class BlobReader : IBlobReader
         _logger = logger;
     }
 
-    public async Task<Stream> DownloadBlobToStreamAsync(string fileName)
+    public async Task<Stream> DownloadBlobToStreamAsync(string fileName, bool prependBOM = false)
     {
         try
         {
@@ -29,6 +30,12 @@ public class BlobReader : IBlobReader
             var memoryStream = new MemoryStream();
             await blobClient.DownloadToAsync(memoryStream);
             memoryStream.Position = 0;
+
+            if (prependBOM)
+            {
+                BomHelper.PrependBOMBytes(memoryStream);
+            }
+
             return memoryStream;
         }
         catch (RequestFailedException ex)

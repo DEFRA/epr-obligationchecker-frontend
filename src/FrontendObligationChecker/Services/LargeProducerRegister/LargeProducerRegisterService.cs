@@ -154,7 +154,7 @@ public class LargeProducerRegisterService : ILargeProducerRegisterService
             return new LargeProducerFileViewModel
             {
                 FileName = string.Format(downloadFileNamePattern, reportingYear, latestBlob.CreatedOn.Value.Date),
-                FileContents = await _blobReader.DownloadBlobToStreamAsync(latestBlob.Name)
+                FileContents = await _blobReader.DownloadBlobToStreamAsync(latestBlob.Name, true)
             };
         }
         catch (BlobReaderException ex)

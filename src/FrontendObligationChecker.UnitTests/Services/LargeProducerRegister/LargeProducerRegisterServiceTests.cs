@@ -61,13 +61,13 @@ public class LargeProducerRegisterServiceTests
     {
         // Arrange
         var expected = new MemoryStream();
-        _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(It.IsAny<string>())).ReturnsAsync(expected);
+        _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(It.IsAny<string>(), false)).ReturnsAsync(expected);
 
         // Act
         var result = await _systemUnderTest.GetReportAsync(nationCode, Language.English);
 
         // Assert
-        _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(It.IsAny<string>()), Times.Once);
+        _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(It.IsAny<string>(), false), Times.Once);
         result.Should().BeOfType<(Stream, string)>();
     }
 
@@ -77,7 +77,7 @@ public class LargeProducerRegisterServiceTests
         // Arrange
         const string nationCode = HomeNation.England;
         const string logMessage = "Failed to get report for nation code {NationCode}";
-        _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(It.IsAny<string>())).ThrowsAsync(new BlobReaderException());
+        _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(It.IsAny<string>(), false)).ThrowsAsync(new BlobReaderException());
 
         // Act
         var act = () => _systemUnderTest.GetReportAsync(nationCode, Language.English);
@@ -304,14 +304,14 @@ public class LargeProducerRegisterServiceTests
         };
 
         _blobReaderMock.Setup(x => x.GetBlobsAsync(expectedPrefix)).ReturnsAsync(blobModels);
-        _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(blobModels[1].Name)).ReturnsAsync(expectedResult.FileContents);
+        _blobReaderMock.Setup(x => x.DownloadBlobToStreamAsync(blobModels[1].Name, true)).ReturnsAsync(expectedResult.FileContents);
 
         // Act
         var result = await _systemUnderTest.GetLatestAllNationsFileAsync(ReportingYear, culture);
 
         // Assert
         _blobReaderMock.Verify(x => x.GetBlobsAsync(expectedPrefix), Times.Once);
-        _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(blobModels[1].Name), Times.Once);
+        _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(blobModels[1].Name, true), Times.Once);
 
         result.Should().BeEquivalentTo(expectedResult);
     }
@@ -330,7 +330,7 @@ public class LargeProducerRegisterServiceTests
 
         // Assert
         _blobReaderMock.Verify(x => x.GetBlobsAsync(prefix), Times.Once);
-        _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(It.IsAny<string>()), Times.Never);
+        _blobReaderMock.Verify(x => x.DownloadBlobToStreamAsync(It.IsAny<string>(), false), Times.Never);
 
         result.Should().BeNull();
     }
