@@ -31,6 +31,45 @@ public class BlobReaderTests
     }
 
     [TestMethod]
+    public async Task DownloadBlobToStreamAsync_BlobContainerFindsFile_ReturnsMemoryStreamAndDoesNotPrepend_WhenAsked()
+    {
+        // Arrange
+        const string fileName = "fileName";
+
+        _blobContainerClient.Setup(x => x.GetBlobClient(It.IsAny<string>()))
+            .Returns(_blobClient.Object);
+
+        // Act
+        var result = await _systemUnderTest.DownloadBlobToStreamAsync(fileName, false);
+
+        // Assert
+        result.Should().BeOfType<MemoryStream>();
+        result.Length.Should().Be(0L);
+    }
+
+    [TestMethod]
+    public async Task DownloadBlobToStreamAsync_BlobContainerFindsFile_ReturnsMemoryStreamAndPrependsBOM_WhenAsked()
+    {
+        // Arrange
+        const string fileName = "fileName";
+
+        _blobContainerClient.Setup(x => x.GetBlobClient(It.IsAny<string>()))
+            .Returns(_blobClient.Object);
+
+        // Act
+        var result = await _systemUnderTest.DownloadBlobToStreamAsync(fileName, true);
+
+        // Assert
+        result.Should().BeOfType<MemoryStream>();
+        var actualByteStart = new byte[3];
+        await result.ReadAsync(actualByteStart.AsMemory(0, 3));
+        actualByteStart[0].Should().Be(0xEF);
+        actualByteStart[1].Should().Be(0xBB);
+        actualByteStart[2].Should().Be(0xBF);
+        result.Length.Should().Be(3L);
+    }
+
+    [TestMethod]
     public async Task DownloadBlobToStreamAsync_BlobContainerFindsFile_ReturnsMemoryStream()
     {
         // Arrange
