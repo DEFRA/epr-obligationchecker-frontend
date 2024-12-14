@@ -97,7 +97,7 @@ public static class PageGenerator
                     OptionPath.Primary, "SingleQuestion.AnnualTurnover.Title1"
                 },
                 {
-                    OptionPath.Secondary, "SingleQuestion.AnnualTurnover.Title2"
+                    OptionPath.Secondary, "SingleQuestion.AnnualTurnover.Title1"
                 }
             },
             TitleCaption = "AboutYourOrganisation",
@@ -108,7 +108,6 @@ public static class PageGenerator
                     OptionPath.Primary, PagePath.NoActionNeeded
                 },
                 {
-                    // OptionPath.Secondary, PagePath.OwnBrand
                     OptionPath.Secondary, PagePath.AmountYouSupply
                 }
             },
@@ -149,7 +148,8 @@ public static class PageGenerator
                 {
                     OptionPath.Primary, "SingleQuestion.AnnualTurnover.AdditionalDescription1"
                 }
-            }
+            },
+            AlternateTitle = "SingleQuestion.AnnualTurnover.Title2"
         };
     }
 
@@ -711,6 +711,7 @@ public static class PageGenerator
                         new(ContentType.Heading, "WhatYouNeedToDo.ContentHeading1", CompanySize.All),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2Small", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Individual),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph2Large", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Individual),
+                        new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph3SmallParent", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Parent),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph3LargeParent", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Parent),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph3SmallSubsidiary", CompanySize.Small, SellerType.NotSellerOnly, associationType: AssociationType.Subsidiary),
                         new(ContentType.Paragraph, "WhatYouNeedToDo.ContentParagraph3LargeSubsidiary", CompanySize.Large, SellerType.NotSellerOnly, associationType: AssociationType.Subsidiary),

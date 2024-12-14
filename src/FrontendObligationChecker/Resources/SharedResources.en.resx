@@ -249,4 +249,7 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+    <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
+    <value>Place drinks containers on the market</value>
+  </data>   
 </root>

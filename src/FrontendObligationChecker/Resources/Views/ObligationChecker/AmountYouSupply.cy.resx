@@ -120,7 +120,7 @@
     <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
     <value>25 tunnell i 50 tunnell</value>
   </data>
-    <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
+  <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
     <value>Mwy na 50 tunnell</value>
   </data>
   <data name="AmountYouSupply.Description" xml:space="preserve">
@@ -160,7 +160,7 @@
         Beth yw cyfanswm y pecynwaith rydych chi'n ei gyflenwi?
     </value>
   </data>
-    <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
+  <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
     <value>O dan 25 tunnell</value>
   </data>
 </root>

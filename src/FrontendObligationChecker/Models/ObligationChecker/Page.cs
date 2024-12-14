@@ -1,13 +1,17 @@
-﻿using FrontendObligationChecker.Services.NextFinder;
+﻿using System.Diagnostics.Eventing.Reader;
+using System.Security.Permissions;
+using FrontendObligationChecker.Services.NextFinder;
 using FrontendObligationChecker.Services.NextFinder.Interfaces;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FrontendObligationChecker.Models.ObligationChecker;
 
 public class Page
 {
     private string _additionalDescription;
+    private string _title;
 
     public INextFinder NextFinder { get; init; } = new OptionFinder();
 
@@ -47,6 +51,8 @@ public class Page
     {
         return IsPackagingActivitiesPage() ? AlternateTitleFirstParagraph : null;
     }
+
+    public string AlternateTitle { get; set; }
 
     public List<string> AlternateTitleSubContents { get; init; } = new();
 
@@ -108,12 +114,30 @@ public class Page
         return Paths.FirstOrDefault(x => x.Key == questionPath);
     }
 
-    public string Title =>
-        PreviousPage switch
+    public string Title
+    {
+        get
         {
-            null => Titles.FirstOrDefault().Value,
-            _ => Titles.FirstOrDefault(x => x.Key == PreviousPage.Next().Key).Value
-        };
+            // A change has been added here to resolve bug 487229 which was preventing the page / question title from changing based on
+            // an answer that was selected in the previous page i.e. Type of Organisation.
+            return PreviousPage switch
+            {
+                null => Titles.FirstOrDefault().Value,
+                _ => IsAnnualTurnoverPage(Path, _title) ? _title : Titles.FirstOrDefault(x => x.Key == PreviousPage.Next().Key).Value
+            };
+        }
+
+        // Setter added due to potential runtime changes. Title
+        // value can now change depending on answers selected on a previous page;
+        set
+        {
+            // This fix (for bug 487229) may need to be revisited.
+            if (IsAnnualTurnoverPage(Path, value))
+                _title = "SingleQuestion.AnnualTurnover.Title2";
+            else
+                _title = value;
+        }
+    }
 
     private Content Content =>
         PreviousPage switch
@@ -166,4 +190,24 @@ public class Page
     private bool IsPackagingActivitiesPage() =>
         Path is PagePath.OwnBrand or PagePath.UnbrandedPackaging or PagePath.ImportingProducts or
                 PagePath.SupplyingEmptyPackaging or PagePath.HiringLoaning or PagePath.OnlineMarketplace or PagePath.SupplyingFilledPackaging;
+
+    private bool IsAnnualTurnoverPage(string path, string title)
+    {
+        if (path != PagePath.AnnualTurnover)
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return false;
+        }
+
+        if (!title.Contains("SingleQuestion.AnnualTurnover.Title2"))
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
