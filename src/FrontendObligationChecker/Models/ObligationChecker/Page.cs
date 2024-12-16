@@ -123,7 +123,7 @@ public class Page
             return PreviousPage switch
             {
                 null => Titles.FirstOrDefault().Value,
-                _ => IsAnnualTurnoverPage(Path, _title) ? _title : Titles.FirstOrDefault(x => x.Key == PreviousPage.Next().Key).Value
+                _ => IsAnnualTurnoverPageAndTitleChanged(Path, _title) ? _title : Titles.FirstOrDefault(x => x.Key == PreviousPage.Next().Key).Value
             };
         }
 
@@ -132,7 +132,7 @@ public class Page
         set
         {
             // This fix (for bug 487229) may need to be revisited.
-            if (IsAnnualTurnoverPage(Path, value))
+            if (IsAnnualTurnoverPageAndTitleChanged(Path, value))
                 _title = "SingleQuestion.AnnualTurnover.Title2";
             else
                 _title = value;
@@ -191,7 +191,7 @@ public class Page
         Path is PagePath.OwnBrand or PagePath.UnbrandedPackaging or PagePath.ImportingProducts or
                 PagePath.SupplyingEmptyPackaging or PagePath.HiringLoaning or PagePath.OnlineMarketplace or PagePath.SupplyingFilledPackaging;
 
-    private bool IsAnnualTurnoverPage(string path, string title)
+    private bool IsAnnualTurnoverPageAndTitleChanged(string path, string title)
     {
         if (path != PagePath.AnnualTurnover)
         {
