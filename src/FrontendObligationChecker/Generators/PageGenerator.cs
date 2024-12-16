@@ -742,13 +742,19 @@ public static class PageGenerator
             {
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionOrganization", associationType: AssociationType.Organisation),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionParent", associationType: AssociationType.Parent),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionSubsidiary", associationType: AssociationType.Subsidiary),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionIndividual", associationType: AssociationType.Individual),
                 new(ContentType.Heading, "NoActionNeeded.AnnualTurnoverTitle1", associationType: AssociationType.All),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription2", associationType: AssociationType.Subsidiary),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription2", associationType: AssociationType.Individual),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription2Parent", associationType: AssociationType.Parent),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription3Parent", associationType: AssociationType.Parent),
-                new(ContentType.Heading, "NoActionNeeded.AnnualTurnoverTitle2", associationType: AssociationType.Subsidiary),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription3", associationType: AssociationType.Individual),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription3", associationType: AssociationType.Subsidiary),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription4", associationType: AssociationType.Individual),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription4", associationType: AssociationType.Subsidiary),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription4Parent", associationType: AssociationType.Parent),
+                new(ContentType.Heading, "NoActionNeeded.AnnualTurnoverTitle2", associationType: AssociationType.Subsidiary)
             }
         };
     }
