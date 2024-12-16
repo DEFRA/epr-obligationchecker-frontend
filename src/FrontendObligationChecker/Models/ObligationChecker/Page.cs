@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Eventing.Reader;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Permissions;
 using FrontendObligationChecker.Services.NextFinder;
 using FrontendObligationChecker.Services.NextFinder.Interfaces;
@@ -191,6 +192,7 @@ public class Page
         Path is PagePath.OwnBrand or PagePath.UnbrandedPackaging or PagePath.ImportingProducts or
                 PagePath.SupplyingEmptyPackaging or PagePath.HiringLoaning or PagePath.OnlineMarketplace or PagePath.SupplyingFilledPackaging;
 
+    [ExcludeFromCodeCoverage]
     private bool IsAnnualTurnoverPageAndTitleChanged(string path, string title)
     {
         if (path != PagePath.AnnualTurnover)
