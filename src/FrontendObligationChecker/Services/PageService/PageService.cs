@@ -223,7 +223,7 @@ public class PageService : IPageService
             page.Title = answer switch
             {
                 "parent" => page.Title,
-                "subsidary" => page.Title,
+                "subsidary" => page.AlternateTitle,
                 "individual" => page.AlternateTitle,
                 _ => page.Title
             };

@@ -142,22 +142,40 @@
     <value />
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription2" xml:space="preserve">
-    <value />
+    <value>
+        bod trosiant eich sefydliad yn fwy na £1 miliwn
+
+    </value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription2Parent" xml:space="preserve">
-    <value />
+    <value>
+        bod trosiant eich sefydliad yn fwy na £1 miliwn
+
+    </value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription3" xml:space="preserve">
-    <value />
+    <value>bod trosiant eich sefydliad ynghyd ag un neu ragor o'i is-gwmnïau yn fwy na £1 miliwn</value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription3Parent" xml:space="preserve">
-    <value />
+   <value>bod trosiant eich sefydliad ynghyd ag un neu ragor o'i is-gwmnïau yn fwy na £1 miliwn</value>
+  </data>
+    <data name="NoActionNeeded.AnnualTurnoverDescription4" xml:space="preserve">
+    <value>bod trosiant cyfunol dau neu fwy o'r sefydliadau o fewn y grŵp yn fwy na £1 miliwn</value>
+  </data>
+    <data name="NoActionNeeded.AnnualTurnoverDescription4Parent" xml:space="preserve">
+    <value>bod trosiant cyfunol dau neu fwy o'r sefydliadau o fewn y grŵp yn fwy na £1 miliwn</value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescriptionOrganization" xml:space="preserve">
     <value />
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescriptionParent" xml:space="preserve">
-    <value />
+   <value>Efallai y bydd angen ichi gydymffurfio â rheoliadau cyfrifoldeb estynedig cynhyrchwyr (EPR) dros becynwaith yn y dyfodol os bydd unrhyw un neu ragor o'r canlynol yn gymwys:</value>
+  </data>
+  <data name="NoActionNeeded.AnnualTurnoverDescriptionSubsidiary" xml:space="preserve">
+    <value>Efallai y bydd angen ichi gydymffurfio â rheoliadau cyfrifoldeb estynedig cynhyrchwyr (EPR) dros becynwaith yn y dyfodol os bydd unrhyw un neu ragor o'r canlynol yn gymwys:</value>
+  </data>
+  <data name="NoActionNeeded.AnnualTurnoverDescriptionIndividual" xml:space="preserve">
+    <value>Efallai y bydd angen ichi gydymffurfio â rheoliadau cyfrifoldeb estynedig cynhyrchwyr (EPR) dros becynwaith yn y dyfodol os bydd unrhyw un neu ragor o'r canlynol yn gymwys:</value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverTitle1" xml:space="preserve">
     <value />

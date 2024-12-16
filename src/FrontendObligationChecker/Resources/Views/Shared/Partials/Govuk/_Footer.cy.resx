@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="_Footer.Cookies" xml:space="preserve">
-    <value>Cookies</value>
+    <value>Cwcis</value>
   </data>
   <data name="_Footer.Privacy" xml:space="preserve">
-    <value>Privacy</value>
+    <value>preifatrwydd</value>
   </data>
   <data name="_Footer.Accessibility" xml:space="preserve">
-    <value>Accessibility statement</value>
+    <value>Datganiad hygyrchedd</value>
   </data>
   <data name="_Footer.AllContentIsAvailable" xml:space="preserve">
     <value>All content is available under the </value>
@@ -142,15 +142,15 @@
     <value />
   </data>
   <data name="_Footer.Email" xml:space="preserve">
-     <value>Email</value>
+     <value>E-bost</value>
   </data>
   <data name="_Footer.GetHelp" xml:space="preserve">
-    <value>Get help</value>
+    <value>Gael help</value>
   </data>
   <data name="_Footer.OpeningTime" xml:space="preserve">
-    <value>Monday to Friday, 8:30am to 4:30pm</value>
+    <value>Dydd Llun i ddydd Gwener, 8:30am to 4:30pm</value>
   </data>
   <data name="_Footer.Telephone" xml:space="preserve">
-    <value>Telephone</value>
+    <value>Ffôn</value>
   </data>
 </root>
