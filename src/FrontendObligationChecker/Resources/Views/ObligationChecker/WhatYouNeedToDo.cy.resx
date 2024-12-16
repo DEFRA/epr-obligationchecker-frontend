@@ -163,7 +163,7 @@
     <value>Cyflwyno data gwlad</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
-    <value>&lt;a href="" target="_blank" &gt; Mewngofnodi i'ch cyfrif EPR &lt;/a&gt; neu  &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; greu cyfrif &lt;/a&gt; </value>
+    <value>&lt;a href="https://report-packaging-data.defra.gov.uk/report-data" target="_blank" &gt; Mewngofnodi i'ch cyfrif EPR &lt;/a&gt; neu  &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; greu cyfrif &lt;/a&gt; </value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset2" xml:space="preserve">
     <value>Bydd angen ichi gyflwyno'ch data erbyn 1 Ebrill 2025</value>
