@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NoActionNeeded.AmountYouSupplyDescription1" xml:space="preserve">
-    <value />
+   <value>Y rheswm am hyn yw y bydd eich sefydliad yn trin neu'n cyflenwi llai na 25 tunnell o becynwaith yn 2023.</value>
   </data>
-  <data name="NoActionNeeded.AmountYouSupplyDescription1Parent" xml:space="preserve">
-    <value />
+ <data name="NoActionNeeded.AmountYouSupplyDescription1Parent" xml:space="preserve">
+   <value>Y rheswm am hyn yw y bydd eich sefydliad yn trin neu'n cyflenwi llai na 25 tunnell o becynwaith yn 2023.</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription2" xml:space="preserve">
-    <value />
+    <value>Efallai y bydd angen ichi gydymffurfio â rheoliadau cyfrifoldeb estynedig cynhyrchwyr dros becynwaith yn y dyfodol os bydd swm y pecynwaith rydych chi'n ei drin a'i gyflenwi mewn blwyddyn yn 25 tunnell neu fwy.</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription2Parent" xml:space="preserve">
-    <value />
+    <value>Efallai y bydd angen ichi gydymffurfio â rheoliadau cyfrifoldeb estynedig cynhyrchwyr dros becynwaith yn y dyfodol os bydd swm y pecynwaith rydych chi'n ei drin a'i gyflenwi mewn blwyddyn yn 25 tunnell neu fwy.</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription3" xml:space="preserve">
     <value />
@@ -136,7 +136,7 @@
     <value />
   </data>
   <data name="NoActionNeeded.AmountYouSupplyTitle1" xml:space="preserve">
-    <value />
+    <value>Beth sy'n digwydd nesaf</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyTitle2" xml:space="preserve">
     <value />
@@ -180,7 +180,7 @@
   <data name="NoActionNeeded.OwnBrandTitle" xml:space="preserve">
     <value />
   </data>
-  <data name="NoActionNeeded.Title" xml:space="preserve">
-    <value />
+    <data name="NoActionNeeded.Title" xml:space="preserve">
+    <value>Ar sail eich atebion, does dim angen ichi roi gwybod am ddata pecynwaith</value>
   </data>
 </root>

@@ -126,13 +126,13 @@
     <value />
   </data>
   <data name="AboutYourOrganisation" xml:space="preserve">
-    <value />
+    <value></value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value />
+    <value>Creu cyfrif i adrodd am ddata pecynnu</value>
   </data>
   <data name="back_link_text" xml:space="preserve">
-    <value />
+    <value>Yn ol</value>
   </data>
   <data name="continue_button_text" xml:space="preserve">
     <value>
@@ -140,7 +140,7 @@
     </value>
   </data>
   <data name="Cymraeg" xml:space="preserve">
-    <value />
+    <value>Cymraeg</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
@@ -149,13 +149,13 @@
     <value />
   </data>
   <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
-    <value />
+    <value>25 tunnell i 50 tunnell</value>
   </data>
-  <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
-    <value />
+    <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
+    <value>Mwy na 50 tunnell</value>
   </data>
   <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
-    <value />
+    <value>O dan 25 tunnell</value>
   </data>
   <data name="Defra" xml:space="preserve">
     <value />
@@ -173,25 +173,29 @@
     <value> i gael rhagor o wybodaeth am rwymedigaethau a chyfrifoldebau.</value>
   </data>
   <data name="question_option_no" xml:space="preserve">
-    <value />
+    <value>
+        Nac ydyn
+    </value>
   </data>
   <data name="question_option_yes" xml:space="preserve">
-    <value />
+    <value>
+        Ydyn
+    </value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
-    <value />
+    <value>O dan £1 miliwn</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel2" xml:space="preserve">
-    <value />
+    <value>£1 miliwn i £2 filiwn</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel3" xml:space="preserve">
-    <value />
+    <value>£2 filiwn neu fwy</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>llogi neu fenthyca deunydd pacio y gellir ei ailddefnyddio i sefydliadau yn y DU</value>
   </data>
   <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Mewnforio nwyddau wedi'u pecynnu i'w cyflenwi i farchnad y DU</value>
   </data>
   <data name="SingleQuestion.ImportingProducts.AmountHandlePageText" xml:space="preserve">
     <value />
@@ -217,20 +221,23 @@
         Caniau dur
     </value>
   </data>
+  <data name="ConsiderPackagingActivity" xml:space="preserve">
+    <value>Dim ond wrth gyfrifo faint rydych yn ei gyflenwi y dylech ystyried eich gweithgareddau pecynnu perthnasol.</value>
+  </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Ydych chi'n berchen ar farchnad ar-lein sy'n caniatáu i gwmnïau o'r tu allan i'r Deyrnas Unedig werthu nwyddau sydd wedi'u pecynnu yn y Deyrnas Unedig?</value>
   </data>
   <data name="SingleQuestion.OwnBrand.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Cyflenwi nwyddau i farchnad y DU o dan eich brand eich hun</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Cyflenwi deunydd pacio gwag i fusnesau sy'n dod o dan y trothwy uwch</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AmountHandlePageText" xml:space="preserve">
     <value />
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Ydych chi'n cyflenwi pecynwaith wedi'i lenwi i ddefnyddwyr terfynol?</value>
   </data>
     <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel1" xml:space="preserve">
     <value>Rhiant-gwmni</value>
@@ -242,13 +249,16 @@
     <value>Cwmni unigol</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Rhoi nwyddau i'w gwerthu mewn pecynnau</value>
   </data>
   <data name="skip_to_main_content_text" xml:space="preserve">
     <value />
   </data>
   <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
-    <value />
+    <value></value>
+  </data>    
+    <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
+    <value>Rhowch gynwysyddion diodydd ar y farchnad</value>
   </data>
   <data name="YourPackagingActivities" xml:space="preserve">
     <value />

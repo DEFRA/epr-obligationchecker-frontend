@@ -181,6 +181,7 @@ public class PageService : IPageService
         if (page.Path == PagePath.AnnualTurnover)
         {
             SetDescriptionForAnnualTurnover(page);
+            SetAlternateTitleForAnnualTurnover(page);
         }
 
         if (page.Path == PagePath.AmountYouSupply)
@@ -205,6 +206,26 @@ public class PageService : IPageService
                 "subsidary" => null,
                 "individual" => null,
                 _ => page.AdditionalDescription
+            };
+        }
+    }
+
+    [ExcludeFromCodeCoverage]
+    private async Task SetAlternateTitleForAnnualTurnover(Page page)
+    {
+        var sessionJourney = await _journeySession.GetAsync();
+        var sessionPage = sessionJourney?.Pages.Find(x => x.Path == PagePath.TypeOfOrganisation);
+
+        if (sessionPage != null)
+        {
+            var answer = sessionPage.Questions.Find(q => q.Key == QuestionKey.TypeOfOrganisation).Answer;
+
+            page.Title = answer switch
+            {
+                "parent" => page.Title,
+                "subsidary" => page.Title,
+                "individual" => page.AlternateTitle,
+                _ => page.Title
             };
         }
     }

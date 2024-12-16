@@ -131,7 +131,7 @@
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentBanner" xml:space="preserve">
-    <value />
+    <value>Bydd angen i chi roi gwybod am ddata pecynnu</value>
   </data>
   <data name="WhatYouNeedToDo.ContentDetailsPrnPerns" xml:space="preserve">
     <value />
@@ -215,11 +215,26 @@
         O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad bach. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.
     </value>
   </data>
+ <data name="WhatYouNeedToDo.ContentParagraph1SmallParent" xml:space="preserve">
+    <value>O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
+  </data> 
   <data name="WhatYouNeedToDo.ContentParagraph2SmallParent" xml:space="preserve">
     <value>Fel rhiant-gwmni, rhaid ichi gyflwyno data ar wahân ar gyfer pob un o'r is-gwmnïau o fewn cofrestriad eich grŵp. 
 Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau sydd wedi'u cofrestru'n annibynnol.
     </value>
   </data>
+  <data name="WhatYouNeedToDo.ContentParagraph3SmallParent" xml:space="preserve">
+    <value>
+          &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+            &lt;li&gt;cofnodi data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi'n eu mewnforio a'u cyflenwi ym marchnad y Deyrnas Unedig o 1 Ionawr 2024 ymlaen&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;creu cyfrif&lt;/a&gt; a chofrestru'ch sefydliad erbyn 1 Ebrill 2025&lt;/li&gt;
+            &lt;li&gt;talu ffi i'r rheoleiddiwr amgylcheddol - cysylltwch â rheoleiddiwr eich gwlad chi yn y Deyrnas Unedig i gael rhagor o wybodaeth am ffioedd &lt;/li&gt;
+            &lt;li&gt;cyflwyno data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi wedi'u mewnforio neu wedi'u cyflenwi drwy farchnad y Deyrnas Unedig bob chwe mis&lt;/li&gt;
+        &lt;/ul&gt;
+    </value>
+  </data>
+    
   <data name="WhatYouNeedToDo.ContentParagraph1LargeParent" xml:space="preserve">
     <value>O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
   </data>
@@ -228,12 +243,35 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
   </data>
     <data name="WhatYouNeedToDo.ContentParagraph3LargeParent" xml:space="preserve">
     <value>
-        
+         &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+            &lt;li&gt;cofnodi data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi'n eu mewnforio a'u cyflenwi ym marchnad y Deyrnas Unedig o 1 Ionawr 2024 ymlaen&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;creu cyfrif&lt;/a&gt; a chofrestru'ch sefydliad erbyn 1 Ebrill 2025&lt;/li&gt;
+            &lt;li&gt;talu ffi i'r rheoleiddiwr amgylcheddol - cysylltwch â rheoleiddiwr eich gwlad chi yn y Deyrnas Unedig i gael rhagor o wybodaeth am ffioedd &lt;/li&gt;
+            &lt;li&gt;cyflwyno data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi wedi'u mewnforio neu wedi'u cyflenwi drwy farchnad y Deyrnas Unedig bob chwe mis&lt;/li&gt;
+        &lt;/ul&gt;
     </value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1SmallSubsidiary" xml:space="preserve">
     <value>O dan yr EPR dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
   </data>
+  <data name="WhatYouNeedToDo.ContentParagraph2SmallSubsidiary" xml:space="preserve">
+    <value>
+        Fel is-gwmni, efallai y bydd angen i'ch rhiant-gwmni roi gwybod am ddata ar eich rhan os yw e hefyd yn cael ei ystyried yn sefydliad mawr.
+    </value>
+  </data>
+    <data name="WhatYouNeedToDo.ContentParagraph3SmallSubsidiary" xml:space="preserve">
+    <value>
+          &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
+        &lt;ul class="govuk-list govuk-list--bullet"&gt;
+            &lt;li&gt;cofnodi data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi'n eu mewnforio a'u cyflenwi ym marchnad y Deyrnas Unedig o 1 Ionawr 2024 ymlaen&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank"&gt;creu cyfrif&lt;/a&gt; a chofrestru'ch sefydliad erbyn 1 Ebrill 2025&lt;/li&gt;
+            &lt;li&gt;talu ffi i'r rheoleiddiwr amgylcheddol - cysylltwch â rheoleiddiwr eich gwlad chi yn y Deyrnas Unedig i gael rhagor o wybodaeth am ffioedd &lt;/li&gt;
+            &lt;li&gt;cyflwyno data am becynwaith gwag a nwyddau wedi'u pecynnu rydych chi wedi'u mewnforio neu wedi'u cyflenwi drwy farchnad y Deyrnas Unedig bob chwe mis&lt;/li&gt;
+        &lt;/ul&gt;
+    </value>
+  </data>  
+    
   <data name="WhatYouNeedToDo.ContentParagraph2Large" xml:space="preserve">
     <value>
         &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
@@ -249,7 +287,7 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
     <value>O dan yr dros becynwaith, rydych chi'n cael eich ystyried yn sefydliad mawr. Mae hyn yn golygu y bydd angen ichi gofnodi a chyflwyno data am y pecynwaith rydych chi'n ei fewnforio a'i gyflenwi.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph2LargeSubsidiary" xml:space="preserve">
-    <value>As a subsidiary, your parent company may need to report data on your behalf if it's also classed as a large organisation.</value>
+    <value>Fel is-gwmni, efallai y bydd angen i'ch rhiant-gwmni roi gwybod am ddata ar eich rhan os yw e hefyd yn cael ei ystyried yn sefydliad mawr.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph3LargeSubsidiary" xml:space="preserve">
     <value>
@@ -327,7 +365,7 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
   </data>
   <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
     <value>
-        
+        Rhowch gynwysyddion diodydd ar y farchnad
     </value>
   </data>
   <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">

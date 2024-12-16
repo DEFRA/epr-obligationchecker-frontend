@@ -162,7 +162,7 @@
     <value>Beth oedd trosiant eich grŵp yn yr adroddiad diwethaf?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">
-    <value>Beth oedd trosiant eich grŵp yn yr adroddiad diwethaf?</value>
+    <value>Beth oedd trosiant eich sefydliad yn yr adroddiad diwethaf?</value>
   </data>
   <data name="SingleQuestion.ContainerVolume.QuestionDescription" xml:space="preserve">
     <value>Mae hyn yn cynnwys cynwysyddion rhwng 150ml a 3l sy'n cael eu gwerthu mewn aml-becyn</value>
@@ -174,7 +174,7 @@
     <value>Oes unrhyw un neu ragor o'r cynwysyddion rhwng 150ml a 3l?</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>llogi neu fenthyca deunydd pacio y gellir ei ailddefnyddio i sefydliadau yn y DU</value>
   </data>
   <data name="SingleQuestion.HiringLoaning.PackagingHireLoanDescriptions" xml:space="preserve">
     <value>
@@ -249,7 +249,7 @@
     </value>
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.Title" xml:space="preserve">
-    <value />
+    <value>Ydych chi'n defnyddio unrhyw un neu ragor o'r deunyddiau canlynol ar gyfer y cynwysyddion diodydd?</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
     <value>
@@ -278,7 +278,7 @@
   </data>
   <data name="SingleQuestion.OwnBrand.AnotherOrganisationTasks" xml:space="preserve">
     <value>
-        >&lt;p class="govuk-body"&gt;Rydych chi'n cyflenwi nwyddau o dan eich brand eich hun hyd yn oed os ydych chi'n talu neu'n trwyddedu cwmni arall i wneud y canlynol:&lt;/p&gt;
+        &lt;p class="govuk-body"&gt;Rydych chi'n cyflenwi nwyddau o dan eich brand eich hun hyd yn oed os ydych chi'n talu neu'n trwyddedu cwmni arall i wneud y canlynol:&lt;/p&gt;
         &lt;ul class="govuk-list govuk-list--bullet"&gt;
         &lt;li&gt;cynhyrchu nwyddau a fydd yn cael eu cyflenwi o dan eich enw brand chi&lt;/li&gt;
         &lt;li&gt;pecynnu nwyddau a fydd yn cael eu cyflenwi o dan eich enw brand chi&lt;/li&gt;
@@ -323,7 +323,7 @@
     </value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
-    <value />
+    <value>Cyflenwi deunydd pacio gwag i fusnesau sy'n dod o dan y trothwy uwch</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.HigherThresholdDescriptions" xml:space="preserve">
     <value>
@@ -363,7 +363,7 @@
     </value>
   </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.Title" xml:space="preserve">
-    <value>Ydych chi'n cyflenwi diodydd mewn cynwysyddion untro yn y Deyrnas Unedig?</value>
+    <value>Ydych chi'n cyflenwi pecynwaith wedi'i lenwi i ddefnyddwyr terfynol?</value>
   </data>
   <data name="SingleQuestion.TypeOfOrganisation.Detail" xml:space="preserve">
     <value>&lt;p class="govuk-body"&gt;Mae yna wahanol ffyrdd y gallwch chi gydymffurfio â'r EPR dros becynwaith.&lt;/p&gt;
@@ -405,6 +405,7 @@
     <value>
         &lt;p class="govuk-body"&gt;Gallai hyn fod yn nwyddau rydych chi'n eu pecynnu i'ch sefydliad eich hun neu ar ran sefydliad arall.&lt;/p&gt;
             &lt;p class="govuk-body"&gt; &lt;/p&gt;
+            &lt;p class="govuk-body"&gt;Dewiswch Nac ydyn os ydych chi ond yn pacio nwyddau y mae sefydliad mawr arall yn gyfrifol amdanyn nhw. &lt;/p&gt;
             &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Rhagor o wybodaeth am gyfrifoldebau. &lt;/a&gt;  &lt;/p&gt;
     </value>
   </data>

@@ -136,7 +136,7 @@
     <value>What was your group’s last annual turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">
-    <value>What was your group’s last reported turnover?</value>
+    <value>What was your organisation’s last reported turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
     <value>        
@@ -381,6 +381,7 @@
   <data name="SingleQuestion.ContainerVolume.QuestionError" xml:space="preserve">
     <value>Select yes if any of the containers are between 150ml and 3l.</value>
   </data>
+  
   <data name="SingleQuestion.YourPackagingActivities" xml:space="preserve">
     <value />
   </data>

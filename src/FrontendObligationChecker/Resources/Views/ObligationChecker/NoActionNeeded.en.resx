@@ -121,10 +121,10 @@
     <value>Based on your answers, you do not need to report packaging data</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription1" xml:space="preserve">
-    <value>This is because your organisation will handle or supply less than 25 tonnes of packaging in 2024.</value>
+    <value>This is because your organisation will handle or supply less than 25 tonnes of packaging in 2023.</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription1Parent" xml:space="preserve">
-    <value>This is because your organisation will handle or supply less than 25 tonnes of packaging in 2024.</value>
+    <value>This is because your organisation will handle or supply less than 25 tonnes of packaging in 2023.</value>
   </data>
   <data name="NoActionNeeded.AmountYouSupplyDescription2" xml:space="preserve">
     <value>You may need to comply with the extended producer responsibility for packaging regulations in the future if the amount of packaging you handle and supply in a year is 25 tonnes or more.</value>
