@@ -740,11 +740,11 @@ public static class PageGenerator
         {
             ContentItems = new List<ContentItem>
             {
-                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionOrganization", associationType: AssociationType.Organisation),
+                new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionOrganization", associationType: AssociationType.All),
+                new(ContentType.Heading, "NoActionNeeded.AnnualTurnoverTitle1", associationType: AssociationType.All),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionParent", associationType: AssociationType.Parent),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionSubsidiary", associationType: AssociationType.Subsidiary),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescriptionIndividual", associationType: AssociationType.Individual),
-                new(ContentType.Heading, "NoActionNeeded.AnnualTurnoverTitle1", associationType: AssociationType.All),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription2", associationType: AssociationType.Subsidiary),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription2", associationType: AssociationType.Individual),
                 new(ContentType.Paragraph, "NoActionNeeded.AnnualTurnoverDescription2Parent", associationType: AssociationType.Parent),
@@ -784,9 +784,7 @@ public static class PageGenerator
                 new(ContentType.Heading, "NoActionNeeded.AmountYouSupplyTitle1"),
                 new(ContentType.Paragraph, "NoActionNeeded.AmountYouSupplyDescription2", associationType: AssociationType.Subsidiary),
                 new(ContentType.Paragraph, "NoActionNeeded.AmountYouSupplyDescription2", associationType: AssociationType.Individual),
-                new(ContentType.Paragraph, "NoActionNeeded.AmountYouSupplyDescription2Parent", associationType: AssociationType.Parent),
-                new(ContentType.Heading, "NoActionNeeded.AmountYouSupplyTitle2", associationType: AssociationType.Subsidiary),
-                new(ContentType.Paragraph, "NoActionNeeded.AmountYouSupplyDescription3", associationType: AssociationType.Subsidiary)
+                new(ContentType.Paragraph, "NoActionNeeded.AmountYouSupplyDescription2Parent", associationType: AssociationType.Parent)
             }
         };
     }

@@ -156,31 +156,44 @@
   </data>
   <data name="NoActionNeeded.HandleSupplyPackagingTitle1" xml:space="preserve">
     <value />
-  </data>
+  </data> 
   <data name="NoActionNeeded.AnnualTurnoverDescription2" xml:space="preserve">
-    <value>the turnover for your organisation exceeds £1 million</value>
+    <value>&lt;ul class="govuk-list govuk-list--bullet"&gt;
+           &lt;li&gt;the turnover for your organisation exceeds £1 million&lt;/li&gt;
+           &lt;li&gt;the turnover for your organisation together with one or more of its subsidiaries exceeds £1 million&lt;/li&gt;
+           &lt;li&gt;the combined turnover for two or more of the group's subsidiaries exceeds £1 million&lt;/li&gt;
+         &lt;/ul&gt;    
+    </value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription2Parent" xml:space="preserve">
-    <value>the turnover for your organisation exceeds £1 million</value>
+    <value>&lt;ul class="govuk-list govuk-list--bullet"&gt;
+           &lt;li&gt;the turnover for your organisation exceeds £1 million&lt;/li&gt;
+           &lt;li&gt;the turnover for your organisation together with one or more of its subsidiaries exceeds £1 million&lt;/li&gt;
+           &lt;li&gt;the combined turnover for two or more of the group's subsidiaries exceeds £1 million&lt;/li&gt;
+         &lt;/ul&gt;
+     </value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription3Parent" xml:space="preserve">
-   <value>the turnover for your organisation together with one or more of its subsidiaries exceeds £1 million</value>
+   <value></value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription3" xml:space="preserve">
-   <value>the turnover for your organisation together with one or more of its subsidiaries exceeds £1 million</value>
+   <value></value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription4" xml:space="preserve">
-    <value>the combined turnover for two or more of the organisation within the groups exceeds £1 million</value>
+    <value></value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverDescription4Parent" xml:space="preserve">
-    <value>the combined turnover for two or more of the organisation within the groups exceeds £1 million</value>
+    <value></value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverTitle1" xml:space="preserve">
-    <value />
+    <value>What happens next</value>
   </data>
   <data name="NoActionNeeded.AnnualTurnoverTitle2" xml:space="preserve">
     <value />
-  </data> 
+  </data>
+    <data name="NoActionNeeded.AnnualTurnoverDescriptionOrganization" xml:space="preserve">
+    <value>This is because your organisation’s turnover was less than £1 million, according to its most recent accounts.</value>
+  </data>
   <data name="NoActionNeeded.AnnualTurnoverDescriptionParent" xml:space="preserve">
     <value>You may need to comply with the extended producer responsibility (EPR) for packaging regulations in the future if any of the following apply:</value>
   </data>
@@ -189,10 +202,7 @@
   </data>
     <data name="NoActionNeeded.AnnualTurnoverDescriptionIndividual" xml:space="preserve">
     <value>You may need to comply with the extended producer responsibility (EPR) for packaging regulations in the future if any of the following apply:</value>
-  </data>
-  <data name="NoActionNeeded.AnnualTurnoverDescriptionOrganization" xml:space="preserve">
-    <value />
-  </data>
+  </data> 
   <data name="NoActionNeeded.OwnBrandDescription1" xml:space="preserve">
     <value />
   </data>
