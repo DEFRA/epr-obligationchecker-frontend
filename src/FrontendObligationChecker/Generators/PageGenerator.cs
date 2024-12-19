@@ -97,7 +97,7 @@ public static class PageGenerator
                     OptionPath.Primary, "SingleQuestion.AnnualTurnover.Title1"
                 },
                 {
-                    OptionPath.Secondary, "SingleQuestion.AnnualTurnover.Title1"
+                    OptionPath.Secondary, "SingleQuestion.AnnualTurnover.Title2"
                 }
             },
             TitleCaption = "AboutYourOrganisation",
