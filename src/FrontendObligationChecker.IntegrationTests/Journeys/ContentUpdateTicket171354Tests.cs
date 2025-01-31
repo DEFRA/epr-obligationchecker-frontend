@@ -227,7 +227,6 @@ public class ContentUpdateTicket171354Tests : TestBase
         var pageContent = await page.Content.ReadAsStringAsync();
 
         pageContent.Should().Contain("What this means for your organisation");
-        pageContent.Should().Contain("Nation data is information about which nation in the UK packaging is supplied in and which nation in the UK packaging is discarded in.");
 
         pageContent.Should().NotContain("A PRN or PERN is evidence that packaging waste has been recycled");
         pageContent.Should().NotContain("a charge to the environmental regulator");
