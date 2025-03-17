@@ -143,7 +143,7 @@
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
     <value>        
-        Dylai'ch ateb gynnwys trosiant yr holl is-gwmnïau perthnasol yn eich grŵp sy'n trin ac yn cyflenwi (creu, mewnforio, dosbarthu neu werthu) pecynwaith.
+        Dylai'ch ateb gynnwys y trosiant sydd wedi'i adrodd ar gyfer pob is-gwmni perthnasol yn eich grŵp sy'n cyflenwi (creu, mewnforio, dosbarthu neu werthu) pecynwaith.
     </value>
   </data>
    <data name="SingleQuestion.AnnualTurnover.QuestionError" xml:space="preserve">
