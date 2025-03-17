@@ -4,7 +4,6 @@ using FluentAssertions;
 using FrontendObligationChecker.IntegrationTests.Extensions;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.UnitTests.Helpers;
-
 using YesNo = FrontendObligationChecker.UnitTests.Helpers.YesNo;
 
 namespace FrontendObligationChecker.IntegrationTests.Journeys;
@@ -18,8 +17,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
 
         var pageContent = await page.Content.ReadAsStringAsync();
-
-        pageContent.Should().Contain("What was your group’s last reported turnover?".CurvedApostropheToHex());
+        pageContent.Should().Contain("Your answer should include the reported turnover of all relevant subsidiaries in your group that supply (create, import, distribute or sell) packaging.");
     }
 
     [TestMethod]
@@ -48,8 +46,8 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.OwnBrand, new PageForm(QuestionKey.OwnBrand, YesNo.Yes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("<title>Do you place goods for sale into packaging? - GOV.UK</title>".ApostropheToHex());
-        pageContent.Should().Contain("Do you place goods for sale into packaging?");
+        pageContent.Should().Contain("<title>Do you place goods into packaging? - GOV.UK</title>".ApostropheToHex());
+        pageContent.Should().Contain("Do you place goods into packaging?");
         pageContent.Should().Contain("This could be goods you packaged for your own organisation or for another organisation.");
 
         pageContent.Should().NotContain("Do you place goods into packaging that's unbranded when it's supplied?".ApostropheToHex());
@@ -66,9 +64,9 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.UnbrandedPackaging, new PageForm(QuestionKey.UnbrandedPackaging, YesNo.Yes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("This also applies to you if you discard the packaging before selling the goods");
-        pageContent.Should().Contain("You are not classed as an organisation that imports products in packaging if you import filled packaging that is:");
+        pageContent.Should().Contain("This also applies to you if you discard the packaging before supplying the goods.");
 
+        pageContent.Should().NotContain("You are not classed as an organisation that imports products in packaging if you import filled packaging that is:");
         pageContent.Should().NotContain("products from outside the UK that are in packaging and go on to supply these products to the UK market");
         pageContent.Should().NotContain("Find out what's classed as a 'large' organisation (opens in a new tab)".ApostropheToHex());
     }
@@ -84,8 +82,8 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.ImportingProducts, new PageForm(QuestionKey.ImportingProducts, YesNo.Yes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("<title>Do you supply empty packaging to organisations which are not classed as 'large'? - GOV.UK</title>".ApostropheToHex());
-        pageContent.Should().Contain("Under EPR, large organisations:".ApostropheToHex());
+        pageContent.Should().Contain("<title>Do you supply empty packaging you've imported or manufactured? - GOV.UK</title>".ApostropheToHex());
+        pageContent.Should().Contain("Select yes if you supply to:");
 
         pageContent.Should().NotContain("supply or import more than 50 tonnes of empty packaging or packaged goods");
     }
@@ -103,8 +101,8 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.HiringLoaning, new PageForm(QuestionKey.HiringLoaning, YesNo.Yes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("Under EPR for packaging, this is when you operate a website or app that allows non-UK businesses to sell their goods into the UK.");
-        pageContent.Should().Contain("If your organisation owns a website or app that sells goods from UK organisations only, this is not classed as owning an online marketplace.");
+        pageContent.Should().Contain("Under EPR for packaging, an online marketplace is a website or app that allows non-UK organisations to sell their goods in the UK.");
+        pageContent.Should().Contain("If your organisation owns a website that sells goods from UK organisations only, this is not classed as an online marketplace.");
     }
 
     [TestMethod]
@@ -121,8 +119,8 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.OnlineMarketplace, new PageForm(QuestionKey.OnlineMarketplace, YesNo.Yes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("<title>Do you supply filled packaging to end users, including businesses? - GOV.UK</title>");
-        pageContent.Should().Contain("An end user is the last person to use packaging before discarding it. This could be an individual or a business.");
+        pageContent.Should().Contain("<title>Do you supply filled packaging to end users? - GOV.UK</title>");
+        pageContent.Should().Contain("An end user is the last person to use packaging before discarding it. This could be a consumer or a business.");
         pageContent.Should().NotContain("This refers to any organisations that supply filled packaging directly to individual customers in the UK, where they are the end user of the packaging.");
         pageContent.Should().NotContain("<title>Supplying filled packaging to individual customers - GOV.UK</title>");
         pageContent.Should().NotContain("It does not refer to filled packaging supplied to businesses.");
@@ -182,7 +180,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("How much packaging in total do you handle and supply?");
+        pageContent.Should().Contain("How much packaging in total do you supply?");
 
         pageContent.Should().NotContain("Amount of packaging");
         pageContent.Should().NotContain("The amount of packaging you supply or import");
@@ -199,7 +197,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.HandleUnder25Tonnes).FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        pageContent.Should().Contain("This is because your organisation will handle or supply less than 25 tonnes of packaging in 2024.");
+        pageContent.Should().Contain("This is because your organisation supplied less than 25 tonnes of packaging in 2023.");
     }
 
     // Needs to be updated.

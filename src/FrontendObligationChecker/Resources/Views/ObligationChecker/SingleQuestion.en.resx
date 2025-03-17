@@ -140,7 +140,7 @@
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionDescription" xml:space="preserve">
     <value>        
-        Your answer should include the reported turnover of all relevant subsidiaries in your group that handle and supply (create, import, distribute or sell) packaging.
+        Your answer should include the reported turnover of all relevant subsidiaries in your group that supply (create, import, distribute or sell) packaging.
     </value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
@@ -232,7 +232,7 @@
     </value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.Title" xml:space="preserve">
-    <value>Do you supply empty packaging you've imported or manufactured? </value>
+    <value>Do you supply empty packaging you've imported or manufactured?</value>
   </data>
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
     <value>Supplying empty packaging to businesses that fall under the higher threshold</value>

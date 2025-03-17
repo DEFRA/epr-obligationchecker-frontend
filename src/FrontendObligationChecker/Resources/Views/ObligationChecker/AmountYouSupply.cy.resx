@@ -134,11 +134,11 @@
   </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
     <value> 
-         &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Gwiriwch y canllawiau &lt;/a&gt; i gael y diffiniad o becynwaith a gwybodaeth am weithgareddau pecynnu perthnasol (cyfeirir at y rhain hefyd fel 'swyddogaethau pecynnu').     
+         &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Gwiriwch y canllawiau &lt;/a&gt; i weld y diffiniad o becynwaith a gwybodaeth am weithgareddau pecynnu perthnasol (cyfeirir at y rhain fel 'swyddogaethau cynhyrchwyr' hefyd).     
     </value>
   </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph2" xml:space="preserve">
-    <value>Does dim angen ichi gynnwys unrhyw becynwaith nad yw'n cael ei ystyried yn weithgaredd pecynnu</value>
+    <value>Does dim angen ichi gynnwys unrhyw becynwaith ar gyfer gweithgarwch pecynnu y mae parti arall yn gyfrifol amdano.</value>
   </data>
     <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
     <value>Dewiswch opsiwn tunelledd.</value>
