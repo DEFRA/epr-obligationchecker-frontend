@@ -223,7 +223,7 @@
     <value></value>
   </data>
   <data name="ConsiderPackagingActivity" xml:space="preserve">
-    <value>Only consider your relevant packaging activities when calculating the amount you supply.</value>
+    <value>Only consider your relevant packaging activities (sometimes known as producer functions) when calculating the amount you supply.</value>
   </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>The 'Check if you need to report packaging data' tool is for information and general support but does not constitute legal advice.</value>

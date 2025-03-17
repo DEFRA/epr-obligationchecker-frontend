@@ -140,11 +140,11 @@
   </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
     <value>
-        &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Check the guidance &lt;/a&gt; for the defintion of packaging and information about relevant packaging activities (these are also referred to as 'packaging functions' ).     
+        &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Check the guidance &lt;/a&gt; for the definition of packaging and information about relevant packaging activities (these are also referred to as 'producer functions').     
     </value>
   </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph2" xml:space="preserve">
-    <value>You do not need to include any packaging which is not classed as a packaging activity</value>
+    <value>You do not need to include any packaging for packaging activity that another party is responsible for.</value>
   </data>
   <data name="AmountYouSupply.Description" xml:space="preserve">
     <value>        

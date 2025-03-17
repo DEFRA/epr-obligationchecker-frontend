@@ -19,7 +19,7 @@ public class AmountYouSupplyTests : TestBase
         var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync();
 
         redirectToAmountYouSupply.Should().BeSuccessful();
-        content.Should().Contain("<title>How much packaging in total do you handle and supply? - GOV.UK</title>");
+        content.Should().Contain("<title>How much packaging in total do you supply? - GOV.UK</title>");
         content.Should().NotContain("Whether you're obligated under EPR for packaging depends on how much packaging you supplied or imported when you:");
         content.Should().NotContain("How much packaging in total did you supply or import in this way, in 2022?");
     }
@@ -33,7 +33,7 @@ public class AmountYouSupplyTests : TestBase
         var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync();
 
         redirectToAmountYouSupply.Should().BeSuccessful();
-        content.Should().Contain("<title>How much packaging in total do you handle and supply? - GOV.UK</title>");
+        content.Should().Contain("<title>How much packaging in total do you supply? - GOV.UK</title>");
         content.Should().NotContain("Some of the ways you supply or import packaging may make you legally obligated under EPR for packaging. These include:");
         content.Should().NotContain("How much packaging in total did you supply or import in these ways, in 2022?");
     }

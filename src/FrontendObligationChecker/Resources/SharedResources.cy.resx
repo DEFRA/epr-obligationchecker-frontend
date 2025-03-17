@@ -222,7 +222,7 @@
     </value>
   </data>
   <data name="ConsiderPackagingActivity" xml:space="preserve">
-    <value>Dim ond wrth gyfrifo faint rydych yn ei gyflenwi y dylech ystyried eich gweithgareddau pecynnu perthnasol.</value>
+    <value>Dim ond wrth gyfrifo faint rydych chi'n ei gyflenwi y dylech chi ystyried eich gweithgareddau pecynnu perthnasol (sydd weithiau'n cael eu nabod fel swyddogaethau cynhyrchwyr).</value>
   </data>
   <data name="SingleQuestion.OnlineMarketplace.AlternateTitle" xml:space="preserve">
     <value>Ydych chi'n berchen ar farchnad ar-lein sy'n caniatáu i gwmnïau o'r tu allan i'r Deyrnas Unedig werthu nwyddau sydd wedi'u pecynnu yn y Deyrnas Unedig?</value>
