@@ -132,7 +132,10 @@
   <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
     <value>Individual company</value>
   </data>
-  <data name="SingleQuestion.AnnualTurnover.Title1" xml:space="preserve">
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4" xml:space="preserve">
+    <value>Partnership</value>
+  </data>
+    <data name="SingleQuestion.AnnualTurnover.Title1" xml:space="preserve">
     <value>What was your group’s last annual turnover?</value>
   </data>
   <data name="SingleQuestion.AnnualTurnover.Title2" xml:space="preserve">

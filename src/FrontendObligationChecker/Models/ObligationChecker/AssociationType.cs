@@ -6,7 +6,8 @@ public enum AssociationType
     Individual = 1,
     Subsidiary = 2,
     Organisation = 3,
-    Parent = 4,
+    Partnership = 4,
+    Parent = 5,
     Associated = 6,
     All = 7
 }
