@@ -13,6 +13,21 @@ public class PageForm
 
     public FormCollection FormCollection => new(_answers.ToDictionary(o => o.Key, o=> o.Value));
 
+    public string GetTypeOfOrganisation(TypeOfOrganisation organisationType)
+    {
+        string typeOfOrganisation = organisationType switch
+        {
+            TypeOfOrganisation.ParentCompany => "parent",
+            TypeOfOrganisation.Subsidiary => "subsidiary",
+            TypeOfOrganisation.IndividualCompany => "individual",
+            TypeOfOrganisation.Partnership => "partnership",
+            TypeOfOrganisation.NotSet => string.Empty,
+            _ => throw new ArgumentOutOfRangeException(nameof(organisationType), organisationType, null)
+        };
+
+        return typeOfOrganisation;
+    }
+
     public PageForm(TypeOfOrganisation answer)
     {
         string typeOfOrganisation = answer switch
@@ -20,6 +35,7 @@ public class PageForm
             TypeOfOrganisation.ParentCompany => "parent",
             TypeOfOrganisation.Subsidiary => "subsidiary",
             TypeOfOrganisation.IndividualCompany => "individual",
+            TypeOfOrganisation.Partnership => "partnership",
             TypeOfOrganisation.NotSet => string.Empty,
             _ => throw new ArgumentOutOfRangeException(nameof(answer), answer, null)
         };

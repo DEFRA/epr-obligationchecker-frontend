@@ -12,11 +12,23 @@ namespace FrontendObligationChecker.IntegrationTests.Journeys;
 public class ContentUpdateTicket171354Tests : TestBase
 {
     [TestMethod]
+    public async Task TypeOfOrganisation_Partnership_IsSelectedAnswer()
+    {
+        var form = new PageForm(TypeOfOrganisation.Partnership);
+        var page = await PostForm(PagePath.TypeOfOrganisation, form.FormUrlEncodedContent);
+        var pageContent = await page.Content.ReadAsStringAsync();
+
+        var selectedAnswer = form.GetTypeOfOrganisation(TypeOfOrganisation.Partnership);
+
+        selectedAnswer.Trim().ToLower().Should().BeEquivalentTo("partnership".Trim().ToLower());
+    }
+
+    [TestMethod]
     public async Task AnnualTurnover_PageContents_AreUpdated()
     {
         var page = await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
-
         var pageContent = await page.Content.ReadAsStringAsync();
+
         pageContent.Should().Contain("Your answer should include the reported turnover of all relevant subsidiaries in your group that supply (create, import, distribute or sell) packaging.");
     }
 
