@@ -4,6 +4,7 @@ using FluentAssertions;
 using FrontendObligationChecker.IntegrationTests.Extensions;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.UnitTests.Helpers;
+
 using YesNo = FrontendObligationChecker.UnitTests.Helpers.YesNo;
 
 namespace FrontendObligationChecker.IntegrationTests.Journeys;
@@ -18,7 +19,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         var page = await PostForm(PagePath.TypeOfOrganisation, form.FormUrlEncodedContent);
         var pageContent = await page.Content.ReadAsStringAsync();
 
-        var selectedAnswer = form.GetTypeOfOrganisation(TypeOfOrganisation.Partnership);
+        var selectedAnswer = PageForm.GetTypeOfOrganisation(TypeOfOrganisation.Partnership);
 
         selectedAnswer.Trim().ToLower().Should().BeEquivalentTo("partnership".Trim().ToLower());
     }

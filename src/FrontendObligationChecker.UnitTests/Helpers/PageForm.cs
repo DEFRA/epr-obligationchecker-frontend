@@ -13,7 +13,7 @@ public class PageForm
 
     public FormCollection FormCollection => new(_answers.ToDictionary(o => o.Key, o=> o.Value));
 
-    public string GetTypeOfOrganisation(TypeOfOrganisation organisationType)
+    public static string GetTypeOfOrganisation(TypeOfOrganisation organisationType)
     {
         string typeOfOrganisation = organisationType switch
         {
