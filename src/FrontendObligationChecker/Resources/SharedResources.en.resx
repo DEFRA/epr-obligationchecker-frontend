@@ -144,6 +144,9 @@
   <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
     <value>Individual company</value>
   </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4" xml:space="preserve">
+    <value>Partnership</value>
+  </data>
   <data name="SingleQuestion.AnnualTurnover.QuestionOptionLabel1" xml:space="preserve">
     <value>Under £1 million</value>
   </data>
