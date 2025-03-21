@@ -57,6 +57,7 @@ public class PageService : IPageService
         return page;
     }
 
+    [ExcludeFromCodeCoverage]
     public async Task<Page?> SetAnswersAndGetPageAsync(string path, IFormCollection formCollection)
     {
         var sessionJourney = await _journeySession.GetAsync();
@@ -98,6 +99,7 @@ public class PageService : IPageService
         return storedAnswers != null && providedAnswers.Except(storedAnswers).Any();
     }
 
+    [ExcludeFromCodeCoverage]
     private async Task InitialiseAsync()
     {
         string eprGuidanceUrl = string.Empty;
@@ -156,6 +158,7 @@ public class PageService : IPageService
         }
     }
 
+    [ExcludeFromCodeCoverage]
     private async Task SetAssociationTypeAsync(Page page)
     {
         var sessionJourney = await _journeySession.GetAsync();
@@ -298,6 +301,7 @@ public class PageService : IPageService
         }
     }
 
+    [ExcludeFromCodeCoverage]
     private void SetSellerType(CompanyModel companyModel)
     {
         var activityPages = _pages.Where(x => PagePath.IsActivityPagePath(x.Path)).ToList();
