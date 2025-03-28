@@ -3,8 +3,8 @@
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
-    public class PagePath
+    internal class PagePath
     {
-        public const string PublicRegister = "public-register";
+        internal const string PublicRegister = "public-register";
     }
 }
