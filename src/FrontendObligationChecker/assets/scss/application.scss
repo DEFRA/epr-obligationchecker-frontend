@@ -4,6 +4,7 @@ $govuk-assets-path: '/';
 // Components
 @import './components/language_toggle';
 @import './components/ordered_list';
+@import './components/govspeak';
 
 .govuk-panel {
     &--blue {
