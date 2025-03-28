@@ -1,5 +1,9 @@
-﻿@using FrontendObligationChecker.ViewModels.PublicRegister
+﻿@using FrontendObligationChecker.Models.Config
+@using FrontendObligationChecker.ViewModels.PublicRegister
+@using Microsoft.Extensions.Options
 @model GuidanceViewModel
+
+@inject IOptions<EmailAddressOptions> EmailAdresses
 
 @{
     ViewData["Title"] = @Localizer["Guidance.PageTitle"];
@@ -93,8 +97,8 @@
                             </summary>
                             <div class="govuk-details__text">
                                 @Localizer["Guidance.AccessibleFormatTextPart1"]
-                                <a href="mailto:@Localizer["Guidance.DefraHelplineEmail"]" target="_blank" rel="noopener" class="govuk-link">
-                                    @Localizer["Guidance.DefraHelplineEmail"]
+                                <a href="mailto:@EmailAdresses.Value.DefraHelpline" target="_blank" rel="noopener" class="govuk-link">
+                                    @EmailAdresses.Value.DefraHelpline
                                 </a>
                                 @Localizer["Guidance.AccessibleFormatTextPart2"]
                             </div>
@@ -137,8 +141,8 @@
                             </summary>
                             <div class="govuk-details__text">
                                 @Localizer["Guidance.AccessibleFormatTextPart1"]
-                                <a href="mailto:@Localizer["Guidance.DefraHelplineEmail"]" target="_blank" rel="noopener" class="govuk-link">
-                                    @Localizer["Guidance.DefraHelplineEmail"]
+                                <a href="mailto:@EmailAdresses.Value.DefraHelpline" target="_blank" rel="noopener" class="govuk-link">
+                                    @EmailAdresses.Value.DefraHelpline
                                 </a>
                                 @Localizer["Guidance.AccessibleFormatTextPart2"]
                             </div>

@@ -138,9 +138,6 @@
   <data name="Guidance.Csv" xml:space="preserve">
     <value>CSV, </value>
   </data>
-  <data name="Guidance.DefraHelplineEmail" xml:space="preserve">
-    <value>defra.helpine@defra.gov.uk.</value>
-  </data>
   <data name="Guidance.DepartmentForEnvironmentLinkText" xml:space="preserve">
     <value>Department for Environment, Food &amp; Rural Affairs</value>
   </data>
