@@ -494,7 +494,8 @@
     -webkit-text-decoration-skip-ink: none;
     text-decoration-skip-ink: none;
     -webkit-text-decoration-skip: none;
-    text-decoration-skip: none
+    text-decoration-skip: none;
+    color: #003078
 }
 
 .govspeak a:focus, .gem-c-govspeak a:focus {
@@ -513,10 +514,6 @@
 
 .govspeak a:visited, .gem-c-govspeak a:visited {
     color: #4c2c92
-}
-
-.govspeak a:hover, .gem-c-govspeak a:hover {
-    color: #003078
 }
 
 .govspeak a:active, .gem-c-govspeak a:active {
