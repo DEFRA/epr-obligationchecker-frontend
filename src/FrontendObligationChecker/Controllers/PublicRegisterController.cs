@@ -3,7 +3,6 @@
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
-    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
@@ -12,13 +11,6 @@
     [Route(PagePath.PublicRegister)]
     public class PublicRegisterController : Controller
     {
-        private readonly SessionRequestCultureProvider _sessionRequestCultureProvider;
-
-        public PublicRegisterController()
-        {
-            _sessionRequestCultureProvider = new SessionRequestCultureProvider();
-        }
-
         [HttpGet]
         public async Task<IActionResult> Guidance()
         {
