@@ -6,6 +6,7 @@
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.FeatureManagement;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
@@ -15,6 +16,7 @@
         private Mock<SessionRequestCultureProvider> _mockCultureProvider;
         private Mock<HttpContext>? _mockHttpContext;
         private Mock<ISession> _mockSession;
+        private Mock<IFeatureManagerSnapshot> _mockFeatureManager;
         private PublicRegisterController _controller;
 
         [TestInitialize]
@@ -24,6 +26,7 @@
             _mockSession = new Mock<ISession>();
             _mockHttpContext = new Mock<HttpContext>();
             _mockHttpContext.Setup(mock => mock.Session).Returns(_mockSession.Object);
+            _mockFeatureManager = new Mock<IFeatureManagerSnapshot>();
             _controller = new PublicRegisterController();
             _controller.ControllerContext.HttpContext = _mockHttpContext.Object;
         }

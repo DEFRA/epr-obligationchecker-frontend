@@ -24,6 +24,7 @@
         {
             var culture = _sessionRequestCultureProvider.DetermineProviderCultureResult(HttpContext).Result.Cultures[0].ToString();
 
+            // This is hard-coded for the sake of displaying the view for story #523624
             var viewModel = new GuidanceViewModel
             {
                 ComplianceSchemesRegisteredFileSize = "450",
