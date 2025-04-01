@@ -162,9 +162,6 @@
   <data name="Guidance.From" xml:space="preserve">
     <value>From:</value>
   </data>
-  <data name="Guidance.GetEmailsAboutThisPage" xml:space="preserve">
-    <value>Get emails about this page</value>
-  </data>
   <data name="Guidance.Heading" xml:space="preserve">
     <value>Public register for the ‘report packaging data’ service</value>
   </data>
