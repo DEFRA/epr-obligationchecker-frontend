@@ -126,6 +126,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Obligated.en.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\PublicRegister\Guidance.cy.resx">
+        <LastGenOutput>LargeProducerError.en.Designer.cs</LastGenOutput>
+        <Generator>ResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\PublicRegister\Guidance.en.resx">
+        <LastGenOutput>LargeProducerError.en.Designer.cs</LastGenOutput>
+        <Generator>ResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Views\Shared\Partials\Govuk\_ErrorSummary.en.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_ErrorSummary.en.Designer.cs</LastGenOutput>

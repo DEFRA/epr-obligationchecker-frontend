@@ -1,7 +1,7 @@
 ﻿using FrontendObligationChecker.ConfigurationExtensions;
+using FrontendObligationChecker.FeatureManagement;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
@@ -14,7 +14,7 @@ namespace FrontendObligationChecker
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddFeatureManagement();
+            builder.Services.AddFeatureManagement().UseDisabledFeaturesHandler(new RedirectDisabledFeatureHandler());
 
             builder.Services.ConfigureOptions(builder.Configuration);
 
