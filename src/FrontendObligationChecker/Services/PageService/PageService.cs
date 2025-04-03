@@ -169,7 +169,7 @@ public class PageService : IPageService
                 "parent" => AssociationType.Parent,
                 "subsidiary" => AssociationType.Subsidiary,
                 "individual" => AssociationType.Individual,
-                _ => page.AssociationType
+                "partnership" => AssociationType.Partnership,
             };
         }
     }
@@ -205,6 +205,7 @@ public class PageService : IPageService
                 "parent" => page.AdditionalDescription,
                 "subsidary" => null,
                 "individual" => null,
+                "partnership" => null,
                 _ => page.AdditionalDescription
             };
         }

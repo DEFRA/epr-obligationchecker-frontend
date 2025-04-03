@@ -79,6 +79,12 @@ public static class PageGenerator
                             Title = "SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3",
                             Value = "individual"
                         },
+                        new()
+                        {
+                            Next = OptionPath.Secondary,
+                            Title = "SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4",
+                            Value = "partnership"
+                        }
                     },
                     ErrorMessage = "SingleQuestion.TypeOfOrganisation.QuestionError"
                 }

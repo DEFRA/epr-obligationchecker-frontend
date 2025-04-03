@@ -5,7 +5,8 @@ public enum TypeOfOrganisation
     NotSet = 0,
     ParentCompany,
     Subsidiary,
-    IndividualCompany
+    IndividualCompany,
+    Partnership
 }
 
 public enum AnnualTurnover

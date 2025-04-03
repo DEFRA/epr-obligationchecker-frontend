@@ -245,8 +245,11 @@
     <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel2" xml:space="preserve">
     <value>Is-gwmni</value>
   </data>
-    <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel3" xml:space="preserve">
     <value>Cwmni unigol</value>
+  </data>
+  <data name="SingleQuestion.TypeOfOrganisation.QuestionOptionLabel4" xml:space="preserve">
+    <value>Partneriaeth</value>
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
     <value>Rhoi nwyddau i'w gwerthu mewn pecynnau</value>
