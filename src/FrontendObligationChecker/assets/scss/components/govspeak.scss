@@ -1,0 +1,699 @@
+﻿.gem-c-layout-for-public__blue-bar {
+    background: #1d70b8;
+    height: 10px
+}
+
+.gem-c-layout-for-public__blue-bar-wrapper--browse {
+    background-color: #263135
+}
+
+.govuk-frontend-supported .gem-c-layout-for-public__global-banner-wrapper {
+    margin-top: -10px;
+    min-height: 10px;
+    position: relative
+}
+
+.gem-c-layout-for-public-account-menu {
+    margin: 0 0 30px 0;
+    padding: 0
+}
+
+@media(min-width: 48.0625em) {
+    .gem-c-layout-for-public-account-menu {
+        margin-right: 20px
+    }
+}
+
+.gem-c-layout-for-public-account-menu__item {
+    list-style-type: none;
+    padding: 12px 0
+}
+
+@media(min-width: 40.0625em) {
+    .gem-c-layout-for-public-account-menu__item {
+        margin: 0 0 20px;
+        padding: 5px 0
+    }
+}
+
+.gem-c-layout-for-public-account-menu__item--current {
+    margin-left: -14px;
+    padding-left: 10px;
+    border-left: 4px solid #1d70b8
+}
+
+.gem-c-layout-for-public-account-menu__item--current .gem-c-layout-for-public-account-menu__link {
+    text-decoration: none
+}
+
+.gem-c-layout-for-public-account-menu__link {
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .gem-c-layout-for-public-account-menu__link {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .gem-c-layout-for-public-account-menu__link {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.gem-c-layout-for-public-account-menu__link:not(:focus):hover {
+    color: #1d70b8
+}
+
+.gem-c-single-page-notification-button__submit {
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #505a5f;
+    color: #1d70b8;
+    cursor: pointer;
+    background: none
+}
+
+.gem-c-single-page-notification-button__submit:focus {
+    outline: 3px solid rgba(0,0,0,0);
+    color: #0b0c0c;
+    background-color: #fd0;
+    box-shadow: 0 -2px #fd0,0 4px #0b0c0c;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    border-color: rgba(0,0,0,0);
+}
+
+.gem-c-single-page-notification-button__submit:hover {
+    background-color: #f3f2f1;
+    color: #003078
+}
+
+.gem-c-single-page-notification-button__submit:hover:focus {
+    color: #0b0c0c
+}
+
+.gem-c-single-page-notification-button__icon {
+    color: #0b0c0c;
+    vertical-align: top;
+    margin-right: 5px
+}
+
+.govuk-frontend-supported .gem-c-single-page-notification-button.js-personalisation-enhancement {
+    opacity: 0
+}
+
+.govuk-frontend-supported .gem-c-single-page-notification-button.js-personalisation-enhancement.gem-c-single-page-notification-button--visible {
+    opacity: 1
+}
+
+.gem-c-attachment {
+    position: relative;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .gem-c-attachment {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .gem-c-attachment {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.gem-c-attachment::after {
+    content: "";
+    display: block;
+    clear: both
+}
+
+.gem-c-attachment__thumbnail {
+    position: relative;
+    width: auto;
+    padding: 5px;
+    float: left
+}
+
+.gem-c-attachment__thumbnail-image {
+    display: block;
+    width: auto;
+    max-width: 66px;
+    height: 93.3333333333px;
+    border: rgba(11,12,12,.1);
+    outline: 5px solid rgba(11,12,12,.1);
+    background: #fff;
+    box-shadow: 0 2px 2px rgba(11,12,12,.4);
+    fill: #b1b4b6;
+    stroke: #b1b4b6
+}
+
+@media(min-width: 40.0625em) {
+    .gem-c-attachment__thumbnail-image {
+        max-width: 99px;
+        height: 140px
+    }
+}
+
+.gem-c-attachment__details {
+    padding-left: 89.3333333333px
+}
+
+@media(min-width: 40.0625em) {
+    .gem-c-attachment__details {
+        padding-left: 134px
+    }
+}
+
+.gem-c-attachment__details .gem-c-details {
+    margin-top: 15px;
+    word-break: break-word;
+    word-wrap: break-word
+}
+
+.gem-c-attachment__title {
+    margin: 0 0 15px;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1.3125rem;
+    line-height: 1.1904761905
+}
+
+@media print {
+    .gem-c-attachment__title {
+        font-family: sans-serif
+    }
+}
+
+@media(min-width: 40.0625em) {
+    .gem-c-attachment__title {
+        font-size: 1.6875rem;
+        line-height: 1.1111111111
+    }
+}
+
+@media print {
+    .gem-c-attachment__title {
+        font-size: 18pt;
+        line-height: 1.15
+    }
+}
+
+.gem-c-attachment__link {
+    line-height: 1.29
+}
+
+.gem-c-attachment__metadata {
+    margin: 0 0 15px;
+    color: #505a5f;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .gem-c-attachment__metadata {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .gem-c-attachment__metadata {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.gem-c-attachment__metadata:last-of-type {
+    margin-bottom: 0
+}
+
+.gem-c-attachment__metadata .gem-c-attachment__attribute {
+    word-wrap: break-word;
+    overflow-wrap: break-word
+}
+
+.govspeak .gem-c-attachment__title, .gem-c-govspeak .gem-c-attachment__title {
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1.3125rem;
+    line-height: 1.1904761905;
+    margin: 0 0 15px 0
+}
+
+@media print {
+    .govspeak .gem-c-attachment__title, .gem-c-govspeak .gem-c-attachment__title {
+        font-family: sans-serif
+    }
+}
+
+@media(min-width: 40.0625em) {
+    .govspeak .gem-c-attachment__title, .gem-c-govspeak .gem-c-attachment__title {
+        font-size: 1.6875rem;
+        line-height: 1.1111111111
+    }
+}
+
+@media print {
+    .govspeak .gem-c-attachment__title, .gem-c-govspeak .gem-c-attachment__title {
+        font-size: 18pt;
+        line-height: 1.15
+    }
+}
+
+.govspeak .gem-c-attachment__metadata, .gem-c-govspeak .gem-c-attachment__metadata {
+    margin: 0 0 15px 0
+}
+
+.gem-c-attachment__metadata--compact {
+    margin-bottom: 0
+}
+
+.gem-c-attachment__abbr {
+    text-decoration: none;
+    cursor: help
+}
+
+@media print {
+    .gem-c-attachment__details {
+        padding: 0
+    }
+
+    .gem-c-attachment__metadata, .gem-c-attachment__metadata .govuk-link::after {
+        font-size: 12pt
+    }
+
+    .gem-c-attachment__link.govuk-link {
+        word-break: break-word
+    }
+
+    .gem-c-attachment__link.govuk-link::after {
+        font-size: 12pt;
+        line-height: 1 !important
+    }
+}
+
+.govspeak, .gem-c-govspeak {
+    color: #0b0c0c;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25
+}
+
+@media print {
+    .govspeak, .gem-c-govspeak {
+        color: #000
+    }
+}
+
+@media print {
+    .govspeak, .gem-c-govspeak {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .govspeak, .gem-c-govspeak {
+        font-size: 14pt;
+        line-height: 1.2
+    }
+}
+
+.govspeak ol, .govspeak ul, .govspeak p, .gem-c-govspeak ol, .gem-c-govspeak ul, .gem-c-govspeak p {
+    margin: 0 0 20px 0;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .govspeak ol, .govspeak ul, .govspeak p, .gem-c-govspeak ol, .gem-c-govspeak ul, .gem-c-govspeak p {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .govspeak ol, .govspeak ul, .govspeak p, .gem-c-govspeak ol, .gem-c-govspeak ul, .gem-c-govspeak p {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.govspeak * + h2, .govspeak * + h3, .gem-c-govspeak * + h2, .gem-c-govspeak * + h3 {
+    padding-top: 20px
+}
+
+.govspeak h1, .gem-c-govspeak h1 {
+    margin: 0;
+    padding: 0;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .govspeak h1, .gem-c-govspeak h1 {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .govspeak h1, .gem-c-govspeak h1 {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.govspeak h2, .gem-c-govspeak h2 {
+    margin: 0 0 20px 0;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    font-size: 1.3125rem;
+    line-height: 1.1904761905
+}
+
+@media print {
+    .govspeak h2, .gem-c-govspeak h2 {
+        font-family: sans-serif
+    }
+}
+
+@media(min-width: 40.0625em) {
+    .govspeak h2, .gem-c-govspeak h2 {
+        font-size: 1.6875rem;
+        line-height: 1.1111111111
+    }
+}
+
+@media print {
+    .govspeak h2, .gem-c-govspeak h2 {
+        font-size: 18pt;
+        line-height: 1.15
+    }
+}
+
+.govspeak h3, .gem-c-govspeak h3 {
+    margin: 0 0 20px 0;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .govspeak h3, .gem-c-govspeak h3 {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .govspeak h3, .gem-c-govspeak h3 {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.govspeak h4, .govspeak h5, .govspeak h6, .gem-c-govspeak h4, .gem-c-govspeak h5, .gem-c-govspeak h6 {
+    margin: 0;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737
+}
+
+@media print {
+    .govspeak h4, .govspeak h5, .govspeak h6, .gem-c-govspeak h4, .gem-c-govspeak h5, .gem-c-govspeak h6 {
+        font-family: sans-serif
+    }
+}
+
+@media print {
+    .govspeak h4, .govspeak h5, .govspeak h6, .gem-c-govspeak h4, .gem-c-govspeak h5, .gem-c-govspeak h6 {
+        font-size: 14pt;
+        line-height: 1.15
+    }
+}
+
+.govspeak a, .gem-c-govspeak a {
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: underline;
+    text-decoration-thickness: max(1px, .0625rem);
+    text-underline-offset: .1578em;
+    word-wrap: break-word;
+    overflow-wrap: break-word
+}
+
+@media print {
+    .govspeak a, .gem-c-govspeak a {
+        font-family: sans-serif
+    }
+}
+
+.govspeak a:hover, .gem-c-govspeak a:hover {
+    text-decoration-thickness: max(3px, .1875rem, .12em);
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-skip: none;
+    text-decoration-skip: none;
+    color: #003078
+}
+
+.govspeak a:focus, .gem-c-govspeak a:focus {
+    outline: 3px solid rgba(0,0,0,0);
+    color: #0b0c0c;
+    background-color: #fd0;
+    box-shadow: 0 -2px #fd0,0 4px #0b0c0c;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone
+}
+
+.govspeak a:link, .gem-c-govspeak a:link {
+    color: #1d70b8
+}
+
+.govspeak a:visited, .gem-c-govspeak a:visited {
+    color: #4c2c92
+}
+
+.govspeak a:active, .gem-c-govspeak a:active {
+    color: #0b0c0c
+}
+
+.govspeak ol, .govspeak ul, .gem-c-govspeak ol, .gem-c-govspeak ul {
+    list-style-position: outside;
+    padding: 0
+}
+
+.govspeak li, .gem-c-govspeak li {
+    margin: 0 0 10px;
+    padding: 0
+}
+
+.govspeak li p, .gem-c-govspeak li p {
+    margin: 0 0 10px
+}
+
+.govspeak sup, .gem-c-govspeak sup {
+    font-size: .8em;
+    line-height: .7em;
+    vertical-align: super
+}
+
+.govspeak abbr, .gem-c-govspeak abbr {
+    cursor: help;
+    text-decoration: none
+}
+
+.govspeak hr, .gem-c-govspeak hr {
+    margin-top: 29px;
+    margin-bottom: 30px;
+    border-top: 1px solid #b1b4b6
+}
+
+.govspeak code, .gem-c-govspeak code {
+    padding: 0 5px;
+    color: #d13118;
+    background-color: #f3f2f1
+}
+
+.govspeak.gem-c-govspeak--direction-rtl ol, .govspeak.gem-c-govspeak--direction-rtl ul, .gem-c-govspeak.gem-c-govspeak--direction-rtl ol, .gem-c-govspeak.gem-c-govspeak--direction-rtl ul {
+    margin-left: 0;
+    margin-right: 20px
+}
+
+.govspeak.gem-c-govspeak--direction-rtl ol a, .govspeak.gem-c-govspeak--direction-rtl ul a, .gem-c-govspeak.gem-c-govspeak--direction-rtl ol a, .gem-c-govspeak.gem-c-govspeak--direction-rtl ul a {
+    overflow-wrap: break-word
+}
+
+.govspeak.gem-c-govspeak--direction-rtl ol ul, .govspeak.gem-c-govspeak--direction-rtl ol ol, .govspeak.gem-c-govspeak--direction-rtl ul ul, .govspeak.gem-c-govspeak--direction-rtl ul ol, .gem-c-govspeak.gem-c-govspeak--direction-rtl ol ul, .gem-c-govspeak.gem-c-govspeak--direction-rtl ol ol, .gem-c-govspeak.gem-c-govspeak--direction-rtl ul ul, .gem-c-govspeak.gem-c-govspeak--direction-rtl ul ol {
+    margin-bottom: 0
+}
+
+.govspeak blockquote, .gem-c-govspeak blockquote {
+    padding: 0 0 0 20px;
+    margin: 0;
+    border: 0
+}
+
+@media(min-width: 48.0625em) {
+    .govspeak blockquote, .gem-c-govspeak blockquote {
+        margin: 0 0 0 -30px
+    }
+}
+
+.govspeak blockquote p, .gem-c-govspeak blockquote p {
+    padding-left: 15px
+}
+
+@media(min-width: 40.0625em) {
+    .govspeak blockquote p, .gem-c-govspeak blockquote p {
+        padding-left: 30px
+    }
+}
+
+.govspeak blockquote p::before, .gem-c-govspeak blockquote p::before {
+    content: "â€œ";
+    float: left;
+    clear: both;
+    margin-left: -15px
+}
+
+.govspeak blockquote p:last-child::after, .gem-c-govspeak blockquote p:last-child::after {
+    content: "â€"
+}
+
+.govspeak.gem-c-govspeak--direction-rtl blockquote, .gem-c-govspeak.gem-c-govspeak--direction-rtl blockquote {
+    padding: 0 20px 0 0
+}
+
+@media(min-width: 48.0625em) {
+    .govspeak.gem-c-govspeak--direction-rtl blockquote, .gem-c-govspeak.gem-c-govspeak--direction-rtl blockquote {
+        margin: 0 -30px 0 0
+    }
+}
+
+.govspeak.gem-c-govspeak--direction-rtl blockquote p, .gem-c-govspeak.gem-c-govspeak--direction-rtl blockquote p {
+    padding-right: 15px;
+    padding-left: 0
+}
+
+@media(min-width: 40.0625em) {
+    .govspeak.gem-c-govspeak--direction-rtl blockquote p, .gem-c-govspeak.gem-c-govspeak--direction-rtl blockquote p {
+        padding-right: 30px;
+        padding-left: 0
+    }
+}
+
+.govspeak.gem-c-govspeak--direction-rtl blockquote p::before, .gem-c-govspeak.gem-c-govspeak--direction-rtl blockquote p::before {
+    content: "â€";
+    float: right;
+    margin-right: -15px;
+    margin-left: 0
+}
+
+.govspeak.gem-c-govspeak--direction-rtl blockquote p:last-child::after, .gem-c-govspeak.gem-c-govspeak--direction-rtl blockquote p:last-child::after {
+    content: "â€œ"
+}
+
+.govspeak em, .govspeak i, .gem-c-govspeak em, .gem-c-govspeak i {
+    font-style: normal;
+    font-weight: inherit
+}
+
+.gem-c-govspeak--inverse {
+    color: #fff
+}
+
+.gem-c-govspeak--inverse a {
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: underline;
+    text-decoration-thickness: max(1px, .0625rem);
+    text-underline-offset: .1578em
+}
+
+@media print {
+    .gem-c-govspeak--inverse a {
+        font-family: sans-serif
+    }
+}
+
+.gem-c-govspeak--inverse a:hover {
+    text-decoration-thickness: max(3px, .1875rem, .12em);
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-skip: none;
+    text-decoration-skip: none
+}
+
+.gem-c-govspeak--inverse a:focus {
+    outline: 3px solid rgba(0,0,0,0);
+    color: #0b0c0c;
+    background-color: #fd0;
+    box-shadow: 0 -2px #fd0,0 4px #0b0c0c;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone
+}
+
+.gem-c-govspeak--inverse a:link, .gem-c-govspeak--inverse a:visited {
+    color: #fff
+}
+
+.gem-c-govspeak--inverse a:hover, .gem-c-govspeak--inverse a:active {
+    color: hsla(0,0%,100%,.99)
+}
+
+.guidance-sidebar {
+    padding-top: 15px;
+    margin-top: 40px;
+    border-top: #1d70b8 2px solid;
+}
+
+.app-contact-panel {
+    margin-top: 30px;
+    padding-top: govuk-spacing(3);
+    border-top: 2px solid govuk-colour("blue");
+}
