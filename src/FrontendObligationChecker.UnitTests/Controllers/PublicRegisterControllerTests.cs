@@ -1,11 +1,14 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Controllers
 {
     using System.Threading.Tasks;
+    using FluentAssertions;
     using FrontendObligationChecker.Controllers;
+    using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
@@ -24,7 +27,11 @@
             _mockSession = new Mock<ISession>();
             _mockHttpContext = new Mock<HttpContext>();
             _mockHttpContext.Setup(mock => mock.Session).Returns(_mockSession.Object);
-            _controller = new PublicRegisterController();
+            var externalUrlsOptions = Options.Create(new ExternalUrlsOptions
+            {
+                DefraUrl = "https://www.defraurl.com"
+            });
+            _controller = new PublicRegisterController(externalUrlsOptions);
             _controller.ControllerContext.HttpContext = _mockHttpContext.Object;
         }
 
@@ -47,8 +54,10 @@
             Assert.IsNotNull(result, "Result should not be null.");
             Assert.AreEqual("Guidance", result.ViewName, "The view name should be 'Guidance'.");
 
-            Assert.IsNotNull(result.Model);
-            Assert.IsInstanceOfType(expectedViewModel, result.Model.GetType());
+            var model = result.Model as GuidanceViewModel;
+            Assert.IsNotNull(model);
+            Assert.IsInstanceOfType(expectedViewModel, model.GetType());
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
         }
     }
 }
