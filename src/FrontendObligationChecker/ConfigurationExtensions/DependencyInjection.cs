@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using Azure.Storage.Blobs;
+using FrontendObligationChecker.Services.PublicRegister;
 using FrontendObligationChecker.Services.Session;
 using FrontendObligationChecker.Services.Session.Interfaces;
 using Microsoft.Extensions.Options;
@@ -41,6 +42,14 @@ public static class DependencyInjection
                 storageAccountOptions.BlobContainerName);
             return blobContainerClient;
         });
+
+        services.AddSingleton(x =>
+        {
+            var storageAccountOptions = x.GetService<IOptions<StorageAccountOptions>>().Value;
+            return new BlobServiceClient(storageAccountOptions.ConnectionString);
+        });
+
+        services.AddScoped<IBlobStorageService, BlobStorageService>();
         services.AddAutoMapper(typeof(Program).Assembly);
         services.AddHealthChecks();
         return services;

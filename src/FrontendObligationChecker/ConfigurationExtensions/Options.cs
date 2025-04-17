@@ -17,6 +17,7 @@ public static class Options
         services.Configure<StorageAccountOptions>(configuration.GetSection(StorageAccountOptions.ConfigSection));
         services.Configure<LargeProducerReportFileNamesOptions>(configuration.GetSection(LargeProducerReportFileNamesOptions.ConfigSection));
         services.Configure<CachingOptions>(configuration.GetSection(CachingOptions.ConfigSection));
+        services.Configure<PublicRegisterOptions>(configuration.GetSection(PublicRegisterOptions.ConfigSection));
 
         return services;
     }
