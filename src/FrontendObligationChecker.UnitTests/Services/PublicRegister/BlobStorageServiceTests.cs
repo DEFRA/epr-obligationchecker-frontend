@@ -58,6 +58,7 @@
 
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
+            Assert.IsNull(result.FileType);
         }
 
         [TestMethod]
@@ -84,18 +85,19 @@
 
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
+            Assert.IsNull(result.FileType);
         }
 
         [TestMethod]
-        [DataRow("ProducerContainer")]
-        [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestFilePropertiesAsync_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName)
+        [DataRow("ProducerContainer", "")]
+        [DataRow("ComplianceSchemeContainer", "CSV")]
+        public async Task GetLatestFilePropertiesAsync_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName, string fileType)
         {
             var mockResponse = new Mock<Response<BlobProperties>>();
 
             var mockBlobContainerClient = new Mock<BlobContainerClient>();
 
-            var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024);
+            var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024, contentType: fileType);
             var blobList = new List<BlobItem>
                 {
                     BlobsModelFactory.BlobItem("2025/Blob1"),
@@ -120,12 +122,13 @@
 
             Assert.IsNotNull(result.LastModified);
             Assert.IsNotNull(result.ContentLength);
+            Assert.IsNotNull(result.FileType);
         }
 
         [TestMethod]
         [DataRow("ProducerContainer")]
         [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestProducersFilePropertiesAsync_ThrowRequestFailedException_WhenFailsGetBlobs(string containerName)
+        public async Task GetLatestFilePropertiesAsync_ThrowRequestFailedException_WhenFailsGetBlobs(string containerName)
         {
             var mockBlobContainerClient = new Mock<BlobContainerClient>();
 
@@ -145,7 +148,7 @@
         [TestMethod]
         [DataRow("ProducerContainer")]
         [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestProducersFilePropertiesAsync_ThrowRequestFailedException_WhenFailsGetBlobClient(string containerName)
+        public async Task GetLatestFilePropertiesAsync_ThrowRequestFailedException_WhenFailsGetBlobClient(string containerName)
         {
             var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024);
             var blobList = new List<BlobItem>
