@@ -1,6 +1,7 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Controllers
 {
     using System.Globalization;
+    using System.Reflection;
     using System.Threading.Tasks;
     using FluentAssertions;
     using FrontendObligationChecker.Controllers;
@@ -99,6 +100,69 @@
             model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
             model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
             model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+        }
+
+        [TestMethod]
+        public async Task Guidance_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
+        {
+            // Arrange
+            var producerBlob = new PublicRegisterBlobModel
+            {
+                Name = "producers.csv",
+                PublishedDate = _publishedDate,
+                LastModified = null,
+                ContentLength = "115",
+                FileType = "text/csv"
+            };
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
+                .ReturnsAsync(producerBlob);
+
+            // Act
+            var result = await _controller.Guidance();
+            var model = (result as ViewResult)!.Model as GuidanceViewModel;
+
+            // Assert
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model!.LastUpdated.Should().Be(expectedDate); // fallback to published date
+        }
+
+        [TestMethod]
+        public async Task Guidance_SetsFileSizeToZero_WhenContentLengthIsNull()
+        {
+            // Arrange
+            var producerBlob = new PublicRegisterBlobModel
+            {
+                Name = "producers.csv",
+                PublishedDate = _publishedDate,
+                LastModified = _lastModified,
+                ContentLength = null,
+                FileType = "text/csv"
+            };
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
+                .ReturnsAsync(producerBlob);
+
+            // Act
+            var result = await _controller.Guidance();
+            var model = (result as ViewResult)!.Model as GuidanceViewModel;
+
+            // Assert
+            model!.ProducerRegisteredFile.FileSize.Should().Be("0");
+        }
+
+        [TestMethod]
+        public void FormatDate_ReturnsNull_WhenDateIsNull()
+        {
+            // Act
+            var result = typeof(PublicRegisterController)
+                .GetMethod("FormatDate", BindingFlags.NonPublic | BindingFlags.Static)!
+                .Invoke(null, [null]);
+
+            // Assert
+            result.Should().BeNull();
         }
     }
 }
