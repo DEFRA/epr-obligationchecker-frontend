@@ -1,9 +1,12 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Controllers
 {
     using System.Threading.Tasks;
+    using Azure.Storage.Blobs.Models;
     using FluentAssertions;
     using FrontendObligationChecker.Controllers;
+    using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
+    using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Http;
@@ -16,6 +19,7 @@
     public class PublicRegisterControllerTests
     {
         private Mock<SessionRequestCultureProvider> _mockCultureProvider;
+        private Mock<IBlobStorageService> _blobStorageService;
         private Mock<HttpContext>? _mockHttpContext;
         private Mock<ISession> _mockSession;
         private PublicRegisterController _controller;
@@ -27,12 +31,14 @@
             _mockSession = new Mock<ISession>();
             _mockHttpContext = new Mock<HttpContext>();
             _mockHttpContext.Setup(mock => mock.Session).Returns(_mockSession.Object);
+            _blobStorageService = new Mock<IBlobStorageService>();
+
             var externalUrlsOptions = Options.Create(new ExternalUrlsOptions
             {
                 DefraUrl = "https://www.defraurl.com"
             });
-            _controller = new PublicRegisterController(externalUrlsOptions);
-            _controller.ControllerContext.HttpContext = _mockHttpContext.Object;
+
+            _controller = new PublicRegisterController(externalUrlsOptions, _blobStorageService.Object);
         }
 
         [TestMethod]
@@ -47,6 +53,15 @@
                 PublishedDate = "6 December 2025"
             };
 
+            _blobStorageService.Setup(x => x.GetLatestProducersFilePropertiesAsync()).ReturnsAsync(
+            new PublicRegisterBlobModel
+            {
+                PublishedDate = DateTime.UtcNow,
+                LastModified = DateTime.UtcNow,
+                ContentLength = "100",
+                Name = "Public_Register_Producers_10_April_2025.csv"
+            });
+
             // Act
             var result = await _controller.Guidance() as ViewResult;
 
@@ -58,6 +73,7 @@
             Assert.IsNotNull(model);
             Assert.IsInstanceOfType(expectedViewModel, model.GetType());
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageService.Verify(r => r.GetLatestProducersFilePropertiesAsync(), Times.AtMostOnce());
         }
     }
 }
