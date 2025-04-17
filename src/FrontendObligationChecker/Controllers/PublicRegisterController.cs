@@ -4,22 +4,17 @@
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
     using FrontendObligationChecker.Models.BlobReader;
+    using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
     using Microsoft.FeatureManagement.Mvc;
 
     [FeatureGate(FeatureFlags.PublicRegisterEnabled)]
     [Route(PagePath.PublicRegister)]
-    public class PublicRegisterController : Controller
+    public class PublicRegisterController(IOptions<ExternalUrlsOptions> urlOptions, IBlobStorageService blobStorageService) : Controller
     {
-        private IBlobStorageService blobStorageService;
-
-        public PublicRegisterController(IBlobStorageService blobStorageService)
-        {
-            this.blobStorageService = blobStorageService;
-        }
-
         [HttpGet]
         public async Task<IActionResult> Guidance()
         {
@@ -32,10 +27,11 @@
             // This is hard-coded cso data for the sake of displaying the view for story #523624
             var viewModel = new GuidanceViewModel
             {
-                PublishedDate = publishedDate,
+                ComplianceSchemesRegisteredFileSize = "450",
+                DefraUrl = urlOptions.Value.DefraUrl,
                 LastUpdated = lastUpdated,
-                ProducersRegisteredFileSize = producersRegisteredFileSize,
-                ComplianceSchemesRegisteredFileSize = "450"
+                PublishedDate = publishedDate,
+                ProducersRegisteredFileSize = producersRegisteredFileSize
             };
 
             return View("Guidance", viewModel);

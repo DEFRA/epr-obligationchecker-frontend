@@ -50,4 +50,6 @@ public class ExternalUrlsOptions
     public string PrivacyPage { get; set; }
 
     public string AccessibilityPage { get; set; }
+
+    public string DefraUrl { get; set; }
 }

@@ -2,13 +2,16 @@
 {
     using System.Threading.Tasks;
     using Azure.Storage.Blobs.Models;
+    using FluentAssertions;
     using FrontendObligationChecker.Controllers;
     using FrontendObligationChecker.Models.BlobReader;
+    using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
@@ -30,16 +33,12 @@
             _mockHttpContext.Setup(mock => mock.Session).Returns(_mockSession.Object);
             _blobStorageService = new Mock<IBlobStorageService>();
 
-            var blopProp = new BlobProperties();
-
-            _blobStorageService.Setup(x => x.GetLatestProducersFilePropertiesAsync()).ReturnsAsync(new PublicRegisterBlobModel
+            var externalUrlsOptions = Options.Create(new ExternalUrlsOptions
             {
-                PublishedDate = DateTime.UtcNow,
-                LastModified = DateTime.UtcNow,
-                ContentLength = "100",
-                Name = "Public_Register_Producers_10_April_2025.csv"
+                DefraUrl = "https://www.defraurl.com"
             });
-            _controller = new PublicRegisterController(_blobStorageService.Object);
+
+            _controller = new PublicRegisterController(externalUrlsOptions, _blobStorageService.Object);
         }
 
         [TestMethod]
@@ -54,6 +53,15 @@
                 PublishedDate = "6 December 2025"
             };
 
+            _blobStorageService.Setup(x => x.GetLatestProducersFilePropertiesAsync()).ReturnsAsync(
+            new PublicRegisterBlobModel
+            {
+                PublishedDate = DateTime.UtcNow,
+                LastModified = DateTime.UtcNow,
+                ContentLength = "100",
+                Name = "Public_Register_Producers_10_April_2025.csv"
+            });
+
             // Act
             var result = await _controller.Guidance() as ViewResult;
 
@@ -61,8 +69,11 @@
             Assert.IsNotNull(result, "Result should not be null.");
             Assert.AreEqual("Guidance", result.ViewName, "The view name should be 'Guidance'.");
 
-            Assert.IsNotNull(result.Model);
-            Assert.IsInstanceOfType(expectedViewModel, result.Model.GetType());
+            var model = result.Model as GuidanceViewModel;
+            Assert.IsNotNull(model);
+            Assert.IsInstanceOfType(expectedViewModel, model.GetType());
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageService.Verify(r => r.GetLatestProducersFilePropertiesAsync(), Times.AtMostOnce());
         }
     }
 }
