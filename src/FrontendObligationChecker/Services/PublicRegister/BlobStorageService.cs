@@ -61,14 +61,14 @@ public class BlobStorageService(
 
     private static string GetFileType(string? contentType, string blobName)
     {
-        if (!string.IsNullOrWhiteSpace(contentType))
+        if (!string.IsNullOrWhiteSpace(contentType) && contentType != "application/octet-stream")
         {
             return $"{contentType}, ";
         }
 
         // Fallback to file extension
         var extension = Path.GetExtension(blobName);
-        return string.IsNullOrWhiteSpace(extension) ? "Unknown File Type" : extension.TrimStart('.').ToLowerInvariant();
+        return string.IsNullOrWhiteSpace(extension) ? "CSV" : extension.TrimStart('.').ToUpperInvariant() + ", ";
     }
 
     private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)

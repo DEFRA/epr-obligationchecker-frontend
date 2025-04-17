@@ -17,37 +17,45 @@
         IBlobStorageService blobStorageService,
         IOptions<PublicRegisterOptions> publicRegisterOptions) : Controller
     {
-        private IBlobStorageService _blobStorageService = blobStorageService;
-        private IOptions<PublicRegisterOptions> _publicRegisterOptions = publicRegisterOptions;
+        private readonly IBlobStorageService _blobStorageService = blobStorageService;
+        private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
 
         [HttpGet]
         public async Task<IActionResult> Guidance()
         {
-            PublicRegisterBlobModel producerBlobModel = await _blobStorageService.GetLatestFilePropertiesAsync(
-            _publicRegisterOptions.Value.PublicRegisterBlobContainerName);
+            var producerBlobModel = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
 
-            PublicRegisterBlobModel complianceSchemeBlobModel = await _blobStorageService.GetLatestFilePropertiesAsync(
-                _publicRegisterOptions.Value.PublicRegisterCsoBlobContainerName);
+            var complianceBlobModel = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
 
-            string publishedDate = producerBlobModel.PublishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
-            string lastUpdated = producerBlobModel.LastModified?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? publishedDate;
-            string producersRegisteredFileSize = producerBlobModel.ContentLength?.ToString() ?? "0";
-            string producersRegisteredFileType = producerBlobModel.FileType;
-
-            string complianceSchemeRegisteredFileSize = complianceSchemeBlobModel.ContentLength?.ToString() ?? "0";
-            string complianceSchemeRegisteredFileType = complianceSchemeBlobModel.FileType;
+            var publishedDate = FormatDate(producerBlobModel.PublishedDate);
+            var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
 
             var viewModel = new GuidanceViewModel
             {
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
-                ProducersRegisteredFileSize = producersRegisteredFileSize,
-                ProducersRegisteredFileType = producersRegisteredFileType,
-                ComplianceSchemesRegisteredFileSize = complianceSchemeRegisteredFileSize,
-                ComplianceSchemesRegisteredFileType = complianceSchemeRegisteredFileType
+                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
+                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated)
             };
 
             return View("Guidance", viewModel);
+        }
+
+        private static string FormatDate(DateTime? date) =>
+            date?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+
+        private static PublicRegisterFileViewModel MapToFileViewModel(PublicRegisterBlobModel blobModel, string publishedDate, string lastUpdated)
+        {
+            return new PublicRegisterFileViewModel
+            {
+                DatePublished = publishedDate,
+                DateLastModified = lastUpdated,
+                FileName = blobModel.Name,
+                FileSize = blobModel.ContentLength?.ToString() ?? "0",
+                FileType = blobModel.FileType
+            };
         }
     }
 }
