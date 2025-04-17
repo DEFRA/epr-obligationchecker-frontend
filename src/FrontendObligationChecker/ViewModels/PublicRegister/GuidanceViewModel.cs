@@ -8,6 +8,10 @@
 
         public string ProducersRegisteredFileSize { get; set; }
 
+        public string ProducersRegisteredFileType { get; set; }
+
         public string ComplianceSchemesRegisteredFileSize { get; set; }
+
+        public string ComplianceSchemesRegisteredFileType { get; set; }
     }
 }

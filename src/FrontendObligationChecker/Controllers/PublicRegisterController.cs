@@ -28,6 +28,7 @@
             string publishedDate = blobModel.PublishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             string lastUpdated = blobModel.LastModified?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? publishedDate;
             string producersRegisteredFileSize = blobModel.ContentLength?.ToString() ?? "0";
+            string producersRegisteredFileType = blobModel.FileType;
 
             // This is hard-coded cso data for the sake of displaying the view for story #523624
             var viewModel = new GuidanceViewModel
@@ -35,6 +36,7 @@
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
                 ProducersRegisteredFileSize = producersRegisteredFileSize,
+                ProducersRegisteredFileType = producersRegisteredFileType,
                 ComplianceSchemesRegisteredFileSize = "450"
             };
 
