@@ -169,5 +169,25 @@
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
+
+        [TestMethod]
+        [DataRow(null, "CSV")]
+        [DataRow("", "CSV")]
+        [DataRow(".pdf", "PDF, ")]
+        [DataRow(".csv", "CSV, ")]
+        [DataRow(".xlsx", "XLSX, ")]
+        public void GetFileType_ReturnsCorrectExtension_WhenContentTypeIsNullOrOctetStream(string extension, string expected)
+        {
+            var result = InvokeGetFileType(null, $"filename{extension}");
+            Assert.AreEqual(expected, result);
+        }
+
+        private static string InvokeGetFileType(string contentType, string blobName)
+        {
+            // Use reflection to invoke private static method
+            var method = typeof(BlobStorageService)
+                .GetMethod("GetFileType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+            return (string)method.Invoke(null, [contentType, blobName]);
+        }
     }
 }
