@@ -1,6 +1,5 @@
 ﻿namespace FrontendObligationChecker.Services.PublicRegister;
 
-using System.Globalization;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Storage.Blobs;
@@ -8,7 +7,6 @@ using Azure.Storage.Blobs.Models;
 using FrontendObligationChecker.Exceptions;
 using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Models.Config;
-using FrontendObligationChecker.ViewModels.PublicRegister;
 using Microsoft.Extensions.Options;
 
 public class BlobStorageService(
@@ -19,69 +17,7 @@ public class BlobStorageService(
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
 
-    public async Task<GuidanceViewModel> GetGuidanceViewModelAsync()
-    {
-        PublicRegisterBlobModel producerBlobModel = await GetLatestFilePropertiesAsync(
-            publicRegisterOptions.Value.PublicRegisterBlobContainerName);
-
-        PublicRegisterBlobModel complianceSchemeBlobModel = await GetLatestFilePropertiesAsync(
-            publicRegisterOptions.Value.PublicRegisterCsoBlobContainerName);
-
-        string publishedDate = producerBlobModel.PublishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
-        string lastUpdated = producerBlobModel.LastModified?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? publishedDate;
-        string producersRegisteredFileSize = producerBlobModel.ContentLength?.ToString() ?? "0";
-        string producersRegisteredFileType = producerBlobModel.FileType;
-
-        string complianceSchemeRegisteredFileSize = complianceSchemeBlobModel.ContentLength?.ToString() ?? "0";
-        string complianceSchemeRegisteredFileType = complianceSchemeBlobModel.FileType;
-
-        var viewModel = new GuidanceViewModel
-        {
-            PublishedDate = publishedDate,
-            LastUpdated = lastUpdated,
-            ProducersRegisteredFileSize = producersRegisteredFileSize,
-            ProducersRegisteredFileType = producersRegisteredFileType,
-            ComplianceSchemesRegisteredFileSize = complianceSchemeRegisteredFileSize,
-            ComplianceSchemesRegisteredFileType = complianceSchemeRegisteredFileType
-        };
-
-        return viewModel;
-    }
-
-    private static string? GetFolderPrefix(string blobName)
-    {
-        var parts = blobName.Split('/');
-        return parts.Length > 1 ? parts[0] + "/" : null;
-    }
-
-    private static string GetFileType(string? contentType, string blobName)
-    {
-        if (!string.IsNullOrWhiteSpace(contentType))
-        {
-            return contentType;
-        }
-
-        // Fallback to file extension
-        var extension = Path.GetExtension(blobName);
-        return string.IsNullOrWhiteSpace(extension) ? "unknown" : extension.TrimStart('.').ToLowerInvariant();
-    }
-
-    private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)
-    {
-        BlobItem? latestBlob = null;
-
-        await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
-        {
-            if (latestBlob is null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
-            {
-                latestBlob = blobItem;
-            }
-        }
-
-        return latestBlob;
-    }
-
-    private async Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName)
+    public async Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName)
     {
         var result = new PublicRegisterBlobModel
         {
@@ -111,10 +47,43 @@ public class BlobStorageService(
         }
         catch (RequestFailedException ex)
         {
-            logger.LogError(ex, LogMessage, "Producers files");
+            logger.LogError(ex, LogMessage, $"{containerName} files");
         }
 
         return result;
+    }
+
+    private static string? GetFolderPrefix(string blobName)
+    {
+        var parts = blobName.Split('/');
+        return parts.Length > 1 ? parts[0] + "/" : null;
+    }
+
+    private static string GetFileType(string? contentType, string blobName)
+    {
+        if (!string.IsNullOrWhiteSpace(contentType))
+        {
+            return $"{contentType}, ";
+        }
+
+        // Fallback to file extension
+        var extension = Path.GetExtension(blobName);
+        return string.IsNullOrWhiteSpace(extension) ? "Unknown File Type" : extension.TrimStart('.').ToLowerInvariant();
+    }
+
+    private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)
+    {
+        BlobItem? latestBlob = null;
+
+        await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
+        {
+            if (latestBlob is null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
+            {
+                latestBlob = blobItem;
+            }
+        }
+
+        return latestBlob;
     }
 
     private BlobContainerClient GetContainerClient(string containerName)
