@@ -4,5 +4,5 @@ using FrontendObligationChecker.Models.BlobReader;
 
 public interface IBlobStorageService
 {
-    Task<PublicRegisterBlobModel?> GetLatestProducersFilePropertiesAsync();
+    Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName);
 }

@@ -12,5 +12,7 @@
         public DateTime? LastModified { get; set; }
 
         public string? ContentLength { get; set; }
+
+        public string? FileType { get; set; }
     }
 }
