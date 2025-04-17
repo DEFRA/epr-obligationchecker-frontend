@@ -1,7 +1,10 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Controllers
 {
     using System.Threading.Tasks;
+    using Azure.Storage.Blobs.Models;
     using FrontendObligationChecker.Controllers;
+    using FrontendObligationChecker.Models.BlobReader;
+    using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Http;
@@ -13,6 +16,7 @@
     public class PublicRegisterControllerTests
     {
         private Mock<SessionRequestCultureProvider> _mockCultureProvider;
+        private Mock<IBlobStorageService> _blobStorageService;
         private Mock<HttpContext>? _mockHttpContext;
         private Mock<ISession> _mockSession;
         private PublicRegisterController _controller;
@@ -24,8 +28,18 @@
             _mockSession = new Mock<ISession>();
             _mockHttpContext = new Mock<HttpContext>();
             _mockHttpContext.Setup(mock => mock.Session).Returns(_mockSession.Object);
-            _controller = new PublicRegisterController();
-            _controller.ControllerContext.HttpContext = _mockHttpContext.Object;
+            _blobStorageService = new Mock<IBlobStorageService>();
+
+            var blopProp = new BlobProperties();
+
+            _blobStorageService.Setup(x => x.GetLatestProducersFilePropertiesAsync()).ReturnsAsync(new PublicRegisterBlobModel
+            {
+                PublishedDate = DateTime.UtcNow,
+                LastModified = DateTime.UtcNow,
+                ContentLength = "100",
+                Name = "Public_Register_Producers_10_April_2025.csv"
+            });
+            _controller = new PublicRegisterController(_blobStorageService.Object);
         }
 
         [TestMethod]
