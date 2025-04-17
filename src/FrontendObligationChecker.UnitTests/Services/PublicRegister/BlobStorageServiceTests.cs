@@ -187,7 +187,7 @@
             // Use reflection to invoke private static method
             var method = typeof(BlobStorageService)
                 .GetMethod("GetFileType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-            return (string)method.Invoke(null, [contentType, blobName]);
+            return (string)method.Invoke(null,[contentType, blobName]);
         }
     }
 }
