@@ -24,24 +24,24 @@ public class BlobStorageService(BlobServiceClient blobServiceClient, ILogger<Blo
         try
         {
             var containerClient = blobServiceClient.GetBlobContainerClient(publicRegisterOptions.Value.PublicRegisterBlobContainerName);
-            if (containerClient == null) return result;
+            if (containerClient is null) return result;
 
             BlobItem? latestBlob = null;
             string? latestFolderPrefix = null;
 
-            latestFolderPrefix = await LatestFolder(containerClient, latestFolderPrefix);
+            latestFolderPrefix = await GetLatestFolder(containerClient, latestFolderPrefix);
 
-            if (string.IsNullOrEmpty(latestFolderPrefix)) return result;
+            if (string.IsNullOrWhiteSpace(latestFolderPrefix)) return result;
 
             await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: latestFolderPrefix))
             {
-                if (latestBlob == null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
+                if (latestBlob is null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
                 {
                     latestBlob = blobItem;
                 }
             }
 
-            if (latestBlob == null) return result;
+            if (latestBlob is null) return result;
 
             var blobClient = containerClient.GetBlobClient(latestBlob.Name);
             var properties = await blobClient.GetPropertiesAsync();
@@ -59,7 +59,7 @@ public class BlobStorageService(BlobServiceClient blobServiceClient, ILogger<Blo
         return result;
     }
 
-    private async Task<string?> LatestFolder(BlobContainerClient containerClient, string? latestFolderPrefix)
+    private async Task<string?> GetLatestFolder(BlobContainerClient containerClient, string? latestFolderPrefix)
     {
         try
         {
