@@ -1,8 +1,8 @@
 ﻿namespace FrontendObligationChecker.Services.PublicRegister;
 
-using FrontendObligationChecker.Models.BlobReader;
+using FrontendObligationChecker.ViewModels.PublicRegister;
 
 public interface IBlobStorageService
 {
-    Task<PublicRegisterBlobModel?> GetLatestProducersFilePropertiesAsync();
+    Task<GuidanceViewModel> GetGuidanceViewModelAsync();
 }

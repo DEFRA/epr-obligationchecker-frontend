@@ -52,7 +52,7 @@
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()))
                 .Returns((BlobContainerClient)null);
 
-            var result = await _service.GetLatestProducersFilePropertiesAsync();
+            var result = await _service.GetLatestFilePropertiesAsync();
 
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
@@ -71,7 +71,7 @@
             _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .Returns(asyncPageable);
 
-            var result = await _service.GetLatestProducersFilePropertiesAsync();
+            var result = await _service.GetLatestFilePropertiesAsync();
 
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
@@ -105,7 +105,7 @@
 
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>())).Returns(blobClientMock.Object);
 
-            var result = await _service.GetLatestProducersFilePropertiesAsync();
+            var result = await _service.GetLatestFilePropertiesAsync();
 
             Assert.IsNotNull(result.LastModified);
             Assert.IsNotNull(result.ContentLength);
@@ -124,7 +124,7 @@
             _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .Throws(new RequestFailedException(string.Format("Failed to read {0} from blob storage", "directories")));
 
-            var act = async () => await _service.GetLatestProducersFilePropertiesAsync();
+            var act = async () => await _service.GetLatestFilePropertiesAsync();
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
@@ -147,7 +147,7 @@
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>()))
                                   .Throws(new RequestFailedException("Failed to read public register producers files from blob storage"));
 
-            var act = async () => await _service.GetLatestProducersFilePropertiesAsync();
+            var act = async () => await _service.GetLatestFilePropertiesAsync();
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
