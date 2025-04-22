@@ -72,7 +72,7 @@ public class BlobStorageService(
         catch (RequestFailedException ex)
         {
             logger.LogError(ex, LogMessage, $"{containerName} files");
-            return null;
+            throw new PublicRegisterServiceException(string.Format(ErrorMessage, HomeNation.All), ex);
         }
     }
 

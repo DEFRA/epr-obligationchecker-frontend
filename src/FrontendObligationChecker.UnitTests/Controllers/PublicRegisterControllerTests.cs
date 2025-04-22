@@ -225,7 +225,7 @@
 
             _blobStorageServiceMock
                 .Setup(s => s.GetLatestFileAsync(It.IsAny<string>()))
-                .ThrowsAsync(new LargeProducerRegisterServiceException("fail"));
+                .ThrowsAsync(new PublicRegisterServiceException("fail"));
 
             // Act
             var result = await _controller.File(fileName, fileType) as RedirectToActionResult;

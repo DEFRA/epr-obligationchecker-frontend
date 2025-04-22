@@ -1,6 +1,7 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
     using System.Globalization;
+    using Azure;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
     using FrontendObligationChecker.Exceptions;
@@ -69,7 +70,7 @@
 
                 return File(fileContent, "text/csv", fileName);
             }
-            catch (LargeProducerRegisterServiceException ex)
+            catch (PublicRegisterServiceException ex)
             {
                 return RedirectToAction(nameof(PagePath.FileNotDownloaded));
             }
@@ -78,7 +79,7 @@
         [HttpGet(PagePath.FileNotDownloaded)]
         public async Task<IActionResult> FileNotDownloaded()
         {
-            return View("GuidanceError", new LargeProducerErrorViewModel());
+            return View("GuidanceError", new PublicRegisterErrorViewModel());
         }
 
         private static string FormatDate(DateTime? date) =>
