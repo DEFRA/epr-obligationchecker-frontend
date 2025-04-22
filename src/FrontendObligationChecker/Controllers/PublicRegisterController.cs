@@ -17,6 +17,7 @@
     [Route(PagePath.PublicRegister)]
     public class PublicRegisterController(
         IBlobStorageService blobStorageService,
+        IOptions<ExternalUrlsOptions> urlOptions,
         IOptions<PublicRegisterOptions> publicRegisterOptions) : Controller
     {
         private readonly IBlobStorageService _blobStorageService = blobStorageService;
@@ -36,6 +37,7 @@
 
             var viewModel = new GuidanceViewModel
             {
+                DefraUrl = urlOptions.Value.DefraUrl,
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
                 ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),

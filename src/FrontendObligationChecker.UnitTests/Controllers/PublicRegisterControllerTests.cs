@@ -18,7 +18,8 @@
     public class PublicRegisterControllerTests
     {
         private Mock<IBlobStorageService> _blobStorageServiceMock = null!;
-        private IOptions<PublicRegisterOptions> _options = null!;
+        private IOptions<PublicRegisterOptions> _publicRegisterOptions = null!;
+        private IOptions<ExternalUrlsOptions> _externalUrlsOptions = null!;
         private PublicRegisterController _controller = null!;
         private DateTime _publishedDate;
         private DateTime _lastModified;
@@ -57,17 +58,24 @@
                 .Setup(x => x.GetLatestFilePropertiesAsync("schemes-container"))
                 .ReturnsAsync(complianceBlob);
 
-            _options = Options.Create(new PublicRegisterOptions
+            _publicRegisterOptions = Options.Create(new PublicRegisterOptions
             {
                 PublicRegisterBlobContainerName = "producers-container",
                 PublicRegisterCsoBlobContainerName = "schemes-container"
             });
 
-            _controller = new PublicRegisterController(_blobStorageServiceMock.Object, _options);
+            _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
+            {
+                DefraUrl = "https://www.defraurl.com"
+            });
+
+            _controller = new PublicRegisterController(_blobStorageServiceMock.Object, _externalUrlsOptions, _publicRegisterOptions);
         }
 
         [TestMethod]
-        public async Task Guidance_ReturnsExpectedViewWithCorrectModel()
+        [DataRow("producers-container")]
+        [DataRow("schemes-container")]
+        public async Task Guidance_ReturnsExpectedViewWithCorrectModel(string containerName)
         {
             // Act
             var result = await _controller.Guidance();
@@ -100,6 +108,8 @@
             model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
             model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
             model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(containerName), Times.AtMostOnce());
         }
 
         [TestMethod]
@@ -126,6 +136,8 @@
             // Assert
             var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             model!.LastUpdated.Should().Be(expectedDate); // fallback to published date
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(It.IsAny<string>()), Times.AtMost(2));
         }
 
         [TestMethod]
@@ -151,6 +163,8 @@
 
             // Assert
             model!.ProducerRegisteredFile.FileSize.Should().Be("0");
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(It.IsAny<string>()), Times.AtMost(2));
         }
 
         [TestMethod]
@@ -159,7 +173,7 @@
             // Act
             var result = typeof(PublicRegisterController)
                 .GetMethod("FormatDate", BindingFlags.NonPublic | BindingFlags.Static)!
-                .Invoke(null, [null]);
+                .Invoke(null,[null]);
 
             // Assert
             result.Should().BeNull();
