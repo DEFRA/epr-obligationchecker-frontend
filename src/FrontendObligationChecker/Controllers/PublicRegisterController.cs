@@ -4,41 +4,58 @@
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
     using FrontendObligationChecker.Models.BlobReader;
+    using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
     using Microsoft.FeatureManagement.Mvc;
 
     [FeatureGate(FeatureFlags.PublicRegisterEnabled)]
     [Route(PagePath.PublicRegister)]
-    public class PublicRegisterController : Controller
+    public class PublicRegisterController(
+        IBlobStorageService blobStorageService,
+        IOptions<PublicRegisterOptions> publicRegisterOptions) : Controller
     {
-        private IBlobStorageService blobStorageService;
-
-        public PublicRegisterController(IBlobStorageService blobStorageService)
-        {
-            this.blobStorageService = blobStorageService;
-        }
+        private readonly IBlobStorageService _blobStorageService = blobStorageService;
+        private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
 
         [HttpGet]
         public async Task<IActionResult> Guidance()
         {
-            PublicRegisterBlobModel blobModel = await blobStorageService.GetLatestProducersFilePropertiesAsync();
+            var producerBlobModel = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
 
-            string publishedDate = blobModel.PublishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
-            string lastUpdated = blobModel.LastModified?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? publishedDate;
-            string producersRegisteredFileSize = blobModel.ContentLength?.ToString() ?? "0";
+            var complianceBlobModel = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
 
-            // This is hard-coded cso data for the sake of displaying the view for story #523624
+            var publishedDate = FormatDate(producerBlobModel.PublishedDate);
+            var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
+
             var viewModel = new GuidanceViewModel
             {
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
-                ProducersRegisteredFileSize = producersRegisteredFileSize,
-                ComplianceSchemesRegisteredFileSize = "450"
+                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
+                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated)
             };
 
             return View("Guidance", viewModel);
+        }
+
+        private static string FormatDate(DateTime? date) =>
+            date?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+
+        private static PublicRegisterFileViewModel MapToFileViewModel(PublicRegisterBlobModel blobModel, string publishedDate, string lastUpdated)
+        {
+            return new PublicRegisterFileViewModel
+            {
+                DatePublished = publishedDate,
+                DateLastModified = lastUpdated,
+                FileName = blobModel.Name,
+                FileSize = blobModel.ContentLength?.ToString() ?? "0",
+                FileType = blobModel.FileType
+            };
         }
     }
 }

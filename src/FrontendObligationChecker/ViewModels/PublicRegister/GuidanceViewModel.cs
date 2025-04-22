@@ -6,8 +6,8 @@
 
         public string LastUpdated { get; set; }
 
-        public string ProducersRegisteredFileSize { get; set; }
+        public PublicRegisterFileViewModel ProducerRegisteredFile { get; set; }
 
-        public string ComplianceSchemesRegisteredFileSize { get; set; }
+        public PublicRegisterFileViewModel ComplianceSchemeRegisteredFile { get; set; }
     }
 }
