@@ -3,10 +3,10 @@
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
-    internal class PagePath
+    public static class PagePath
     {
-        internal const string PublicRegister = "public-register";
-        internal const string Report = "report";
-        internal const string FileNotDownloaded = "file-not-downloaded";
+        public const string PublicRegister = "public-register";
+        public const string Report = "report";
+        public const string FileNotDownloaded = "file-not-downloaded";
     }
 }

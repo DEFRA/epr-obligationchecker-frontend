@@ -7,7 +7,6 @@
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
-    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.LargeProducer;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
@@ -25,7 +24,7 @@
         private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
 
         [HttpGet]
-        public async Task<IActionResult> Guidance()
+        public async Task<IActionResult> Get()
         {
             var producerBlobModel = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
@@ -56,6 +55,11 @@
         {
             try
             {
+                if(string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(type))
+                {
+                    return RedirectToAction("Get");
+                }
+
                 var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
                 var fileContent = await _blobStorageService.GetLatestFileAsync(containerName);
                 if (fileContent == null)

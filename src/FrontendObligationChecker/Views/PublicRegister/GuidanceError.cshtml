@@ -11,7 +11,7 @@
 			<div class="govuk-grid-column-two-thirds">
 				<h1 class="govuk-heading-l">@title</h1>
 				<p class="govuk-body">@Localizer["GuidanceError.ThereWasAProblem"]</p>
-				@using (Html.BeginForm("File", "Guidance", null, FormMethod.Get))
+                @using (Html.BeginForm("File", "PublicRegister", null, FormMethod.Get))
 				{
 					<button type="submit" class="govuk-button" data-module="govuk-button">
 						@Localizer["GuidanceError.TryAgain"]
@@ -19,7 +19,7 @@
 				}
 				<br>
 				@Html.ActionLink(Localizer["GuidanceError.BackToLargeProducers"].Value,
-                         "Guidance",
+                         "Get",
                                     "PublicRegister",
 									null,
 									new { @class = "govuk-link" })

@@ -2,16 +2,13 @@
 {
     using System.Globalization;
     using System.Reflection;
-    using System.Text;
     using System.Threading.Tasks;
     using FluentAssertions;
-    using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Controllers;
     using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
-    using FrontendObligationChecker.ViewModels.LargeProducer;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -82,7 +79,7 @@
         public async Task Guidance_ReturnsExpectedViewWithCorrectModel(string containerName)
         {
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
 
             // Assert
             result.Should().BeOfType<ViewResult>();
@@ -134,7 +131,7 @@
                 .ReturnsAsync(producerBlob);
 
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
             var model = (result as ViewResult)!.Model as GuidanceViewModel;
 
             // Assert
@@ -162,7 +159,7 @@
                 .ReturnsAsync(producerBlob);
 
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
             var model = (result as ViewResult)!.Model as GuidanceViewModel;
 
             // Assert
