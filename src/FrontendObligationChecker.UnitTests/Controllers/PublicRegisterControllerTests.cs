@@ -2,12 +2,16 @@
 {
     using System.Globalization;
     using System.Reflection;
+    using System.Text;
     using System.Threading.Tasks;
     using FluentAssertions;
+    using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Controllers;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
+    using FrontendObligationChecker.ViewModels.LargeProducer;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -177,6 +181,25 @@
 
             // Assert
             result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public async Task GetFile_Public_Register_ReturnFile()
+        {
+            // Arrange
+            const string filename = "testFileName";
+            var test_Stream = new MemoryStream();
+
+            _blobStorageServiceMock
+                 .Setup(x => x.GetLatestFileAsync("producers-container"))
+                 .ReturnsAsync(test_Stream);
+            // Act
+            var result = await _controller.File(filename) as FileStreamResult;
+
+            // Assert
+            result.FileDownloadName.Should().Be(filename);
+            result.FileStream.Should().BeSameAs(test_Stream);
+            result.ContentType.Should().Be("text/csv");
         }
     }
 }

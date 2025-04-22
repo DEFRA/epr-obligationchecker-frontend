@@ -15,8 +15,7 @@ using Microsoft.Extensions.Options;
 public class BlobStorageService(
     BlobServiceClient blobServiceClient,
     ILogger<BlobStorageService> logger,
-    IOptions<PublicRegisterOptions> publicRegisterOptions,
-    IBlobReader _blobReader) : IBlobStorageService
+    IOptions<PublicRegisterOptions> publicRegisterOptions) : IBlobStorageService
 {
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
@@ -57,41 +56,24 @@ public class BlobStorageService(
         return result;
     }
 
-    public async Task<PublicRegisterBlobModel?> GetLatestFileAsync(string containerName)
+    public async Task<Stream?> GetLatestFileAsync(string containerName)
     {
-        var result = new PublicRegisterBlobModel
-        {
-            PublishedDate = publicRegisterOptions.Value.PublishedDate
-        };
-
         try
         {
             var containerClient = GetContainerClient(containerName);
-            if (containerClient is null) return result;
-
             var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
-            if (string.IsNullOrWhiteSpace(latestFolderPrefix)) return result;
-
             var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
-            if (latestBlob is null) return result;
-
             var blobClient = containerClient.GetBlobClient(latestBlob.Name);
             var properties = await blobClient.GetPropertiesAsync();
+            var download = await blobClient.DownloadContentAsync();
 
-            result.Name = latestBlob.Name;
-            result.LastModified = properties.Value.LastModified.DateTime;
-            result.ContentLength = properties.Value.ContentLength.ToString();
-            result.FileType = GetFileType(properties.Value.ContentType, latestBlob.Name);
-            result.FileContents = await _blobReader.DownloadBlobToStreamAsync(latestBlob.Name, true);
-
-            return result;
+            return download.Value.Content.ToStream();
         }
         catch (RequestFailedException ex)
         {
             logger.LogError(ex, LogMessage, $"{containerName} files");
+            return null;
         }
-
-        return result;
     }
 
     private static string? GetFolderPrefix(string blobName)

@@ -51,21 +51,20 @@
         [Produces("text/csv")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> File(string reportingYear)
+        public async Task<IActionResult> File(string fileName, string type)
         {
             try
             {
-                var producerBlobModel = await _blobStorageService.GetLatestFileAsync(_options.PublicRegisterBlobContainerName);
-                if (producerBlobModel == null)
+                var fileContent = await _blobStorageService.GetLatestFileAsync(_options.PublicRegisterBlobContainerName);
+                if (fileContent == null)
                 {
                    return RedirectToAction("FileNotDownloaded");
                 }
 
-                return File(producerBlobModel.FileContents, "text/csv", producerBlobModel.Name);
+                return File(fileContent, "text/csv", fileName);
             }
             catch (LargeProducerRegisterServiceException ex)
             {
-               // _logger.LogError(ex, FileNotDownloadedExceptionLog, HomeNation.All);
                 return RedirectToAction("FileNotDownloaded");
             }
         }
