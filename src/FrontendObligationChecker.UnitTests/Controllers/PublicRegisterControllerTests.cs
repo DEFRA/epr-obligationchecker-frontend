@@ -173,7 +173,7 @@
             // Act
             var result = typeof(PublicRegisterController)
                 .GetMethod("FormatDate", BindingFlags.NonPublic | BindingFlags.Static)!
-                .Invoke(null, [null]);
+                .Invoke(null,[null]);
 
             // Assert
             result.Should().BeNull();
