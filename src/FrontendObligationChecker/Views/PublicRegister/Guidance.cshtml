@@ -51,9 +51,15 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-                            <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
-                               target="_self"
-                               href="#">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+							@if (string.IsNullOrEmpty(Model.ProducerRegisteredFile.FileName)){
+								<p>@Localizer["Guidance.FileNoAvailable"]</p>
+
+							} else {
+								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+								   target="_self"
+								   href="/public-register/report?reportingYear=@Model.PublishedDate">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+							}
+                            
                         </h3>
 
                         <p class="gem-c-attachment__metadata">

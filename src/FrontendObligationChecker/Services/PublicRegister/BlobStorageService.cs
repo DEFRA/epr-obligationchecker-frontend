@@ -4,15 +4,19 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using FrontendObligationChecker.Constants;
 using FrontendObligationChecker.Exceptions;
 using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Models.Config;
+using FrontendObligationChecker.Readers;
+using FrontendObligationChecker.ViewModels.LargeProducer;
 using Microsoft.Extensions.Options;
 
 public class BlobStorageService(
     BlobServiceClient blobServiceClient,
     ILogger<BlobStorageService> logger,
-    IOptions<PublicRegisterOptions> publicRegisterOptions) : IBlobStorageService
+    IOptions<PublicRegisterOptions> publicRegisterOptions,
+    IBlobReader _blobReader) : IBlobStorageService
 {
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
@@ -42,6 +46,43 @@ public class BlobStorageService(
             result.LastModified = properties.Value.LastModified.DateTime;
             result.ContentLength = properties.Value.ContentLength.ToString();
             result.FileType = GetFileType(properties.Value.ContentType, latestBlob.Name);
+
+            return result;
+        }
+        catch (RequestFailedException ex)
+        {
+            logger.LogError(ex, LogMessage, $"{containerName} files");
+        }
+
+        return result;
+    }
+
+    public async Task<PublicRegisterBlobModel?> GetLatestFileAsync(string containerName)
+    {
+        var result = new PublicRegisterBlobModel
+        {
+            PublishedDate = publicRegisterOptions.Value.PublishedDate
+        };
+
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            if (containerClient is null) return result;
+
+            var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
+            if (string.IsNullOrWhiteSpace(latestFolderPrefix)) return result;
+
+            var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
+            if (latestBlob is null) return result;
+
+            var blobClient = containerClient.GetBlobClient(latestBlob.Name);
+            var properties = await blobClient.GetPropertiesAsync();
+
+            result.Name = latestBlob.Name;
+            result.LastModified = properties.Value.LastModified.DateTime;
+            result.ContentLength = properties.Value.ContentLength.ToString();
+            result.FileType = GetFileType(properties.Value.ContentType, latestBlob.Name);
+            result.FileContents = await _blobReader.DownloadBlobToStreamAsync(latestBlob.Name, true);
 
             return result;
         }

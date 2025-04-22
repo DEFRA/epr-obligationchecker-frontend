@@ -14,5 +14,7 @@
         public string? ContentLength { get; set; }
 
         public string? FileType { get; set; }
+
+        public Stream FileContents { get; set; }
     }
 }

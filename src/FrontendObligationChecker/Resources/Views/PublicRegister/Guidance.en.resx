@@ -198,4 +198,7 @@
   <data name="Guidance.ThisFileMayNotBeSuitable" xml:space="preserve">
     <value>This file may not be suitable for users of assistive technology.</value>
   </data>
+  <data name="Guidance.FileNoAvailable" xml:space="preserve">
+    <value>File not available, try again later.</value>
+  </data>
 </root>

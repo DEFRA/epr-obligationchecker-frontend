@@ -3,9 +3,11 @@
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
+    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -41,6 +43,29 @@
             };
 
             return View("Guidance", viewModel);
+        }
+
+        [HttpGet(PagePath.Report)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string reportingYear)
+        {
+            try
+            {
+                var producerBlobModel = await _blobStorageService.GetLatestFileAsync(_options.PublicRegisterBlobContainerName);
+                if (producerBlobModel == null)
+                {
+                   return RedirectToAction("FileNotDownloaded");
+                }
+
+                return File(producerBlobModel.FileContents, "text/csv", producerBlobModel.Name);
+            }
+            catch (LargeProducerRegisterServiceException ex)
+            {
+               // _logger.LogError(ex, FileNotDownloadedExceptionLog, HomeNation.All);
+                return RedirectToAction("FileNotDownloaded");
+            }
         }
 
         private static string FormatDate(DateTime? date) =>
