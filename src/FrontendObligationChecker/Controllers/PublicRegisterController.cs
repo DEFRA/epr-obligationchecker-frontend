@@ -55,7 +55,8 @@
         {
             try
             {
-                var fileContent = await _blobStorageService.GetLatestFileAsync(_options.PublicRegisterBlobContainerName);
+                var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
+                var fileContent = await _blobStorageService.GetLatestFileAsync(containerName);
                 if (fileContent == null)
                 {
                    return RedirectToAction("FileNotDownloaded");
