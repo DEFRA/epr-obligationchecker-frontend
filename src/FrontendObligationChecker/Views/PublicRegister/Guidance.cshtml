@@ -139,6 +139,8 @@
                         <div class="govspeak">
                             <p>@Localizer["Guidance.EnforcementActionDescription"]</p>
                             <ul class="govuk-list">
+
+                                
                                 <li>
                                     <a class="govuk-link" href="#">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
                                 </li>
@@ -152,6 +154,25 @@
                                     <a class="govuk-link" href="#">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
                                 </li>
                             </ul>
+
+                            @* <ul class="govuk-list">
+                                @foreach(var item in Model.EnforcementActionItems)
+                                {
+                                    if (item.Properties.ContentLength == 0)
+                                    {
+                                        <li>
+                                            @Localizer["Guidance.EnvironmentAgencyLink"]
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a class="govuk-link" href="#">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
+                                        </li>
+                                    }
+                                }
+                            </ul> *@
+
                         </div>
                     </div>
                 </section>

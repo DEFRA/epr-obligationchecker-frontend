@@ -121,4 +121,31 @@ public class BlobStorageService(
     {
         logger.LogError(ex, LogMessage, fileName);
     }
+
+    public async Task<List<BlobItem>> GetEnforcementActionFiles()
+    {
+        var results = new List<BlobItem>();
+
+        try
+        {
+            var containerClient = blobServiceClient.GetBlobContainerClient(publicRegisterOptions.Value.EnforcementActionsBlobContainerName);
+            if (containerClient is null)
+            {
+                return results;
+            }
+
+            await foreach(BlobItem blobItem in containerClient.GetBlobsAsync())
+            {
+                results.Add(blobItem);
+            }
+
+        }
+        catch (RequestFailedException ex)
+        {
+            logger.LogError(ex, LogMessage, "directories");
+            throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
+        }
+
+        return results;
+    }
 }

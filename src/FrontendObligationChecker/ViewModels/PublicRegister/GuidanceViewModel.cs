@@ -1,5 +1,7 @@
 ﻿namespace FrontendObligationChecker.ViewModels.PublicRegister
 {
+    using Azure.Storage.Blobs.Models;
+
     public class GuidanceViewModel : BaseViewModel
     {
         public string PublishedDate { get; set; }

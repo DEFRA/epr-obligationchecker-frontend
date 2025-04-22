@@ -11,5 +11,9 @@ public class PublicRegisterOptions
 
     public string? PublicRegisterCsoBlobContainerName { get; set; }
 
+    public string? EnforcementActionsBlobContainerName { get; set; }
+
+    public string? EnforcementActionsFileName { get; set; }
+
     public DateTime PublishedDate { get; set; }
 }
