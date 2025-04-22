@@ -7,5 +7,6 @@
     {
         internal const string PublicRegister = "public-register";
         internal const string Report = "report";
+        internal const string FileNotDownloaded = "file-not-downloaded";
     }
 }

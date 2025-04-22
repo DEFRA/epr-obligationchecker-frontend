@@ -8,6 +8,7 @@
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.Sessions;
+    using FrontendObligationChecker.ViewModels.LargeProducer;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -68,6 +69,12 @@
             {
                 return RedirectToAction("FileNotDownloaded");
             }
+        }
+
+        [HttpGet(PagePath.FileNotDownloaded)]
+        public async Task<IActionResult> FileNotDownloaded()
+        {
+            return View("GuidanceError");
         }
 
         private static string FormatDate(DateTime? date) =>
