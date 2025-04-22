@@ -60,21 +60,21 @@
                 var fileContent = await _blobStorageService.GetLatestFileAsync(containerName);
                 if (fileContent == null)
                 {
-                   return RedirectToAction("FileNotDownloaded");
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
                 }
 
                 return File(fileContent, "text/csv", fileName);
             }
             catch (LargeProducerRegisterServiceException ex)
             {
-                return RedirectToAction("FileNotDownloaded");
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
             }
         }
 
         [HttpGet(PagePath.FileNotDownloaded)]
         public async Task<IActionResult> FileNotDownloaded()
         {
-            return View("GuidanceError");
+            return View("GuidanceError", new LargeProducerErrorViewModel());
         }
 
         private static string FormatDate(DateTime? date) =>
