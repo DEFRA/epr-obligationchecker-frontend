@@ -24,7 +24,7 @@
             </div>
             <div class="govuk-grid-column-two-thirds">
                 <p class="govuk-body-s govuk-!-margin-bottom-2">
-                    @Localizer["Guidance.From"] <a href="#" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold">
+                    @Localizer["Guidance.From"] <a href="@Model.DefraUrl" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold">
                         @Localizer["Guidance.DepartmentForEnvironmentLinkText"]
                     </a>
                 </p>
@@ -32,9 +32,7 @@
                     @Localizer["Guidance.Published"] @Localizer["Guidance.Published2"] @Model.PublishedDate
                 </p>
                 <p class="govuk-body-s">
-                    @Localizer["Guidance.LastUpdated"] @Model.LastUpdated — <a href="#" class="govuk-link govuk-link--no-visited-state ">
-                        @Localizer["Guidance.SeeAllUpdates"]
-                    </a>
+                    @Localizer["Guidance.LastUpdated"] @Model.LastUpdated
                 </p>
 
                 <h2 class="govuk-heading-m govuk-!-font-size-27">@Localizer["Guidance.Documents"]</h2>
@@ -59,9 +57,9 @@
                         <p class="gem-c-attachment__metadata">
 
                             <span class="gem-c-attachment__attribute">
-                                <abbr title="Comma Separated Value" class="gem-c-attachment__abbr">@Localizer["Guidance.Csv"]</abbr>
+                                <abbr title="Comma Separated Value" class="gem-c-attachment__abbr">@Model.ProducerRegisteredFile.FileType, </abbr>
                             </span>
-                            <span class="gem-c-attachment__attribute">@Model.ProducersRegisteredFileSize @Localizer["Guidance.Bytes"]</span>
+                            <span class="gem-c-attachment__attribute">@Model.ProducerRegisteredFile.FileSize @Localizer["Guidance.Bytes"]</span>
                         </p>
 
                         <p class="gem-c-attachment__metadata">@Localizer["Guidance.ThisFileMayNotBeSuitable"]</p>
@@ -103,9 +101,9 @@
                         <p class="gem-c-attachment__metadata">
 
                             <span class="gem-c-attachment__attribute">
-                                <abbr title="Comma Separated Value" class="gem-c-attachment__abbr">@Localizer["Guidance.Csv"]</abbr>
+                                <abbr title="Comma Separated Value" class="gem-c-attachment__abbr">@Model.ComplianceSchemeRegisteredFile.FileType, </abbr>
                             </span>
-                            <span class="gem-c-attachment__attribute">@Model.ComplianceSchemesRegisteredFileSize @Localizer["Guidance.Bytes"]</span>
+                            <span class="gem-c-attachment__attribute">@Model.ComplianceSchemeRegisteredFile.FileSize @Localizer["Guidance.Bytes"]</span>
                         </p>
 
                         <p class="gem-c-attachment__metadata">@Localizer["Guidance.ThisFileMayNotBeSuitable"]</p>
@@ -162,9 +160,7 @@
                     @Localizer["Guidance.Published"] @Localizer["Guidance.Published2"] @Model.PublishedDate
                 </p>
                 <p class="govuk-body-s">
-                    @Localizer["Guidance.LastUpdated"] @Model.LastUpdated — <a href="#" class="govuk-link govuk-link--no-visited-state ">
-                        @Localizer["Guidance.SeeAllUpdates"]
-                    </a>
+                    @Localizer["Guidance.LastUpdated"] @Model.LastUpdated
                 </p>
             </div>
             <div class="govuk-grid-column-full">
