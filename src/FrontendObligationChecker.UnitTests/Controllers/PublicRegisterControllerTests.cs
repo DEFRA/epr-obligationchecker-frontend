@@ -76,10 +76,10 @@
         [TestMethod]
         [DataRow("producers-container")]
         [DataRow("schemes-container")]
-        public async Task Guidance_ReturnsExpectedViewWithCorrectModel(string containerName)
+        public async Task Get_ReturnsExpectedViewWithCorrectModel(string containerName)
         {
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
 
             // Assert
             result.Should().BeOfType<ViewResult>();
@@ -114,7 +114,7 @@
         }
 
         [TestMethod]
-        public async Task Guidance_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
+        public async Task Get_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
         {
             // Arrange
             var producerBlob = new PublicRegisterBlobModel
@@ -131,7 +131,7 @@
                 .ReturnsAsync(producerBlob);
 
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
             var model = (result as ViewResult)!.Model as GuidanceViewModel;
 
             // Assert
@@ -142,7 +142,7 @@
         }
 
         [TestMethod]
-        public async Task Guidance_SetsFileSizeToZero_WhenContentLengthIsNull()
+        public async Task Get_SetsFileSizeToZero_WhenContentLengthIsNull()
         {
             // Arrange
             var producerBlob = new PublicRegisterBlobModel
@@ -159,7 +159,7 @@
                 .ReturnsAsync(producerBlob);
 
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
             var model = (result as ViewResult)!.Model as GuidanceViewModel;
 
             // Assert
