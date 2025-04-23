@@ -1,15 +1,14 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Controllers
 {
+    using System.Globalization;
+    using System.Reflection;
     using System.Threading.Tasks;
-    using Azure.Storage.Blobs.Models;
     using FluentAssertions;
     using FrontendObligationChecker.Controllers;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
-    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,62 +17,166 @@
     [TestClass]
     public class PublicRegisterControllerTests
     {
-        private Mock<SessionRequestCultureProvider> _mockCultureProvider;
-        private Mock<IBlobStorageService> _blobStorageService;
-        private Mock<HttpContext>? _mockHttpContext;
-        private Mock<ISession> _mockSession;
-        private PublicRegisterController _controller;
+        private Mock<IBlobStorageService> _blobStorageServiceMock = null!;
+        private IOptions<PublicRegisterOptions> _publicRegisterOptions = null!;
+        private IOptions<ExternalUrlsOptions> _externalUrlsOptions = null!;
+        private PublicRegisterController _controller = null!;
+        private DateTime _publishedDate;
+        private DateTime _lastModified;
 
         [TestInitialize]
         public void Setup()
         {
-            _mockCultureProvider = new Mock<SessionRequestCultureProvider>();
-            _mockSession = new Mock<ISession>();
-            _mockHttpContext = new Mock<HttpContext>();
-            _mockHttpContext.Setup(mock => mock.Session).Returns(_mockSession.Object);
-            _blobStorageService = new Mock<IBlobStorageService>();
+            _blobStorageServiceMock = new Mock<IBlobStorageService>();
 
-            var externalUrlsOptions = Options.Create(new ExternalUrlsOptions
+            _publishedDate = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Utc);
+            _lastModified = new DateTime(2025, 4, 15, 0, 0, 0, DateTimeKind.Utc);
+
+            var producerBlob = new PublicRegisterBlobModel
+            {
+                Name = "producers.csv",
+                PublishedDate = _publishedDate,
+                LastModified = _lastModified,
+                ContentLength = "115",
+                FileType = "text/csv"
+            };
+
+            var complianceBlob = new PublicRegisterBlobModel
+            {
+                Name = "schemes.csv",
+                PublishedDate = _publishedDate,
+                LastModified = _lastModified,
+                ContentLength = "450",
+                FileType = "text/csv"
+            };
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
+                .ReturnsAsync(producerBlob);
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("schemes-container"))
+                .ReturnsAsync(complianceBlob);
+
+            _publicRegisterOptions = Options.Create(new PublicRegisterOptions
+            {
+                PublicRegisterBlobContainerName = "producers-container",
+                PublicRegisterCsoBlobContainerName = "schemes-container"
+            });
+
+            _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
             {
                 DefraUrl = "https://www.defraurl.com"
             });
 
-            _controller = new PublicRegisterController(externalUrlsOptions, _blobStorageService.Object);
+            _controller = new PublicRegisterController(_blobStorageServiceMock.Object, _externalUrlsOptions, _publicRegisterOptions);
         }
 
         [TestMethod]
-        public async Task PublicRegisterGuidance_ShouldReturnView_WithCorrectViewModel()
+        [DataRow("producers-container")]
+        [DataRow("schemes-container")]
+        public async Task Guidance_ReturnsExpectedViewWithCorrectModel(string containerName)
         {
-            // Arrange
-            var expectedViewModel = new GuidanceViewModel
-            {
-                ComplianceSchemesRegisteredFileSize = "450",
-                LastUpdated = "10 March 2025",
-                ProducersRegisteredFileSize = "115",
-                PublishedDate = "6 December 2025"
-            };
-
-            _blobStorageService.Setup(x => x.GetLatestProducersFilePropertiesAsync()).ReturnsAsync(
-            new PublicRegisterBlobModel
-            {
-                PublishedDate = DateTime.UtcNow,
-                LastModified = DateTime.UtcNow,
-                ContentLength = "100",
-                Name = "Public_Register_Producers_10_April_2025.csv"
-            });
-
             // Act
-            var result = await _controller.Guidance() as ViewResult;
+            var result = await _controller.Guidance();
 
             // Assert
-            Assert.IsNotNull(result, "Result should not be null.");
-            Assert.AreEqual("Guidance", result.ViewName, "The view name should be 'Guidance'.");
+            result.Should().BeOfType<ViewResult>();
 
-            var model = result.Model as GuidanceViewModel;
-            Assert.IsNotNull(model);
-            Assert.IsInstanceOfType(expectedViewModel, model.GetType());
+            var viewResult = result as ViewResult;
+            viewResult!.ViewName.Should().Be("Guidance");
+            viewResult.Model.Should().BeOfType<GuidanceViewModel>();
+
+            var model = (GuidanceViewModel)viewResult.Model!;
+
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+
+            model.PublishedDate.Should().Be(expectedDate);
+            model.LastUpdated.Should().Be(expectedLastUpdated);
+
+            model.ProducerRegisteredFile.Should().NotBeNull();
+            model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
+            model.ProducerRegisteredFile.FileSize.Should().Be("115");
+            model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
+            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile!.FileName.Should().Be("schemes.csv");
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().Be("450");
+            model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
-            _blobStorageService.Verify(r => r.GetLatestProducersFilePropertiesAsync(), Times.AtMostOnce());
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(containerName), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task Guidance_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
+        {
+            // Arrange
+            var producerBlob = new PublicRegisterBlobModel
+            {
+                Name = "producers.csv",
+                PublishedDate = _publishedDate,
+                LastModified = null,
+                ContentLength = "115",
+                FileType = "text/csv"
+            };
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
+                .ReturnsAsync(producerBlob);
+
+            // Act
+            var result = await _controller.Guidance();
+            var model = (result as ViewResult)!.Model as GuidanceViewModel;
+
+            // Assert
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model!.LastUpdated.Should().Be(expectedDate); // fallback to published date
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(It.IsAny<string>()), Times.AtMost(2));
+        }
+
+        [TestMethod]
+        public async Task Guidance_SetsFileSizeToZero_WhenContentLengthIsNull()
+        {
+            // Arrange
+            var producerBlob = new PublicRegisterBlobModel
+            {
+                Name = "producers.csv",
+                PublishedDate = _publishedDate,
+                LastModified = _lastModified,
+                ContentLength = null,
+                FileType = "text/csv"
+            };
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
+                .ReturnsAsync(producerBlob);
+
+            // Act
+            var result = await _controller.Guidance();
+            var model = (result as ViewResult)!.Model as GuidanceViewModel;
+
+            // Assert
+            model!.ProducerRegisteredFile.FileSize.Should().Be("0");
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(It.IsAny<string>()), Times.AtMost(2));
+        }
+
+        [TestMethod]
+        public void FormatDate_ReturnsNull_WhenDateIsNull()
+        {
+            // Act
+            var result = typeof(PublicRegisterController)
+                .GetMethod("FormatDate", BindingFlags.NonPublic | BindingFlags.Static)!
+                .Invoke(null,[null]);
+
+            // Assert
+            result.Should().BeNull();
         }
     }
 }

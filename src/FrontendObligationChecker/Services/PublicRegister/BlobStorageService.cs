@@ -9,12 +9,15 @@ using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Models.Config;
 using Microsoft.Extensions.Options;
 
-public class BlobStorageService(BlobServiceClient blobServiceClient, ILogger<BlobStorageService> logger, IOptions<PublicRegisterOptions> publicRegisterOptions) : IBlobStorageService
+public class BlobStorageService(
+    BlobServiceClient blobServiceClient,
+    ILogger<BlobStorageService> logger,
+    IOptions<PublicRegisterOptions> publicRegisterOptions) : IBlobStorageService
 {
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
 
-    public async Task<PublicRegisterBlobModel?> GetLatestProducersFilePropertiesAsync()
+    public async Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName)
     {
         var result = new PublicRegisterBlobModel
         {
@@ -23,64 +26,93 @@ public class BlobStorageService(BlobServiceClient blobServiceClient, ILogger<Blo
 
         try
         {
-            var containerClient = blobServiceClient.GetBlobContainerClient(publicRegisterOptions.Value.PublicRegisterBlobContainerName);
+            var containerClient = GetContainerClient(containerName);
             if (containerClient is null) return result;
 
-            BlobItem? latestBlob = null;
-            string? latestFolderPrefix = null;
-
-            latestFolderPrefix = await GetLatestFolder(containerClient, latestFolderPrefix);
-
+            var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
             if (string.IsNullOrWhiteSpace(latestFolderPrefix)) return result;
 
-            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: latestFolderPrefix))
-            {
-                if (latestBlob is null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
-                {
-                    latestBlob = blobItem;
-                }
-            }
-
+            var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
             if (latestBlob is null) return result;
 
             var blobClient = containerClient.GetBlobClient(latestBlob.Name);
             var properties = await blobClient.GetPropertiesAsync();
 
+            result.Name = latestBlob.Name;
             result.LastModified = properties.Value.LastModified.DateTime;
             result.ContentLength = properties.Value.ContentLength.ToString();
-            result.Name = latestBlob.Name;
+            result.FileType = GetFileType(latestBlob.Name);
+
             return result;
         }
         catch (RequestFailedException ex)
         {
-            logger.LogError(ex, LogMessage, "Producers files");
+            logger.LogError(ex, LogMessage, $"{containerName} files");
         }
 
         return result;
     }
 
-    private async Task<string?> GetLatestFolder(BlobContainerClient containerClient, string? latestFolderPrefix)
+    private static string? GetFolderPrefix(string blobName)
+    {
+        var parts = blobName.Split('/');
+        return parts.Length > 1 ? parts[0] + "/" : null;
+    }
+
+    private static string GetFileType(string blobName)
+    {
+        var extension = Path.GetExtension(blobName);
+        return string.IsNullOrWhiteSpace(extension) ? "CSV" : extension.TrimStart('.').ToUpperInvariant();
+    }
+
+    private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)
+    {
+        BlobItem? latestBlob = null;
+
+        await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
+        {
+            if (latestBlob is null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
+            {
+                latestBlob = blobItem;
+            }
+        }
+
+        return latestBlob;
+    }
+
+    private BlobContainerClient GetContainerClient(string containerName)
+    {
+        return blobServiceClient.GetBlobContainerClient(containerName);
+    }
+
+    private async Task<string?> GetLatestFolderPrefixAsync(BlobContainerClient containerClient)
     {
         try
         {
-            var blobs = new List<BlobItem>();
+            var folderPrefixes = new HashSet<string>();
+
             await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
             {
-                blobs.Add(blobItem);
+                var prefix = GetFolderPrefix(blobItem.Name);
+                if (!string.IsNullOrWhiteSpace(prefix))
+                {
+                    folderPrefixes.Add(prefix);
+                }
             }
 
-            latestFolderPrefix = blobs
-                .Where(blob => blob.Name.Contains('/'))
-                .Select(blob => blob.Name.Split('/')[0] + "/")
-                .OrderDescending()
+            return folderPrefixes
+                .OrderByDescending(p => p)
                 .FirstOrDefault();
-
-            return latestFolderPrefix;
         }
         catch (RequestFailedException ex)
         {
-            logger.LogError(ex, LogMessage, "directories");
+            LogError(ex, "directories");
             throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
         }
+    }
+
+    private void LogError(RequestFailedException ex, string fileName)
+    {
+        logger.LogError(ex, LogMessage, fileName);
     }
 }

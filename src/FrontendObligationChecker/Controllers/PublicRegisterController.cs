@@ -13,28 +13,51 @@
 
     [FeatureGate(FeatureFlags.PublicRegisterEnabled)]
     [Route(PagePath.PublicRegister)]
-    public class PublicRegisterController(IOptions<ExternalUrlsOptions> urlOptions, IBlobStorageService blobStorageService) : Controller
+    public class PublicRegisterController(
+        IBlobStorageService blobStorageService,
+        IOptions<ExternalUrlsOptions> urlOptions,
+        IOptions<PublicRegisterOptions> publicRegisterOptions) : Controller
     {
+        private readonly IBlobStorageService _blobStorageService = blobStorageService;
+        private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
+
         [HttpGet]
         public async Task<IActionResult> Guidance()
         {
-            PublicRegisterBlobModel blobModel = await blobStorageService.GetLatestProducersFilePropertiesAsync();
+            var producerBlobModel = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
 
-            string publishedDate = blobModel.PublishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
-            string lastUpdated = blobModel.LastModified?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? publishedDate;
-            string producersRegisteredFileSize = blobModel.ContentLength?.ToString() ?? "0";
+            var complianceBlobModel = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
 
-            // This is hard-coded cso data for the sake of displaying the view for story #523624
+            var publishedDate = FormatDate(producerBlobModel.PublishedDate);
+            var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
+
             var viewModel = new GuidanceViewModel
             {
-                ComplianceSchemesRegisteredFileSize = "450",
                 DefraUrl = urlOptions.Value.DefraUrl,
-                LastUpdated = lastUpdated,
                 PublishedDate = publishedDate,
-                ProducersRegisteredFileSize = producersRegisteredFileSize
+                LastUpdated = lastUpdated,
+                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
+                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated)
             };
 
             return View("Guidance", viewModel);
+        }
+
+        private static string FormatDate(DateTime? date) =>
+            date?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+
+        private static PublicRegisterFileViewModel MapToFileViewModel(PublicRegisterBlobModel blobModel, string publishedDate, string lastUpdated)
+        {
+            return new PublicRegisterFileViewModel
+            {
+                DatePublished = publishedDate,
+                DateLastModified = lastUpdated,
+                FileName = blobModel.Name,
+                FileSize = blobModel.ContentLength?.ToString() ?? "0",
+                FileType = blobModel.FileType
+            };
         }
     }
 }
