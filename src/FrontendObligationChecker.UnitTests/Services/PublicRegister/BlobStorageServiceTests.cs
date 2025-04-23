@@ -169,5 +169,50 @@
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
+
+        [TestMethod]
+        [DataRow("ProducerContainer")]
+        [DataRow("ComplianceSchemeContainer")]
+        public async Task GetLatestFileAsync_ThrowRequestFailedException_WhenFailsGetBlobs(string containerName)
+        {
+            var mockBlobContainerClient = new Mock<BlobContainerClient>();
+
+            var blobList = new List<BlobItem>();
+
+            var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
+            var asyncPageable = AsyncPageable<BlobItem>.FromPages(new[] { page });
+
+            _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Throws(new RequestFailedException(string.Format("Failed to read {0} from blob storage", "directories")));
+
+            var act = async () => await _service.GetLatestFileAsync(containerName);
+
+            act.Should().ThrowAsync<BlobReaderException>();
+        }
+
+        [TestMethod]
+        [DataRow("ProducerContainer")]
+        [DataRow("ComplianceSchemeContainer")]
+        public async Task GetLatestFileAsync_ThrowRequestFailedException_WhenFailsGetBlobClient(string containerName)
+        {
+            var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024);
+            var blobList = new List<BlobItem>
+                {
+                    BlobsModelFactory.BlobItem("2025/Blob1"),
+                };
+            var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
+            var asyncPageable = AsyncPageable<BlobItem>.FromPages(new[] { page });
+
+            _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(asyncPageable);
+
+            var blobClientMock = new Mock<BlobClient>();
+            _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>()))
+                                  .Throws(new RequestFailedException("Failed to read public register producers files from blob storage"));
+
+            var act = async () => await _service.GetLatestFileAsync(containerName);
+
+            act.Should().ThrowAsync<BlobReaderException>();
+        }
     }
 }

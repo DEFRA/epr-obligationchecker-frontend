@@ -234,5 +234,16 @@
             result.Should().NotBeNull();
             result.ActionName.Should().Be("FileNotDownloaded");
         }
+
+        [TestMethod]
+        public async Task GetFileNotDownloaded_ReturnsLargeProducerErrorView_WhenCalledWithValidHomeNation()
+        {
+            // Act
+            var result = await _controller.FileNotDownloaded() as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("GuidanceError");
+        }
     }
 }
