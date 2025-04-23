@@ -1,14 +1,12 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
     using System.Globalization;
-    using Azure;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
     using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
-    using FrontendObligationChecker.ViewModels.LargeProducer;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -56,11 +54,6 @@
         {
             try
             {
-                if(string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(type))
-                {
-                    return RedirectToAction("Get");
-                }
-
                 var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
                 var fileContent = await _blobStorageService.GetLatestFileAsync(containerName);
                 if (fileContent == null)

@@ -1,4 +1,4 @@
-﻿@model FrontendObligationChecker.ViewModels.LargeProducer.LargeProducerErrorViewModel
+﻿@model FrontendObligationChecker.ViewModels.PublicRegister.PublicRegisterErrorViewModel
 
 @{
 	var title = Localizer["GuidanceError.Title"];
@@ -11,7 +11,7 @@
 			<div class="govuk-grid-column-two-thirds">
 				<h1 class="govuk-heading-l">@title</h1>
 				<p class="govuk-body">@Localizer["GuidanceError.ThereWasAProblem"]</p>
-                @using (Html.BeginForm("File", "PublicRegister", null, FormMethod.Get))
+                @using (Html.BeginForm("Get", "PublicRegister", null, FormMethod.Get))
 				{
 					<button type="submit" class="govuk-button" data-module="govuk-button">
 						@Localizer["GuidanceError.TryAgain"]
