@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using FrontendObligationChecker.Constants;
 using FrontendObligationChecker.Exceptions;
 using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Models.Config;
+using FrontendObligationChecker.Readers;
+using FrontendObligationChecker.ViewModels.LargeProducer;
 using Microsoft.Extensions.Options;
 
 public class BlobStorageService(
@@ -51,6 +54,26 @@ public class BlobStorageService(
         }
 
         return result;
+    }
+
+    public async Task<Stream?> GetLatestFileAsync(string containerName)
+    {
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
+            var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
+            var blobClient = containerClient.GetBlobClient(latestBlob.Name);
+            var properties = await blobClient.GetPropertiesAsync();
+            var download = await blobClient.DownloadContentAsync();
+
+            return download.Value.Content.ToStream();
+        }
+        catch (RequestFailedException ex)
+        {
+            logger.LogError(ex, LogMessage, $"{containerName} files");
+            throw new PublicRegisterServiceException(string.Format(ErrorMessage, HomeNation.All), ex);
+        }
     }
 
     private static string? GetFolderPrefix(string blobName)

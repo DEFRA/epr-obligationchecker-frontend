@@ -3,6 +3,7 @@
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
@@ -22,7 +23,7 @@
         private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
 
         [HttpGet]
-        public async Task<IActionResult> Guidance()
+        public async Task<IActionResult> Get()
         {
             var producerBlobModel = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
@@ -43,6 +44,35 @@
             };
 
             return View("Guidance", viewModel);
+        }
+
+        [HttpGet(PagePath.Report)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string fileName, string type)
+        {
+            try
+            {
+                var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
+                var fileContent = await _blobStorageService.GetLatestFileAsync(containerName);
+                if (fileContent == null)
+                {
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+                }
+
+                return File(fileContent, "text/csv", fileName);
+            }
+            catch (PublicRegisterServiceException ex)
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+        }
+
+        [HttpGet(PagePath.FileNotDownloaded)]
+        public async Task<IActionResult> FileNotDownloaded()
+        {
+            return View("GuidanceError", new PublicRegisterErrorViewModel());
         }
 
         private static string FormatDate(DateTime? date) =>

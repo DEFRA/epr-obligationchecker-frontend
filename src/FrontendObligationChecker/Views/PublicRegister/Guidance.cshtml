@@ -49,9 +49,15 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-                            <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
-                               target="_self"
-                               href="#">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+							@if (string.IsNullOrEmpty(Model.ProducerRegisteredFile.FileName)){
+								<p>@Localizer["Guidance.FileNoAvailable"]</p>
+
+							} else {
+								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+								   target="_self"
+								   href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+							}
+                            
                         </h3>
 
                         <p class="gem-c-attachment__metadata">
@@ -93,10 +99,15 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-                            <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
-                               target="_self"
-                               href="#">@Localizer["Guidance.ComplianceSchemeRegisteredForRpd"]</a>
-                        </h3>
+							@if (string.IsNullOrEmpty(Model.ComplianceSchemeRegisteredFile.FileName))
+							{
+								<p>@Localizer["Guidance.FileNoAvailable"]</p>
+							} else {
+								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+								   target="_self"
+								   href="/public-register/report?fileName=@Model.ComplianceSchemeRegisteredFile.FileName&type=Compliance">@Localizer["Guidance.ComplianceSchemeRegisteredForRpd"]</a>
+							}
+                            </h3>
 
                         <p class="gem-c-attachment__metadata">
 

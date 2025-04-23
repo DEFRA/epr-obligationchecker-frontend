@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using FluentAssertions;
     using FrontendObligationChecker.Controllers;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
@@ -177,6 +178,61 @@
 
             // Assert
             result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public async Task GetFile_Public_Register_ReturnFile()
+        {
+            // Arrange
+            const string filename = "testFileName";
+            var fileType = "producers-container";
+            var test_Stream = new MemoryStream();
+
+            _blobStorageServiceMock
+                 .Setup(x => x.GetLatestFileAsync("producers-container"))
+                 .ReturnsAsync(test_Stream);
+            // Act
+            var result = await _controller.File(filename, fileType) as FileStreamResult;
+
+            // Assert
+            result.FileDownloadName.Should().Be(filename);
+            result.FileStream.Should().BeSameAs(test_Stream);
+            result.ContentType.Should().Be("text/csv");
+        }
+
+        [TestMethod]
+        public async Task GetFile_Public_Register_RedirectTo_FileNotDownloaded_When_FileContent_Null()
+        {
+            // Arrange
+            const string filename = "testFileName";
+            var fileType = "public";
+            var test_Stream = new MemoryStream();
+
+            // Act
+            var result = await _controller.File(filename, fileType) as RedirectToActionResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ActionName.Should().Be("FileNotDownloaded");
+        }
+
+        [TestMethod]
+        public async Task File_RedirectsToFileNotDownloaded_WhenExceptionThrown()
+        {
+            // Arrange
+            var fileName = "report.csv";
+            var fileType = "public";
+
+            _blobStorageServiceMock
+                .Setup(s => s.GetLatestFileAsync(It.IsAny<string>()))
+                .ThrowsAsync(new PublicRegisterServiceException("fail"));
+
+            // Act
+            var result = await _controller.File(fileName, fileType) as RedirectToActionResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ActionName.Should().Be("FileNotDownloaded");
         }
     }
 }

@@ -117,89 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Guidance.AccessibleFormatTextPart1" xml:space="preserve">
-    <value>If you use assistive technology (such as a screen reader) and need a version of this document in a more accessible format, please email</value>
+  <data name="GuidanceError.Title" xml:space="preserve">
+    <value />
   </data>
-  <data name="Guidance.AccessibleFormatTextPart2" xml:space="preserve">
-    <value>Please tell us what format you need. It will help us if you say what assistive technology you use.</value>
+  <data name="GuidanceError.ThereWasAProblem" xml:space="preserve">
+    <value />
   </data>
-  <data name="Guidance.BusinessAndTheEnvironmentLink" xml:space="preserve">
-    <value>Business and the environment</value>
+  <data name="GuidanceError.TryAgain" xml:space="preserve">
+    <value />
   </data>
-  <data name="Guidance.Bytes" xml:space="preserve">
-    <value>Bytes</value>
+  <data name="GuidanceError.BackToLargeProducers" xml:space="preserve">
+    <value />
   </data>
-  <data name="Guidance.Caption" xml:space="preserve">
-    <value>Guidance</value>
-  </data>
-  <data name="Guidance.ComplianceSchemeRegisteredForRpd" xml:space="preserve">
-    <value>Compliance schemes registered for the ‘report packaging data’ service</value>
-  </data>
-  <data name="Guidance.Csv" xml:space="preserve">
-    <value>CSV, </value>
-  </data>
-  <data name="Guidance.DepartmentForEnvironmentLinkText" xml:space="preserve">
-    <value>Department for Environment, Food &amp; Rural Affairs</value>
-  </data>
-  <data name="Guidance.Description" xml:space="preserve">
-    <value>Find producers and compliance scheme operators registered for the ‘report packaging data’ service. You can also find organisations subject to enforcement actions.</value>
-  </data>
-  <data name="Guidance.Documents" xml:space="preserve">
-    <value>Documents</value>
-  </data>
-  <data name="Guidance.EnforcementAction" xml:space="preserve">
-    <value>Enforcement action</value>
-  </data>
-  <data name="Guidance.EnforcementActionDescription" xml:space="preserve">
-    <value>Find organisations subject to enforcement action using the list below:</value>
-  </data>
-  <data name="Guidance.EnvironmentAgencyLink" xml:space="preserve">
-    <value>Environment Agency</value>
-  </data>
-  <data name="Guidance.ExploreTheTopic" xml:space="preserve">
-    <value>Explore the topic</value>
-  </data>
-  <data name="Guidance.From" xml:space="preserve">
-    <value>From:</value>
-  </data>
-  <data name="Guidance.Heading" xml:space="preserve">
-    <value>Public register for the ‘report packaging data’ service</value>
-  </data>
-  <data name="Guidance.LastUpdated" xml:space="preserve">
-    <value>Last updated: </value>
-  </data>
-  <data name="Guidance.NaturalResourcesWalesLink" xml:space="preserve">
-    <value>Natural Resources Wales</value>
-  </data>
-  <data name="Guidance.NorthernIrelandEnvironmentAgencyLink" xml:space="preserve">
-    <value>Northen Ireland Environment</value>
-  </data>
-  <data name="Guidance.PageTitle" xml:space="preserve">
-    <value>Public register for the ‘report packaging data’ service</value>
-  </data>
-  <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>Producers registered for the ‘report packaging data’ service</value>
-  </data>
-  <data name="Guidance.Published" xml:space="preserve">
-    <value>Published:</value>
-  </data>
-  <data name="Guidance.Published2" xml:space="preserve">
-    <value>Published</value>
-  </data>
-  <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
-    <value>Request an accessible format.</value>
-  </data>
-  <data name="Guidance.ScottishEnvironmentProtectionAgencyLink" xml:space="preserve">
-    <value>Scottish Environment Protection Agency</value>
-  </data>
-  <data name="Guidance.SeeAllUpdates" xml:space="preserve">
-    <value>See all updates</value>
-  </data>
-  <data name="Guidance.ThisFileMayNotBeSuitable" xml:space="preserve">
-    <value>This file may not be suitable for users of assistive technology.</value>
-  </data>
-  <data name="Guidance.FileNoAvailable" xml:space="preserve">
-    <value>File not available, try again later.</value>
-  </data>
-
 </root>
