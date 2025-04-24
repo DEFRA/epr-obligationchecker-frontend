@@ -90,7 +90,7 @@
 
         [TestMethod]
         [DataRow("ProducerContainer", "")]
-        [DataRow("ComplianceSchemeContainer", "CSV")]
+        [DataRow("ComplianceSchemeContainer", ".CSV")]
         public async Task GetLatestFilePropertiesAsync_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName, string fileType)
         {
             var mockResponse = new Mock<Response<BlobProperties>>();
@@ -100,9 +100,9 @@
             var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024, contentType: fileType);
             var blobList = new List<BlobItem>
                 {
-                    BlobsModelFactory.BlobItem("2025/Blob1"),
-                    BlobsModelFactory.BlobItem("2026/Blob2"),
-                    BlobsModelFactory.BlobItem("Blob3")
+                    BlobsModelFactory.BlobItem($"2025/Blob1{fileType}"),
+                    BlobsModelFactory.BlobItem($"2026/Blob2{fileType}"),
+                    BlobsModelFactory.BlobItem($"Blob3{fileType}")
                 };
             var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
             var asyncPageable = AsyncPageable<BlobItem>.FromPages(new[] { page });

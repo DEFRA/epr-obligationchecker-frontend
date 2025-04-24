@@ -41,7 +41,7 @@ public class BlobStorageService(
             result.Name = latestBlob.Name;
             result.LastModified = properties.Value.LastModified.DateTime;
             result.ContentLength = properties.Value.ContentLength.ToString();
-            result.FileType = GetFileType(properties.Value.ContentType, latestBlob.Name);
+            result.FileType = GetFileType(latestBlob.Name);
 
             return result;
         }
@@ -59,16 +59,10 @@ public class BlobStorageService(
         return parts.Length > 1 ? parts[0] + "/" : null;
     }
 
-    private static string GetFileType(string? contentType, string blobName)
+    private static string GetFileType(string blobName)
     {
-        if (!string.IsNullOrWhiteSpace(contentType) && contentType != "application/octet-stream")
-        {
-            return $"{contentType}, ";
-        }
-
-        // Fallback to file extension
         var extension = Path.GetExtension(blobName);
-        return string.IsNullOrWhiteSpace(extension) ? "CSV" : extension.TrimStart('.').ToUpperInvariant() + ", ";
+        return string.IsNullOrWhiteSpace(extension) ? "CSV" : extension.TrimStart('.').ToUpperInvariant();
     }
 
     private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)
@@ -142,7 +136,7 @@ public class BlobStorageService(
         }
         catch (RequestFailedException ex)
         {
-            logger.LogError(ex, LogMessage, "directories");
+            LogError(ex, "directories");
             throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
         }
 

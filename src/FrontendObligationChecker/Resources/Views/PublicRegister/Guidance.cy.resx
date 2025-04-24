@@ -118,84 +118,86 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Guidance.AccessibleFormatTextPart1" xml:space="preserve">
-    <value>[Welsh]If you use assistive technology (such as a screen reader) and need a version of this document in a more accessible format, please email</value>
+    <value>Os ydych chi'n defnyddio technoleg gynorthwyol (megis darllenydd sgrin) a bod arnoch chi angen fersiwn o'r ddogfen yma mewn fformat mwy hygyrch, anfonech neges ebost at</value>
   </data>
   <data name="Guidance.AccessibleFormatTextPart2" xml:space="preserve">
-    <value>[Welsh]Please tell us what format you need. It will help us if you say what assistive technology you use.</value>
+    <value>Dywedwch pa fformat sydd ei angen arnoch. Bydd o gymorth i ni os dywedwch chi pa dechnoleg gynorthwyol rydych chi'n ei defnyddio.</value>
   </data>
   <data name="Guidance.BusinessAndTheEnvironmentLink" xml:space="preserve">
-    <value>[Welsh]Business and the environment</value>
+    <value>Busnes a'r amgylchedd</value>
   </data>
   <data name="Guidance.Bytes" xml:space="preserve">
-    <value>[Welsh]Bytes</value>
+    <value>Bytes</value>
   </data>
   <data name="Guidance.Caption" xml:space="preserve">
-    <value>[Welsh]Guidance</value>
+    <value>Canllawiau</value>
   </data>
   <data name="Guidance.ComplianceSchemeRegisteredForRpd" xml:space="preserve">
-    <value>[Welsh]Compliance schemes registered for the ‘report packaging data’ service</value>
+    <value>Cynlluniau cydymffurfio sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
   </data>
   <data name="Guidance.Csv" xml:space="preserve">
-    <value>[Welsh]CSV, </value>
+    <value>CSV, </value>
   </data>
   <data name="Guidance.DepartmentForEnvironmentLinkText" xml:space="preserve">
-    <value>[Welsh]Department for Environment, Food &amp; Rural Affairs</value>
+    <value>Adran yr Amgylchedd, Bwyd a Materion Gwledig</value>
   </data>
   <data name="Guidance.Description" xml:space="preserve">
-    <value>[Welsh]Find producers and compliance scheme operators registered for the ‘report packaging data’ service. You can also find organisations subject to enforcement actiongi.</value>
+    <value>Dod o hyd i gynhyrchwyr a gweithredwyr cynlluniau cydymffurfio sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'. Gallwch ddod o hyd i sefydliadau sy'n destun camau gorfodi hefyd</value>
   </data>
   <data name="Guidance.Documents" xml:space="preserve">
-    <value>[Welsh]Documents</value>
+    <value>Dogfennau</value>
   </data>
   <data name="Guidance.EnforcementAction" xml:space="preserve">
-    <value>[Welsh]Enforcement action</value>
+    <value>Camau gorfodi</value>
   </data>
   <data name="Guidance.EnforcementActionDescription" xml:space="preserve">
-    <value>[Welsh]Find organisations subject to enforcement action using the list below:</value>
+    <value>Dod o hyd i sefydliadau sy'n destun camau gorfodi drwy ddefnyddio'r rhestr isod:</value>
   </data>
   <data name="Guidance.EnvironmentAgencyLink" xml:space="preserve">
-    <value>[Welsh]Environment Agency</value>
+    <value>Asiantaeth yr Amgylchedd</value>
   </data>
   <data name="Guidance.ExploreTheTopic" xml:space="preserve">
-    <value>[Welsh]Explore the topic</value>
+    <value>Archwilio'r pwnc</value>
   </data>
   <data name="Guidance.From" xml:space="preserve">
-    <value>[Welsh]From:</value>
+    <value>Oddi wrth:</value>
   </data>
   <data name="Guidance.Heading" xml:space="preserve">
-    <value>[Welsh]Public register for the ‘report packaging data’ service</value>
+    <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
   </data>
   <data name="Guidance.LastUpdated" xml:space="preserve">
-    <value>[Welsh]Last updated: </value>
+    <value>Y diweddariad diwethaf:</value>
   </data>
   <data name="Guidance.NaturalResourcesWalesLink" xml:space="preserve">
-    <value>[Welsh]Natural Resources Wales</value>
+    <value>Cyfoeth Naturiol Cymru</value>
   </data>
   <data name="Guidance.NorthernIrelandEnvironmentAgencyLink" xml:space="preserve">
-    <value>[Welsh]Northen Ireland Environment</value>
+    <value>Asiantaeth Amgylchedd Gogledd Iwerddon</value>
   </data>
   <data name="Guidance.PageTitle" xml:space="preserve">
-    <value>[Welsh]Public register for the ‘report packaging data’ service</value>
+    <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
   </data>
   <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>[Welsh]Producers registered for the ‘report packaging data’ service</value>
+    <value>Cynhyrchwyr sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
   </data>
   <data name="Guidance.Published" xml:space="preserve">
-    <value>[Welsh]Published:</value>
+    <value>Wedi'i gyhoeddi:</value>
   </data>
   <data name="Guidance.Published2" xml:space="preserve">
-    <value>[Welsh]Published</value>
+    <value>Wedi'i gyhoeddi</value>
   </data>
   <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
-    <value>[Welsh]Request an accessible format.</value>
+    <value>Efallai na fydd y ffeil yma'n addas i ddefnyddwyr technoleg gynorthwyol.
+
+Gwneud cais am fformat hygyrch.</value>
   </data>
   <data name="Guidance.ScottishEnvironmentProtectionAgencyLink" xml:space="preserve">
-    <value>[Welsh]Scottish Environment Protection Agency</value>
+    <value>Asiantaeth Diogelu Amgylchedd yr Alban</value>
   </data>
   <data name="Guidance.SeeAllUpdates" xml:space="preserve">
-    <value>[Welsh]See all updates</value>
+    <value>Gweld pob diweddariad</value>
   </data>
   <data name="Guidance.ThisFileMayNotBeSuitable" xml:space="preserve">
-    <value>[Welsh]This file may not be suitable for users of assistive technology.</value>
+    <value>Efallai na fydd y ffeil yma'n addas i ddefnyddwyr technoleg gynorthwyol.</value>
   </data>
 </root>
