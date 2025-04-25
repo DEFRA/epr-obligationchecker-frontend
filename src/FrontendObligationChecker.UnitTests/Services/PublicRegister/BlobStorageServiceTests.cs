@@ -36,6 +36,7 @@
             _blobClientMock = new Mock<BlobClient>();
             _optionsMock = new Mock<IOptions<PublicRegisterOptions>>();
             _loggerMock = new Mock<ILogger<BlobStorageService>>();
+            _blobReaderloggerMock = new Mock<ILogger<BlobReader>>();
 
             _optionsMock.Setup(x => x.Value).Returns(new PublicRegisterOptions
             {
