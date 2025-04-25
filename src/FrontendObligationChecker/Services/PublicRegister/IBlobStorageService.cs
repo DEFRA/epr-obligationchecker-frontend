@@ -6,5 +6,5 @@ public interface IBlobStorageService
 {
     Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName);
 
-    Task<Stream?> GetLatestFileAsync(string containerName);
+    Task<PublicRegisterFaileModel> GetLatestFileAsync(string containerName);
 }

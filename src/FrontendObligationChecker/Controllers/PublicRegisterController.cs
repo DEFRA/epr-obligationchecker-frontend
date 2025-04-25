@@ -55,13 +55,13 @@
             try
             {
                 var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
-                var fileContent = await _blobStorageService.GetLatestFileAsync(containerName);
-                if (fileContent == null)
+                var fileModel = await _blobStorageService.GetLatestFileAsync(containerName);
+                if (string.IsNullOrEmpty(fileModel.FileName))
                 {
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
                 }
 
-                return File(fileContent, "text/csv", fileName);
+                return File(fileModel.FileContent, "text/csv", fileModel.FileName);
             }
             catch (PublicRegisterServiceException ex)
             {
