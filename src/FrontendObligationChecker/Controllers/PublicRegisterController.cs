@@ -3,9 +3,12 @@
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
+    using FrontendObligationChecker.Readers;
     using FrontendObligationChecker.Services.PublicRegister;
+    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -39,10 +42,39 @@
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
                 ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
-                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated)
+                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated),
+                EnforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles()
             };
 
             return View("Guidance", viewModel);
+        }
+
+        [HttpGet(PagePath.Enforcement)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string homeNation)
+        {
+            if (string.IsNullOrEmpty(homeNation))
+            {
+                return RedirectToAction("Get");
+            }
+
+            try
+            {
+                var latestFile = await _blobStorageService.GetEnforcementActionFileByHomeNation(homeNation);
+
+                if (latestFile == null)
+                {
+                    return RedirectToAction("Get");
+                }
+
+                return File(latestFile.FileContents, "text/csv", latestFile.FileName);
+            }
+            catch (LargeProducerRegisterServiceException ex)
+            {
+                return RedirectToAction("Get");
+            }
         }
 
         private static string FormatDate(DateTime? date) =>

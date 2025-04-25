@@ -1,12 +1,21 @@
 ﻿@using FrontendObligationChecker.Models.Config
 @using FrontendObligationChecker.ViewModels.PublicRegister
 @using Microsoft.Extensions.Options
+@using FrontendObligationChecker.Constants;
+
 @model GuidanceViewModel
 
 @inject IOptions<EmailAddressOptions> EmailAdresses
+@inject IOptions<ExternalUrlsOptions> ExternalUrls;
 
 @{
     ViewData["Title"] = @Localizer["Guidance.PageTitle"];
+}
+
+@{
+    var EnglandEnforcementActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{HomeNation.England}")).FirstOrDefault();
+    var WalesEnforcementActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{HomeNation.Wales}")).FirstOrDefault();
+    var NorthernIrelandEnformentActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{HomeNation.NorthernIreland}")).FirstOrDefault();
 }
 
 <div class="govuk-width-container">
@@ -138,41 +147,59 @@
                          data-govspeak-module-started="true">
                         <div class="govspeak">
                             <p>@Localizer["Guidance.EnforcementActionDescription"]</p>
-                            <ul class="govuk-list">
 
-                                
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
-                                </li>
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
-                                </li>
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
-                                </li>
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
-                                </li>
-                            </ul>
+                            @using (Html.BeginForm(FormMethod.Post))
+                            {                
+                                <ul class="govuk-list">
 
-                            @* <ul class="govuk-list">
-                                @foreach(var item in Model.EnforcementActionItems)
-                                {
-                                    if (item.Properties.ContentLength == 0)
+                                    @* If the files are not available for download then show only the read only text *@
+
+                                    @if (EnglandEnforcementActionFile != null)
                                     {
                                         <li>
-                                            @Localizer["Guidance.EnvironmentAgencyLink"]
+                                            <a class="govuk-link" href="/public-register/enforce?&homeNation=@HomeNation.England">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
                                         </li>
                                     }
                                     else
                                     {
                                         <li>
-                                            <a class="govuk-link" href="#">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
+                                            @Localizer["Guidance.EnvironmentAgencyLink"] @Localizer["Guidance.NotYetAvailable"]
                                         </li>
                                     }
-                                }
-                            </ul> *@
 
+
+                                    @if (WalesEnforcementActionFile != null)
+                                    {
+                                        <li>
+                                            <a class="govuk-link" href="/public-register/enforce?&homeNation=@HomeNation.Wales">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Localizer["Guidance.NaturalResourcesWalesLink"] @Localizer["Guidance.NotYetAvailable"]
+                                        </li>
+                                    }
+
+                                    <li>
+                                        <a class="govuk-link" href="@ExternalUrls.Value.PublicRegisterScottishProtectionAgency" target="_blank" rel="noreferrer">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
+                                    </li>
+
+                                    @if (NorthernIrelandEnformentActionFile != null)
+                                    {
+                                        <li>
+                                            <a class="govuk-link" href="/public-register/enforce?&homeNation=@HomeNation.NorthernIreland">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"] @Localizer["Guidance.NotYetAvailable"]
+                                        </li>
+                                    }
+                                    
+                                </ul>
+                            }
                         </div>
                     </div>
                 </section>

@@ -200,4 +200,7 @@ Gwneud cais am fformat hygyrch.</value>
   <data name="Guidance.ThisFileMayNotBeSuitable" xml:space="preserve">
     <value>Efallai na fydd y ffeil yma'n addas i ddefnyddwyr technoleg gynorthwyol.</value>
   </data>
+    <data name="Guidance.NotYetAvailable" xml:space="preserve">
+        <value>(ddim ar gael eto)</value>
+    </data>
 </root>

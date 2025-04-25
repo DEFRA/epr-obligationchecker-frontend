@@ -6,5 +6,6 @@
     internal class PagePath
     {
         internal const string PublicRegister = "public-register";
+        internal const string Enforcement = "enforce";
     }
 }

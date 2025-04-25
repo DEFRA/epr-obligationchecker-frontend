@@ -7,10 +7,13 @@ using Azure.Storage.Blobs.Models;
 using FrontendObligationChecker.Exceptions;
 using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Models.Config;
+using FrontendObligationChecker.Readers;
+using FrontendObligationChecker.ViewModels.PublicRegister;
 using Microsoft.Extensions.Options;
 
 public class BlobStorageService(
     BlobServiceClient blobServiceClient,
+    IBlobReader blobReader,
     ILogger<BlobStorageService> logger,
     IOptions<PublicRegisterOptions> publicRegisterOptions) : IBlobStorageService
 {
@@ -44,6 +47,45 @@ public class BlobStorageService(
             result.FileType = GetFileType(latestBlob.Name);
 
             return result;
+        }
+        catch (RequestFailedException ex)
+        {
+            logger.LogError(ex, LogMessage, $"{containerName} files");
+        }
+
+        return result;
+    }
+
+    public async Task<EnforcementActionFileViewModel> GetEnforcementActionFileByHomeNation(string homeNation)
+    {
+        var result = new EnforcementActionFileViewModel();
+        var containerName = publicRegisterOptions.Value.EnforcementActionsBlobContainerName;
+
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+
+            if (containerClient is null) return result;
+
+            // Used as a filter.
+            var suffix = string.Format("_{0}", homeNation);
+
+            var enforcementFileName = string.Format("{0}{1}.{2}", publicRegisterOptions.Value.EnforcementActionFileName, suffix, "xlsx");
+
+            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
+            {
+                var blobClient = containerClient.GetBlobClient(blobItem.Name);
+
+                if (blobItem.Name == enforcementFileName)
+                {
+                    result.FileName = blobItem.Name;
+                    result.ContentFileLength = (int)blobItem.Properties.ContentLength;
+                    result.DateCreated = blobItem.Properties.CreatedOn.Value.DateTime;
+                    result.FileContents = await blobReader.DownloadBlobToStreamAsync(containerName, blobItem.Name, true);
+
+                    break;
+                }
+            }
         }
         catch (RequestFailedException ex)
         {
@@ -116,9 +158,9 @@ public class BlobStorageService(
         logger.LogError(ex, LogMessage, fileName);
     }
 
-    public async Task<List<BlobItem>> GetEnforcementActionFiles()
+    public async Task<IEnumerable<EnforcementActionFileViewModel>> GetEnforcementActionFiles()
     {
-        var results = new List<BlobItem>();
+        var results = new List<EnforcementActionFileViewModel>();
 
         try
         {
@@ -130,7 +172,13 @@ public class BlobStorageService(
 
             await foreach(BlobItem blobItem in containerClient.GetBlobsAsync())
             {
-                results.Add(blobItem);
+                var enforcementActionFileItem = new EnforcementActionFileViewModel();
+
+                enforcementActionFileItem.FileName = blobItem.Name;
+                enforcementActionFileItem.DateCreated = DateTime.Now;
+                enforcementActionFileItem.ContentFileLength = (int)blobItem.Properties.ContentLength;
+
+                results.Add(enforcementActionFileItem);
             }
 
         }

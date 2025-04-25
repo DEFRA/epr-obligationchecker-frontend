@@ -13,7 +13,7 @@ public class PublicRegisterOptions
 
     public string? EnforcementActionsBlobContainerName { get; set; }
 
-    public string? EnforcementActionsFileName { get; set; }
+    public string? EnforcementActionFileName { get; set; }
 
     public DateTime PublishedDate { get; set; }
 }
