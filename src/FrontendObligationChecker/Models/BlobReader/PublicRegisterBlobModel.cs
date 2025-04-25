@@ -1,6 +1,7 @@
 ﻿namespace FrontendObligationChecker.Models.BlobReader
 {
     using System.Diagnostics.CodeAnalysis;
+    using Azure.Storage.Blobs.Models;
 
     [ExcludeFromCodeCoverage]
     public class PublicRegisterBlobModel
@@ -14,5 +15,7 @@
         public string? ContentLength { get; set; }
 
         public string? FileType { get; set; }
+
+        public List<BlobItem> EnforcementActionItems { get; set; }
     }
 }

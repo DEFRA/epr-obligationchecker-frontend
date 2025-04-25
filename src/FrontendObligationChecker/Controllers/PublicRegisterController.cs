@@ -6,7 +6,9 @@
     using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
+    using FrontendObligationChecker.Readers;
     using FrontendObligationChecker.Services.PublicRegister;
+    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -40,7 +42,8 @@
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
                 ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
-                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated)
+                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated),
+                EnforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles()
             };
 
             return View("Guidance", viewModel);
@@ -73,6 +76,34 @@
         public async Task<IActionResult> FileNotDownloaded()
         {
             return View("GuidanceError", new PublicRegisterErrorViewModel());
+        }
+
+        [HttpGet(PagePath.Enforce)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string agency)
+        {
+            if (string.IsNullOrEmpty(agency))
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+
+            try
+            {
+                var latestFile = await _blobStorageService.GetEnforcementActionFileByAgency(agency);
+
+                if (latestFile == null || latestFile.FileContents == null)
+                {
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+                }
+
+                return File(latestFile.FileContents, "text/csv", latestFile.FileName);
+            }
+            catch (LargeProducerRegisterServiceException ex)
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
         }
 
         private static string FormatDate(DateTime? date) =>
