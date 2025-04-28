@@ -3,9 +3,12 @@
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
+    using FrontendObligationChecker.Readers;
     using FrontendObligationChecker.Services.PublicRegister;
+    using FrontendObligationChecker.Sessions;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -22,7 +25,7 @@
         private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
 
         [HttpGet]
-        public async Task<IActionResult> Guidance()
+        public async Task<IActionResult> Get()
         {
             var producerBlobModel = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
@@ -39,10 +42,68 @@
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
                 ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
-                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated)
+                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated),
+                EnforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles()
             };
 
             return View("Guidance", viewModel);
+        }
+
+        [HttpGet(PagePath.Report)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string fileName, string type)
+        {
+            try
+            {
+                var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
+                var fileModel = await _blobStorageService.GetLatestFileAsync(containerName);
+                if (string.IsNullOrEmpty(fileModel.FileName))
+                {
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+                }
+
+                return File(fileModel.FileContent, "text/csv", fileModel.FileName);
+            }
+            catch (PublicRegisterServiceException ex)
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+        }
+
+        [HttpGet(PagePath.FileNotDownloaded)]
+        public async Task<IActionResult> FileNotDownloaded()
+        {
+            return View("GuidanceError", new PublicRegisterErrorViewModel());
+        }
+
+        [HttpGet(PagePath.Enforce)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string agency)
+        {
+            if (string.IsNullOrEmpty(agency))
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+
+            try
+            {
+                var latestFile = await _blobStorageService.GetEnforcementActionFileByAgency(agency);
+
+                if (latestFile == null || latestFile.FileContents == null)
+                {
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+                }
+
+                return File(latestFile.FileContents, "text/csv", latestFile.FileName);
+            }
+            catch (LargeProducerRegisterServiceException ex)
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
         }
 
         private static string FormatDate(DateTime? date) =>

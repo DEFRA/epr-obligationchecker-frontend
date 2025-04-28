@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using FluentAssertions;
     using FrontendObligationChecker.Controllers;
+    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
@@ -75,10 +76,10 @@
         [TestMethod]
         [DataRow("producers-container")]
         [DataRow("schemes-container")]
-        public async Task Guidance_ReturnsExpectedViewWithCorrectModel(string containerName)
+        public async Task Get_ReturnsExpectedViewWithCorrectModel(string containerName)
         {
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
 
             // Assert
             result.Should().BeOfType<ViewResult>();
@@ -113,7 +114,7 @@
         }
 
         [TestMethod]
-        public async Task Guidance_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
+        public async Task Get_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
         {
             // Arrange
             var producerBlob = new PublicRegisterBlobModel
@@ -130,7 +131,7 @@
                 .ReturnsAsync(producerBlob);
 
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
             var model = (result as ViewResult)!.Model as GuidanceViewModel;
 
             // Assert
@@ -141,7 +142,7 @@
         }
 
         [TestMethod]
-        public async Task Guidance_SetsFileSizeToZero_WhenContentLengthIsNull()
+        public async Task Get_SetsFileSizeToZero_WhenContentLengthIsNull()
         {
             // Arrange
             var producerBlob = new PublicRegisterBlobModel
@@ -158,7 +159,7 @@
                 .ReturnsAsync(producerBlob);
 
             // Act
-            var result = await _controller.Guidance();
+            var result = await _controller.Get();
             var model = (result as ViewResult)!.Model as GuidanceViewModel;
 
             // Assert
@@ -177,6 +178,76 @@
 
             // Assert
             result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public async Task GetFile_Public_Register_ReturnFile()
+        {
+            // Arrange
+            const string filename = "testFileName";
+            var fileType = "producers-container";
+            var faileModel = new PublicRegisterFileModel { FileName = filename, FileContent = new MemoryStream() };
+
+            _blobStorageServiceMock
+                 .Setup(x => x.GetLatestFileAsync("producers-container"))
+                 .ReturnsAsync(faileModel);
+            // Act
+            var result = await _controller.File(filename, fileType) as FileStreamResult;
+
+            // Assert
+            result.FileDownloadName.Should().Be(faileModel.FileName);
+            result.FileStream.Should().BeSameAs(faileModel.FileContent);
+            result.ContentType.Should().Be("text/csv");
+        }
+
+        [TestMethod]
+        public async Task GetFile_Public_Register_RedirectTo_FileNotDownloaded_When_FileContent_Null()
+        {
+            // Arrange
+            const string filename = "testFileName";
+            var fileType = "producers-container";
+            var faileModel = new PublicRegisterFileModel();
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFileAsync("producers-container"))
+                .ReturnsAsync(faileModel);
+
+            // Act
+            var result = await _controller.File(filename, fileType) as RedirectToActionResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ActionName.Should().Be("FileNotDownloaded");
+        }
+
+        [TestMethod]
+        public async Task File_RedirectsToFileNotDownloaded_WhenExceptionThrown()
+        {
+            // Arrange
+            var fileName = "report.csv";
+            var fileType = "public";
+
+            _blobStorageServiceMock
+                .Setup(s => s.GetLatestFileAsync(It.IsAny<string>()))
+                .ThrowsAsync(new PublicRegisterServiceException("fail"));
+
+            // Act
+            var result = await _controller.File(fileName, fileType) as RedirectToActionResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ActionName.Should().Be("FileNotDownloaded");
+        }
+
+        [TestMethod]
+        public async Task GetFileNotDownloaded_ReturnsLargeProducerErrorView_WhenCalledWithValidHomeNation()
+        {
+            // Act
+            var result = await _controller.FileNotDownloaded() as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("GuidanceError");
         }
     }
 }

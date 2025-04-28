@@ -1,12 +1,21 @@
 ﻿@using FrontendObligationChecker.Models.Config
 @using FrontendObligationChecker.ViewModels.PublicRegister
 @using Microsoft.Extensions.Options
+@using FrontendObligationChecker.Constants;
+
 @model GuidanceViewModel
 
 @inject IOptions<EmailAddressOptions> EmailAdresses
+@inject IOptions<ExternalUrlsOptions> ExternalUrls;
 
 @{
     ViewData["Title"] = @Localizer["Guidance.PageTitle"];
+}
+
+@{
+    var EnglandEnforcementActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{EnforcementAgency.England}")).FirstOrDefault();
+    var WalesEnforcementActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{EnforcementAgency.Wales}")).FirstOrDefault();
+    var NorthernIrelandEnformentActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{EnforcementAgency.NorthernIreland}")).FirstOrDefault();
 }
 
 <div class="govuk-width-container">
@@ -49,9 +58,15 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-                            <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
-                               target="_self"
-                               href="#">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+							@if (string.IsNullOrEmpty(Model.ProducerRegisteredFile.FileName)){
+								<p>@Localizer["Guidance.ProducersRegisteredForRpd"]</p>
+
+							} else {
+								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+								   target="_self"
+								   href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+							}
+                            
                         </h3>
 
                         <p class="gem-c-attachment__metadata">
@@ -93,10 +108,15 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-                            <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
-                               target="_self"
-                               href="#">@Localizer["Guidance.ComplianceSchemeRegisteredForRpd"]</a>
-                        </h3>
+							@if (string.IsNullOrEmpty(Model.ComplianceSchemeRegisteredFile.FileName))
+							{
+								<p>@Localizer["Guidance.ComplianceSchemeRegisteredForRpd"]</p>
+							} else {
+								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+								   target="_self"
+								   href="/public-register/report?fileName=@Model.ComplianceSchemeRegisteredFile.FileName&type=Compliance">@Localizer["Guidance.ComplianceSchemeRegisteredForRpd"]</a>
+							}
+                            </h3>
 
                         <p class="gem-c-attachment__metadata">
 
@@ -138,20 +158,59 @@
                          data-govspeak-module-started="true">
                         <div class="govspeak">
                             <p>@Localizer["Guidance.EnforcementActionDescription"]</p>
-                            <ul class="govuk-list">
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
-                                </li>
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
-                                </li>
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
-                                </li>
-                                <li>
-                                    <a class="govuk-link" href="#">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
-                                </li>
-                            </ul>
+
+                            @using (Html.BeginForm(FormMethod.Post))
+                            {                
+                                <ul class="govuk-list">
+
+                                    @* If the files are not available for download then show only the read only text *@
+
+                                    @if (EnglandEnforcementActionFile != null)
+                                    {
+                                        <li>
+                                            <a class="govuk-link" href="/public-register/enforce?&agency=@EnforcementAgency.England">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Localizer["Guidance.EnvironmentAgencyLink"] @Localizer["Guidance.NotYetAvailable"]
+                                        </li>
+                                    }
+
+
+                                    @if (WalesEnforcementActionFile != null)
+                                    {
+                                        <li>
+                                            <a class="govuk-link" href="/public-register/enforce?&agency=@EnforcementAgency.Wales">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Localizer["Guidance.NaturalResourcesWalesLink"] @Localizer["Guidance.NotYetAvailable"]
+                                        </li>
+                                    }
+
+                                    <li>
+                                        <a class="govuk-link" href="@ExternalUrls.Value.PublicRegisterScottishProtectionAgency" target="_blank" rel="noreferrer">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
+                                    </li>
+
+                                    @if (NorthernIrelandEnformentActionFile != null)
+                                    {
+                                        <li>
+                                            <a class="govuk-link" href="/public-register/enforce?&agency=@EnforcementAgency.NorthernIreland">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"] @Localizer["Guidance.NotYetAvailable"]
+                                        </li>
+                                    }
+                                    
+                                </ul>
+                            }
                         </div>
                     </div>
                 </section>
