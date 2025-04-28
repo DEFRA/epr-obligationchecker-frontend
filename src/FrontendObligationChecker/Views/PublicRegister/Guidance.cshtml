@@ -59,7 +59,7 @@
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
 							@if (string.IsNullOrEmpty(Model.ProducerRegisteredFile.FileName)){
-								<p>@Localizer["Guidance.FileNoAvailable"]</p>
+								<p>@Localizer["Guidance.ProducersRegisteredForRpd"]</p>
 
 							} else {
 								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
@@ -110,7 +110,7 @@
                         <h3 class="gem-c-attachment__title">
 							@if (string.IsNullOrEmpty(Model.ComplianceSchemeRegisteredFile.FileName))
 							{
-								<p>@Localizer["Guidance.FileNoAvailable"]</p>
+								<p>@Localizer["Guidance.ComplianceSchemeRegisteredForRpd"]</p>
 							} else {
 								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
 								   target="_self"
