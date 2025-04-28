@@ -57,10 +57,11 @@ public class BlobStorageService(
         return result;
     }
 
-    public async Task<Stream?> GetLatestFileAsync(string containerName)
+    public async Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName)
     {
         try
         {
+            var fileModel = new PublicRegisterFileModel();
             var containerClient = GetContainerClient(containerName);
             var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
             var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
@@ -68,7 +69,10 @@ public class BlobStorageService(
             var properties = await blobClient.GetPropertiesAsync();
             var download = await blobClient.DownloadContentAsync();
 
-            return download.Value.Content.ToStream();
+            fileModel.FileContent = download.Value.Content.ToStream();
+            fileModel.FileName = GetFileName(latestBlob.Name);
+
+            return fileModel;
         }
         catch (RequestFailedException ex)
         {
@@ -126,6 +130,12 @@ public class BlobStorageService(
     {
         var extension = Path.GetExtension(blobName);
         return string.IsNullOrWhiteSpace(extension) ? "CSV" : extension.TrimStart('.').ToUpperInvariant();
+    }
+
+    private static string GetFileName(string blobName)
+    {
+        var parts = blobName.Split('/');
+        return parts.Length > 1 ? parts[1] : blobName;
     }
 
     private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)

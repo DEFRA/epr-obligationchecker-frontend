@@ -220,5 +220,48 @@
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
+
+        [TestMethod]
+        [DataRow("ProducerContainer", "")]
+        [DataRow("ComplianceSchemeContainer", ".CSV")]
+        public async Task GetLatestFileAsync_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName, string fileType)
+        {
+            var mockResponse = new Mock<Response<BlobProperties>>();
+            var mockDownloadResponse = new Mock<Response<BlobDownloadResult>>();
+            var downloadContent = BlobsModelFactory.BlobDownloadResult(content: new BinaryData("some data"));
+
+            var mockBlobContainerClient = new Mock<BlobContainerClient>();
+            var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024, contentType: fileType);
+            var mockValue = BlobsModelFactory.BlobDownloadResult(new BinaryData("some data"), default);
+            var blobContent = new BinaryData("this is test data");
+            var downloadResult = BlobsModelFactory.BlobDownloadResult(content: blobContent);
+            var response = Response.FromValue(downloadResult, new Mock<Response>().Object);
+            var blobList = new List<BlobItem>
+                {
+                    BlobsModelFactory.BlobItem($"2025/Blob1{fileType}"),
+                    BlobsModelFactory.BlobItem($"2026/Blob2{fileType}"),
+                    BlobsModelFactory.BlobItem($"Blob3{fileType}")
+                };
+            var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
+            var asyncPageable = AsyncPageable<BlobItem>.FromPages(new[] { page });
+
+            _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(asyncPageable);
+
+            var metadata = new Dictionary<string, string>() { { "ContentLength", "180" } };
+            var blobClientMock = new Mock<BlobClient>();
+            blobClientMock.Setup(x => x.SetMetadata(metadata, null, It.IsAny<CancellationToken>()));
+            mockResponse.Setup(r => r.Value).Returns(blobProperties);
+            mockDownloadResponse.Setup(r => r.Value).Returns(downloadContent);
+            blobClientMock.Setup(x => x.GetPropertiesAsync(It.IsAny<BlobRequestConditions>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
+            blobClientMock.Setup(x => x.DownloadContentAsync()).ReturnsAsync(mockDownloadResponse.Object);
+            _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>())).Returns(blobClientMock.Object);
+
+            var result = await _service.GetLatestFileAsync(containerName);
+
+            result.FileName.Equals("Blob1");
+            Assert.IsNotNull(result.FileContent);
+        }
+
     }
 }

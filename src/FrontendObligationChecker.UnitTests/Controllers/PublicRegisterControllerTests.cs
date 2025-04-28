@@ -186,17 +186,17 @@
             // Arrange
             const string filename = "testFileName";
             var fileType = "producers-container";
-            var test_Stream = new MemoryStream();
+            var faileModel = new PublicRegisterFileModel { FileName = filename, FileContent = new MemoryStream() };
 
             _blobStorageServiceMock
                  .Setup(x => x.GetLatestFileAsync("producers-container"))
-                 .ReturnsAsync(test_Stream);
+                 .ReturnsAsync(faileModel);
             // Act
             var result = await _controller.File(filename, fileType) as FileStreamResult;
 
             // Assert
-            result.FileDownloadName.Should().Be(filename);
-            result.FileStream.Should().BeSameAs(test_Stream);
+            result.FileDownloadName.Should().Be(faileModel.FileName);
+            result.FileStream.Should().BeSameAs(faileModel.FileContent);
             result.ContentType.Should().Be("text/csv");
         }
 
@@ -205,8 +205,12 @@
         {
             // Arrange
             const string filename = "testFileName";
-            var fileType = "public";
-            var test_Stream = new MemoryStream();
+            var fileType = "producers-container";
+            var faileModel = new PublicRegisterFileModel();
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFileAsync("producers-container"))
+                .ReturnsAsync(faileModel);
 
             // Act
             var result = await _controller.File(filename, fileType) as RedirectToActionResult;
