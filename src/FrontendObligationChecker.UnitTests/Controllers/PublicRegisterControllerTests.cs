@@ -186,7 +186,7 @@
             // Arrange
             const string filename = "testFileName";
             var fileType = "producers-container";
-            var faileModel = new PublicRegisterFaileModel { FileName = filename, FileContent = new MemoryStream() };
+            var faileModel = new PublicRegisterFileModel { FileName = filename, FileContent = new MemoryStream() };
 
             _blobStorageServiceMock
                  .Setup(x => x.GetLatestFileAsync("producers-container"))
@@ -206,7 +206,7 @@
             // Arrange
             const string filename = "testFileName";
             var fileType = "producers-container";
-            var faileModel = new PublicRegisterFaileModel();
+            var faileModel = new PublicRegisterFileModel();
 
             _blobStorageServiceMock
                 .Setup(x => x.GetLatestFileAsync("producers-container"))

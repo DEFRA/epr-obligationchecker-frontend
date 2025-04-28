@@ -56,11 +56,11 @@ public class BlobStorageService(
         return result;
     }
 
-    public async Task<PublicRegisterFaileModel> GetLatestFileAsync(string containerName)
+    public async Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName)
     {
         try
         {
-            var fileModel = new PublicRegisterFaileModel();
+            var fileModel = new PublicRegisterFileModel();
             var containerClient = GetContainerClient(containerName);
             var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
             var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
