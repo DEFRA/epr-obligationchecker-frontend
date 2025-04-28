@@ -13,9 +13,9 @@
 }
 
 @{
-    var EnglandEnforcementActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{EnforcementAgency.England}")).FirstOrDefault();
-    var WalesEnforcementActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{EnforcementAgency.Wales}")).FirstOrDefault();
-    var NorthernIrelandEnformentActionFile = Model.EnforcementActionFiles.Where(x => x.FileName.Contains($"_{EnforcementAgency.NorthernIreland}")).FirstOrDefault();
+    var EnglandEnforcementActionFile = Model.EnforcementActionFiles.FirstOrDefault(x => x.FileName.Contains($"_{EnforcementAgency.England}"));
+    var WalesEnforcementActionFile = Model.EnforcementActionFiles.FirstOrDefault(x => x.FileName.Contains($"_{EnforcementAgency.Wales}"));
+    var NorthernIrelandEnformentActionFile = Model.EnforcementActionFiles.FirstOrDefault(x => x.FileName.Contains($"_{EnforcementAgency.NorthernIreland}"));
 }
 
 <div class="govuk-width-container">

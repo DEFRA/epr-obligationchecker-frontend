@@ -72,12 +72,6 @@
             }
         }
 
-        [HttpGet(PagePath.FileNotDownloaded)]
-        public async Task<IActionResult> FileNotDownloaded()
-        {
-            return View("GuidanceError", new PublicRegisterErrorViewModel());
-        }
-
         [HttpGet(PagePath.Enforce)]
         [Produces("text/csv")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -104,6 +98,12 @@
             {
                 return RedirectToAction(nameof(PagePath.FileNotDownloaded));
             }
+        }
+
+        [HttpGet(PagePath.FileNotDownloaded)]
+        public async Task<IActionResult> FileNotDownloaded()
+        {
+            return View("GuidanceError", new PublicRegisterErrorViewModel());
         }
 
         private static string FormatDate(DateTime? date) =>
