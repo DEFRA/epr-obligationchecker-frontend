@@ -9,6 +9,7 @@
     using FluentAssertions;
     using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.Config;
+    using FrontendObligationChecker.Readers;
     using FrontendObligationChecker.Services.PublicRegister;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
@@ -23,7 +24,9 @@
         private Mock<BlobClient> _blobClientMock;
         private Mock<IOptions<PublicRegisterOptions>> _optionsMock;
         private Mock<ILogger<BlobStorageService>> _loggerMock;
+        private Mock<ILogger<BlobReader>> _blobReaderloggerMock;
         private IBlobStorageService _service;
+        private Mock<BlobReader> _blobReaderMock;
 
         [TestInitialize]
         public void Setup()
@@ -33,6 +36,7 @@
             _blobClientMock = new Mock<BlobClient>();
             _optionsMock = new Mock<IOptions<PublicRegisterOptions>>();
             _loggerMock = new Mock<ILogger<BlobStorageService>>();
+            _blobReaderloggerMock = new Mock<ILogger<BlobReader>>();
 
             _optionsMock.Setup(x => x.Value).Returns(new PublicRegisterOptions
             {
@@ -43,7 +47,9 @@
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()))
                 .Returns(_containerClientMock.Object);
 
-            _service = new BlobStorageService(_blobServiceClientMock.Object, _loggerMock.Object, _optionsMock.Object);
+            _blobReaderMock = new Mock<BlobReader>(_containerClientMock.Object, _blobServiceClientMock.Object, _blobReaderloggerMock.Object);
+
+            _service = new BlobStorageService(_blobServiceClientMock.Object, _blobReaderMock.Object, _loggerMock.Object, _optionsMock.Object);
         }
 
         [TestMethod]

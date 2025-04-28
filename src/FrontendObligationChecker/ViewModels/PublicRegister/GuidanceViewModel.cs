@@ -1,5 +1,7 @@
 ﻿namespace FrontendObligationChecker.ViewModels.PublicRegister
 {
+    using Azure.Storage.Blobs.Models;
+
     public class GuidanceViewModel : BaseViewModel
     {
         public string PublishedDate { get; set; }
@@ -11,5 +13,7 @@
         public PublicRegisterFileViewModel ComplianceSchemeRegisteredFile { get; set; }
 
         public string DefraUrl { get; set; }
+
+        public IEnumerable<EnforcementActionFileViewModel> EnforcementActionFiles { get; set; }
     }
 }

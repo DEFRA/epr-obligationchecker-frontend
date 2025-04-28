@@ -206,4 +206,7 @@ Gwneud cais am fformat hygyrch.</value>
   <data name="Guidance.FileNoAvailableTryAgainLater" xml:space="preserve">
       <value>[Welsh]File not available, try again later.</value>
   </data>
+    <data name="Guidance.NotYetAvailable" xml:space="preserve">
+        <value>(ddim ar gael eto)</value>
+    </data>
 </root>
