@@ -11,5 +11,5 @@ public interface IBlobStorageService
 
     Task<IEnumerable<EnforcementActionFileViewModel>> GetEnforcementActionFiles();
 
-    Task<Stream?> GetLatestFileAsync(string containerName);
+    Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName);
 }
