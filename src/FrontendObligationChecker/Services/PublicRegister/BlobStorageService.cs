@@ -95,11 +95,15 @@ public class BlobStorageService(
             // Used as a filter.
             var suffix = string.Format("_{0}", agency);
 
-            var enforcementFileName = string.Format("{0}{1}.{2}", publicRegisterOptions.Value.EnforcementActionFileName, suffix, "xlsx");
+            // Get the file name value from the config file so the system knows what file name to look for.
+            // Filename from blob storage without the suffix and extension must much what's stored in the config
+            // otherwise the file won't be available for download. See user story (523627).
+
+            var enforcementFileName = string.Format("{0}{1}", publicRegisterOptions.Value.EnforcementActionFileName, suffix);
 
             await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
             {
-                if (blobItem.Name == enforcementFileName)
+                if (Path.GetFileNameWithoutExtension(blobItem.Name) == enforcementFileName)
                 {
                     result.FileName = blobItem.Name;
                     result.ContentFileLength = (int)blobItem.Properties.ContentLength;
