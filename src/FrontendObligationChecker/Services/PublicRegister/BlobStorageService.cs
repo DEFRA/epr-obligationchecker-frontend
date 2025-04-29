@@ -99,8 +99,6 @@ public class BlobStorageService(
 
             await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
             {
-                var blobClient = containerClient.GetBlobClient(blobItem.Name);
-
                 if (blobItem.Name == enforcementFileName)
                 {
                     result.FileName = blobItem.Name;
