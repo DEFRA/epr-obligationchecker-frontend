@@ -108,7 +108,7 @@ public class BlobStorageService(
                     result.FileName = blobItem.Name;
                     result.ContentFileLength = (int)blobItem.Properties.ContentLength;
                     result.DateCreated = blobItem.Properties.CreatedOn.Value.DateTime;
-                    result.FileContents = await blobReader.DownloadBlobToStreamAsync(containerName, blobItem.Name, true);
+                    result.FileContents = await blobReader.DownloadBlobToStreamAsync(containerName, blobItem.Name, false);
 
                     break;
                 }
