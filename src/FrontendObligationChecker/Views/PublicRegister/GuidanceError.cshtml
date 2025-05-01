@@ -1,0 +1,29 @@
+﻿@model FrontendObligationChecker.ViewModels.PublicRegister.PublicRegisterErrorViewModel
+
+@{
+	var title = Localizer["GuidanceError.Title"];
+	ViewData["Title"] = title;
+}
+
+<div class="govuk-width-container">
+	<main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+		<div class="govuk-grid-row">
+			<div class="govuk-grid-column-two-thirds">
+				<h1 class="govuk-heading-l">@title</h1>
+				<p class="govuk-body">@Localizer["GuidanceError.ThereWasAProblem"]</p>
+                @using (Html.BeginForm("Get", "PublicRegister", null, FormMethod.Get))
+				{
+					<button type="submit" class="govuk-button" data-module="govuk-button">
+						@Localizer["GuidanceError.TryAgain"]
+					</button>
+				}
+				<br>
+				@Html.ActionLink(Localizer["GuidanceError.BackToLargeProducers"].Value,
+                         "Get",
+                                    "PublicRegister",
+									null,
+									new { @class = "govuk-link" })
+			</div>
+		</div>
+	</main>
+</div>

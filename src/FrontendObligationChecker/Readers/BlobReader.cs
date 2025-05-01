@@ -1,6 +1,8 @@
 ﻿namespace FrontendObligationChecker.Readers;
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
@@ -14,11 +16,13 @@ public class BlobReader : IBlobReader
     private const string LogMessage = "Failed to read {FileName} from blob storage";
 
     private readonly BlobContainerClient _blobContainerClient;
+    private readonly BlobServiceClient _blobServiceClient;
     private readonly ILogger<BlobReader> _logger;
 
-    public BlobReader(BlobContainerClient blobContainerClient, ILogger<BlobReader> logger)
+    public BlobReader(BlobContainerClient blobContainerClient, BlobServiceClient blobServiceClient, ILogger<BlobReader> logger)
     {
         _blobContainerClient = blobContainerClient;
+        _blobServiceClient = blobServiceClient;
         _logger = logger;
     }
 
@@ -27,6 +31,38 @@ public class BlobReader : IBlobReader
         try
         {
             var blobClient = _blobContainerClient.GetBlobClient(fileName);
+            var memoryStream = new MemoryStream();
+            await blobClient.DownloadToAsync(memoryStream);
+            memoryStream.Position = 0;
+
+            if (prependBOM)
+            {
+                BomHelper.PrependBOMBytes(memoryStream);
+            }
+
+            return memoryStream;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, fileName);
+            throw new BlobReaderException(string.Format(ErrorMessage, fileName), ex);
+        }
+    }
+
+    [ExcludeFromCodeCoverage]
+    public async Task<Stream> DownloadBlobToStreamAsync(string containerName, string fileName, bool prependBOM = false)
+    {
+        if (string.IsNullOrEmpty(containerName))
+        {
+            // Empty memory stream returned as container name is needed.
+            return new MemoryStream();
+        }
+
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+
+            var blobClient = containerClient.GetBlobClient(fileName);
             var memoryStream = new MemoryStream();
             await blobClient.DownloadToAsync(memoryStream);
             memoryStream.Position = 0;
@@ -116,5 +152,11 @@ public class BlobReader : IBlobReader
             _logger.LogError(ex, LogMessage, "directories");
             throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
         }
+    }
+
+    [ExcludeFromCodeCoverage]
+    private BlobContainerClient GetContainerClient(string containerName)
+    {
+        return _blobServiceClient.GetBlobContainerClient(containerName);
     }
 }

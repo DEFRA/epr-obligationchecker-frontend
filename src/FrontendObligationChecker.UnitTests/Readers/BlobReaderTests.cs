@@ -16,6 +16,7 @@ public class BlobReaderTests
 {
     private Mock<BlobContainerClient> _blobContainerClient;
     private Mock<BlobClient> _blobClient;
+    private Mock<BlobServiceClient> _blobServiceClient;
     private Mock<ILogger<BlobReader>> _logger;
 
     private BlobReader _systemUnderTest;
@@ -25,9 +26,10 @@ public class BlobReaderTests
     {
         _blobContainerClient = new Mock<BlobContainerClient>();
         _blobClient = new Mock<BlobClient>();
+        _blobServiceClient = new Mock<BlobServiceClient>();
         _logger = new Mock<ILogger<BlobReader>>();
 
-        _systemUnderTest = new BlobReader(_blobContainerClient.Object, _logger.Object);
+        _systemUnderTest = new BlobReader(_blobContainerClient.Object, _blobServiceClient.Object, _logger.Object);
     }
 
     [TestMethod]
