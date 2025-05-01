@@ -49,6 +49,34 @@
             return View("Guidance", viewModel);
         }
 
+        [HttpGet(PagePath.Enforce)]
+        [Produces("text/csv")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> File(string agency)
+        {
+            if (string.IsNullOrEmpty(agency))
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+
+            try
+            {
+                var latestFile = await _blobStorageService.GetEnforcementActionFileByAgency(agency);
+
+                if (latestFile == null || latestFile.FileContents == null)
+                {
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+                }
+
+                return File(latestFile.FileContents, "text/csv", latestFile.FileName);
+            }
+            catch (LargeProducerRegisterServiceException ex)
+            {
+                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+        }
+
         [HttpGet(PagePath.Report)]
         [Produces("text/csv")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -76,34 +104,6 @@
         public async Task<IActionResult> FileNotDownloaded()
         {
             return View("GuidanceError", new PublicRegisterErrorViewModel());
-        }
-
-        [HttpGet(PagePath.Enforce)]
-        [Produces("text/csv")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> File(string agency)
-        {
-            if (string.IsNullOrEmpty(agency))
-            {
-                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
-            }
-
-            try
-            {
-                var latestFile = await _blobStorageService.GetEnforcementActionFileByAgency(agency);
-
-                if (latestFile == null || latestFile.FileContents == null)
-                {
-                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
-                }
-
-                return File(latestFile.FileContents, "text/csv", latestFile.FileName);
-            }
-            catch (LargeProducerRegisterServiceException ex)
-            {
-                return RedirectToAction(nameof(PagePath.FileNotDownloaded));
-            }
         }
 
         private static string FormatDate(DateTime? date) =>

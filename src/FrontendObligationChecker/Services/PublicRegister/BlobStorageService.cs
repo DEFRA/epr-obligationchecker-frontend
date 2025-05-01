@@ -66,7 +66,6 @@ public class BlobStorageService(
             var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
             var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
             var blobClient = containerClient.GetBlobClient(latestBlob.Name);
-            var properties = await blobClient.GetPropertiesAsync();
             var download = await blobClient.DownloadContentAsync();
 
             fileModel.FileContent = download.Value.Content.ToStream();
