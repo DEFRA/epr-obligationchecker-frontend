@@ -123,7 +123,8 @@
                 PublishedDate = _publishedDate,
                 LastModified = null,
                 ContentLength = "115",
-                FileType = "text/csv"
+                FileType = "text/csv",
+                EnforcementActionItems = new List<Azure.Storage.Blobs.Models.BlobItem>()
             };
 
             _blobStorageServiceMock
