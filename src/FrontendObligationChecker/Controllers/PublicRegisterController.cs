@@ -1,5 +1,6 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
@@ -53,6 +54,7 @@
         [Produces("text/csv")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ExcludeFromCodeCoverage]
         public async Task<IActionResult> File(string agency)
         {
             if (string.IsNullOrEmpty(agency))
