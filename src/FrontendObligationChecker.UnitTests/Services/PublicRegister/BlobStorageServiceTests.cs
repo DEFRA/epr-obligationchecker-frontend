@@ -262,6 +262,5 @@
             result.FileName.Equals("Blob1");
             Assert.IsNotNull(result.FileContent);
         }
-
     }
 }

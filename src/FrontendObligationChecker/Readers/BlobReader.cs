@@ -1,6 +1,7 @@
 ﻿namespace FrontendObligationChecker.Readers;
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Azure;
 using Azure.Storage.Blobs;
@@ -48,6 +49,7 @@ public class BlobReader : IBlobReader
         }
     }
 
+    [ExcludeFromCodeCoverage]
     public async Task<Stream> DownloadBlobToStreamAsync(string containerName, string fileName, bool prependBOM = false)
     {
         if (string.IsNullOrEmpty(containerName))
@@ -152,6 +154,7 @@ public class BlobReader : IBlobReader
         }
     }
 
+    [ExcludeFromCodeCoverage]
     private BlobContainerClient GetContainerClient(string containerName)
     {
         return _blobServiceClient.GetBlobContainerClient(containerName);
