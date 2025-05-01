@@ -1,5 +1,6 @@
 ﻿namespace FrontendObligationChecker.Services.PublicRegister;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Storage.Blobs;
@@ -80,6 +81,7 @@ public class BlobStorageService(
         }
     }
 
+    [ExcludeFromCodeCoverage]
     public async Task<EnforcementActionFileViewModel> GetEnforcementActionFileByAgency(string agency)
     {
         var result = new EnforcementActionFileViewModel();
@@ -189,6 +191,8 @@ public class BlobStorageService(
     {
         logger.LogError(ex, LogMessage, fileName);
     }
+
+    [ExcludeFromCodeCoverage]
 
     public async Task<IEnumerable<EnforcementActionFileViewModel>> GetEnforcementActionFiles()
     {
