@@ -51,5 +51,7 @@ public class ExternalUrlsOptions
 
     public string AccessibilityPage { get; set; }
 
+    public string PublicRegisterScottishProtectionAgency { get; set; }
+
     public string DefraUrl { get; set; }
 }
