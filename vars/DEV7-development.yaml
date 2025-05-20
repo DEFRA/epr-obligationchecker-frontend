@@ -3,4 +3,4 @@ variables:
   docker.imageName: 'obligationregistry'
   acr.azureContainerRegistryName: 'devrwdinfac1401'
   acr.repositoryName: 'obligationregistry'
-  serviceName: 'devrwdwebwa7401'
+  serviceName: 'devrwdwebwa7443'
