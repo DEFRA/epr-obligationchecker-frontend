@@ -3,6 +3,9 @@ pr: none
 pool: DEFRA-COMMON-ubuntu2004-SSV3
 
 parameters:
+- name: slotName
+  type: string
+  default: ''
 - name: teamName
   displayName: 'Select a dev environment to deploy to:    (works only with "development" as target env)'
   default: 'DEV1'
@@ -75,7 +78,7 @@ resources:
       name: defra/epr-webapps-code-deploy-templates
       type: github
       endpoint: defra
-      ref: main
+      ref: feature/test-poc
 
     # The repo will be reference the repo by a release tag (if the imageTag parameter contains 'release') otherwise it will pull down the main branch.
     - repository: ReleaseTags
@@ -98,6 +101,7 @@ extends:
     acrName: $(acr.azureContainerRegistryName)
     registryName: $(acr.repositoryName)
     serviceName: $(serviceName)
+    slotName: ${{ parameters.slotName }}
     ${{ if eq(parameters.envToDeploy, 'development') }}:
       targetEnvironment: 'development'
     ${{ else }}:
