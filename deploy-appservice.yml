@@ -6,6 +6,9 @@ parameters:
 - name: slotName
   type: string
   default: ''
+- name: deployToSlot
+  type: boolean
+  default: 'false'
 - name: teamName
   displayName: 'Select a dev environment to deploy to:    (works only with "development" as target env)'
   default: 'DEV1'
@@ -102,6 +105,7 @@ extends:
     registryName: $(acr.repositoryName)
     serviceName: $(serviceName)
     slotName: ${{ parameters.slotName }}
+    deployToSlot: ${{ parameters.deployToSlot }}
     ${{ if eq(parameters.envToDeploy, 'development') }}:
       targetEnvironment: 'development'
     ${{ else }}:
