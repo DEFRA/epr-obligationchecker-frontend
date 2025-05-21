@@ -8,7 +8,7 @@ parameters:
   default: ''
 - name: deployToSlot
   type: boolean
-  default: 'false'
+  default: false
 - name: teamName
   displayName: 'Select a dev environment to deploy to:    (works only with "development" as target env)'
   default: 'DEV1'
