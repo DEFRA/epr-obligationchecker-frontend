@@ -12,7 +12,7 @@
         public Task<bool> IsComplianceSchemesRegisterEnabledAsync() =>
             _featureManager.IsEnabledAsync(FeatureFlags.ComplianceSchemesRegisterEnabled);
 
-        public Task<bool> IsEnforcementActiionsSectionEnabledAsync() =>
-            _featureManager.IsEnabledAsync(FeatureFlags.IsEnforcementActiionsSectionEnabled);
+        public Task<bool> IsEnforcementActionsSectionEnabledAsync() =>
+            _featureManager.IsEnabledAsync(FeatureFlags.EnforcementActionsSectionEnabled);
     }
 }

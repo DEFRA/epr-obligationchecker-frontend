@@ -14,6 +14,6 @@ public static class FeatureFlags
     public const string LargeProducerRegisterEnabled = "LargeProducerRegisterEnabled";
     internal const string PublicRegisterEnabled = "PublicRegisterEnabled";
     internal const string ComplianceSchemesRegisterEnabled = "ComplianceSchemesRegisterEnabled";
-    internal const string IsEnforcementActiionsSectionEnabled = "IsEnforcementActiionsSectionEnabled";
+    internal const string EnforcementActionsSectionEnabled = "EnforcementActionsSectionEnabled";
 
 }

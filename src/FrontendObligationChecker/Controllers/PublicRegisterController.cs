@@ -7,9 +7,8 @@
     using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
-    using FrontendObligationChecker.Readers;
     using FrontendObligationChecker.Services.PublicRegister;
-    using FrontendObligationChecker.Sessions;
+    using FrontendObligationChecker.Services.PublicRegister.Interfaces;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -20,32 +19,46 @@
     public class PublicRegisterController(
         IBlobStorageService blobStorageService,
         IOptions<ExternalUrlsOptions> urlOptions,
-        IOptions<PublicRegisterOptions> publicRegisterOptions) : Controller
+        IOptions<PublicRegisterOptions> publicRegisterOptions,
+        IFeatureFlagService featureFlagService) : Controller
     {
         private readonly IBlobStorageService _blobStorageService = blobStorageService;
         private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
+        private readonly ExternalUrlsOptions _urlOptions = urlOptions.Value;
+        private readonly IFeatureFlagService _featureFlagService = featureFlagService;
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            var isComplianceSchemesRegisterEnabled = await _featureFlagService.IsComplianceSchemesRegisterEnabledAsync();
+            var isEnforcementActionsSectionEnabled = await _featureFlagService.IsEnforcementActionsSectionEnabledAsync();
+
             var producerBlobModel = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
-
-            var complianceBlobModel = await _blobStorageService
-                .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
 
             var publishedDate = FormatDate(producerBlobModel.PublishedDate);
             var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
 
             var viewModel = new GuidanceViewModel
             {
-                DefraUrl = urlOptions.Value.DefraUrl,
+                DefraUrl = _urlOptions.DefraUrl,
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
-                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated),
-                ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated),
-                EnforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles()
+                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated)
             };
+
+            if (isComplianceSchemesRegisterEnabled)
+            {
+                var complianceBlobModel = await _blobStorageService
+                    .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
+
+                viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated);
+            }
+
+            if (isEnforcementActionsSectionEnabled)
+            {
+                 viewModel.EnforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles();
+            }
 
             return View("Guidance", viewModel);
         }

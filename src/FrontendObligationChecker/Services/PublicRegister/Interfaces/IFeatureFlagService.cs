@@ -4,6 +4,6 @@
     {
         Task<bool> IsComplianceSchemesRegisterEnabledAsync();
 
-        Task<bool> IsEnforcementActiionsSectionEnabledAsync();
+        Task<bool> IsEnforcementActionsSectionEnabledAsync();
     }
 }

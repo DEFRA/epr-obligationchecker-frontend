@@ -11,10 +11,10 @@
 
         public PublicRegisterFileViewModel ProducerRegisteredFile { get; set; }
 
-        public PublicRegisterFileViewModel ComplianceSchemeRegisteredFile { get; set; }
+        public PublicRegisterFileViewModel? ComplianceSchemeRegisteredFile { get; set; }
 
         public string DefraUrl { get; set; }
 
-        public IEnumerable<EnforcementActionFileViewModel> EnforcementActionFiles { get; set; }
+        public IEnumerable<EnforcementActionFileViewModel>? EnforcementActionFiles { get; set; }
     }
 }
