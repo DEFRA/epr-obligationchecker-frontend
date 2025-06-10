@@ -19,19 +19,20 @@
     public class PublicRegisterController(
         IBlobStorageService blobStorageService,
         IOptions<ExternalUrlsOptions> urlOptions,
+        IOptions<EmailAddressOptions> emailAddressOptions,
         IOptions<PublicRegisterOptions> publicRegisterOptions,
         IFeatureFlagService featureFlagService) : Controller
     {
         private readonly IBlobStorageService _blobStorageService = blobStorageService;
         private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
         private readonly ExternalUrlsOptions _urlOptions = urlOptions.Value;
+        private readonly EmailAddressOptions _emailAddressOptions = emailAddressOptions.Value;
         private readonly IFeatureFlagService _featureFlagService = featureFlagService;
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var isComplianceSchemesRegisterEnabled = await _featureFlagService.IsComplianceSchemesRegisterEnabledAsync();
-            var isEnforcementActionsSectionEnabled = await _featureFlagService.IsEnforcementActionsSectionEnabledAsync();
+            var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled) = await GetFeatureFlagsAsync();
 
             var producerBlobModel = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
@@ -42,6 +43,7 @@
             var viewModel = new GuidanceViewModel
             {
                 DefraUrl = _urlOptions.DefraUrl,
+                DefraHelplineEmail = _emailAddressOptions.DefraHelpline,
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,
                 ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated)
@@ -57,7 +59,14 @@
 
             if (isEnforcementActionsSectionEnabled)
             {
-                 viewModel.EnforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles();
+                var enforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles();
+                viewModel.EnforcementActionFiles = enforcementActionFiles;
+
+                viewModel.EnglishEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.England);
+                viewModel.WelshEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.Wales);
+                viewModel.NortherIrishEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.NorthernIreland);
+
+                viewModel.ScottishEnforcementActionFileUrl = _urlOptions.PublicRegisterScottishProtectionAgency;
             }
 
             return View("Guidance", viewModel);
@@ -134,6 +143,24 @@
                 FileSize = blobModel.ContentLength?.ToString() ?? "0",
                 FileType = blobModel.FileType
             };
+        }
+
+        private static EnforcementActionFileViewModel? GetEnforcementActionFileViewModel(IEnumerable<EnforcementActionFileViewModel> files, string agency)
+        {
+            var file = files.FirstOrDefault(x => x.FileName.Contains($"_{agency}"));
+            if (file != null)
+            {
+                file.FileDownloadUrl = $"/public-register/enforce?&agency={agency}";
+            }
+
+            return file;
+        }
+
+        private async Task<(bool ComplianceEnabled, bool EnforcementEnabled)> GetFeatureFlagsAsync()
+        {
+            var compliance = await _featureFlagService.IsComplianceSchemesRegisterEnabledAsync();
+            var enforcement = await _featureFlagService.IsEnforcementActionsSectionEnabledAsync();
+            return (compliance, enforcement);
         }
     }
 }

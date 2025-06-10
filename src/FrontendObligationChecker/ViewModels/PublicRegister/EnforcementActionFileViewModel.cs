@@ -12,5 +12,7 @@
         public int ContentFileLength { get; set; }
 
         public Stream FileContents { get; set; }
+
+        public string FileDownloadUrl { get; set; }
     }
 }

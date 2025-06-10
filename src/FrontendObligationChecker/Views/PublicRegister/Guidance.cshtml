@@ -1,12 +1,6 @@
-﻿@using FrontendObligationChecker.Models.Config
-@using FrontendObligationChecker.ViewModels.PublicRegister
-@using Microsoft.Extensions.Options
-@using FrontendObligationChecker.Constants;
+﻿@using FrontendObligationChecker.ViewModels.PublicRegister
 
 @model GuidanceViewModel
-
-@inject IOptions<EmailAddressOptions> EmailAdresses
-@inject IOptions<ExternalUrlsOptions> ExternalUrls;
 
 @{
     ViewData["Title"] = @Localizer["Guidance.PageTitle"];
@@ -81,8 +75,8 @@
                             </summary>
                             <div class="govuk-details__text">
                                 @Localizer["Guidance.AccessibleFormatTextPart1"]
-                                <a href="mailto:@EmailAdresses.Value.DefraHelpline" target="_blank" rel="noopener" class="govuk-link">
-                                    @EmailAdresses.Value.DefraHelpline
+                                <a href="mailto:@Model.DefraHelplineEmail" target="_blank" rel="noopener" class="govuk-link">
+                                    @Model.DefraHelplineEmail
                                 </a>
                                 @Localizer["Guidance.AccessibleFormatTextPart2"]
                             </div>
@@ -140,8 +134,8 @@
                                 </summary>
                                 <div class="govuk-details__text">
                                     @Localizer["Guidance.AccessibleFormatTextPart1"]
-                                    <a href="mailto:@EmailAdresses.Value.DefraHelpline" target="_blank" rel="noopener" class="govuk-link">
-                                        @EmailAdresses.Value.DefraHelpline
+                                    <a href="mailto:@Model.DefraHelplineEmail" target="_blank" rel="noopener" class="govuk-link">
+                                        @Model.DefraHelplineEmail
                                     </a>
                                     @Localizer["Guidance.AccessibleFormatTextPart2"]
                                 </div>
@@ -152,10 +146,6 @@
 
                 @if (Model.EnforcementActionFiles is not null && Model.EnforcementActionFiles.Any())
                 {
-                    var EnglandEnforcementActionFile = Model.EnforcementActionFiles.FirstOrDefault(x => x.FileName.Contains($"_{EnforcementAgency.England}"));
-                    var WalesEnforcementActionFile = Model.EnforcementActionFiles.FirstOrDefault(x => x.FileName.Contains($"_{EnforcementAgency.Wales}"));
-                    var NorthernIrelandEnformentActionFile = Model.EnforcementActionFiles.FirstOrDefault(x => x.FileName.Contains($"_{EnforcementAgency.NorthernIreland}"));
-
                     <section id="details">
 
                         <div class="gem-c-heading govuk-!-margin-bottom-4">
@@ -176,10 +166,10 @@
 
                                         @* If the files are not available for download then show only the read only text *@
 
-                                        @if (EnglandEnforcementActionFile != null)
+                                        @if (Model.EnglishEnforcementActionFile != null)
                                         {
                                             <li>
-                                                <a class="govuk-link" href="/public-register/enforce?&agency=@EnforcementAgency.England">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
+                                                <a class="govuk-link" href="@Model.EnglishEnforcementActionFile.FileDownloadUrl">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
                                             </li>
                                         }
                                         else
@@ -190,10 +180,10 @@
                                         }
 
 
-                                        @if (WalesEnforcementActionFile != null)
+                                        @if (Model.WelshEnforcementActionFile != null)
                                         {
                                             <li>
-                                                <a class="govuk-link" href="/public-register/enforce?&agency=@EnforcementAgency.Wales">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
+                                                <a class="govuk-link" href="@Model.WelshEnforcementActionFile.FileDownloadUrl">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
                                             </li>
                                         }
                                         else
@@ -204,13 +194,13 @@
                                         }
 
                                         <li>
-                                            <a class="govuk-link" href="@ExternalUrls.Value.PublicRegisterScottishProtectionAgency" target="_blank" rel="noreferrer">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
+                                            <a class="govuk-link" href="@Model.ScottishEnforcementActionFileUrl" target="_blank" rel="noreferrer">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
                                         </li>
 
-                                        @if (NorthernIrelandEnformentActionFile != null)
+                                        @if (Model.NortherIrishEnforcementActionFile != null)
                                         {
                                             <li>
-                                                <a class="govuk-link" href="/public-register/enforce?&agency=@EnforcementAgency.NorthernIreland">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
+                                                <a class="govuk-link" href="@Model.NortherIrishEnforcementActionFile.FileDownloadUrl">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>
                                             </li>
                                         }
                                         else

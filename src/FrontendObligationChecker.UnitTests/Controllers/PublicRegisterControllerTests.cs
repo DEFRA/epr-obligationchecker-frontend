@@ -23,6 +23,7 @@
         private Mock<IFeatureFlagService> _mockFeatureFlagService = null!;
         private IOptions<PublicRegisterOptions> _publicRegisterOptions = null!;
         private IOptions<ExternalUrlsOptions> _externalUrlsOptions = null!;
+        private IOptions<EmailAddressOptions> _emailAddressOptions = null!;
         private PublicRegisterController _controller = null!;
         private DateTime _publishedDate;
         private DateTime _lastModified;
@@ -70,12 +71,19 @@
 
             _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
             {
-                DefraUrl = "https://www.defraurl.com"
+                DefraUrl = "https://www.defraurl.com",
+                PublicRegisterScottishProtectionAgency = "some/url.com"
+            });
+
+            _emailAddressOptions = Options.Create(new EmailAddressOptions
+            {
+                DefraHelpline = "defrahelpline@email.com"
             });
 
             _controller = new PublicRegisterController(
                 _blobStorageServiceMock.Object,
                 _externalUrlsOptions,
+                _emailAddressOptions,
                 _publicRegisterOptions,
                 _mockFeatureFlagService.Object);
         }
@@ -94,21 +102,21 @@
             {
                 new ()
                 {
-                    FileName = "Document1.pdf",
+                    FileName = "Document1_EA.xlsx",
                     DateCreated = DateTime.Now.AddDays(-10),
                     ContentFileLength = 1024,
                     FileContents = new MemoryStream(new byte[1024])
                 },
                 new ()
                 {
-                    FileName = "Report.xlsx",
+                    FileName = "Document2_NRW.xlsx",
                     DateCreated = DateTime.Now.AddDays(-5),
                     ContentFileLength = 2048,
                     FileContents = new MemoryStream(new byte[2048])
                 },
                 new ()
                 {
-                    FileName = "Image.png",
+                    FileName = "Document3_NIEA.xlsx",
                     DateCreated = DateTime.Now,
                     ContentFileLength = 512,
                     FileContents = new MemoryStream(new byte[512])
@@ -135,6 +143,7 @@
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
 
             model.ProducerRegisteredFile.Should().NotBeNull();
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
@@ -147,6 +156,17 @@
 
             model.EnforcementActionFiles.Should().NotBeNullOrEmpty();
             model.EnforcementActionFiles!.Should().HaveCount(3);
+
+            model.EnglishEnforcementActionFile.Should().NotBeNull();
+            model.EnglishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.WelshEnforcementActionFile.Should().NotBeNull();
+            model.WelshEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.NortherIrishEnforcementActionFile.Should().NotBeNull();
+            model.NortherIrishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.ScottishEnforcementActionFileUrl.Should().NotBeNull();
 
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
 
@@ -181,6 +201,7 @@
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
 
             model.ProducerRegisteredFile.Should().NotBeNull();
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
@@ -218,21 +239,21 @@
             {
                 new ()
                 {
-                    FileName = "Document1.pdf",
+                    FileName = "Document1_EA.xlsx",
                     DateCreated = DateTime.Now.AddDays(-10),
                     ContentFileLength = 1024,
                     FileContents = new MemoryStream(new byte[1024])
                 },
                 new ()
                 {
-                    FileName = "Report.xlsx",
+                    FileName = "Document2_NRW.xlsx",
                     DateCreated = DateTime.Now.AddDays(-5),
                     ContentFileLength = 2048,
                     FileContents = new MemoryStream(new byte[2048])
                 },
                 new ()
                 {
-                    FileName = "Image.png",
+                    FileName = "Document3_NIEA.xlsx",
                     DateCreated = DateTime.Now,
                     ContentFileLength = 512,
                     FileContents = new MemoryStream(new byte[512])
@@ -256,6 +277,7 @@
 
             var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
@@ -276,6 +298,17 @@
 
             model.EnforcementActionFiles.Should().NotBeNullOrEmpty();
             model.EnforcementActionFiles!.Should().HaveCount(3);
+
+            model.EnglishEnforcementActionFile.Should().NotBeNull();
+            model.EnglishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.WelshEnforcementActionFile.Should().NotBeNull();
+            model.WelshEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.NortherIrishEnforcementActionFile.Should().NotBeNull();
+            model.NortherIrishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.ScottishEnforcementActionFileUrl.Should().NotBeNull();
 
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
 
@@ -307,6 +340,7 @@
 
             var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
