@@ -1,6 +1,5 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
@@ -76,10 +75,9 @@
         [Produces("text/csv")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ExcludeFromCodeCoverage]
         public async Task<IActionResult> File(string agency)
         {
-            if (string.IsNullOrEmpty(agency))
+            if (string.IsNullOrWhiteSpace(agency))
             {
                 return RedirectToAction(nameof(PagePath.FileNotDownloaded));
             }
@@ -88,7 +86,7 @@
             {
                 var latestFile = await _blobStorageService.GetEnforcementActionFileByAgency(agency);
 
-                if (latestFile == null || latestFile.FileContents == null)
+                if (latestFile is null || latestFile.FileContents is null)
                 {
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
                 }

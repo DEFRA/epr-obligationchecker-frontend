@@ -499,5 +499,127 @@
             result.Should().NotBeNull();
             result.ViewName.Should().Be("GuidanceError");
         }
+
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("")]
+        [DataRow(" ")]
+        public async Task File_ShouldRedirectToFileNotDownloaded_WhenAgencyIsNullOrEmptyOrWhitespace(string enforcementAgency)
+        {
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.Never());
+        }
+
+        [TestMethod]
+        public async Task File_ShouldRedirectToFileNotDownloaded_WhenLatestFileIsNull()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ReturnsAsync(default(EnforcementActionFileViewModel));
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task File_ShouldRedirectToFileNotDownloaded_WhenLatestFileContentIsNull()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+            var latestFile = new EnforcementActionFileViewModel();
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ReturnsAsync(latestFile);
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task File_ShouldReturnFile_WhenForAValidRequest()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+            var expectedFile = new EnforcementActionFileViewModel
+            {
+                FileName = "Document1_EA.xlsx",
+                DateCreated = DateTime.Now.AddDays(-10),
+                ContentFileLength = 1024,
+                FileContents = new MemoryStream(new byte[1024])
+            };
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ReturnsAsync(expectedFile);
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            var fileStreamResult = result as FileStreamResult;
+            fileStreamResult.Should().NotBeNull();
+            fileStreamResult.ContentType.Should().Be("text/csv");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task File_Should_ShouldRedirectToFileNotDownloaded_ForALargeProducerRegisterServiceException()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+            var expectedFile = new EnforcementActionFileViewModel
+            {
+                FileName = "Document1_EA.xlsx",
+                DateCreated = DateTime.Now.AddDays(-10),
+                ContentFileLength = 1024,
+                FileContents = new MemoryStream(new byte[1024])
+            };
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ThrowsAsync(new LargeProducerRegisterServiceException());
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
     }
 }
