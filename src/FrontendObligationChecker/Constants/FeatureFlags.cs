@@ -12,8 +12,8 @@ public static class FeatureFlags
     public const string WalesNationDownloadLink = "WalesNationDownloadLink";
     public const string AllNationsDownloadLink = "AllNationsDownloadLink";
     public const string LargeProducerRegisterEnabled = "LargeProducerRegisterEnabled";
-    internal const string PublicRegisterEnabled = "PublicRegisterEnabled";
-    internal const string ComplianceSchemesRegisterEnabled = "ComplianceSchemesRegisterEnabled";
-    internal const string EnforcementActionsSectionEnabled = "EnforcementActionsSectionEnabled";
+    public const string PublicRegisterEnabled = "PublicRegisterEnabled";
+    public const string ComplianceSchemesRegisterEnabled = "ComplianceSchemesRegisterEnabled";
+    public const string EnforcementActionsSectionEnabled = "EnforcementActionsSectionEnabled";
 
 }
