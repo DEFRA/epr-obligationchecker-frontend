@@ -3,7 +3,7 @@
 @model GuidanceViewModel
 
 @{
-    ViewData["Title"] = @Localizer["Guidance.PageTitle"];
+    ViewData["Title"] = (Model.ComplianceSchemeRegisteredFile is null) ? @Localizer["Guidance.PageTitle"] : @Localizer["Guidance.PageTitleOld"];
 }
 
 <div class="govuk-width-container">
@@ -11,10 +11,26 @@
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
                 <span class="govuk-caption-xl">@Localizer["Guidance.Caption"]</span>
-                <h1 class="govuk-heading-l">@Localizer["Guidance.PageTitle"]</h1>
-                <p class="govuk-body-l">
-                    @Localizer["Guidance.Description"]
-                </p>
+                @if (Model.ComplianceSchemeRegisteredFile is null)
+                {
+                    <h1 id="public-register-heading" class="govuk-heading-l"> @Localizer["Guidance.Heading"]</h1>
+                }
+                else
+                {
+                    <h1 id="public-register-heading" class="govuk-heading-l"> @Localizer["Guidance.HeadingOld"]</h1>
+                }
+                @if (Model.ComplianceSchemeRegisteredFile is null)
+                {
+                    <p id="public-register-description" class="govuk-body-l">
+                        @Localizer["Guidance.Description"]
+                    </p>
+                }
+                else
+                {
+                    <p id="public-register-description" class="govuk-body-l">
+                        @Localizer["Guidance.DescriptionOld"]
+                    </p>
+                }
             </div>
             <div class="govuk-grid-column-full">
                 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -48,13 +64,30 @@
                         <h3 class="gem-c-attachment__title">
 							@if (string.IsNullOrEmpty(Model.ProducerRegisteredFile.FileName))
                             {
-                                <p>@Localizer["Guidance.ProducersRegisteredForRpd"]</p>
+                                @if (Model.ComplianceSchemeRegisteredFile is null)
+                                {
+                                    <p>@Localizer["Guidance.ProducersRegisteredForRpd"]</p>
+                                }
+                                else
+                                {
+                                    <p>@Localizer["Guidance.ProducersRegisteredForRpdOld"]</p>
+                                }
+
 							} else {
-								<a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
-								   target="_self"
-								   href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+
+                                @if (Model.ComplianceSchemeRegisteredFile is null)
+                                {
+                                    <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+                                       target="_self"
+                                       href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+                                }
+                                else
+                                {
+                                    <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
+                                       target="_self"
+                                       href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpdOld"]</a>
+                                }
 							}
-                            
                         </h3>
 
                         <p class="gem-c-attachment__metadata">

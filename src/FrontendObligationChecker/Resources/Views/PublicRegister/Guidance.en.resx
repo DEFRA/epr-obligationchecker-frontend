@@ -213,4 +213,16 @@
   <data name="Guidance.DisclaimerText" xml:space="preserve">
     <value>Some fields may be blank. This could be because they do not apply to the producer in question.</value>
   </data>
+  <data name="Guidance.PageTitleOld" xml:space="preserve">
+    <value>Public register for the ‘report packaging data’ service</value>
+  </data>
+  <data name="Guidance.HeadingOld" xml:space="preserve">
+    <value>Public register for the ‘report packaging data’ service</value>
+  </data>
+  <data name="Guidance.DescriptionOld" xml:space="preserve">
+    <value>Find producers and compliance scheme operators registered for the ‘report packaging data’ service. You can also find organisations subject to enforcement actions.</value>
+  </data>
+  <data name="Guidance.ProducersRegisteredForRpdOld" xml:space="preserve">
+    <value>Producers registered for the ‘report packaging data’ service</value>
+  </data>
 </root>

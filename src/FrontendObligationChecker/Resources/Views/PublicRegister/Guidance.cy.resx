@@ -215,4 +215,16 @@ Gwneud cais am fformat hygyrch.</value>
   <data name="Guidance.DisclaimerText" xml:space="preserve">
     <value>[Welsh]Some fields may be blank. This could be because they do not apply to the producer in question.</value>
   </data>
+  <data name="Guidance.PageTitleOld" xml:space="preserve">
+    <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
+  </data>
+  <data name="Guidance.HeadingOld" xml:space="preserve">
+    <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
+  </data>
+  <data name="Guidance.DescriptionOld" xml:space="preserve">
+    <value>Dod o hyd i gynhyrchwyr a gweithredwyr cynlluniau cydymffurfio sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'. Gallwch ddod o hyd i sefydliadau sy'n destun camau gorfodi hefyd</value>
+  </data>
+  <data name="Guidance.ProducersRegisteredForRpdOld" xml:space="preserve">
+    <value>Cynhyrchwyr sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
+  </data>
 </root>
