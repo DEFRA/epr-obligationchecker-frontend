@@ -146,7 +146,8 @@
         private static EnforcementActionFileViewModel? GetEnforcementActionFileViewModel(IEnumerable<EnforcementActionFileViewModel> files, string agency)
         {
             var file = files.FirstOrDefault(x => x.FileName.Contains($"_{agency}"));
-            if (file != null)
+
+            if (file is not null)
             {
                 file.FileDownloadUrl = $"/public-register/enforce?&agency={agency}";
             }

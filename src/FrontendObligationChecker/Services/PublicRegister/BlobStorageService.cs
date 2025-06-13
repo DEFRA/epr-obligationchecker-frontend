@@ -22,7 +22,7 @@ public class BlobStorageService(
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
 
-    public async Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName)
+    public async Task<PublicRegisterBlobModel> GetLatestFilePropertiesAsync(string containerName)
     {
         var result = new PublicRegisterBlobModel
         {

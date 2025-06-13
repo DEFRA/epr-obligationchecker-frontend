@@ -152,7 +152,13 @@
             model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
             model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
-            model.ComplianceSchemeRegisteredFile.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile.Should().BeOfType<PublicRegisterFileViewModel>();
+            model.ComplianceSchemeRegisteredFile.FileName.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileType.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().BeNull();
 
             model.EnforcementActionFiles.Should().NotBeNullOrEmpty();
             model.EnforcementActionFiles!.Should().HaveCount(3);
@@ -217,7 +223,7 @@
             model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
             model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
-            model.EnforcementActionFiles.Should().BeNull();
+            model.EnforcementActionFiles.Should().BeEmpty();
 
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
 
@@ -352,9 +358,15 @@
             model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
             model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
-            model.ComplianceSchemeRegisteredFile.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile.Should().BeOfType<PublicRegisterFileViewModel>();
+            model.ComplianceSchemeRegisteredFile.FileName.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileType.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().BeNull();
 
-            model.EnforcementActionFiles.Should().BeNull();
+            model.EnforcementActionFiles.Should().BeEmpty();
 
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
 

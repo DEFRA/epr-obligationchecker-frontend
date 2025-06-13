@@ -3,7 +3,7 @@
 @model GuidanceViewModel
 
 @{
-    ViewData["Title"] = (Model.ComplianceSchemeRegisteredFile is null) ? @Localizer["Guidance.PageTitle"] : @Localizer["Guidance.PageTitleOld"];
+    ViewData["Title"] = (Model.ComplianceSchemeRegisteredFile.FileName is null) ? @Localizer["Guidance.PageTitle"] : @Localizer["Guidance.PageTitleOld"];
 }
 
 <div class="govuk-width-container">
@@ -11,7 +11,7 @@
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
                 <span class="govuk-caption-xl">@Localizer["Guidance.Caption"]</span>
-                @if (Model.ComplianceSchemeRegisteredFile is null)
+                @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                 {
                     <h1 id="public-register-heading" class="govuk-heading-l"> @Localizer["Guidance.Heading"]</h1>
                 }
@@ -19,7 +19,7 @@
                 {
                     <h1 id="public-register-heading" class="govuk-heading-l"> @Localizer["Guidance.HeadingOld"]</h1>
                 }
-                @if (Model.ComplianceSchemeRegisteredFile is null)
+                @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                 {
                     <p id="public-register-description" class="govuk-body-l">
                         @Localizer["Guidance.Description"]
@@ -62,9 +62,9 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-							@if (string.IsNullOrEmpty(Model.ProducerRegisteredFile.FileName))
+							@if (string.IsNullOrWhiteSpace(Model.ProducerRegisteredFile.FileName))
                             {
-                                @if (Model.ComplianceSchemeRegisteredFile is null)
+                                @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                                 {
                                     <p>@Localizer["Guidance.ProducersRegisteredForRpd"]</p>
                                 }
@@ -75,7 +75,7 @@
 
 							} else {
 
-                                @if (Model.ComplianceSchemeRegisteredFile is null)
+                                @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                                 {
                                     <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
                                        target="_self"
@@ -117,13 +117,13 @@
                     </div>
                 </section>
 
-                @if (Model.ComplianceSchemeRegisteredFile is null && Model.EnforcementActionFiles is null)
+                @if (Model.ComplianceSchemeRegisteredFile.FileName is null && !Model.EnforcementActionFiles.Any())
                 {
                     <h3 id="disclaimer-heading" class="govuk-heading-m">@Localizer["Guidance.DisclaimerHeading"]</h3>
                     <p id="disclaimer-text" class="govuk-hint"> @Localizer["Guidance.DisclaimerText"]</p>
                 }
 
-                @if (Model.ComplianceSchemeRegisteredFile is not null)
+                @if (Model.ComplianceSchemeRegisteredFile.FileName is not null)
                 {
                     <section data-module="ga4-link-tracker" class="gem-c-attachment govuk-!-margin-bottom-9" data-ga4-link-tracker-module-started="true">
                         <div class="gem-c-attachment__thumbnail govuk-!-display-none-print">
@@ -199,7 +199,7 @@
 
                                         @* If the files are not available for download then show only the read only text *@
 
-                                        @if (Model.EnglishEnforcementActionFile != null)
+                                        @if (Model.EnglishEnforcementActionFile is not null)
                                         {
                                             <li>
                                                 <a class="govuk-link" href="@Model.EnglishEnforcementActionFile.FileDownloadUrl">@Localizer["Guidance.EnvironmentAgencyLink"]</a>
@@ -213,7 +213,7 @@
                                         }
 
 
-                                        @if (Model.WelshEnforcementActionFile != null)
+                                        @if (Model.WelshEnforcementActionFile is not null)
                                         {
                                             <li>
                                                 <a class="govuk-link" href="@Model.WelshEnforcementActionFile.FileDownloadUrl">@Localizer["Guidance.NaturalResourcesWalesLink"]</a>
@@ -230,7 +230,7 @@
                                             <a class="govuk-link" href="@Model.ScottishEnforcementActionFileUrl" target="_blank" rel="noreferrer">@Localizer["Guidance.ScottishEnvironmentProtectionAgencyLink"]</a>
                                         </li>
 
-                                        @if (Model.NortherIrishEnforcementActionFile != null)
+                                        @if (Model.NortherIrishEnforcementActionFile is not null)
                                         {
                                             <li>
                                                 <a class="govuk-link" href="@Model.NortherIrishEnforcementActionFile.FileDownloadUrl">@Localizer["Guidance.NorthernIrelandEnvironmentAgencyLink"]</a>

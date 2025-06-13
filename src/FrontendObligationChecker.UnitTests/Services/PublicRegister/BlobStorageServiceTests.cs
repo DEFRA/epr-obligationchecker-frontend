@@ -55,13 +55,28 @@
         [TestMethod]
         [DataRow("ProducerContainer")]
         [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestFilePropertiesAsync_ReturnsNull_WhenContainerClientIsNull(string containerName)
+        public async Task GetLatestFilePropertiesAsync_DoesNotReturnNull(string containerName)
         {
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()))
                 .Returns((BlobContainerClient)null);
 
             var result = await _service.GetLatestFilePropertiesAsync(containerName);
 
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        [DataRow("ProducerContainer")]
+        [DataRow("ComplianceSchemeContainer")]
+        public async Task GetLatestFilePropertiesAsync_ReturnsOnlyPublicRegisterBlobModelWithPublishedDate_WhenContainerClientIsNull(string containerName)
+        {
+            _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()))
+                .Returns((BlobContainerClient)null);
+
+            var result = await _service.GetLatestFilePropertiesAsync(containerName);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.PublishedDate);
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
             Assert.IsNull(result.FileType);
@@ -70,7 +85,7 @@
         [TestMethod]
         [DataRow("ProducerContainer")]
         [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestFilePropertiesAsync_ReturnsNull_WhenNoBlobsFound(string containerName)
+        public async Task GetLatestFilePropertiesAsync_ReturnsOnlyPublicRegisterBlobModelWithPublishedDate_WhenNoBlobsFound(string containerName)
         {
             var mockBlobContainerClient = new Mock<BlobContainerClient>();
 
@@ -89,6 +104,8 @@
 
             var result = await _service.GetLatestFilePropertiesAsync(containerName);
 
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.PublishedDate);
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
             Assert.IsNull(result.FileType);
