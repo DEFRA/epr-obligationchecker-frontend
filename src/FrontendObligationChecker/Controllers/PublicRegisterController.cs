@@ -42,6 +42,7 @@
             var viewModel = new GuidanceViewModel
             {
                 DefraUrl = _urlOptions.DefraUrl,
+                BusinessAndEnvironmentUrl = _urlOptions.BusinessAndEnvironmentUrl,
                 DefraHelplineEmail = _emailAddressOptions.DefraHelpline,
                 PublishedDate = publishedDate,
                 LastUpdated = lastUpdated,

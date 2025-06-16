@@ -12,6 +12,8 @@
 
         public string DefraUrl { get; set; }
 
+        public string BusinessAndEnvironmentUrl { get; set; }
+
         public string DefraHelplineEmail { get; set; }
 
         public IEnumerable<EnforcementActionFileViewModel> EnforcementActionFiles { get; set; } =[];

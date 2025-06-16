@@ -72,7 +72,8 @@
             _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
             {
                 DefraUrl = "https://www.defraurl.com",
-                PublicRegisterScottishProtectionAgency = "some/url.com"
+                PublicRegisterScottishProtectionAgency = "some/url.com",
+                BusinessAndEnvironmentUrl = "another/url.com"
             });
 
             _emailAddressOptions = Options.Create(new EmailAddressOptions
@@ -144,6 +145,7 @@
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
             model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
 
             model.ProducerRegisteredFile.Should().NotBeNull();
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
@@ -208,6 +210,7 @@
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
             model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
 
             model.ProducerRegisteredFile.Should().NotBeNull();
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
@@ -284,6 +287,7 @@
             var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
@@ -347,6 +351,7 @@
             var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
