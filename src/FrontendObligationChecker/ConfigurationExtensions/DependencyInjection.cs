@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using Azure.Storage.Blobs;
 using FrontendObligationChecker.Services.PublicRegister;
+using FrontendObligationChecker.Services.PublicRegister.Interfaces;
 using FrontendObligationChecker.Services.Session;
 using FrontendObligationChecker.Services.Session.Interfaces;
 using Microsoft.Extensions.Options;
@@ -34,6 +35,7 @@ public static class DependencyInjection
         services.AddScoped<IBlobReader, BlobReader>();
         services.AddScoped<ILargeProducerRegisterService, LargeProducerRegisterService>();
         services.AddScoped<ICacheService, CacheService>();
+        services.AddScoped<IFeatureFlagService, FeatureFlagService>();
         services.AddSingleton(x =>
         {
             var storageAccountOptions = x.GetService<IOptions<StorageAccountOptions>>().Value;

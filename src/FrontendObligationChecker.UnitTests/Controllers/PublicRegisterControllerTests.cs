@@ -9,6 +9,7 @@
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
+    using FrontendObligationChecker.Services.PublicRegister.Interfaces;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -19,8 +20,10 @@
     public class PublicRegisterControllerTests
     {
         private Mock<IBlobStorageService> _blobStorageServiceMock = null!;
+        private Mock<IFeatureFlagService> _mockFeatureFlagService = null!;
         private IOptions<PublicRegisterOptions> _publicRegisterOptions = null!;
         private IOptions<ExternalUrlsOptions> _externalUrlsOptions = null!;
+        private IOptions<EmailAddressOptions> _emailAddressOptions = null!;
         private PublicRegisterController _controller = null!;
         private DateTime _publishedDate;
         private DateTime _lastModified;
@@ -29,6 +32,7 @@
         public void Setup()
         {
             _blobStorageServiceMock = new Mock<IBlobStorageService>();
+            _mockFeatureFlagService = new Mock<IFeatureFlagService>();
 
             _publishedDate = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Utc);
             _lastModified = new DateTime(2025, 4, 15, 0, 0, 0, DateTimeKind.Utc);
@@ -67,17 +71,62 @@
 
             _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
             {
-                DefraUrl = "https://www.defraurl.com"
+                DefraUrl = "https://www.defraurl.com",
+                PublicRegisterScottishProtectionAgency = "some/url.com",
+                BusinessAndEnvironmentUrl = "another/url.com"
             });
 
-            _controller = new PublicRegisterController(_blobStorageServiceMock.Object, _externalUrlsOptions, _publicRegisterOptions);
+            _emailAddressOptions = Options.Create(new EmailAddressOptions
+            {
+                DefraHelpline = "defrahelpline@email.com"
+            });
+
+            _controller = new PublicRegisterController(
+                _blobStorageServiceMock.Object,
+                _externalUrlsOptions,
+                _emailAddressOptions,
+                _publicRegisterOptions,
+                _mockFeatureFlagService.Object);
         }
 
         [TestMethod]
-        [DataRow("producers-container")]
-        [DataRow("schemes-container")]
-        public async Task Get_ReturnsExpectedViewWithCorrectModel(string containerName)
+        public async Task Get_ReturnsExpectedViewWithCorrectModel_WhenComplianceSchemesRegisterDisabled_AndEnforcementActionsSectionEnabled()
         {
+            // Arrange
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsComplianceSchemesRegisterEnabledAsync()).ReturnsAsync(false);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsEnforcementActionsSectionEnabledAsync()).ReturnsAsync(true);
+
+            var expectedEnforcementActionFiles = new List<EnforcementActionFileViewModel>
+            {
+                new ()
+                {
+                    FileName = "Document1_EA.xlsx",
+                    DateCreated = DateTime.Now.AddDays(-10),
+                    ContentFileLength = 1024,
+                    FileContents = new MemoryStream(new byte[1024])
+                },
+                new ()
+                {
+                    FileName = "Document2_NRW.xlsx",
+                    DateCreated = DateTime.Now.AddDays(-5),
+                    ContentFileLength = 2048,
+                    FileContents = new MemoryStream(new byte[2048])
+                },
+                new ()
+                {
+                    FileName = "Document3_NIEA.xlsx",
+                    DateCreated = DateTime.Now,
+                    ContentFileLength = 512,
+                    FileContents = new MemoryStream(new byte[512])
+                }
+            };
+
+            _blobStorageServiceMock.Setup(bsm =>
+                bsm.GetEnforcementActionFiles()).ReturnsAsync(expectedEnforcementActionFiles);
+
             // Act
             var result = await _controller.Get();
 
@@ -95,6 +144,73 @@
 
             model.PublishedDate.Should().Be(expectedDate);
             model.LastUpdated.Should().Be(expectedLastUpdated);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
+
+            model.ProducerRegisteredFile.Should().NotBeNull();
+            model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
+            model.ProducerRegisteredFile.FileSize.Should().Be("115");
+            model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
+            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile.Should().BeOfType<PublicRegisterFileViewModel>();
+            model.ComplianceSchemeRegisteredFile.FileName.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileType.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().BeNull();
+
+            model.EnforcementActionFiles.Should().NotBeNullOrEmpty();
+            model.EnforcementActionFiles!.Should().HaveCount(3);
+
+            model.EnglishEnforcementActionFile.Should().NotBeNull();
+            model.EnglishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.WelshEnforcementActionFile.Should().NotBeNull();
+            model.WelshEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.NortherIrishEnforcementActionFile.Should().NotBeNull();
+            model.NortherIrishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.ScottishEnforcementActionFileUrl.Should().NotBeNull();
+
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync("producers-container"), Times.AtMostOnce());
+            _blobStorageServiceMock.Verify(bsm => bsm.GetEnforcementActionFiles(), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task Get_ReturnsExpectedViewWithCorrectModel_WhenComplianceSchemesRegisterEnabled_AndEnforcementActionsSectionDisabled()
+        {
+            // Arrange
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsComplianceSchemesRegisterEnabledAsync()).ReturnsAsync(true);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsEnforcementActionsSectionEnabledAsync()).ReturnsAsync(false);
+
+            // Act
+            var result = await _controller.Get();
+
+            // Assert
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = result as ViewResult;
+            viewResult!.ViewName.Should().Be("Guidance");
+            viewResult.Model.Should().BeOfType<GuidanceViewModel>();
+
+            var model = (GuidanceViewModel)viewResult.Model!;
+
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+
+            model.PublishedDate.Should().Be(expectedDate);
+            model.LastUpdated.Should().Be(expectedLastUpdated);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
 
             model.ProducerRegisteredFile.Should().NotBeNull();
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
@@ -109,8 +225,158 @@
             model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
             model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
             model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.EnforcementActionFiles.Should().BeEmpty();
+
             model.DefraUrl.Should().NotBeNullOrWhiteSpace();
-            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync(containerName), Times.AtMostOnce());
+
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync("producers-container"), Times.AtMostOnce());
+            _blobStorageServiceMock.Verify(bsm => bsm.GetEnforcementActionFiles(), Times.Never());
+        }
+
+        [TestMethod]
+        public async Task Get_ReturnsExpectedViewWithCorrectModel_WhenComplianceSchemesRegisterEnabled_AndEnforcementActionsSectionEnabled()
+        {
+            // Arrange
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsComplianceSchemesRegisterEnabledAsync()).ReturnsAsync(true);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsEnforcementActionsSectionEnabledAsync()).ReturnsAsync(true);
+
+            var expectedEnforcementActionFiles = new List<EnforcementActionFileViewModel>
+            {
+                new ()
+                {
+                    FileName = "Document1_EA.xlsx",
+                    DateCreated = DateTime.Now.AddDays(-10),
+                    ContentFileLength = 1024,
+                    FileContents = new MemoryStream(new byte[1024])
+                },
+                new ()
+                {
+                    FileName = "Document2_NRW.xlsx",
+                    DateCreated = DateTime.Now.AddDays(-5),
+                    ContentFileLength = 2048,
+                    FileContents = new MemoryStream(new byte[2048])
+                },
+                new ()
+                {
+                    FileName = "Document3_NIEA.xlsx",
+                    DateCreated = DateTime.Now,
+                    ContentFileLength = 512,
+                    FileContents = new MemoryStream(new byte[512])
+                }
+            };
+
+            _blobStorageServiceMock.Setup(bsm =>
+                bsm.GetEnforcementActionFiles()).ReturnsAsync(expectedEnforcementActionFiles);
+
+            // Act
+            var result = await _controller.Get();
+
+            // Assert
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = result as ViewResult;
+            viewResult!.ViewName.Should().Be("Guidance");
+            viewResult.Model.Should().BeOfType<GuidanceViewModel>();
+
+            var model = (GuidanceViewModel)viewResult.Model!;
+
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
+
+            model.PublishedDate.Should().Be(expectedDate);
+            model.LastUpdated.Should().Be(expectedLastUpdated);
+
+            model.ProducerRegisteredFile.Should().NotBeNull();
+            model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
+            model.ProducerRegisteredFile.FileSize.Should().Be("115");
+            model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
+            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile!.FileName.Should().Be("schemes.csv");
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().Be("450");
+            model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.EnforcementActionFiles.Should().NotBeNullOrEmpty();
+            model.EnforcementActionFiles!.Should().HaveCount(3);
+
+            model.EnglishEnforcementActionFile.Should().NotBeNull();
+            model.EnglishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.WelshEnforcementActionFile.Should().NotBeNull();
+            model.WelshEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.NortherIrishEnforcementActionFile.Should().NotBeNull();
+            model.NortherIrishEnforcementActionFile.FileDownloadUrl.Should().NotBeNull();
+
+            model.ScottishEnforcementActionFileUrl.Should().NotBeNull();
+
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync("producers-container"), Times.AtMostOnce());
+            _blobStorageServiceMock.Verify(bsm => bsm.GetEnforcementActionFiles(), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task Get_ReturnsExpectedViewWithCorrectModel_WhenComplianceSchemesRegisterDisabled_AndEnforcementActionsSectionDisabled()
+        {
+            // Arrange
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsComplianceSchemesRegisterEnabledAsync()).ReturnsAsync(false);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsEnforcementActionsSectionEnabledAsync()).ReturnsAsync(false);
+
+            // Act
+            var result = await _controller.Get();
+
+            // Assert
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = result as ViewResult;
+            viewResult!.ViewName.Should().Be("Guidance");
+            viewResult.Model.Should().BeOfType<GuidanceViewModel>();
+
+            var model = (GuidanceViewModel)viewResult.Model!;
+
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
+
+            model.PublishedDate.Should().Be(expectedDate);
+            model.LastUpdated.Should().Be(expectedLastUpdated);
+
+            model.ProducerRegisteredFile.Should().NotBeNull();
+            model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
+            model.ProducerRegisteredFile.FileSize.Should().Be("115");
+            model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
+            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile.Should().BeOfType<PublicRegisterFileViewModel>();
+            model.ComplianceSchemeRegisteredFile.FileName.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileType.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().BeNull();
+
+            model.EnforcementActionFiles.Should().BeEmpty();
+
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync("producers-container"), Times.AtMostOnce());
+            _blobStorageServiceMock.Verify(bsm => bsm.GetEnforcementActionFiles(), Times.Never());
         }
 
         [TestMethod]
@@ -249,6 +515,128 @@
             // Assert
             result.Should().NotBeNull();
             result.ViewName.Should().Be("GuidanceError");
+        }
+
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("")]
+        [DataRow(" ")]
+        public async Task File_ShouldRedirectToFileNotDownloaded_WhenAgencyIsNullOrEmptyOrWhitespace(string enforcementAgency)
+        {
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.Never());
+        }
+
+        [TestMethod]
+        public async Task File_ShouldRedirectToFileNotDownloaded_WhenLatestFileIsNull()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ReturnsAsync(default(EnforcementActionFileViewModel));
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task File_ShouldRedirectToFileNotDownloaded_WhenLatestFileContentIsNull()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+            var latestFile = new EnforcementActionFileViewModel();
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ReturnsAsync(latestFile);
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task File_ShouldReturnFile_WhenForAValidRequest()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+            var expectedFile = new EnforcementActionFileViewModel
+            {
+                FileName = "Document1_EA.xlsx",
+                DateCreated = DateTime.Now.AddDays(-10),
+                ContentFileLength = 1024,
+                FileContents = new MemoryStream(new byte[1024])
+            };
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ReturnsAsync(expectedFile);
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            var fileStreamResult = result as FileStreamResult;
+            fileStreamResult.Should().NotBeNull();
+            fileStreamResult.ContentType.Should().Be("text/csv");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
+        }
+
+        [TestMethod]
+        public async Task File_Should_ShouldRedirectToFileNotDownloaded_ForALargeProducerRegisterServiceException()
+        {
+            // Arrange
+            var enforcementAgency = "EA";
+            var expectedFile = new EnforcementActionFileViewModel
+            {
+                FileName = "Document1_EA.xlsx",
+                DateCreated = DateTime.Now.AddDays(-10),
+                ContentFileLength = 1024,
+                FileContents = new MemoryStream(new byte[1024])
+            };
+
+            _blobStorageServiceMock.Setup(mock =>
+                mock.GetEnforcementActionFileByAgency(enforcementAgency)).ThrowsAsync(new LargeProducerRegisterServiceException());
+
+            // Act
+            var result = await _controller.File(enforcementAgency);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<RedirectToActionResult>();
+            var redirectToActionResult = result as RedirectToActionResult;
+            redirectToActionResult.ActionName.Should().Be("FileNotDownloaded");
+
+            _blobStorageServiceMock.Verify(m =>
+                m.GetEnforcementActionFileByAgency(It.IsAny<string>()), Times.AtMostOnce());
         }
     }
 }

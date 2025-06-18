@@ -5,7 +5,7 @@ using FrontendObligationChecker.ViewModels.PublicRegister;
 
 public interface IBlobStorageService
 {
-    Task<PublicRegisterBlobModel?> GetLatestFilePropertiesAsync(string containerName);
+    Task<PublicRegisterBlobModel> GetLatestFilePropertiesAsync(string containerName);
 
     Task<EnforcementActionFileViewModel> GetEnforcementActionFileByAgency(string agency);
 
