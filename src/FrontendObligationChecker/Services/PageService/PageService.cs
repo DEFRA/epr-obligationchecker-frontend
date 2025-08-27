@@ -107,7 +107,7 @@ public class PageService : IPageService
             eprGuidanceUrl = new Uri(_externalUrls.EprGuidance).OriginalString;
         }
 
-        _pages ??= PageGenerator.Create(eprGuidanceUrl);
+        _pages ??= PageGenerator.Create();
     }
 
     private async Task SetAnswersAsync(Page page)
