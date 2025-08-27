@@ -100,13 +100,6 @@ public class PageService : IPageService
 
     private async Task InitialiseAsync()
     {
-        string eprGuidanceUrl = string.Empty;
-
-        if (!string.IsNullOrEmpty(_externalUrls?.EprGuidance))
-        {
-            eprGuidanceUrl = new Uri(_externalUrls.EprGuidance).OriginalString;
-        }
-
         _pages ??= PageGenerator.Create();
     }
 
@@ -329,7 +322,7 @@ public class PageService : IPageService
             .Where(x => producerActivityPagePaths.Contains(x.Path))
             .Select(x => x.FirstQuestion.SelectedOption).ToList();
 
-        if (producerActivities.All(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes && supplyFilledPackagingQuestion.Answer == YesNo.Yes)
+        if (producerActivities.TrueForAll(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes && supplyFilledPackagingQuestion.Answer == YesNo.Yes)
         {
             companyModel.SellerType = SellerType.SellerOnly;
         }

@@ -173,17 +173,6 @@
     </Target>
 
     <ItemGroup>
-        <!-- Suppress csharpsquid:S108 for .cshtml files -->
-        <SonarQubeSetting Include="sonar.issue.ignore.multicriteria">
-            <Value>e1</Value>
-        </SonarQubeSetting>
-        <SonarQubeSetting Include="sonar.issue.ignore.multicriteria.e1.ruleKey">
-            <Value>csharpsquid:S108</Value>
-        </SonarQubeSetting>
-        <SonarQubeSetting Include="sonar.issue.ignore.multicriteria.e1.resourceKey">
-            <Value>Views/ObligationChecker/SingleQuestion.cshtml</Value>
-        </SonarQubeSetting>
-
         <SonarQubeSetting Include="sonar.coverage.exclusions">
             <Value>Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**,Views/Shared/Components/LanguageSwitcher/Default.cshtml</Value>
         </SonarQubeSetting>

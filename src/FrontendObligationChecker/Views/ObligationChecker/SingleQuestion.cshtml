@@ -17,6 +17,7 @@
 
                 @if (!Model.Page.IsPageHeading)
                 {
+					#pragma warning disable S2094
                     @if (Model.Page.HasTitleCaption)
                     {
                         @*
@@ -26,6 +27,7 @@
 
                         @* <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span> *@
                     }
+                    #pragma warning restore S2094
                     <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
                 }
 
