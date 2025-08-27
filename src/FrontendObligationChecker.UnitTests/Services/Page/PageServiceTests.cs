@@ -145,7 +145,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
 
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult<SessionJourney>(null));
 
@@ -161,7 +161,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "parent" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
@@ -177,7 +177,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "2" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
@@ -193,7 +193,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "-" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
@@ -209,7 +209,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "parent" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
