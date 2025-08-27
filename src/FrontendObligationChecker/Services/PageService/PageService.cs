@@ -1,25 +1,20 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using FrontendObligationChecker.Generators;
-using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
 using FrontendObligationChecker.Services.PageService.Interfaces;
 using FrontendObligationChecker.Services.Session.Interfaces;
-using Microsoft.Extensions.Options;
-
 using YesNo = FrontendObligationChecker.Models.ObligationChecker.YesNo;
 
 namespace FrontendObligationChecker.Services.PageService;
 public class PageService : IPageService
 {
     private readonly IJourneySession _journeySession;
-    private readonly ExternalUrlsOptions _externalUrls;
     private IEnumerable<Page>? _pages;
 
-    public PageService(IJourneySession journeySession, IOptions<ExternalUrlsOptions> externalUrls)
+    public PageService(IJourneySession journeySession)
     {
         _journeySession = journeySession;
-        _externalUrls = externalUrls.Value;
     }
 
     public async Task<Page?> GetPageAsync(string path)

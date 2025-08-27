@@ -1,14 +1,12 @@
 ﻿using FluentAssertions;
 
 using FrontendObligationChecker.Generators;
-using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
 using FrontendObligationChecker.Services.Session.Interfaces;
 using FrontendObligationChecker.UnitTests.Helpers;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
 using Moq;
@@ -19,15 +17,13 @@ public class PageServiceTests
 {
     private FrontendObligationChecker.Services.PageService.PageService _systemUnderTest;
     private Mock<IJourneySession> _journeySessionMock;
-    private Mock<IOptions<ExternalUrlsOptions>> _externalUrls;
 
     [TestInitialize]
     public void TestInitialize()
     {
         _journeySessionMock = new Mock<IJourneySession>();
-        _externalUrls = new Mock<IOptions<ExternalUrlsOptions>>();
 
-        _systemUnderTest = new FrontendObligationChecker.Services.PageService.PageService(_journeySessionMock.Object, _externalUrls.Object);
+        _systemUnderTest = new FrontendObligationChecker.Services.PageService.PageService(_journeySessionMock.Object);
     }
 
     [TestMethod]
