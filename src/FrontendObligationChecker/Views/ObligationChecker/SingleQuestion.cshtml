@@ -17,20 +17,18 @@
 
                 @if (!Model.Page.IsPageHeading)
                 {
-#pragma warning disable S108
-                    @if (Model.Page.HasTitleCaption)
+                    @if (!Model.Page.HasTitleCaption)
                     {
-
-                        @*
-                            There's a request from Defra not to show Title Caption at this time. However this also appears in the report summary
-                            page where it's needed hence why it's commented out and not removed completely
-                        *@
-
-                        @* <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span> *@
+                        <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
                     }
-#pragma warning restore S108
 
-                    <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
+                    @*
+						There's a request from Defra not to show Title Caption at this time. However this also appears in the report summary
+                        page where it's needed hence why it's commented out and not removed completely
+					*@
+
+                    @* <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span> *@
+                    
                 }
 
                 @if (Model.Page.GetAlternateTitles().Any() || !string.IsNullOrEmpty(Model.Page.GetAlternateTitleFirstParagraph()))
