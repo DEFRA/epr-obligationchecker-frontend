@@ -17,17 +17,18 @@
 
                 @if (!Model.Page.IsPageHeading)
                 {
-					#pragma warning disable S2094
                     @if (Model.Page.HasTitleCaption)
                     {
+#pragma warning disable S2094
+
                         @*
                             There's a request from Defra not to show Title Caption at this time. However this also appears in the report summary
                             page where it's needed hence why it's commented out and not removed completely
                         *@
 
                         @* <span class="govuk-caption-l">@SharedLocalizer[Model.Page.TitleCaption]</span> *@
+#pragma warning restore S2094
                     }
-                    #pragma warning restore S2094
                     <h1 class="govuk-heading-l govuk-!-margin-bottom-5">@Localizer[Model.Page.Title]</h1>
                 }
 
