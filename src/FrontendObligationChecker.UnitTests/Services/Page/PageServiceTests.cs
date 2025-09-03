@@ -1,14 +1,12 @@
 ﻿using FluentAssertions;
 
 using FrontendObligationChecker.Generators;
-using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
 using FrontendObligationChecker.Services.Session.Interfaces;
 using FrontendObligationChecker.UnitTests.Helpers;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
 using Moq;
@@ -19,15 +17,13 @@ public class PageServiceTests
 {
     private FrontendObligationChecker.Services.PageService.PageService _systemUnderTest;
     private Mock<IJourneySession> _journeySessionMock;
-    private Mock<IOptions<ExternalUrlsOptions>> _externalUrls;
 
     [TestInitialize]
     public void TestInitialize()
     {
         _journeySessionMock = new Mock<IJourneySession>();
-        _externalUrls = new Mock<IOptions<ExternalUrlsOptions>>();
 
-        _systemUnderTest = new FrontendObligationChecker.Services.PageService.PageService(_journeySessionMock.Object, _externalUrls.Object);
+        _systemUnderTest = new FrontendObligationChecker.Services.PageService.PageService(_journeySessionMock.Object);
     }
 
     [TestMethod]
@@ -113,6 +109,20 @@ public class PageServiceTests
     }
 
     [TestMethod]
+    public async Task GetPageSetAnswersAndGetPage_ReturnsNull()
+    {
+        // Arrange
+        const string path = PagePath.AnnualTurnover;
+        _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(new SessionJourney()));
+
+        // Act
+        var act = await _systemUnderTest.SetAnswersAndGetPageAsync("blah", FormCollection.Empty);
+
+        // Assert
+        act.Should().BeNull();
+    }
+
+    [TestMethod]
     public async Task GetPageSetAnswersAndGetPage_DoesNotReturnNull_WhenSessionIsNullAndPagePathIsOrganisationType()
     {
         // Arrange
@@ -145,7 +155,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
 
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult<SessionJourney>(null));
 
@@ -161,7 +171,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "parent" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
@@ -177,7 +187,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "2" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
@@ -193,7 +203,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "-" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 
@@ -209,7 +219,7 @@ public class PageServiceTests
     {
         // Arrange
         const string path = PagePath.TypeOfOrganisation;
-        var pages = PageGenerator.Create(string.Empty);
+        var pages = PageGenerator.Create();
         var formCollection = new FormCollection(new Dictionary<string, StringValues> { { QuestionKey.TypeOfOrganisation, "parent" } });
         _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(SessionHelper.GetSessionJourney()));
 

@@ -11,7 +11,7 @@ public class UnObligatedParentCompanyTests : TestBase
     [TestInitialize]
     public void Setup()
     {
-        _pages = PageGenerator.Create(string.Empty);
+        _pages = PageGenerator.Create();
     }
 
     private static FormUrlEncodedContent GetFormData(Page page, string path)

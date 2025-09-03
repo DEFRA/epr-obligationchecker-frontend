@@ -4,7 +4,7 @@ using Models.ObligationChecker;
 
 public static class PageGenerator
 {
-    public static IEnumerable<Page> Create(string eprGuidanceUrl)
+    public static IEnumerable<Page> Create()
     {
         return new List<Page>
         {
@@ -22,7 +22,7 @@ public static class PageGenerator
             MaterialsForDrinksContainersPage(),
             ContainerVolumePage(),
             NoActionNeededPage(),
-            WhatYouNeedToDoPage(eprGuidanceUrl)
+            WhatYouNeedToDoPage()
         };
     }
 
@@ -316,7 +316,7 @@ public static class PageGenerator
         };
     }
 
-    private static Page WhatYouNeedToDoPage(string guidanceUrl)
+    private static Page WhatYouNeedToDoPage()
     {
         return new Page()
         {
@@ -330,7 +330,7 @@ public static class PageGenerator
                     OptionPath.Secondary, "WhatYouNeedToDo.Title"
                 }
             },
-            Contents = GetWhatYouNeedToDoContents(guidanceUrl),
+            Contents = GetWhatYouNeedToDoContents(),
             Path = PagePath.WhatYouNeedToDo,
             PageType = PageType.WhatYouNeedToDo,
             IsBackButtonHidden = true
@@ -692,7 +692,7 @@ public static class PageGenerator
         return contents;
     }
 
-    private static Dictionary<string, Content> GetWhatYouNeedToDoContents(string guidanceUrl)
+    private static Dictionary<string, Content> GetWhatYouNeedToDoContents()
     {
         return new Dictionary<string, Content>()
         {
