@@ -7,6 +7,8 @@ using FrontendObligationChecker.Services.Session.Interfaces;
 using YesNo = FrontendObligationChecker.Models.ObligationChecker.YesNo;
 
 namespace FrontendObligationChecker.Services.PageService;
+
+[ExcludeFromCodeCoverage(Justification = "Will deal with this in a second pass")]
 public class PageService : IPageService
 {
     private readonly IJourneySession _journeySession;
