@@ -109,6 +109,20 @@ public class PageServiceTests
     }
 
     [TestMethod]
+    public async Task GetPageSetAnswersAndGetPage_ReturnsNull()
+    {
+        // Arrange
+        const string path = PagePath.AnnualTurnover;
+        _journeySessionMock.Setup(x => x.GetAsync()).Returns(Task.FromResult(new SessionJourney()));
+
+        // Act
+        var act = await _systemUnderTest.SetAnswersAndGetPageAsync("blah", FormCollection.Empty);
+
+        // Assert
+        act.Should().BeNull();
+    }
+
+    [TestMethod]
     public async Task GetPageSetAnswersAndGetPage_DoesNotReturnNull_WhenSessionIsNullAndPagePathIsOrganisationType()
     {
         // Arrange

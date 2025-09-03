@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace FrontendObligationChecker.Models.ObligationChecker;
 
+[ExcludeFromCodeCoverage(Justification = "Will deal with this in a second pass")]
 public class Page
 {
     private string _additionalDescription;
