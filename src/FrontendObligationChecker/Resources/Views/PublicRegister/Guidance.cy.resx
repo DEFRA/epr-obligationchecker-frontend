@@ -142,7 +142,7 @@
     <value>Adran yr Amgylchedd, Bwyd a Materion Gwledig</value>
   </data>
   <data name="Guidance.Description" xml:space="preserve">
-    <value>[Welsh]Find a list of producers that are registered on the ‘report packaging data’ service under the Producer Responsibility Obligations (Packaging and Packaging Waste) Regulations 2024 for 2025</value>
+    <value>Dod o hyd i restr o gynhyrchwyr sydd wedi'u cofrestru ar y gwasanaeth 'rhoi gwybod am ddata pecynwaith' o dan Reoliadau Rhwymedigaethau Cyfrifoldeb Cynhyrchwyr (Pecynwaith a Gwastraff Pecynwaith) 2024 ar gyfer 2025</value>
   </data>
   <data name="Guidance.Documents" xml:space="preserve">
     <value>Dogfennau</value>
@@ -163,7 +163,7 @@
     <value>Oddi wrth:</value>
   </data>
   <data name="Guidance.Heading" xml:space="preserve">
-    <value>[Welsh]Packaging public registers</value>
+    <value>Cofrestrau cyhoeddus pecynwaith</value>
   </data>
   <data name="Guidance.LastUpdated" xml:space="preserve">
     <value>Y diweddariad diwethaf:</value>
@@ -175,10 +175,10 @@
     <value>Asiantaeth Amgylchedd Gogledd Iwerddon</value>
   </data>
   <data name="Guidance.PageTitle" xml:space="preserve">
-    <value>[Welsh]Packaging public registers</value>
+    <value>Cofrestrau cyhoeddus pecynwaith</value>
   </data>
   <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>[Welsh]2025 Public register of producers</value>
+    <value>Cofrestr gyhoeddus o gynhyrchwyr 2025</value>
   </data>
   <data name="Guidance.Published" xml:space="preserve">
     <value>Wedi'i gyhoeddi:</value>
@@ -210,10 +210,10 @@ Gwneud cais am fformat hygyrch.</value>
     <value>(ddim ar gael eto)</value>
   </data>
   <data name="Guidance.DisclaimerHeading" xml:space="preserve">
-    <value>[Welsh]Disclaimer</value>
+    <value>Ymwadiad</value>
   </data>
   <data name="Guidance.DisclaimerText" xml:space="preserve">
-    <value>[Welsh]Some fields may be blank. This could be because they do not apply to the producer in question.</value>
+    <value>Gallai rhai meysydd fod yn wag, efallai am nad ydyn nhw'n gymwys i'r cynhyrchydd dan sylw.</value>
   </data>
   <data name="Guidance.PageTitleOld" xml:space="preserve">
     <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
