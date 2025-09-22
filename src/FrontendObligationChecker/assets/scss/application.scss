@@ -1,5 +1,7 @@
 $govuk-assets-path: '/';
-@import 'node_modules/govuk-frontend/govuk/all';
+$govuk-fonts-path: '/fonts/';
+
+@import 'index';
 
 // Components
 @import './components/language_toggle';
