@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PhaseBanner.Alpha" xml:space="preserve">
-    <value>alpha</value>
+    <value>Alpha</value>
   </data>
   <data name="PhaseBanner.Beta" xml:space="preserve">
-    <value />
+    <value>Beta</value>
   </data>
   <data name="PhaseBanner.Live" xml:space="preserve">
-    <value />
+    <value>Byw</value>
   </data>
   <data name="PhaseBanner.Feedback" xml:space="preserve">
     <value>adborth</value>
