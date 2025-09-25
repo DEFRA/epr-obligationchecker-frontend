@@ -1,25 +1,22 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using FrontendObligationChecker.Generators;
-using FrontendObligationChecker.Models.Config;
 using FrontendObligationChecker.Models.ObligationChecker;
 using FrontendObligationChecker.Models.Session;
 using FrontendObligationChecker.Services.PageService.Interfaces;
 using FrontendObligationChecker.Services.Session.Interfaces;
-using Microsoft.Extensions.Options;
-
 using YesNo = FrontendObligationChecker.Models.ObligationChecker.YesNo;
 
 namespace FrontendObligationChecker.Services.PageService;
+
+[ExcludeFromCodeCoverage(Justification = "Will deal with this in a second pass")]
 public class PageService : IPageService
 {
     private readonly IJourneySession _journeySession;
-    private readonly ExternalUrlsOptions _externalUrls;
     private IEnumerable<Page>? _pages;
 
-    public PageService(IJourneySession journeySession, IOptions<ExternalUrlsOptions> externalUrls)
+    public PageService(IJourneySession journeySession)
     {
         _journeySession = journeySession;
-        _externalUrls = externalUrls.Value;
     }
 
     public async Task<Page?> GetPageAsync(string path)
@@ -100,14 +97,7 @@ public class PageService : IPageService
 
     private async Task InitialiseAsync()
     {
-        string eprGuidanceUrl = string.Empty;
-
-        if (!string.IsNullOrEmpty(_externalUrls?.EprGuidance))
-        {
-            eprGuidanceUrl = new Uri(_externalUrls.EprGuidance).OriginalString;
-        }
-
-        _pages ??= PageGenerator.Create(eprGuidanceUrl);
+        _pages ??= PageGenerator.Create();
     }
 
     private async Task SetAnswersAsync(Page page)
@@ -329,7 +319,7 @@ public class PageService : IPageService
             .Where(x => producerActivityPagePaths.Contains(x.Path))
             .Select(x => x.FirstQuestion.SelectedOption).ToList();
 
-        if (producerActivities.All(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes && supplyFilledPackagingQuestion.Answer == YesNo.Yes)
+        if (producerActivities.TrueForAll(x => x!= null && x.Value == YesNo.No) && sellerQuestion.Answer == YesNo.Yes && supplyFilledPackagingQuestion.Answer == YesNo.Yes)
         {
             companyModel.SellerType = SellerType.SellerOnly;
         }

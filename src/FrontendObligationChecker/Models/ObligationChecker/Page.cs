@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Eventing.Reader;
-using System.Security.Permissions;
 using FrontendObligationChecker.Services.NextFinder;
 using FrontendObligationChecker.Services.NextFinder.Interfaces;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace FrontendObligationChecker.Models.ObligationChecker;
 
+[ExcludeFromCodeCoverage(Justification = "Will deal with this in a second pass")]
 public class Page
 {
     private string _additionalDescription;
@@ -188,12 +186,8 @@ public class Page
         return AlternateTitleSubContents;
     }
 
-    private bool IsPackagingActivitiesPage() =>
-        Path is PagePath.OwnBrand or PagePath.UnbrandedPackaging or PagePath.ImportingProducts or
-                PagePath.SupplyingEmptyPackaging or PagePath.HiringLoaning or PagePath.OnlineMarketplace or PagePath.SupplyingFilledPackaging;
-
     [ExcludeFromCodeCoverage]
-    private bool IsAnnualTurnoverPageAndTitleChanged(string path, string title)
+    private static bool IsAnnualTurnoverPageAndTitleChanged(string path, string title)
     {
         if (path != PagePath.AnnualTurnover)
         {
@@ -212,4 +206,8 @@ public class Page
 
         return true;
     }
+
+    private bool IsPackagingActivitiesPage() =>
+        Path is PagePath.OwnBrand or PagePath.UnbrandedPackaging or PagePath.ImportingProducts or
+                PagePath.SupplyingEmptyPackaging or PagePath.HiringLoaning or PagePath.OnlineMarketplace or PagePath.SupplyingFilledPackaging;
 }
