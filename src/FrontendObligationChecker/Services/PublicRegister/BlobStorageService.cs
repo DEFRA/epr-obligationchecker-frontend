@@ -22,6 +22,47 @@ public class BlobStorageService(
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
 
+    public async Task<Dictionary<string, PublicRegisterBlobModel>> GetLatestFilePropertiesAllFoldersAsync(string containerName)
+    {
+        var result = new Dictionary<string, PublicRegisterBlobModel>();
+
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            if (containerClient is null) return result;
+
+            var folderPrefixes = await GetTopLevelFolderPrefixesAsync(containerClient);
+            foreach (var prefix in folderPrefixes)
+            {
+                var latestBlob = await GetLatestBlobAsync(containerClient, prefix);
+                if (latestBlob is null) return result;
+
+                var blobClient = containerClient.GetBlobClient(latestBlob.Name);
+                var properties = await blobClient.GetPropertiesAsync();
+
+                var model = new PublicRegisterBlobModel
+                {
+                    PublishedDate = publicRegisterOptions.Value.PublishedDate,
+                    Name = latestBlob.Name,
+                    LastModified = properties.Value.LastModified.DateTime,
+                    ContentLength = properties.Value.ContentLength.ToString(),
+                    FileType = GetFileType(latestBlob.Name)
+                };
+
+                result[prefix.TrimEnd('/')] = model;
+
+            }
+
+            return result;
+        }
+        catch (RequestFailedException ex)
+        {
+            logger.LogError(ex, LogMessage, $"{containerName} files");
+        }
+
+        return result;
+    }
+
     public async Task<PublicRegisterBlobModel> GetLatestFilePropertiesAsync(string containerName)
     {
         var result = new PublicRegisterBlobModel
@@ -185,6 +226,22 @@ public class BlobStorageService(
             LogError(ex, "directories");
             throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
         }
+    }
+
+    private async Task<List<string>> GetTopLevelFolderPrefixesAsync(BlobContainerClient containerClient)
+    {
+        var folderPrefixes = new HashSet<string>();
+
+        await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
+        {
+            var prefix = GetFolderPrefix(blobItem.Name);
+            if (!string.IsNullOrWhiteSpace(prefix))
+            {
+                folderPrefixes.Add(prefix);
+            }
+        }
+
+        return folderPrefixes.OrderByDescending(p => p).ToList();
     }
 
     private void LogError(RequestFailedException ex, string fileName)
