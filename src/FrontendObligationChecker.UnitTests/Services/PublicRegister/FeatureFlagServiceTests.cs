@@ -54,5 +54,23 @@
             result.Should().Be(expected);
             _mockFeatureManager.Verify(m => m.IsEnabledAsync(FeatureFlags.EnforcementActionsSectionEnabled), Times.Once);
         }
+
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public async Task IsPublicRegisterNextYearEnabledAsync_ShouldReturnExpectedValue(bool expected)
+        {
+            // Arrange
+            _mockFeatureManager
+                .Setup(m => m.IsEnabledAsync(FeatureFlags.PublicRegisterNextYearEnabled))
+                .ReturnsAsync(expected);
+
+            // Act
+            var result = await _featureFlagService.IsPublicRegisterNextYearEnabledAsync();
+
+            // Assert
+            result.Should().Be(expected);
+            _mockFeatureManager.Verify(m => m.IsEnabledAsync(FeatureFlags.PublicRegisterNextYearEnabled), Times.Once);
+        }
     }
 }

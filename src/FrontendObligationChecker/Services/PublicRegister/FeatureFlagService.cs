@@ -14,5 +14,8 @@
 
         public Task<bool> IsEnforcementActionsSectionEnabledAsync() =>
             _featureManager.IsEnabledAsync(FeatureFlags.EnforcementActionsSectionEnabled);
+
+        public Task<bool> IsPublicRegisterNextYearEnabledAsync() =>
+            _featureManager.IsEnabledAsync(FeatureFlags.PublicRegisterNextYearEnabled);
     }
 }

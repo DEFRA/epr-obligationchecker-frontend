@@ -31,13 +31,20 @@
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled) = await GetFeatureFlagsAsync();
+            var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
 
             var producerBlobModel = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
 
             var publishedDate = FormatDate(producerBlobModel.PublishedDate);
             var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
+
+            if (isPublicRegisterNextYearEnabled)
+            {
+                var startMonthDay = _options.PublicRegisterNextYearStartMonthAndDay;
+                var nextYear = DateTime.UtcNow.Year + 1;
+                var nextStartDate = DateTime.ParseExact($"{nextYear}-{startMonthDay}", "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            }
 
             var viewModel = new GuidanceViewModel
             {
@@ -156,11 +163,12 @@
             return file;
         }
 
-        private async Task<(bool ComplianceEnabled, bool EnforcementEnabled)> GetFeatureFlagsAsync()
+        private async Task<(bool ComplianceEnabled, bool EnforcementEnabled, bool NextYearEnabled)> GetFeatureFlagsAsync()
         {
             var compliance = await _featureFlagService.IsComplianceSchemesRegisterEnabledAsync();
             var enforcement = await _featureFlagService.IsEnforcementActionsSectionEnabledAsync();
-            return (compliance, enforcement);
+            var nextYear = await _featureFlagService.IsPublicRegisterNextYearEnabledAsync();
+            return (compliance, enforcement,nextYear);
         }
     }
 }
