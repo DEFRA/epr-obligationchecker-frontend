@@ -25,7 +25,7 @@
         private Mock<IOptions<PublicRegisterOptions>> _optionsMock;
         private Mock<ILogger<BlobStorageService>> _loggerMock;
         private Mock<ILogger<BlobReader>> _blobReaderloggerMock;
-        private IBlobStorageService _service;
+        private BlobStorageService _service;
         private Mock<BlobReader> _blobReaderMock;
 
         [TestInitialize]
