@@ -10,7 +10,6 @@
     <main class="govuk-main-wrapper govuk-!-padding-top-4" id="main-content" role="main">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
-                <span class="govuk-caption-xl">@Localizer["Guidance.Caption"]</span>
                 @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                 {
                     <h1 id="public-register-heading" class="govuk-heading-l"> @Localizer["Guidance.Heading"]</h1>
@@ -62,7 +61,7 @@
                     </div>
                     <div class="gem-c-attachment__details">
                         <h3 class="gem-c-attachment__title">
-							@if (string.IsNullOrWhiteSpace(Model.ProducerRegisteredFile.FileName))
+                            @if (string.IsNullOrWhiteSpace(Model.ProducerRegisteredFile.FileName))
                             {
                                 @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                                 {
@@ -73,7 +72,9 @@
                                     <p>@Localizer["Guidance.ProducersRegisteredForRpdOld"]</p>
                                 }
 
-							} else {
+                            }
+                            else
+                            {
 
                                 @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                                 {
@@ -87,7 +88,7 @@
                                        target="_self"
                                        href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpdOld"]</a>
                                 }
-							}
+                            }
                         </h3>
 
                         <p class="gem-c-attachment__metadata">
@@ -107,11 +108,12 @@
                                 </span>
                             </summary>
                             <div class="govuk-details__text">
-                                @Localizer["Guidance.AccessibleFormatTextPart1"]
-                                <a href="mailto:@Model.DefraHelplineEmail" target="_blank" rel="noopener" class="govuk-link">
-                                    @Model.DefraHelplineEmail
-                                </a>
-                                @Localizer["Guidance.AccessibleFormatTextPart2"]
+                                <p class="govuk-body">@Localizer["Guidance.AccessibleFormatTextPart1"]<a href="mailto:@Model.DefraHelplineEmail" target="_blank" rel="noopener" class="govuk-link">@Model.DefraHelplineEmail</a></p>
+                                <p class="govuk-body">@Localizer["Guidance.AccessibleFormatTextPart2"]</p>
+                                <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-4">
+                                    <li>@Localizer["Guidance.AccessibleFormatTextPart3"] </li>
+                                    <li>@Localizer["Guidance.AccessibleFormatTextPart4"]</li>
+                                </ul>
                             </div>
                         </details>
                     </div>

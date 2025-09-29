@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Guidance.AccessibleFormatTextPart1" xml:space="preserve">
-    <value>Os ydych chi'n defnyddio technoleg gynorthwyol (megis darllenydd sgrin) a bod arnoch chi angen fersiwn o'r ddogfen yma mewn fformat mwy hygyrch, anfonech neges ebost at</value>
+    <value>[Welsh]Assistive technology users can request this document in an accessible format. Email </value>
   </data>
   <data name="Guidance.AccessibleFormatTextPart2" xml:space="preserve">
-    <value>Dywedwch pa fformat sydd ei angen arnoch. Bydd o gymorth i ni os dywedwch chi pa dechnoleg gynorthwyol rydych chi'n ei defnyddio.</value>
+    <value>[Welsh]Tell us:</value>
+  </data>
+  <data name="Guidance.AccessibleFormatTextPart3" xml:space="preserve">
+    <value>[Welsh]what format you require</value>
+  </data>
+  <data name="Guidance.AccessibleFormatTextPart4" xml:space="preserve">
+    <value>[Welsh]the assistive technology you use:</value>
   </data>
   <data name="Guidance.BusinessAndTheEnvironmentLink" xml:space="preserve">
     <value>Busnes a'r amgylchedd</value>
@@ -142,7 +148,7 @@
     <value>Adran yr Amgylchedd, Bwyd a Materion Gwledig</value>
   </data>
   <data name="Guidance.Description" xml:space="preserve">
-    <value>Dod o hyd i restr o gynhyrchwyr sydd wedi'u cofrestru ar y gwasanaeth 'rhoi gwybod am ddata pecynwaith' o dan Reoliadau Rhwymedigaethau Cyfrifoldeb Cynhyrchwyr (Pecynwaith a Gwastraff Pecynwaith) 2024 ar gyfer 2025</value>
+    <value>[Welsh]Download a list of producers registered on the Report Packaging Data service under Producer Responsibility Obligations (Packaging and Waste Regulations).</value>
   </data>
   <data name="Guidance.Documents" xml:space="preserve">
     <value>Dogfennau</value>
