@@ -299,7 +299,7 @@
                     It.IsAny<CancellationToken>()))
                 .Returns(asyncPageable);
 
-            Dictionary<string,PublicRegisterBlobModel> result =
+            Dictionary<string, PublicRegisterBlobModel> result =
                 await _service.GetLatestFilePropertiesAsync("ProducerContainer", new List<string> { DateTime.UtcNow.Year.ToString() });
 
             Assert.IsNotNull(result);
@@ -352,6 +352,9 @@
 
         private Mock<BlobClient> SetupMockDataForGetLatestFileProperties(string fileType)
         {
+            string currentYear = DateTime.UtcNow.Year.ToString();
+            string nextYear = (DateTime.UtcNow.Year + 1).ToString();
+
             var mockResponse = new Mock<Response<BlobProperties>>();
 
             var mockBlobContainerClient = new Mock<BlobContainerClient>();
@@ -359,8 +362,8 @@
             var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024, contentType: fileType);
             var blobList = new List<BlobItem>
                 {
-                    BlobsModelFactory.BlobItem($"2025/Blob1{fileType}"),
-                    BlobsModelFactory.BlobItem($"2026/Blob2{fileType}"),
+                    BlobsModelFactory.BlobItem($"{currentYear}/Blob1{fileType}"),
+                    BlobsModelFactory.BlobItem($"{nextYear}/Blob2{fileType}"),
                     BlobsModelFactory.BlobItem($"Blob3{fileType}")
                 };
             var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
@@ -375,6 +378,26 @@
             mockResponse.Setup(r => r.Value).Returns(blobProperties);
             blobClientMock.Setup(x => x.GetPropertiesAsync(It.IsAny<BlobRequestConditions>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
             return blobClientMock;
+        }
+
+        [TestMethod]
+        [DataRow("ProducerContainer")]
+        public async Task GetLatestFileAsync_For_Given_Folders_ThrowRequestFailedException_WhenFailsGetBlobs(string containerName)
+        {
+            var mockBlobContainerClient = new Mock<BlobContainerClient>();
+
+            var blobList = new List<BlobItem>();
+
+            var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
+            var asyncPageable = AsyncPageable<BlobItem>.FromPages(new[] { page });
+
+            _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Throws(new RequestFailedException(string.Format("Failed to read {0} from blob storage", "directories")));
+
+            var act = async () => await _service.GetLatestFilePropertiesAsync(containerName, new List<string> { DateTime.UtcNow.Year.ToString() });
+
+            act.Should().ThrowAsync<BlobReaderException>();
+
         }
     }
 }
