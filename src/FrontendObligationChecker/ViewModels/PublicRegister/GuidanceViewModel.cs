@@ -6,7 +6,13 @@
 
         public string LastUpdated { get; set; }
 
+        public string Currentyear { get; set; }
+
+        public string Nextyear { get; set; }
+
         public PublicRegisterFileViewModel ProducerRegisteredFile { get; set; } = new PublicRegisterFileViewModel();
+
+        public PublicRegisterFileViewModel ProducerRegisteredFileNextYear { get; set; } = new PublicRegisterFileViewModel();
 
         public PublicRegisterFileViewModel ComplianceSchemeRegisteredFile { get; set; } = new PublicRegisterFileViewModel();
 

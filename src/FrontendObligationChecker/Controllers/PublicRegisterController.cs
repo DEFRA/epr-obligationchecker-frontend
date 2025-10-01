@@ -33,18 +33,36 @@
         {
             var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
 
-            var producerBlobModel = await _blobStorageService
-                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
-
-            var publishedDate = FormatDate(producerBlobModel.PublishedDate);
-            var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
+            var currentYear = DateTime.UtcNow.Year;
+            var nextYear = currentYear + 1;
+            var folderPrefixes = new List<string> { currentYear.ToString() };
 
             if (isPublicRegisterNextYearEnabled)
             {
                 var startMonthDay = _options.PublicRegisterNextYearStartMonthAndDay;
-                var nextYear = DateTime.UtcNow.Year + 1;
-                var nextStartDate = DateTime.ParseExact($"{nextYear}-{startMonthDay}", "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                var currentYearMonthDay = DateTime.UtcNow.ToString("MM-dd");
+
+                // If today is on or after the configured month and day, the next year folder is added.
+                if (string.Compare(currentYearMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
+                {
+                    folderPrefixes.Add(nextYear.ToString());
+                }
             }
+
+            var producerBlobModels = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes);
+
+            var lastUpdated = producerBlobModels.Values
+                                .Where(x => x.LastModified.HasValue)
+                                .Select(x => x.LastModified.Value)
+                                .DefaultIfEmpty(_options.PublishedDate)
+                                .Max();
+
+            producerBlobModels.TryGetValue(currentYear.ToString(), out var producerBlobModelCurrentYear);
+            producerBlobModels.TryGetValue(nextYear.ToString(), out var producerBlobModelNextYear);
+
+            var publishedDate = FormatDate(publicRegisterOptions.Value.PublishedDate);
+            var lastUpdatedFormatted = FormatDate(lastUpdated);
 
             var viewModel = new GuidanceViewModel
             {
@@ -52,8 +70,11 @@
                 BusinessAndEnvironmentUrl = _urlOptions.BusinessAndEnvironmentUrl,
                 DefraHelplineEmail = _emailAddressOptions.DefraHelpline,
                 PublishedDate = publishedDate,
-                LastUpdated = lastUpdated,
-                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated)
+                Currentyear = currentYear.ToString(),
+                Nextyear = nextYear.ToString(),
+                LastUpdated = lastUpdatedFormatted,
+                ProducerRegisteredFile = producerBlobModelCurrentYear != null ? MapToFileViewModel(producerBlobModelCurrentYear, publishedDate, lastUpdatedFormatted) : null,
+                ProducerRegisteredFileNextYear = producerBlobModelNextYear != null ? MapToFileViewModel(producerBlobModelNextYear, publishedDate, lastUpdatedFormatted) : null
             };
 
             if (isComplianceSchemesRegisterEnabled)
@@ -61,7 +82,7 @@
                 var complianceBlobModel = await _blobStorageService
                     .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
 
-                viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated);
+                viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdatedFormatted);
             }
 
             if (isEnforcementActionsSectionEnabled)

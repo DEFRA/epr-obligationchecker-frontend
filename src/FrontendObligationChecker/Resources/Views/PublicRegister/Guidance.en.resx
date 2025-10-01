@@ -184,15 +184,15 @@
     <value>Packaging public registers</value>
   </data>
     <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>2025 Public register of producers</value>
+    <value>Public register of producers</value>
   </data>
     <data name="Guidance.Published" xml:space="preserve">
     <value>Published:</value>
   </data>
-    <data name="Guidance.Published2" xml:space="preserve">
+  <data name="Guidance.Published2" xml:space="preserve">
     <value>Published</value>
   </data>
-    <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
+  <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
     <value>Request an accessible format.</value>
   </data>
     <data name="Guidance.ScottishEnvironmentProtectionAgencyLink" xml:space="preserve">

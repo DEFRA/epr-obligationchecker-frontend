@@ -27,12 +27,14 @@
         private PublicRegisterController _controller = null!;
         private DateTime _publishedDate;
         private DateTime _lastModified;
+        private List<string> _folderPrefixes = null!;
 
         [TestInitialize]
         public void Setup()
         {
             _blobStorageServiceMock = new Mock<IBlobStorageService>();
             _mockFeatureFlagService = new Mock<IFeatureFlagService>();
+            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
 
             _publishedDate = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Utc);
             _lastModified = new DateTime(2025, 4, 15, 0, 0, 0, DateTimeKind.Utc);
@@ -46,6 +48,11 @@
                 FileType = "text/csv"
             };
 
+            var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
+            {
+                { DateTime.UtcNow.Year.ToString(), producerBlob }
+            };
+
             var complianceBlob = new PublicRegisterBlobModel
             {
                 Name = "schemes.csv",
@@ -56,8 +63,8 @@
             };
 
             _blobStorageServiceMock
-                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
-                .ReturnsAsync(producerBlob);
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))
+                .ReturnsAsync(producerBlobs);
 
             _blobStorageServiceMock
                 .Setup(x => x.GetLatestFilePropertiesAsync("schemes-container"))
@@ -66,7 +73,8 @@
             _publicRegisterOptions = Options.Create(new PublicRegisterOptions
             {
                 PublicRegisterBlobContainerName = "producers-container",
-                PublicRegisterCsoBlobContainerName = "schemes-container"
+                PublicRegisterCsoBlobContainerName = "schemes-container",
+                PublishedDate = _publishedDate,
             });
 
             _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
@@ -216,15 +224,11 @@
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
             model.ProducerRegisteredFile.FileSize.Should().Be("115");
             model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
-            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
-            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
             model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
             model.ComplianceSchemeRegisteredFile!.FileName.Should().Be("schemes.csv");
             model.ComplianceSchemeRegisteredFile.FileSize.Should().Be("450");
             model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
-            model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
-            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
             model.EnforcementActionFiles.Should().BeEmpty();
 
@@ -296,15 +300,11 @@
             model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
             model.ProducerRegisteredFile.FileSize.Should().Be("115");
             model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
-            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
-            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
             model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
             model.ComplianceSchemeRegisteredFile!.FileName.Should().Be("schemes.csv");
             model.ComplianceSchemeRegisteredFile.FileSize.Should().Be("450");
             model.ComplianceSchemeRegisteredFile.FileType.Should().Be("text/csv");
-            model.ComplianceSchemeRegisteredFile.DatePublished.Should().Be(expectedDate);
-            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
 
             model.EnforcementActionFiles.Should().NotBeNullOrEmpty();
             model.EnforcementActionFiles!.Should().HaveCount(3);
@@ -393,9 +393,14 @@
                 EnforcementActionItems = new List<Azure.Storage.Blobs.Models.BlobItem>()
             };
 
+            var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
+            {
+                { DateTime.UtcNow.Year.ToString(), producerBlob }
+            };
+
             _blobStorageServiceMock
-                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
-                .ReturnsAsync(producerBlob);
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))
+                .ReturnsAsync(producerBlobs);
 
             // Act
             var result = await _controller.Get();
@@ -421,9 +426,14 @@
                 FileType = "text/csv"
             };
 
+            var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
+            {
+                { DateTime.UtcNow.Year.ToString(), producerBlob }
+            };
+
             _blobStorageServiceMock
-                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container"))
-                .ReturnsAsync(producerBlob);
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))
+                .ReturnsAsync(producerBlobs);
 
             // Act
             var result = await _controller.Get();

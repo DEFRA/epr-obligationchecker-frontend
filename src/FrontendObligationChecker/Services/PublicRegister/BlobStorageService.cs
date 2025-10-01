@@ -58,6 +58,45 @@ public class BlobStorageService(
         return result;
     }
 
+    public async Task<Dictionary<string, PublicRegisterBlobModel>> GetLatestFilePropertiesAsync(string containerName, List<string> folderPrefixes)
+    {
+        var result = new Dictionary<string, PublicRegisterBlobModel>();
+
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            if (containerClient is null) return result;
+
+            foreach (var folderPrefix in folderPrefixes)
+            {
+                if (string.IsNullOrWhiteSpace(folderPrefix)) continue;
+
+                var latestBlob = await GetLatestBlobAsync(containerClient, folderPrefix);
+                if (latestBlob is null) continue;
+
+                var blobClient = containerClient.GetBlobClient(latestBlob.Name);
+                var properties = await blobClient.GetPropertiesAsync();
+
+                var model = new PublicRegisterBlobModel
+                {
+                    PublishedDate = publicRegisterOptions.Value.PublishedDate,
+                    Name = latestBlob.Name,
+                    LastModified = properties.Value.LastModified.DateTime,
+                    ContentLength = properties.Value.ContentLength.ToString(),
+                    FileType = GetFileType(latestBlob.Name)
+                };
+
+                result[folderPrefix.TrimEnd('/')] = model;
+            }
+        }
+        catch (RequestFailedException ex)
+        {
+            logger.LogError(ex, LogMessage, $"{containerName} files");
+        }
+
+        return result;
+    }
+
     public async Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName)
     {
         try
