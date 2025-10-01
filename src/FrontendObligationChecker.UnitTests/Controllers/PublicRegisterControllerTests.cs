@@ -28,6 +28,8 @@
         private DateTime _publishedDate;
         private DateTime _lastModified;
         private List<string> _folderPrefixes = null!;
+        private PublicRegisterBlobModel producerBlob2025 = null!;
+        private PublicRegisterBlobModel producerBlob2026 = null!;
 
         [TestInitialize]
         public void Setup()
@@ -39,7 +41,7 @@
             _publishedDate = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Utc);
             _lastModified = new DateTime(2025, 4, 15, 0, 0, 0, DateTimeKind.Utc);
 
-            var producerBlob = new PublicRegisterBlobModel
+            producerBlob2025 = new PublicRegisterBlobModel
             {
                 Name = "producers.csv",
                 PublishedDate = _publishedDate,
@@ -48,9 +50,18 @@
                 FileType = "text/csv"
             };
 
+            producerBlob2026 = new PublicRegisterBlobModel
+            {
+                Name = "producers-2026.csv",
+                PublishedDate = _publishedDate,
+                LastModified = _lastModified,
+                ContentLength = "225",
+                FileType = "text/csv"
+            };
+
             var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
             {
-                { DateTime.UtcNow.Year.ToString(), producerBlob }
+                { DateTime.UtcNow.Year.ToString(), producerBlob2025 },
             };
 
             var complianceBlob = new PublicRegisterBlobModel
@@ -380,6 +391,149 @@
         }
 
         [TestMethod]
+        public async Task Get_ReturnsExpectedViewWithCorrectModel_WhenPublicRegisterNextYearDisabled()
+        {
+            // Arrange
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsPublicRegisterNextYearEnabledAsync()).ReturnsAsync(false);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsEnforcementActionsSectionEnabledAsync()).ReturnsAsync(false);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsPublicRegisterNextYearEnabledAsync()).ReturnsAsync(false);
+
+            // Act
+            var result = await _controller.Get();
+
+            // Assert
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = result as ViewResult;
+            viewResult!.ViewName.Should().Be("Guidance");
+            viewResult.Model.Should().BeOfType<GuidanceViewModel>();
+
+            var model = (GuidanceViewModel)viewResult.Model!;
+
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
+
+            model.PublishedDate.Should().Be(expectedDate);
+            model.LastUpdated.Should().Be(expectedLastUpdated);
+
+            model.ProducerRegisteredFileNextYear.Should().BeNull();
+
+            model.ProducerRegisteredFile.Should().NotBeNull();
+            model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
+            model.ProducerRegisteredFile.FileSize.Should().Be("115");
+            model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
+            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile.Should().BeOfType<PublicRegisterFileViewModel>();
+            model.ComplianceSchemeRegisteredFile.FileName.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileType.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().BeNull();
+
+            model.EnforcementActionFiles.Should().BeEmpty();
+
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync("producers-container"), Times.AtMostOnce());
+            _blobStorageServiceMock.Verify(bsm => bsm.GetEnforcementActionFiles(), Times.Never());
+        }
+
+        [TestMethod]
+        public async Task Get_ReturnsExpectedViewWithCorrectModel_WhenPublicRegisterNextYearEnabled()
+        {
+            // Arrange
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsPublicRegisterNextYearEnabledAsync()).ReturnsAsync(false);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsEnforcementActionsSectionEnabledAsync()).ReturnsAsync(false);
+
+            _mockFeatureFlagService.Setup(mock =>
+                mock.IsPublicRegisterNextYearEnabledAsync()).ReturnsAsync(true);
+
+            var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
+            {
+                { DateTime.UtcNow.Year.ToString(), producerBlob2025 },
+                { (DateTime.UtcNow.Year + 1).ToString(), producerBlob2026 }
+            };
+
+            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString(), (DateTime.UtcNow.Year + 1).ToString() };
+
+            _publicRegisterOptions = Options.Create(new PublicRegisterOptions
+            {
+                PublicRegisterBlobContainerName = "producers-container",
+                PublicRegisterCsoBlobContainerName = "schemes-container",
+                PublishedDate = _publishedDate,
+                PublicRegisterNextYearStartMonthAndDay = $"{DateTime.UtcNow.ToString("MM-dd")}"
+            });
+
+            _blobStorageServiceMock
+                .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))
+                .ReturnsAsync(producerBlobs);
+
+            _controller = new PublicRegisterController(
+                            _blobStorageServiceMock.Object,
+                            _externalUrlsOptions,
+                            _emailAddressOptions,
+                            _publicRegisterOptions,
+                            _mockFeatureFlagService.Object);
+
+            // Act
+            var result = await _controller.Get();
+
+            // Assert
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = result as ViewResult;
+            viewResult!.ViewName.Should().Be("Guidance");
+            viewResult.Model.Should().BeOfType<GuidanceViewModel>();
+
+            var model = (GuidanceViewModel)viewResult.Model!;
+
+            var expectedDate = _publishedDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            var expectedLastUpdated = _lastModified.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
+            model.DefraHelplineEmail.Should().NotBeNullOrEmpty();
+            model.BusinessAndEnvironmentUrl.Should().Be("another/url.com");
+
+            model.PublishedDate.Should().Be(expectedDate);
+            model.LastUpdated.Should().Be(expectedLastUpdated);
+
+            model.ProducerRegisteredFileNextYear.Should().NotBeNull();
+
+            model.ProducerRegisteredFile.Should().NotBeNull();
+            model.ProducerRegisteredFile!.FileName.Should().Be("producers.csv");
+            model.ProducerRegisteredFile.FileSize.Should().Be("115");
+            model.ProducerRegisteredFile.FileType.Should().Be("text/csv");
+            model.ProducerRegisteredFile.DatePublished.Should().Be(expectedDate);
+            model.ProducerRegisteredFile.DateLastModified.Should().Be(expectedLastUpdated);
+
+            model.ComplianceSchemeRegisteredFile.Should().NotBeNull();
+            model.ComplianceSchemeRegisteredFile.Should().BeOfType<PublicRegisterFileViewModel>();
+            model.ComplianceSchemeRegisteredFile.FileName.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileSize.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.FileType.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DatePublished.Should().BeNull();
+            model.ComplianceSchemeRegisteredFile.DateLastModified.Should().BeNull();
+
+            model.EnforcementActionFiles.Should().BeEmpty();
+
+            model.DefraUrl.Should().NotBeNullOrWhiteSpace();
+
+            _blobStorageServiceMock.Verify(r => r.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes), Times.Once());
+            _blobStorageServiceMock.Verify(bsm => bsm.GetEnforcementActionFiles(), Times.Never());
+        }
+
+        [TestMethod]
         public async Task Get_SetsLastUpdatedToPublishedDate_WhenLastModifiedIsNull()
         {
             // Arrange
@@ -397,6 +551,8 @@
             {
                 { DateTime.UtcNow.Year.ToString(), producerBlob }
             };
+
+            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
 
             _blobStorageServiceMock
                 .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))
@@ -430,6 +586,8 @@
             {
                 { DateTime.UtcNow.Year.ToString(), producerBlob }
             };
+
+            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
 
             _blobStorageServiceMock
                 .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))

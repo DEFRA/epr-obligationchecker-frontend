@@ -1,6 +1,7 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
     using System.Globalization;
+    using System.Linq;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
     using FrontendObligationChecker.Exceptions;
@@ -52,16 +53,19 @@
             var producerBlobModels = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes);
 
-            var lastUpdated = producerBlobModels.Values
-                                .Where(x => x.LastModified.HasValue)
-                                .Select(x => x.LastModified.Value)
-                                .DefaultIfEmpty(_options.PublishedDate)
-                                .Max();
-
             producerBlobModels.TryGetValue(currentYear.ToString(), out var producerBlobModelCurrentYear);
             producerBlobModels.TryGetValue(nextYear.ToString(), out var producerBlobModelNextYear);
 
             var publishedDate = FormatDate(publicRegisterOptions.Value.PublishedDate);
+
+            DateTime lastUpdated;
+
+            lastUpdated = producerBlobModels.Values
+                                        .Where(x => x?.LastModified.HasValue == true)
+                                        .Select(x => x.LastModified.Value)
+                                        .DefaultIfEmpty(_options.PublishedDate)
+                                        .Max();
+
             var lastUpdatedFormatted = FormatDate(lastUpdated);
 
             var viewModel = new GuidanceViewModel
@@ -189,7 +193,7 @@
             var compliance = await _featureFlagService.IsComplianceSchemesRegisterEnabledAsync();
             var enforcement = await _featureFlagService.IsEnforcementActionsSectionEnabledAsync();
             var nextYear = await _featureFlagService.IsPublicRegisterNextYearEnabledAsync();
-            return (compliance, enforcement,nextYear);
+            return (compliance, enforcement, nextYear);
         }
     }
 }
