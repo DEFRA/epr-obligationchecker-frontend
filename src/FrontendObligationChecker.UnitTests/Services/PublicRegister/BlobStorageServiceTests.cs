@@ -303,7 +303,7 @@
                 await _service.GetLatestFilePropertiesAsync("ProducerContainer", new List<string> { DateTime.UtcNow.Year.ToString() });
 
             Assert.IsNotNull(result);
-            result.Any().Should().BeFalse();
+            result.Count.Should().Be(0);
         }
 
         [TestMethod]
