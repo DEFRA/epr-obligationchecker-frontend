@@ -7,6 +7,8 @@ public interface IBlobStorageService
 {
     Task<PublicRegisterBlobModel> GetLatestFilePropertiesAsync(string containerName);
 
+    Task<Dictionary<string, PublicRegisterBlobModel>> GetLatestFilePropertiesAsync(string containerName, List<string> folderPrefixes);
+
     Task<EnforcementActionFileViewModel> GetEnforcementActionFileByAgency(string agency);
 
     Task<IEnumerable<EnforcementActionFileViewModel>> GetEnforcementActionFiles();

@@ -15,5 +15,5 @@ public static class FeatureFlags
     public const string PublicRegisterEnabled = "PublicRegisterEnabled";
     public const string ComplianceSchemesRegisterEnabled = "ComplianceSchemesRegisterEnabled";
     public const string EnforcementActionsSectionEnabled = "EnforcementActionsSectionEnabled";
-
+    public const string PublicRegisterNextYearEnabled = "PublicRegisterNextYearEnabled";
 }

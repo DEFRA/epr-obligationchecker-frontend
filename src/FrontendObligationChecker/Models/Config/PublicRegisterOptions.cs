@@ -16,4 +16,6 @@ public class PublicRegisterOptions
     public string? EnforcementActionFileName { get; set; }
 
     public DateTime PublishedDate { get; set; }
+
+    public string PublicRegisterNextYearStartMonthAndDay { get; set; }
 }

@@ -5,5 +5,7 @@
         Task<bool> IsComplianceSchemesRegisterEnabledAsync();
 
         Task<bool> IsEnforcementActionsSectionEnabledAsync();
+
+        Task<bool> IsPublicRegisterNextYearEnabledAsync();
     }
 }

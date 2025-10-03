@@ -1,6 +1,7 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
     using System.Globalization;
+    using System.Linq;
     using FrontendObligationChecker.Constants;
     using FrontendObligationChecker.Constants.PublicRegister;
     using FrontendObligationChecker.Exceptions;
@@ -31,13 +32,41 @@
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled) = await GetFeatureFlagsAsync();
+            var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
 
-            var producerBlobModel = await _blobStorageService
-                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName);
+            var currentYear = DateTime.UtcNow.Year;
+            var nextYear = currentYear + 1;
+            var folderPrefixes = new List<string> { currentYear.ToString() };
 
-            var publishedDate = FormatDate(producerBlobModel.PublishedDate);
-            var lastUpdated = FormatDate(producerBlobModel.LastModified) ?? publishedDate;
+            if (isPublicRegisterNextYearEnabled)
+            {
+                var startMonthDay = _options.PublicRegisterNextYearStartMonthAndDay;
+                var currentYearMonthDay = DateTime.UtcNow.ToString("MM-dd");
+
+                // If today is on or after the configured month and day, the next year folder is added.
+                if (string.Compare(currentYearMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
+                {
+                    folderPrefixes.Add(nextYear.ToString());
+                }
+            }
+
+            var producerBlobModels = await _blobStorageService
+                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes);
+
+            producerBlobModels.TryGetValue(currentYear.ToString(), out var producerBlobModelCurrentYear);
+            producerBlobModels.TryGetValue(nextYear.ToString(), out var producerBlobModelNextYear);
+
+            var publishedDate = FormatDate(publicRegisterOptions.Value.PublishedDate);
+
+            DateTime lastUpdated;
+
+            lastUpdated = producerBlobModels.Values
+                                        .Where(x => x?.LastModified.HasValue == true)
+                                        .Select(x => x.LastModified.Value)
+                                        .DefaultIfEmpty(_options.PublishedDate)
+                                        .Max();
+
+            var lastUpdatedFormatted = FormatDate(lastUpdated);
 
             var viewModel = new GuidanceViewModel
             {
@@ -45,8 +74,11 @@
                 BusinessAndEnvironmentUrl = _urlOptions.BusinessAndEnvironmentUrl,
                 DefraHelplineEmail = _emailAddressOptions.DefraHelpline,
                 PublishedDate = publishedDate,
-                LastUpdated = lastUpdated,
-                ProducerRegisteredFile = MapToFileViewModel(producerBlobModel, publishedDate, lastUpdated)
+                Currentyear = currentYear.ToString(),
+                Nextyear = nextYear.ToString(),
+                LastUpdated = lastUpdatedFormatted,
+                ProducerRegisteredFile = producerBlobModelCurrentYear != null ? MapToFileViewModel(producerBlobModelCurrentYear, publishedDate, lastUpdatedFormatted) : null,
+                ProducerRegisteredFileNextYear = producerBlobModelNextYear != null ? MapToFileViewModel(producerBlobModelNextYear, publishedDate, lastUpdatedFormatted) : null
             };
 
             if (isComplianceSchemesRegisterEnabled)
@@ -54,7 +86,7 @@
                 var complianceBlobModel = await _blobStorageService
                     .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
 
-                viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdated);
+                viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdatedFormatted);
             }
 
             if (isEnforcementActionsSectionEnabled)
@@ -156,11 +188,12 @@
             return file;
         }
 
-        private async Task<(bool ComplianceEnabled, bool EnforcementEnabled)> GetFeatureFlagsAsync()
+        private async Task<(bool ComplianceEnabled, bool EnforcementEnabled, bool NextYearEnabled)> GetFeatureFlagsAsync()
         {
             var compliance = await _featureFlagService.IsComplianceSchemesRegisterEnabledAsync();
             var enforcement = await _featureFlagService.IsEnforcementActionsSectionEnabledAsync();
-            return (compliance, enforcement);
+            var nextYear = await _featureFlagService.IsPublicRegisterNextYearEnabledAsync();
+            return (compliance, enforcement, nextYear);
         }
     }
 }
