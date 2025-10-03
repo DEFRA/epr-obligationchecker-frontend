@@ -19,7 +19,7 @@
             _featureFlagService = new FeatureFlagService(_mockFeatureManager.Object);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(true)]
         [DataRow(false)]
         public async Task IsComplianceSchemesRegisterEnabledAsync_ShouldReturnExpectedValue(bool expected)
@@ -37,7 +37,7 @@
             _mockFeatureManager.Verify(m => m.IsEnabledAsync(FeatureFlags.ComplianceSchemesRegisterEnabled), Times.Once);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(true)]
         [DataRow(false)]
         public async Task IsEnforcementActionsSectionEnabledAsync_ShouldReturnExpectedValue(bool expected)
@@ -55,7 +55,7 @@
             _mockFeatureManager.Verify(m => m.IsEnabledAsync(FeatureFlags.EnforcementActionsSectionEnabled), Times.Once);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(true)]
         [DataRow(false)]
         public async Task IsPublicRegisterNextYearEnabledAsync_ShouldReturnExpectedValue(bool expected)
