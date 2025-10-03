@@ -127,7 +127,7 @@
     <value>what format you require</value>
   </data>
     <data name="Guidance.AccessibleFormatTextPart4" xml:space="preserve">
-    <value>the assistive technology you use:</value>
+    <value>the assistive technology you use</value>
   </data>
     <data name="Guidance.BusinessAndTheEnvironmentLink" xml:space="preserve">
     <value>Business and the environment</value>
@@ -193,7 +193,7 @@
     <value>Published</value>
   </data>
   <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
-    <value>Request an accessible format.</value>
+    <value>Request accessible format</value>
   </data>
     <data name="Guidance.ScottishEnvironmentProtectionAgencyLink" xml:space="preserve">
     <value>Scottish Environment Protection Agency</value>
