@@ -140,8 +140,7 @@
         {
             try
             {
-                var containerName = type == _options.PublicRegisterBlobContainerName ? _options.PublicRegisterBlobContainerName : _options.PublicRegisterCsoBlobContainerName;
-                var fileModel = await _blobStorageService.GetLatestFileAsync(containerName);
+                var fileModel = await _blobStorageService.GetLatestFileAsync(type, fileName);
                 if (string.IsNullOrEmpty(fileModel.FileName))
                 {
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
