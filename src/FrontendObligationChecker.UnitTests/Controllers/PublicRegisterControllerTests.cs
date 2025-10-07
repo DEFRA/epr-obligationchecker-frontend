@@ -624,7 +624,7 @@
             var faileModel = new PublicRegisterFileModel { FileName = filename, FileContent = new MemoryStream() };
 
             _blobStorageServiceMock
-                 .Setup(x => x.GetLatestFileAsync("producers-container"))
+                 .Setup(x => x.GetLatestFileAsync("producers-container",filename))
                  .ReturnsAsync(faileModel);
             // Act
             var result = await _controller.File(filename, fileType) as FileStreamResult;
@@ -644,7 +644,7 @@
             var faileModel = new PublicRegisterFileModel();
 
             _blobStorageServiceMock
-                .Setup(x => x.GetLatestFileAsync("producers-container"))
+                .Setup(x => x.GetLatestFileAsync("producers-container", filename))
                 .ReturnsAsync(faileModel);
 
             // Act
@@ -663,7 +663,7 @@
             var fileType = "public";
 
             _blobStorageServiceMock
-                .Setup(s => s.GetLatestFileAsync(It.IsAny<string>()))
+                .Setup(s => s.GetLatestFileAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .ThrowsAsync(new PublicRegisterServiceException("fail"));
 
             // Act

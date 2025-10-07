@@ -195,9 +195,9 @@
         }
 
         [TestMethod]
-        [DataRow("ProducerContainer")]
-        [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestFileAsync_ThrowRequestFailedException_WhenFailsGetBlobs(string containerName)
+        [DataRow("ProducerContainer", "testFileName.csv")]
+        [DataRow("ComplianceSchemeContainer", "testFileName.csv")]
+        public async Task GetLatestFileAsync_ThrowRequestFailedException_WhenFailsGetBlobs(string containerName, string blobName)
         {
             var mockBlobContainerClient = new Mock<BlobContainerClient>();
 
@@ -209,15 +209,15 @@
             _containerClientMock.Setup(x => x.GetBlobsAsync(It.IsAny<BlobTraits>(), It.IsAny<BlobStates>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .Throws(new RequestFailedException(string.Format("Failed to read {0} from blob storage", "directories")));
 
-            var act = async () => await _service.GetLatestFileAsync(containerName);
+            var act = async () => await _service.GetLatestFileAsync(containerName,blobName);
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
 
         [TestMethod]
-        [DataRow("ProducerContainer")]
-        [DataRow("ComplianceSchemeContainer")]
-        public async Task GetLatestFileAsync_ThrowRequestFailedException_WhenFailsGetBlobClient(string containerName)
+        [DataRow("ProducerContainer", "testFileName.csv")]
+        [DataRow("ComplianceSchemeContainer", "testFileName.csv")]
+        public async Task GetLatestFileAsync_ThrowRequestFailedException_WhenFailsGetBlobClient(string containerName, string blobName)
         {
             var blobProperties = BlobsModelFactory.BlobProperties(lastModified: DateTimeOffset.UtcNow, contentLength: 1024);
             var blobList = new List<BlobItem>
@@ -234,13 +234,13 @@
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>()))
                                   .Throws(new RequestFailedException("Failed to read public register producers files from blob storage"));
 
-            var act = async () => await _service.GetLatestFileAsync(containerName);
+            var act = async () => await _service.GetLatestFileAsync(containerName, blobName);
 
             act.Should().ThrowAsync<BlobReaderException>();
         }
 
         [TestMethod]
-        [DataRow("ProducerContainer", "")]
+        [DataRow("ProducerContainer", "Blob1.CSV")]
         [DataRow("ComplianceSchemeContainer", ".CSV")]
         public async Task GetLatestFileAsync_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName, string fileType)
         {
@@ -256,9 +256,9 @@
             var response = Response.FromValue(downloadResult, new Mock<Response>().Object);
             var blobList = new List<BlobItem>
                 {
-                    BlobsModelFactory.BlobItem($"2025/Blob1{fileType}"),
-                    BlobsModelFactory.BlobItem($"2026/Blob2{fileType}"),
-                    BlobsModelFactory.BlobItem($"Blob3{fileType}")
+                    BlobsModelFactory.BlobItem($"2025/{fileType}"),
+                    BlobsModelFactory.BlobItem($"2026/{fileType}"),
+                    BlobsModelFactory.BlobItem($"{fileType}")
                 };
             var page = Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>());
             var asyncPageable = AsyncPageable<BlobItem>.FromPages(new[] { page });
@@ -275,7 +275,7 @@
             blobClientMock.Setup(x => x.DownloadContentAsync()).ReturnsAsync(mockDownloadResponse.Object);
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>())).Returns(blobClientMock.Object);
 
-            var result = await _service.GetLatestFileAsync(containerName);
+            var result = await _service.GetLatestFileAsync(containerName,fileType);
 
             result.FileName.Equals("Blob1");
             Assert.IsNotNull(result.FileContent);

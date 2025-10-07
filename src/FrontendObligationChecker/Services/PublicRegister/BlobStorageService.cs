@@ -97,19 +97,17 @@ public class BlobStorageService(
         return result;
     }
 
-    public async Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName)
+    public async Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName, string blobName)
     {
         try
         {
             var fileModel = new PublicRegisterFileModel();
             var containerClient = GetContainerClient(containerName);
-            var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
-            var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
-            var blobClient = containerClient.GetBlobClient(latestBlob.Name);
+            var blobClient = containerClient.GetBlobClient(blobName);
             var download = await blobClient.DownloadContentAsync();
 
             fileModel.FileContent = download.Value.Content.ToStream();
-            fileModel.FileName = GetFileName(latestBlob.Name);
+            fileModel.FileName = GetFileName(blobName);
 
             return fileModel;
         }
