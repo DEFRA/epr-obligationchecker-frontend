@@ -34,17 +34,30 @@
         {
             var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
 
-            var currentYear = DateTime.UtcNow.Year;
-            var nextYear = currentYear + 1;
+            int currentYear = string.IsNullOrEmpty(_options.CurrentYear)
+                ? DateTime.UtcNow.Year
+                : int.Parse(_options.CurrentYear);
+
+            int previousYear = currentYear - 1;
+            int nextYear = currentYear + 1;
             var folderPrefixes = new List<string> { currentYear.ToString() };
 
+            var endMonthDay = _options.PublicRegisterPreviousYearEndMonthAndDay;
+            var currentMonthDay = DateTime.UtcNow.ToString("MM-dd");
+
+            // Add previous year if today is on or before the configured month and day
+            if (!string.IsNullOrEmpty(endMonthDay) &&
+                string.Compare(currentMonthDay, endMonthDay, StringComparison.Ordinal) <= 0)
+            {
+                folderPrefixes.Add(previousYear.ToString());
+            }
+
+            // Add next year if feature enabled and today is on or after the configured month and day
             if (isPublicRegisterNextYearEnabled)
             {
                 var startMonthDay = _options.PublicRegisterNextYearStartMonthAndDay;
-                var currentYearMonthDay = DateTime.UtcNow.ToString("MM-dd");
-
-                // If today is on or after the configured month and day, the next year folder is added.
-                if (string.Compare(currentYearMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
+                if (!string.IsNullOrEmpty(startMonthDay) &&
+                    string.Compare(currentMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
                 {
                     folderPrefixes.Add(nextYear.ToString());
                 }
@@ -53,18 +66,33 @@
             var producerBlobModels = await _blobStorageService
                 .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes);
 
-            producerBlobModels.TryGetValue(currentYear.ToString(), out var producerBlobModelCurrentYear);
-            producerBlobModels.TryGetValue(nextYear.ToString(), out var producerBlobModelNextYear);
+            // Determine which year to display as "current"
+            PublicRegisterBlobModel? producerBlobModelCurrentYear = null;
+            PublicRegisterBlobModel? producerBlobModelNextYear = null;
 
-            var publishedDate = FormatDate(publicRegisterOptions.Value.PublishedDate);
+            // Prefer previous year if available and within display window
+            if (producerBlobModels.TryGetValue(previousYear.ToString(), out var previousYearBlob) &&
+                folderPrefixes.Contains(previousYear.ToString()))
+            {
+                producerBlobModelCurrentYear = previousYearBlob;
+                currentYear = previousYear;
+                nextYear = currentYear + 1;
+            }
+            else
+            {
+                producerBlobModels.TryGetValue(currentYear.ToString(), out producerBlobModelCurrentYear);
+            }
 
-            DateTime lastUpdated;
+            // Next year logic
+            producerBlobModels.TryGetValue(nextYear.ToString(), out producerBlobModelNextYear);
 
-            lastUpdated = producerBlobModels.Values
-                                        .Where(x => x?.LastModified.HasValue == true)
-                                        .Select(x => x.LastModified.Value)
-                                        .DefaultIfEmpty(_options.PublishedDate)
-                                        .Max();
+            var publishedDate = FormatDate(_options.PublishedDate);
+
+            DateTime lastUpdated = producerBlobModels?.Values?
+                .Where(x => x?.LastModified.HasValue == true)
+                .Select(x => x!.LastModified!.Value)
+                .DefaultIfEmpty(_options.PublishedDate)
+                .Max() ?? _options.PublishedDate;
 
             var lastUpdatedFormatted = FormatDate(lastUpdated);
 

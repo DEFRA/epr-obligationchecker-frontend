@@ -184,9 +184,16 @@ public class BlobStorageService(
 
         await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
         {
-            if (latestBlob is null || blobItem.Properties?.LastModified > latestBlob.Properties?.LastModified)
+            var contentLength = blobItem.Properties?.ContentLength ?? 0;
+            var lastModified = blobItem.Properties?.LastModified;
+
+            if (contentLength > 0)
             {
-                latestBlob = blobItem;
+                if (latestBlob == null ||
+                    (lastModified != null && lastModified > latestBlob.Properties?.LastModified))
+                {
+                    latestBlob = blobItem;
+                }
             }
         }
 

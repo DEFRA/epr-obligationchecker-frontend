@@ -18,4 +18,8 @@ public class PublicRegisterOptions
     public DateTime PublishedDate { get; set; }
 
     public string PublicRegisterNextYearStartMonthAndDay { get; set; }
+
+    public string? PublicRegisterPreviousYearEndMonthAndDay { get; set; }
+
+    public string? CurrentYear { get; set; }
 }
