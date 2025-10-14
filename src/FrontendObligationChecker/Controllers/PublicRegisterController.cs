@@ -105,7 +105,7 @@
                 Currentyear = currentYear.ToString(),
                 Nextyear = nextYear.ToString(),
                 LastUpdated = lastUpdatedFormatted,
-                ProducerRegisteredFile = producerBlobModelCurrentYear != null ? MapToFileViewModel(producerBlobModelCurrentYear, publishedDate, lastUpdatedFormatted) : null,
+                ProducerRegisteredFile = MapToFileViewModel(producerBlobModelCurrentYear, publishedDate, lastUpdatedFormatted),
                 ProducerRegisteredFileNextYear = producerBlobModelNextYear != null ? MapToFileViewModel(producerBlobModelNextYear, publishedDate, lastUpdatedFormatted) : null
             };
 
@@ -168,7 +168,13 @@
         {
             try
             {
+                if(string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(type))
+                {
+                    return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+                }
+
                 var fileModel = await _blobStorageService.GetLatestFileAsync(type, fileName);
+
                 if (string.IsNullOrEmpty(fileModel.FileName))
                 {
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
@@ -197,9 +203,9 @@
             {
                 DatePublished = publishedDate,
                 DateLastModified = lastUpdated,
-                FileName = blobModel.Name,
-                FileSize = blobModel.ContentLength?.ToString() ?? "0",
-                FileType = blobModel.FileType
+                FileName = blobModel?.Name,
+                FileSize = blobModel?.ContentLength?.ToString() ?? "0",
+                FileType = blobModel?.FileType ?? "CSV"
             };
         }
 
