@@ -34,7 +34,7 @@
         {
             var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
 
-            int currentYear = string.IsNullOrEmpty(_options.CurrentYear)
+            int currentYear = string.IsNullOrWhiteSpace(_options.CurrentYear)
                 ? DateTime.UtcNow.Year
                 : int.Parse(_options.CurrentYear);
 
@@ -46,8 +46,8 @@
             var currentMonthDay = DateTime.UtcNow.ToString("MM-dd");
 
             // Add previous year if today is on or before the configured month and day
-            if (!string.IsNullOrEmpty(endMonthDay) &&
-                string.Compare(currentMonthDay, endMonthDay, StringComparison.Ordinal) <= 0)
+            if (!string.IsNullOrWhiteSpace(endMonthDay) &&
+                 string.Compare(currentMonthDay, endMonthDay, StringComparison.Ordinal) <= 0)
             {
                 folderPrefixes.Add(previousYear.ToString());
             }
@@ -56,7 +56,7 @@
             if (isPublicRegisterNextYearEnabled)
             {
                 var startMonthDay = _options.PublicRegisterNextYearStartMonthAndDay;
-                if (!string.IsNullOrEmpty(startMonthDay) &&
+                if (!string.IsNullOrWhiteSpace(startMonthDay) &&
                     string.Compare(currentMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
                 {
                     folderPrefixes.Add(nextYear.ToString());
@@ -175,7 +175,7 @@
 
                 var fileModel = await _blobStorageService.GetLatestFileAsync(type, fileName);
 
-                if (string.IsNullOrEmpty(fileModel.FileName))
+                if (string.IsNullOrWhiteSpace(fileModel.FileName))
                 {
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
                 }
