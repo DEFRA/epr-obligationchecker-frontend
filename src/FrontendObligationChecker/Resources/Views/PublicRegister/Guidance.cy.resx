@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Guidance.AccessibleFormatTextPart1" xml:space="preserve">
-    <value>[Welsh]Assistive technology users can request this document in an accessible format. Email </value>
+    <value>Gall defnyddwyr technoleg hygyrch ofyn am y ddogfen yma mewn fformat hygyrch. Anfonwch neges ebost at </value>
   </data>
   <data name="Guidance.AccessibleFormatTextPart2" xml:space="preserve">
-    <value>[Welsh]Tell us:</value>
+    <value>Dywedwch:</value>
   </data>
   <data name="Guidance.AccessibleFormatTextPart3" xml:space="preserve">
-    <value>[Welsh]what format you require</value>
+    <value>pa fformat rydych chi ei angen</value>
   </data>
   <data name="Guidance.AccessibleFormatTextPart4" xml:space="preserve">
-    <value>[Welsh]the assistive technology you use</value>
+    <value>pa dechnoleg gynorthwyol rydych chi'n ei defnyddio</value>
   </data>
   <data name="Guidance.BusinessAndTheEnvironmentLink" xml:space="preserve">
     <value>Busnes a'r amgylchedd</value>
   </data>
   <data name="Guidance.Bytes" xml:space="preserve">
-    <value>Bytes</value>
+    <value>Beit</value>
   </data>
   <data name="Guidance.Caption" xml:space="preserve">
     <value>Canllawiau</value>
@@ -148,7 +148,7 @@
     <value>Adran yr Amgylchedd, Bwyd a Materion Gwledig</value>
   </data>
   <data name="Guidance.Description" xml:space="preserve">
-    <value>[Welsh]Download a list of producers registered on the Report Packaging Data service under Producer Responsibility Obligations (Packaging and Waste Regulations).</value>
+    <value>Lawrlwythwch restr o gynhyrchwyr sydd wedi'u cofrestru ar y gwasanaeth Rhoi Gwybod am Ddata Pecynwaith o dan y Rheoliadau Rhwymedigaethau Cynhyrchwyr (Pecynwaith a Gwastraff Pecynwaith).</value>
   </data>
   <data name="Guidance.Documents" xml:space="preserve">
     <value>Dogfennau</value>
@@ -184,7 +184,7 @@
     <value>Cofrestrau cyhoeddus pecynwaith</value>
   </data>
   <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>Cofrestr gyhoeddus o gynhyrchwyr</value>
+    <value>Cofrestr gyhoeddus o gynhyrchwyr {0}</value>
   </data>
   <data name="Guidance.Published" xml:space="preserve">
     <value>Wedi'i gyhoeddi:</value>
@@ -193,7 +193,7 @@
     <value>Wedi'i gyhoeddi</value>
   </data>
   <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
-    <value>[Welsh]Request accessible format</value>
+    <value>Gofyn am fformat hygyrch</value>
   </data>
   <data name="Guidance.ScottishEnvironmentProtectionAgencyLink" xml:space="preserve">
     <value>Asiantaeth Diogelu Amgylchedd yr Alban</value>
@@ -229,6 +229,6 @@
     <value>Dod o hyd i gynhyrchwyr a gweithredwyr cynlluniau cydymffurfio sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'. Gallwch ddod o hyd i sefydliadau sy'n destun camau gorfodi hefyd</value>
   </data>
   <data name="Guidance.ProducersRegisteredForRpdOld" xml:space="preserve">
-    <value>Cynhyrchwyr sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
+    <value>Cynhyrchwyr sydd wedi'u cofrestru ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith' {0}</value>
   </data>
 </root>

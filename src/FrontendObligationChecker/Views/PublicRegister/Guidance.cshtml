@@ -65,7 +65,7 @@
                             <h3 class="gem-c-attachment__title">
                                 <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
                                    target="_self"
-                                   href="/public-register/report?fileName=@Model.ProducerRegisteredFileNextYear.FileName&type=public-register-producers">@Model.Nextyear @Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+                                   href="/public-register/report?fileName=@Model.ProducerRegisteredFileNextYear.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpd", Model.Nextyear]</a>
                             </h3>
 
                             <p class="gem-c-attachment__metadata">
@@ -111,11 +111,11 @@
                             {
                                 @if (Model.ComplianceSchemeRegisteredFile.FileName is null)
                                 {
-                                    <p>@Model.Currentyear @Localizer["Guidance.ProducersRegisteredForRpd"]</p>
+                                    <p>@Localizer["Guidance.ProducersRegisteredForRpd", Model.Currentyear]</p>
                                 }
                                 else
                                 {
-                                    <p>@Model.Currentyear @Localizer["Guidance.ProducersRegisteredForRpdOld"]</p>
+                                    <p>@Localizer["Guidance.ProducersRegisteredForRpdOld", Model.Currentyear]</p>
                                 }
                             }
                             else
@@ -125,13 +125,13 @@
                                 {
                                     <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
                                        target="_self"
-                                       href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Model.Currentyear @Localizer["Guidance.ProducersRegisteredForRpd"]</a>
+                                       href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpd", Model.Currentyear]</a>
                                 }
                                 else
                                 {
                                     <a class="govuk-link govuk-link--no-visited-state gem-c-attachment__link"
                                        target="_self"
-                                       href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Model.Currentyear @Localizer["Guidance.ProducersRegisteredForRpdOld"]</a>
+                                       href="/public-register/report?fileName=@Model.ProducerRegisteredFile.FileName&type=public-register-producers">@Localizer["Guidance.ProducersRegisteredForRpdOld", Model.Currentyear]</a>
                                 }
                             }
                         </h3>
