@@ -184,13 +184,13 @@
     <value>Cofrestrau cyhoeddus pecynwaith</value>
   </data>
   <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>Cofrestr gyhoeddus o gynhyrchwyr {0}</value>
+    <value>Cofrestr gyhoeddus cynhyrchwyr {0}</value>
   </data>
   <data name="Guidance.Published" xml:space="preserve">
-    <value>Wedi'i gyhoeddi:</value>
+    <value>Wedi'i chyhoeddi:</value>
   </data>
   <data name="Guidance.Published2" xml:space="preserve">
-    <value>Wedi'i gyhoeddi</value>
+    <value>Wedi'i chyhoeddi</value>
   </data>
   <data name="Guidance.RequestAnAccessibleFormat" xml:space="preserve">
     <value>Gofyn am fformat hygyrch</value>
@@ -202,7 +202,7 @@
     <value>Gweld pob diweddariad</value>
   </data>
   <data name="Guidance.ThisFileMayNotBeSuitable" xml:space="preserve">
-    <value>Efallai na fydd y ffeil yma'n addas i ddefnyddwyr technoleg gynorthwyol.</value>
+    <value>Efallai na fydd y ffeil yma yn addas i ddefnyddwyr technoleg gynorthwyol.</value>
   </data>
   <data name="Guidance.FileNoAvailable" xml:space="preserve">
     <value>[Welsh]File not available.</value>
@@ -217,7 +217,7 @@
     <value>Ymwadiad</value>
   </data>
   <data name="Guidance.DisclaimerText" xml:space="preserve">
-    <value>Gallai rhai meysydd fod yn wag, efallai am nad ydyn nhw'n gymwys i'r cynhyrchydd dan sylw.</value>
+    <value>Gall rhai meysydd fod yn wag. Un rheswm posibl am hynny yw nad ydyn nhw'n gymwys i'r cynhyrchydd dan sylw.</value>
   </data>
   <data name="Guidance.PageTitleOld" xml:space="preserve">
     <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
