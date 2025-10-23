@@ -148,7 +148,7 @@
     <value>Department for Environment, Food &amp; Rural Affairs</value>
   </data>
     <data name="Guidance.Description" xml:space="preserve">
-    <value>Download a list of producers registered on the Report Packaging Data service under Producer Responsibility Obligations (Packaging and Waste Regulations).</value>
+    <value>Download a list of producers that are registered on the Report Packaging Data service under the Producer Responsibility Obligations (Packaging and Packaging Waste) Regulations 2024.</value>
   </data>
     <data name="Guidance.Documents" xml:space="preserve">
     <value>Documents</value>
@@ -184,7 +184,7 @@
     <value>Packaging public registers</value>
   </data>
     <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>Public register of producers</value>
+    <value>{0} Public register of producers</value>
   </data>
     <data name="Guidance.Published" xml:space="preserve">
     <value>Published:</value>
@@ -229,6 +229,6 @@
     <value>Find producers and compliance scheme operators registered for the ‘report packaging data’ service. You can also find organisations subject to enforcement actions.</value>
   </data>
     <data name="Guidance.ProducersRegisteredForRpdOld" xml:space="preserve">
-    <value>Producers registered for the ‘report packaging data’ service</value>
+    <value>{0} Producers registered for the ‘report packaging data’ service</value>
   </data>
 </root>
