@@ -14,10 +14,10 @@ public class ErrorControllerTests
     [DataRow(HttpStatusCode.NotFound)]
     [DataRow(HttpStatusCode.InternalServerError)]
     [DataRow(HttpStatusCode.BadRequest)]
-    public void Error_ReturnsErrorView_WhenCalledWithErrorCode(int statusCode)
+    public void Error_ReturnsErrorView_WhenCalledWithErrorCode(HttpStatusCode statusCode)
     {
         // Arrange / Act
-        var viewResult = _systemUnderTest.Error(statusCode);
+        var viewResult = _systemUnderTest.Error((int)statusCode);
 
         // Assert
         viewResult.ViewName.Should().Be(nameof(PageType.Error));

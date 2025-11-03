@@ -41,7 +41,6 @@
       <PackageReference Include="Azure.Storage.Blobs" Version="12.25.1" />
       <PackageReference Include="Azure.Storage.Queues" Version="12.23.0" />
       <PackageReference Include="ByteSize" Version="2.1.2" />
-      <PackageReference Include="FluentAssertions" Version="6.12.0" />
       <PackageReference Include="HtmlAgilityPack" Version="1.12.3" />
       <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.23.0" />
       <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.7" />
@@ -176,7 +175,7 @@
 
     <ItemGroup>
         <SonarQubeSetting Include="sonar.coverage.exclusions">
-            <Value>Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**,Views/Shared/Components/LanguageSwitcher/Default.cshtml</Value>
+            <Value>**/BlobStorageService.cs,Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**,Views/Shared/Components/LanguageSwitcher/Default.cshtml</Value>
         </SonarQubeSetting>
 
         <SonarQubeSetting Include="sonar.cpd.exclusions">

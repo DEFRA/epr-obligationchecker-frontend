@@ -16,7 +16,7 @@ public class AmountYouSupplyTests : TestBase
         await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
         var redirectToAmountYouSupply = await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
 
-        var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync();
+        var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync(CancellationToken.None);
 
         redirectToAmountYouSupply.Should().BeSuccessful();
         content.Should().Contain("<title>How much packaging in total do you supply? - GOV.UK</title>");
@@ -30,7 +30,7 @@ public class AmountYouSupplyTests : TestBase
         await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
         var redirectToAmountYouSupply = await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
 
-        var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync();
+        var content = await redirectToAmountYouSupply.Content.ReadAsStringAsync(CancellationToken.None);
 
         redirectToAmountYouSupply.Should().BeSuccessful();
         content.Should().Contain("<title>How much packaging in total do you supply? - GOV.UK</title>");

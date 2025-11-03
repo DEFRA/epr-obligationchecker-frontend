@@ -88,11 +88,13 @@
 
             var publishedDate = FormatDate(_options.PublishedDate);
 
+#pragma warning disable S2589
             DateTime lastUpdated = producerBlobModels?.Values?
                 .Where(x => x?.LastModified.HasValue == true)
                 .Select(x => x!.LastModified!.Value)
                 .DefaultIfEmpty(_options.PublishedDate)
                 .Max() ?? _options.PublishedDate;
+#pragma warning restore S2589
 
             var lastUpdatedFormatted = FormatDate(lastUpdated);
 

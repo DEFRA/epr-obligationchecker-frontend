@@ -1,6 +1,5 @@
 ﻿namespace FrontendObligationChecker.UnitTests.Readers;
 
-using System.Runtime.Serialization;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
@@ -64,7 +63,7 @@ public class BlobReaderTests
         // Assert
         result.Should().BeOfType<MemoryStream>();
         var actualByteStart = new byte[3];
-        await result.ReadAsync(actualByteStart.AsMemory(0, 3));
+        await result.ReadAsync(actualByteStart.AsMemory(0, 3), CancellationToken.None);
         actualByteStart[0].Should().Be(0xEF);
         actualByteStart[1].Should().Be(0xBB);
         actualByteStart[2].Should().Be(0xBF);
@@ -94,7 +93,9 @@ public class BlobReaderTests
         const string logMessage = "Failed to read {FileName} from blob storage";
         const string fileName = "fileName";
 
+#pragma warning disable MSTEST0049
         _blobClient.Setup(x => x.DownloadToAsync(It.IsAny<Stream>()))
+#pragma warning restore MSTEST0049
             .ThrowsAsync(new RequestFailedException(It.IsAny<string>()));
         _blobContainerClient.Setup(x => x.GetBlobClient(It.IsAny<string>()))
             .Returns(_blobClient.Object);

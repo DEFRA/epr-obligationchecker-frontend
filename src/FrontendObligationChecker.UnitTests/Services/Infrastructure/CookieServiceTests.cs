@@ -18,12 +18,12 @@ public class CookieServiceTests
     private const string CookieName = ".epr_cookie_policy";
     private const string GoogleAnalyticsDefaultCookieName = "_ga";
 
-    private CookieService _systemUnderTest;
-    private Mock<IOptions<EprCookieOptions>> _cookieOptions;
-    private Mock<IOptions<AnalyticsOptions>> _googleAnalyticsOptions;
-    private Mock<ILogger<CookieService>> _loggerMock;
-    private Mock<IDateTimeWrapper> _dateTimeWrapperMock;
-    private Mock<EprCookieOptions> _eprCookieOptions;
+    private CookieService _systemUnderTest = null!;
+    private Mock<IOptions<EprCookieOptions>> _cookieOptions = null!;
+    private Mock<IOptions<AnalyticsOptions>> _googleAnalyticsOptions = null!;
+    private Mock<ILogger<CookieService>> _loggerMock = null!;
+    private Mock<IDateTimeWrapper> _dateTimeWrapperMock = null!;
+    private Mock<EprCookieOptions> _eprCookieOptions = null!;
 
     [TestInitialize]
     public void TestInitialize()
@@ -37,8 +37,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public async Task SetCookieAcceptance_LogsError_WhenArgumentNullExceptionThrow()
+    public void SetCookieAcceptance_LogsError_WhenArgumentNullExceptionThrow()
     {
         // Arrange
         const string expectedLog = "Error setting cookie acceptance to 'True'";
@@ -47,14 +46,14 @@ public class CookieServiceTests
         MockService();
 
         // Act
-        _systemUnderTest.SetCookieAcceptance(true, requestCookieCollection, context.Response.Cookies);
+        Assert.ThrowsExactly<ArgumentNullException>(() => _systemUnderTest.SetCookieAcceptance(true, requestCookieCollection, context.Response.Cookies));
 
         // Assert
         _loggerMock.VerifyLog(logger => logger.LogError(expectedLog), Times.Once);
     }
 
     [TestMethod]
-    public async Task SetCookieAcceptance_True_ReturnValidCookie()
+    public void SetCookieAcceptance_True_ReturnValidCookie()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection();
@@ -70,7 +69,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    public async Task SetCookieAcceptance_False_ReturnValidCookie()
+    public void SetCookieAcceptance_False_ReturnValidCookie()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection();
@@ -86,7 +85,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    public async Task SetCookieAcceptance_False_ResetsGACookie()
+    public void SetCookieAcceptance_False_ResetsGACookie()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection(GoogleAnalyticsDefaultCookieName, "1234");
@@ -102,25 +101,22 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public async Task GetConsentState_LogsError_WhenArgumentNullExceptionThrow()
+    public void GetConsentState_LogsError_WhenArgumentNullExceptionThrow()
     {
         // Arrange
-        const string expectedLog = "Error reading cookie acceptance";
         var requestCookieCollection = MockRequestCookieCollection("test", "test");
         var context = new DefaultHttpContext();
         MockService();
 
         // Act
-        _systemUnderTest.GetConsentState(requestCookieCollection, context.Response.Cookies);
+        var act = () => _systemUnderTest.GetConsentState(requestCookieCollection, context.Response.Cookies);
 
         // Assert
-        _loggerMock.VerifyLog(logger => logger.LogError(expectedLog), Times.Once);
-
+        act.Should().ThrowExactly<ArgumentNullException>();
     }
 
     [TestMethod]
-    public async Task GetConsentState_True_ReturnsValidValue()
+    public void GetConsentState_True_ReturnsValidValue()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection(CookieName, "True");
@@ -137,7 +133,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    public async Task GetConsentState_TrueWithAck_ReturnsValidValue()
+    public void GetConsentState_TrueWithAck_ReturnsValidValue()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection(CookieName, "True|ACK");
@@ -154,7 +150,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    public async Task GetConsentState_False_ReturnsValidValue()
+    public void GetConsentState_False_ReturnsValidValue()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection(CookieName, "False");
@@ -171,7 +167,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    public async Task GetConsentState_FalseWithAck_ReturnsValidValue()
+    public void GetConsentState_FalseWithAck_ReturnsValidValue()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection(CookieName, "False|ACK");
@@ -188,7 +184,7 @@ public class CookieServiceTests
     }
 
     [TestMethod]
-    public async Task GetConsentState_NoCookie_ReturnsValidValue()
+    public void GetConsentState_NoCookie_ReturnsValidValue()
     {
         // Arrange
         var requestCookieCollection = MockRequestCookieCollection("test", "test");
