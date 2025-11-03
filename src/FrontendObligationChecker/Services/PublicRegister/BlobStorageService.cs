@@ -187,8 +187,7 @@ public class BlobStorageService(
             var contentLength = blobItem.Properties?.ContentLength ?? 0;
             var lastModified = blobItem.Properties?.LastModified;
 
-            if (contentLength > 0 && (latestBlob == null || 
-                (lastModified != null && lastModified > latestBlob.Properties?.LastModified)))
+            if (contentLength > 0 && (latestBlob == null || (lastModified != null && lastModified > latestBlob.Properties?.LastModified)))
             {
                 latestBlob = blobItem;
             }
