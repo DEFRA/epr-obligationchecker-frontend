@@ -12,7 +12,7 @@ public class HealthCheckTests : TestBase
         const string url = "/admin/health";
 
         // Act
-        var response = await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync(url, CancellationToken.None);
         var content = await response.Content.ReadAsStringAsync();
 
         // Assert
