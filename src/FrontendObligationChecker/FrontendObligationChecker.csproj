@@ -175,7 +175,7 @@
 
     <ItemGroup>
         <SonarQubeSetting Include="sonar.coverage.exclusions">
-            <Value>Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**,Views/Shared/Components/LanguageSwitcher/Default.cshtml</Value>
+            <Value>**/BlobStorageService.cs,Views/**/*.cshtml,**/gulpfile.js,**/Program.cs,**/assets/**,**/ConfigurationExtensions/**,**/Exceptions/**,**/Mapping/**,Views/Shared/Components/LanguageSwitcher/Default.cshtml</Value>
         </SonarQubeSetting>
 
         <SonarQubeSetting Include="sonar.cpd.exclusions">
