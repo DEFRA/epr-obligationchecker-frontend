@@ -33,7 +33,7 @@ public class SecurityHeaderMiddlewareTests
         Assert.IsTrue(responseHeaders.ContainsKey("X-Robots-Tag"));
 
         // Verify the content of the headers, especially those that are dynamic
-        Assert.IsTrue(responseHeaders.ContentSecurityPolicy.ToString().Contains("script-src 'self' 'nonce-"));
+        Assert.Contains("script-src 'self' 'nonce-", responseHeaders.ContentSecurityPolicy.ToString());
         Assert.AreEqual("require-corp", responseHeaders["Cross-Origin-Embedder-Policy"].ToString());
         Assert.AreEqual("same-origin", responseHeaders["Cross-Origin-Opener-Policy"].ToString());
         Assert.AreEqual("same-origin", responseHeaders["Cross-Origin-Resource-Policy"].ToString());

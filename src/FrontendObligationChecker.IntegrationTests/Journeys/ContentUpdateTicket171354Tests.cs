@@ -17,7 +17,7 @@ public class ContentUpdateTicket171354Tests : TestBase
     {
         var form = new PageForm(TypeOfOrganisation.Partnership);
         var page = await PostForm(PagePath.TypeOfOrganisation, form.FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         var selectedAnswer = PageForm.GetTypeOfOrganisation(TypeOfOrganisation.Partnership);
 
@@ -28,7 +28,7 @@ public class ContentUpdateTicket171354Tests : TestBase
     public async Task AnnualTurnover_PageContents_AreUpdated()
     {
         var page = await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("Your answer should include the reported turnover of all relevant subsidiaries in your group that supply (create, import, distribute or sell) packaging.");
     }
@@ -40,7 +40,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
         var page = await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
 
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("<title>Do you supply goods to the UK market under your own brand? - GOV.UK</title>");
         pageContent.Should().Contain("A brand is something your business could be visibly identified by, including:");
@@ -57,7 +57,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
         await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
         var page = await PostForm(PagePath.OwnBrand, new PageForm(QuestionKey.OwnBrand, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("<title>Do you place goods into packaging? - GOV.UK</title>".ApostropheToHex());
         pageContent.Should().Contain("Do you place goods into packaging?");
@@ -75,7 +75,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
         await PostForm(PagePath.OwnBrand, new PageForm(QuestionKey.OwnBrand, YesNo.Yes).FormUrlEncodedContent);
         var page = await PostForm(PagePath.UnbrandedPackaging, new PageForm(QuestionKey.UnbrandedPackaging, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("This also applies to you if you discard the packaging before supplying the goods.");
 
@@ -93,7 +93,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.OwnBrand, new PageForm(QuestionKey.OwnBrand, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.UnbrandedPackaging, new PageForm(QuestionKey.UnbrandedPackaging, YesNo.Yes).FormUrlEncodedContent);
         var page = await PostForm(PagePath.ImportingProducts, new PageForm(QuestionKey.ImportingProducts, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("<title>Do you supply empty packaging you've imported or manufactured? - GOV.UK</title>".ApostropheToHex());
         pageContent.Should().Contain("Select yes if you supply to:");
@@ -112,7 +112,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.ImportingProducts, new PageForm(QuestionKey.ImportingProducts, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.SupplyingEmptyPackaging, new PageForm(QuestionKey.SellingEmptyPackaging, YesNo.Yes).FormUrlEncodedContent);
         var page = await PostForm(PagePath.HiringLoaning, new PageForm(QuestionKey.HiringLoaning, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("Under EPR for packaging, an online marketplace is a website or app that allows non-UK organisations to sell their goods in the UK.");
         pageContent.Should().Contain("If your organisation owns a website that sells goods from UK organisations only, this is not classed as an online marketplace.");
@@ -130,7 +130,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.SupplyingEmptyPackaging, new PageForm(QuestionKey.SellingEmptyPackaging, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.HiringLoaning, new PageForm(QuestionKey.HiringLoaning, YesNo.Yes).FormUrlEncodedContent);
         var page = await PostForm(PagePath.OnlineMarketplace, new PageForm(QuestionKey.OnlineMarketplace, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("<title>Do you supply filled packaging to end users? - GOV.UK</title>");
         pageContent.Should().Contain("An end user is the last person to use packaging before discarding it. This could be a consumer or a business.");
@@ -152,7 +152,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.HiringLoaning, new PageForm(QuestionKey.HiringLoaning, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.OnlineMarketplace, new PageForm(QuestionKey.OnlineMarketplace, YesNo.Yes).FormUrlEncodedContent);
         var page = await PostForm(PagePath.SupplyingFilledPackaging, new PageForm(QuestionKey.SupplyingFilledPackaging, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("Do you supply drinks in single-use containers in the UK?");
         pageContent.Should().NotContain("From October 2025, Scotland will operate a Deposit Return Scheme.".ApostropheToHex());
@@ -175,7 +175,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.OnlineMarketplace, new PageForm(QuestionKey.OnlineMarketplace, YesNo.Yes).FormUrlEncodedContent);
         await PostForm(PagePath.SupplyingFilledPackaging, new PageForm(QuestionKey.SellingEmptyPackaging, YesNo.Yes).FormUrlEncodedContent);
         var page = await PostForm(PagePath.PlaceDrinksOnMarket, new PageForm(QuestionKey.SingleUseContainersOnMarket, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().NotContain("Your packaging activities");
 
@@ -191,7 +191,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.TypeOfOrganisation, new PageForm(TypeOfOrganisation.IndividualCompany).FormUrlEncodedContent);
 
         var page = await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("How much packaging in total do you supply?");
 
@@ -208,7 +208,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.AnnualTurnover, new PageForm(AnnualTurnover.OverTwoMillion).FormUrlEncodedContent);
 
         var page = await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.HandleUnder25Tonnes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("This is because your organisation supplied less than 25 tonnes of packaging in 2023.");
     }
@@ -235,7 +235,7 @@ public class ContentUpdateTicket171354Tests : TestBase
         await PostForm(PagePath.MaterialsForDrinksContainers, new PageForm(allMaterialsForDrinksContainersSelected).FormUrlEncodedContent);
 
         var page = await PostForm(PagePath.ContainerVolume, new PageForm(QuestionKey.ContainerVolume, YesNo.Yes).FormUrlEncodedContent);
-        var pageContent = await page.Content.ReadAsStringAsync();
+        var pageContent = await page.Content.ReadAsStringAsync(CancellationToken.None);
 
         pageContent.Should().Contain("What this means for your organisation");
 

@@ -72,12 +72,11 @@
         public async Task GetLatestFilePropertiesAsync_ReturnsOnlyPublicRegisterBlobModelWithPublishedDate_WhenContainerClientIsNull(string containerName)
         {
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()))
-                .Returns((BlobContainerClient)null);
+                .Returns((BlobContainerClient)null!);
 
             var result = await _service.GetLatestFilePropertiesAsync(containerName);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.PublishedDate);
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
             Assert.IsNull(result.FileType);
@@ -106,7 +105,6 @@
             var result = await _service.GetLatestFilePropertiesAsync(containerName);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.PublishedDate);
             Assert.IsNull(result.LastModified);
             Assert.IsNull(result.ContentLength);
             Assert.IsNull(result.FileType);
@@ -274,7 +272,9 @@
             mockResponse.Setup(r => r.Value).Returns(blobProperties);
             mockDownloadResponse.Setup(r => r.Value).Returns(downloadContent);
             blobClientMock.Setup(x => x.GetPropertiesAsync(It.IsAny<BlobRequestConditions>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
+#pragma warning disable MSTEST0049
             blobClientMock.Setup(x => x.DownloadContentAsync()).ReturnsAsync(mockDownloadResponse.Object);
+#pragma warning restore MSTEST0049
             _blobServiceClientMock.Setup(x => x.GetBlobContainerClient(It.IsAny<string>()).GetBlobClient(It.IsAny<string>())).Returns(blobClientMock.Object);
 
             var result = await _service.GetLatestFileAsync(containerName, fileType);

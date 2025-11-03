@@ -19,6 +19,10 @@
     <Rule Id="DOC203" Action="None" />
     <Rule Id="DOC204" Action="None" />
   </Rules>
+  <Rules AnalyzerId="MSTest.Analyzers" RuleNamespace="MSTest.Analyzers">
+    <Rule Id="MSTEST0037" Action="Warning" />
+    <Rule Id="MSTEST0049" Action="Warning" />
+  </Rules>
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
     <Rule Id="AD0001" Action="None" />
     <Rule Id="CS0078" Action="None" />
@@ -376,7 +380,6 @@
     <Rule Id="S1121" Action="None" />
     <Rule Id="S1123" Action="None" />
     <Rule Id="S1125" Action="None" />
-    <Rule Id="S1128" Action="None" />
     <Rule Id="S1134" Action="None" />
     <Rule Id="S1135" Action="None" />
     <Rule Id="S1144" Action="None" />
@@ -429,7 +432,6 @@
     <Rule Id="S2292" Action="None" />
     <Rule Id="S2306" Action="None" />
     <Rule Id="S2326" Action="None" />
-    <Rule Id="S2327" Action="None" />
     <Rule Id="S2328" Action="None" />
     <Rule Id="S2344" Action="None" />
     <Rule Id="S2345" Action="None" />
@@ -525,7 +527,6 @@
     <Rule Id="S3875" Action="None" />
     <Rule Id="S3877" Action="None" />
     <Rule Id="S3881" Action="None" />
-    <Rule Id="S3884" Action="None" />
     <Rule Id="S3885" Action="None" />
     <Rule Id="S3887" Action="None" />
     <Rule Id="S3889" Action="None" />
@@ -547,7 +548,6 @@
     <Rule Id="S3984" Action="None" />
     <Rule Id="S3998" Action="None" />
     <Rule Id="S4015" Action="None" />
-    <Rule Id="S4016" Action="None" />
     <Rule Id="S4019" Action="None" />
     <Rule Id="S4035" Action="None" />
     <Rule Id="S4061" Action="None" />
@@ -561,7 +561,6 @@
     <Rule Id="S4201" Action="None" />
     <Rule Id="S4210" Action="None" />
     <Rule Id="S4211" Action="None" />
-    <Rule Id="S4214" Action="None" />
     <Rule Id="S4220" Action="None" />
     <Rule Id="S4260" Action="None" />
     <Rule Id="S4275" Action="None" />
@@ -570,7 +569,6 @@
     <Rule Id="S4428" Action="None" />
     <Rule Id="S4433" Action="None" />
     <Rule Id="S4456" Action="None" />
-    <Rule Id="S4457" Action="None" />
     <Rule Id="S4487" Action="None" />
     <Rule Id="S4524" Action="None" />
     <Rule Id="S4581" Action="None" />

@@ -38,7 +38,7 @@ public class WhatYouNeedToDoTests : TestBase
 
         var redirectToWhatYouNeedToDo = await PostForm(PagePath.AmountYouSupply, new PageForm(AmountYouSupply.Handle50TonnesOrMore).FormUrlEncodedContent);
 
-        var content = await redirectToWhatYouNeedToDo.Content.ReadAsStringAsync();
+        var content = await redirectToWhatYouNeedToDo.Content.ReadAsStringAsync(CancellationToken.None);
 
         redirectToWhatYouNeedToDo.Should().BeSuccessful();
         content.Should().Contain("<title>You will need to take action under the EPR - GOV.UK</title>");

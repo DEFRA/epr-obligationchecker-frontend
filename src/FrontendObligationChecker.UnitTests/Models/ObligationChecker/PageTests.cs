@@ -52,7 +52,7 @@ public class PageTests
             }
         };
 
-        Assert.AreEqual(0, page.Errors.Count);
+        Assert.IsEmpty(page.Errors);
     }
 
     [TestMethod]
@@ -72,7 +72,7 @@ public class PageTests
             });
         }
 
-        Assert.AreEqual(errorCount, page.Errors.Count);
+        Assert.HasCount(errorCount, page.Errors);
     }
 
     [TestMethod]
@@ -201,10 +201,10 @@ public class PageTests
         var alternateTitles = page.GetAlternateTitles();
 
         // Assert
-        Assert.AreEqual(2, alternateTitles.Count);
-        Assert.IsTrue(alternateTitles.Contains("Title 1"));
-        Assert.IsTrue(alternateTitles.Contains("Title 2"));
-        Assert.IsFalse(alternateTitles.Contains("Title 3"));
+        Assert.HasCount(2, alternateTitles);
+        Assert.Contains("Title 1", alternateTitles);
+        Assert.Contains("Title 2", alternateTitles);
+        Assert.DoesNotContain("Title 3", alternateTitles);
     }
 
 }

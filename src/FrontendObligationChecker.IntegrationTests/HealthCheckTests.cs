@@ -13,7 +13,7 @@ public class HealthCheckTests : TestBase
 
         // Act
         var response = await _httpClient.GetAsync(url, CancellationToken.None);
-        var content = await response.Content.ReadAsStringAsync();
+        var content = await response.Content.ReadAsStringAsync(CancellationToken.None);
 
         // Assert
         response.Should().BeSuccessful();

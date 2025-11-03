@@ -44,7 +44,7 @@ public class ContentUnitTests
         var result = content.GetRelatedContentItems(AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(1, result.Count);
+        Assert.HasCount(1, result);
         Assert.AreEqual(item1, result[0]);
     }
 
@@ -69,7 +69,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(1, result.Count);
+        Assert.HasCount(1, result);
         Assert.AreEqual(item, result[0]);
     }
 
@@ -94,7 +94,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(0, result.Count);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
@@ -118,7 +118,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(0, result.Count);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
@@ -142,7 +142,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(1, result.Count);
+        Assert.HasCount(1, result);
         Assert.AreEqual(item, result[0]);
     }
 
@@ -167,7 +167,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(1, result.Count);
+        Assert.HasCount(1, result);
         Assert.AreEqual(item, result[0]);
     }
 
@@ -192,7 +192,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(0, result.Count);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
@@ -216,7 +216,7 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(1, result.Count);
+        Assert.HasCount(1, result);
         Assert.AreEqual(item, result[0]);
     }
 
@@ -236,6 +236,6 @@ public class ContentUnitTests
         var result = content.GetObligatedContentItems(company, AssociationType.Individual);
 
         // Assert
-        Assert.AreEqual(0, result.Count);
+        Assert.IsEmpty(result);
     }
 }

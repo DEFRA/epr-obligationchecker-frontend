@@ -47,12 +47,11 @@ public class UnObligatedParentCompanyTests : TestBase
         var page = GetPage(path);
 
         // Act
-        var response = await _httpClient.GetAsync($"/ObligationChecker/{path}");
-        var content = await response.Content.ReadAsStringAsync();
+        var response = await _httpClient.GetAsync($"/ObligationChecker/{path}", CancellationToken.None);
+        _ = await response.Content.ReadAsStringAsync(CancellationToken.None);
 
         // Assert
         response.Should().BeSuccessful();
-        // content.Should().Contain(pageTitle);
     }
 
     [TestMethod]
@@ -62,7 +61,6 @@ public class UnObligatedParentCompanyTests : TestBase
     {
         // Arrange
         var page = GetPage(path);
-        var formData = await Task.FromResult(GetFormData(page, path));
 
         var tokenValue = await GetAntiForgeryToken($"/ObligationChecker/{path}");
 
@@ -73,12 +71,11 @@ public class UnObligatedParentCompanyTests : TestBase
         });
 
         // Act
-        var response = await _httpClient.PostAsync($"/ObligationChecker/{path}", formContent);
-        var content = await response.Content.ReadAsStringAsync();
+        var response = await _httpClient.PostAsync($"/ObligationChecker/{path}", formContent, CancellationToken.None);
+        _ = await response.Content.ReadAsStringAsync(CancellationToken.None);
 
         // Assert
         response.Should().BeSuccessful();
-        // content.Should().Contain(page.Title);
     }
 
     private Page GetPage(string path)

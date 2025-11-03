@@ -315,7 +315,7 @@ public class WhatYouNeedToDoTests
         Page page = await _pageService.GetPageAsync(PagePath.WhatYouNeedToDo);
 
         Assert.AreEqual(CompanySize.Large, page.CompanyModel.CompanySize);
-        Assert.AreEqual(true, page.CompanyModel.RequiresNationData);
+        Assert.IsTrue(page.CompanyModel.RequiresNationData);
     }
 
     [TestMethod]
