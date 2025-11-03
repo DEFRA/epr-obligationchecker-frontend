@@ -39,8 +39,10 @@
        <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
       <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory="../.." />
   </Target>
-
-  <SonarQubeSetting Include="sonar.coverage.exclusions">
-    <Value>**/BlobStorageService.cs</Value>
-  </SonarQubeSetting>
+  
+  <ItemGroup>
+    <SonarQubeSetting Include="sonar.coverage.exclusions">
+      <Value>**/BlobStorageService.cs</Value>
+    </SonarQubeSetting>
+  </ItemGroup>
 </Project>
