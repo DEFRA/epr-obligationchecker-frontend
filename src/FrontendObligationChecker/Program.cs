@@ -24,6 +24,10 @@ namespace FrontendObligationChecker
             {
                 opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
                 opts.Cookie.Path = pathBase;
+
+                opts.Cookie.HttpOnly = true;
+                opts.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                opts.Cookie.SameSite = SameSiteMode.Strict;
             });
 
             builder.Services.AddMemoryCache();
