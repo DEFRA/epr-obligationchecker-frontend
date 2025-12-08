@@ -24,7 +24,7 @@ public class PublicRegisterLogicTests
             urlOptionsPublicRegisterScottishProtectionAgency: "https://defra.example.org/spa",
             getUtcNow: () => new DateTime(2025, 12, 8),
             getLatestFilePropertiesForPrefixes: _ => Task.FromResult(new Dictionary<string, PublicRegisterBlobModel>()),
-            getLatestFileProperties: () => Task.FromResult(new PublicRegisterBlobModel()),
+            getComplianceSchemeFileProperties: () => Task.FromResult(new PublicRegisterBlobModel()),
             getEnforcementActionFiles: () => Task.FromResult(new List<EnforcementActionFileViewModel>().AsEnumerable()));
 
         Assert.IsNotNull(actual);
