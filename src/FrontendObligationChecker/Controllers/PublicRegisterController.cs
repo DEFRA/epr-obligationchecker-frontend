@@ -50,7 +50,7 @@
                 urlOptionsPublicRegisterScottishProtectionAgency: _urlOptions.PublicRegisterScottishProtectionAgency,
                 getUtcNow: () => DateTime.UtcNow,
                 getLatestFilePropertiesForPrefixes: async folderPrefixes => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes),
-                getLatestFileProperties: async () => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName),
+                getComplianceSchemeFileProperties: async () => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName),
                 getEnforcementActionFiles: async () => await _blobStorageService.GetEnforcementActionFiles());
             return View("Guidance", viewModel);
         }
@@ -69,7 +69,7 @@
             string urlOptionsPublicRegisterScottishProtectionAgency,
             Func<DateTime> getUtcNow,
             Func<List<string>, Task<Dictionary<string, PublicRegisterBlobModel>>> getLatestFilePropertiesForPrefixes,
-            Func<Task<PublicRegisterBlobModel>> getLatestFileProperties,
+            Func<Task<PublicRegisterBlobModel>> getComplianceSchemeFileProperties,
             Func<Task<IEnumerable<EnforcementActionFileViewModel>>> getEnforcementActionFiles)
         {
             int currentYear = string.IsNullOrWhiteSpace(optionsCurrentYear)
@@ -151,7 +151,7 @@
 
             if (isComplianceSchemesRegisterEnabled)
             {
-                var complianceBlobModel = await getLatestFileProperties();
+                var complianceBlobModel = await getComplianceSchemeFileProperties();
 
                 viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdatedFormatted);
             }
