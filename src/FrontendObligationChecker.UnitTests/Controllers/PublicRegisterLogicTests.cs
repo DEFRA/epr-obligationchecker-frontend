@@ -10,6 +10,7 @@ public class PublicRegisterLogicTests
     [TestMethod]
     public async Task TestGet()
     {
+        List<string> capturedPrefixes = null;
         var actual = await PublicRegisterController.GetRegisterViewModel(
             isComplianceSchemesRegisterEnabled: true,
             isEnforcementActionsSectionEnabled: true,
@@ -23,10 +24,18 @@ public class PublicRegisterLogicTests
             defraHelplineEmail: "help@example.org",
             urlOptionsPublicRegisterScottishProtectionAgency: "https://defra.example.org/spa",
             getUtcNow: () => new DateTime(2025, 12, 8),
-            getLatestFilePropertiesForPrefixes: _ => Task.FromResult(new Dictionary<string, PublicRegisterBlobModel>()),
+            getLatestFilePropertiesForPrefixes: (folderPrefixes) =>
+            {
+                capturedPrefixes = folderPrefixes;
+                return Task.FromResult(new Dictionary<string, PublicRegisterBlobModel>());
+            },
             getComplianceSchemeFileProperties: () => Task.FromResult(new PublicRegisterBlobModel()),
             getEnforcementActionFiles: () => Task.FromResult(new List<EnforcementActionFileViewModel>().AsEnumerable()));
 
         Assert.IsNotNull(actual);
+        Assert.IsNotNull(capturedPrefixes);
+        Assert.AreEqual(2, capturedPrefixes.Count);
+        Assert.AreEqual("2025", capturedPrefixes[0]);
+        Assert.AreEqual("2026", capturedPrefixes[1]);
     }
 }
