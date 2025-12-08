@@ -1,6 +1,5 @@
 ﻿namespace FrontendObligationChecker.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using FrontendObligationChecker.Constants;
@@ -34,6 +33,7 @@
         public async Task<IActionResult> Get()
         {
             var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
+
             GuidanceViewModel viewModel = await GetRegisterViewModel(
                 isComplianceSchemesRegisterEnabled: isComplianceSchemesRegisterEnabled,
                 isEnforcementActionsSectionEnabled: isEnforcementActionsSectionEnabled,
@@ -46,7 +46,10 @@
                 urlOptionsBusinessAndEnvironmentUrl: _urlOptions.BusinessAndEnvironmentUrl,
                 defraHelplineEmail: _emailAddressOptions.DefraHelpline,
                 urlOptionsPublicRegisterScottishProtectionAgency: _urlOptions.PublicRegisterScottishProtectionAgency,
-                getUtcNow: () => DateTime.UtcNow);
+                getUtcNow: () => DateTime.UtcNow,
+                getLatestFilePropertiesForPrefixes: async folderPrefixes => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes),
+                getLatestFileProperties: async () => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName),
+                getEnforcementActionFiles: async () => await _blobStorageService.GetEnforcementActionFiles());
             return View("Guidance", viewModel);
         }
 
@@ -62,9 +65,11 @@
             string urlOptionsBusinessAndEnvironmentUrl,
             string defraHelplineEmail,
             string urlOptionsPublicRegisterScottishProtectionAgency,
-            Func<DateTime> getUtcNow)
+            Func<DateTime> getUtcNow,
+            Func<List<string>, Task<Dictionary<string, PublicRegisterBlobModel>>> getLatestFilePropertiesForPrefixes,
+            Func<Task<PublicRegisterBlobModel>> getLatestFileProperties,
+            Func<Task<IEnumerable<EnforcementActionFileViewModel>>> getEnforcementActionFiles)
         {
-
             int currentYear = string.IsNullOrWhiteSpace(optionsCurrentYear)
                 ? DateTime.UtcNow.Year
                 : int.Parse(optionsCurrentYear);
@@ -95,8 +100,7 @@
             }
 
             // dictionary key is the year, e.g. "2025"
-            Dictionary<string, PublicRegisterBlobModel> producerBlobModels = await _blobStorageService
-                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes);
+            var producerBlobModels = await getLatestFilePropertiesForPrefixes(folderPrefixes);
 
             // Determine which year to display as "current"
             PublicRegisterBlobModel? producerBlobModelCurrentYear = null;
@@ -145,15 +149,15 @@
 
             if (isComplianceSchemesRegisterEnabled)
             {
-                var complianceBlobModel = await _blobStorageService
-                    .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
+                var complianceBlobModel = await getLatestFileProperties();
 
                 viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdatedFormatted);
             }
 
             if (isEnforcementActionsSectionEnabled)
             {
-                var enforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles();
+                var enforcementActionFiles = (await getEnforcementActionFiles()).ToList();
+
                 viewModel.EnforcementActionFiles = enforcementActionFiles;
 
                 viewModel.EnglishEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.England);
