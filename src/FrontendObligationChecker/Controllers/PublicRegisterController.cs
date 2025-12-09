@@ -71,7 +71,7 @@
             Func<Task<IEnumerable<EnforcementActionFileViewModel>>> getEnforcementActionFiles)
         {
             int currentYear = string.IsNullOrWhiteSpace(optionsCurrentYear)
-                ? DateTime.UtcNow.Year
+                ? getUtcNow().Year
                 : int.Parse(optionsCurrentYear);
 
             int previousYear = currentYear - 1;
