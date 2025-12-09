@@ -27,11 +27,35 @@ public class PublicRegisterLogicTests
             urlOptionsBusinessAndEnvironmentUrl: "https://defra.example.org/business",
             defraHelplineEmail: "help@example.org",
             urlOptionsPublicRegisterScottishProtectionAgency: "https://defra.example.org/spa",
-            getUtcNow: () => new DateTime(2025, 12, 8),
-            getLatestFilePropertiesForPrefixes: (folderPrefixes) =>
+            getUtcNow: () => new DateTime(2025, 12, 8), // today
+            getLatestFilePropertiesForPrefixes: folderPrefixes =>
             {
                 capturedPrefixes = folderPrefixes;
-                return Task.FromResult(new Dictionary<string, PublicRegisterBlobModel>());
+                return Task.FromResult(new Dictionary<string, PublicRegisterBlobModel>
+                {
+                    {
+                        "2025", new PublicRegisterBlobModel
+                        {
+                            ContentLength = "132629",
+                            EnforcementActionItems = null,
+                            FileType = "CSV",
+                            LastModified = new DateTime(2025, 12, 7, 19, 59, 58), // yesterday
+                            Name = "2025/Public_Register_Producers_27_November_2025.csv",
+                            PublishedDate = new DateTime(2025, 11, 3, 23, 57, 56), // published previously (as seen in dev storage)
+                        }
+                    },
+                    {
+                        "2026", new PublicRegisterBlobModel
+                        {
+                            ContentLength = "25883",
+                            EnforcementActionItems = null,
+                            FileType = "CSV",
+                            LastModified = new DateTime(2025, 12, 7, 19, 45, 46), // yesterday
+                            Name = "2026/Public_Register_Producers_27_November_2025.csv",
+                            PublishedDate = new DateTime(2025, 11, 3, 23, 59, 59), // published previously (as seen in dev storage)
+                        }
+                    },
+                });
             },
             getComplianceSchemeFileProperties: () => Task.FromResult(new PublicRegisterBlobModel()),
             getEnforcementActionFiles: () => Task.FromResult(new List<EnforcementActionFileViewModel>().AsEnumerable()));
@@ -51,29 +75,36 @@ public class PublicRegisterLogicTests
             PublishedDate = "30 September 2025",
             Currentyear = "2025",
             Nextyear = "2026",
-            LastUpdated = "30 September 2025",
+            LastUpdated = "7 December 2025",
             ProducerRegisteredFile = new PublicRegisterFileViewModel
             {
                 DatePublished = "30 September 2025",
-                DateLastModified = "30 September 2025",
-                FileName = null,
-                FileSize = "0",
-                FileType = "CSV"
+                DateLastModified = "7 December 2025",
+                FileName = "2025/Public_Register_Producers_27_November_2025.csv",
+                FileSize = "132629",
+                FileType = "CSV",
             },
-            ProducerRegisteredFileNextYear = null,
+            ProducerRegisteredFileNextYear = new PublicRegisterFileViewModel
+            {
+                DatePublished = "30 September 2025",
+                DateLastModified = "7 December 2025",
+                FileName = "2026/Public_Register_Producers_27_November_2025.csv",
+                FileSize = "25883",
+                FileType = "CSV",
+            },
             ComplianceSchemeRegisteredFile = new PublicRegisterFileViewModel
             {
                 DatePublished = "30 September 2025",
-                DateLastModified = "30 September 2025",
+                DateLastModified = "7 December 2025",
                 FileName = null,
                 FileSize = "0",
-                FileType = "CSV"
+                FileType = "CSV",
             },
             EnforcementActionFiles = new List<EnforcementActionFileViewModel>(),
             EnglishEnforcementActionFile = null,
             WelshEnforcementActionFile = null,
             NortherIrishEnforcementActionFile = null,
-            ScottishEnforcementActionFileUrl = "https://defra.example.org/spa"
+            ScottishEnforcementActionFileUrl = "https://defra.example.org/spa",
         }, options => options
             .Excluding(x => x.BackLinkToDisplay)
             .Excluding(x => x.CurrentPage)
