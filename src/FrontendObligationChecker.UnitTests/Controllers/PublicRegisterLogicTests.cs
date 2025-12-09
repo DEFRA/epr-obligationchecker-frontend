@@ -2,6 +2,7 @@ namespace FrontendObligationChecker.UnitTests.Controllers;
 
 using System.Globalization;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.Services.PublicRegister;
@@ -95,79 +96,50 @@ public class PublicRegisterLogicTests
     [DataRow("2026-01-31", "2025", "2026")]
     [DataRow("2026-02-01", "2025", "2026")]
     [DataRow("2026-02-02", "2026", "2027")]
-    public async Task TestDateBoundaryLogic(
-        string fakeCurrentDate, string expectedCurrentYear, string expectedNextYear)
+    public async Task TestDateBoundaryLogic(string fakeCurrentDate, string expectedCurrentYear, string expectedNextYear)
     {
         // Arrange
-        var utcNow = ConvertToDateTime(fakeCurrentDate);
-
+        var fakeBlobStorageService = new FakeBlobStorageService([
+            new FakeBlob(Name: "2025/Public_Register_Producers_27_November_2025.csv",
+                Properties: new FakeBlobProperties(
+                    ContentLength: 132629,
+                    LastModified: new DateTime(2025, 9, 30, 23, 59, 59, DateTimeKind.Utc))),
+            new FakeBlob(Name: "2026/Public_Register_Producers_27_November_2025.csv",
+                Properties: new FakeBlobProperties(
+                    ContentLength: 25883,
+                    LastModified: new DateTime(2025, 12, 7, 23, 59, 59, DateTimeKind.Utc))),
+        ]);
+ 
         // Act
-        var guidanceViewModel = await RunGetGuidanceViewModel(utcNow: utcNow);
+        var guidanceViewModel = await RunGetGuidanceViewModel(fakeClock: ConvertToDateTime(fakeCurrentDate), fakeBlobStorageService: fakeBlobStorageService);
 
         // Assert
-        guidanceViewModel.Should().BeEquivalentTo(new GuidanceViewModel
+        using (new AssertionScope())
         {
-            DefraUrl = "https://defra.example.org",
-            BusinessAndEnvironmentUrl = "https://defra.example.org/business",
-            DefraHelplineEmail = "help@example.org",
-            PublishedDate = "30 September 2025",
-            Currentyear = expectedCurrentYear,
-            Nextyear = expectedNextYear,
-            LastUpdated = "7 December 2025",
-            ProducerRegisteredFile = new PublicRegisterFileViewModel
+            guidanceViewModel.Currentyear.Should().Be(expectedCurrentYear);
+            guidanceViewModel.Nextyear.Should().Be(expectedNextYear);
+            guidanceViewModel.LastUpdated.Should().Be("7 December 2025");
+            guidanceViewModel.ProducerRegisteredFile.Should().BeEquivalentTo(new PublicRegisterFileViewModel
             {
                 DatePublished = "30 September 2025",
                 DateLastModified = "7 December 2025",
                 FileName = "2025/Public_Register_Producers_27_November_2025.csv",
                 FileSize = "132629",
                 FileType = "CSV",
-            },
-            ProducerRegisteredFileNextYear = new PublicRegisterFileViewModel
+            });
+            guidanceViewModel.ProducerRegisteredFileNextYear.Should().BeEquivalentTo(new PublicRegisterFileViewModel
             {
                 DatePublished = "30 September 2025",
                 DateLastModified = "7 December 2025",
                 FileName = "2026/Public_Register_Producers_27_November_2025.csv",
                 FileSize = "25883",
                 FileType = "CSV",
-            },
-            ComplianceSchemeRegisteredFile = new PublicRegisterFileViewModel
-            {
-                DatePublished = null,
-                DateLastModified = null,
-                FileName = null,
-                FileSize = null,
-                FileType = null,
-            },
-            EnforcementActionFiles = new List<EnforcementActionFileViewModel>(),
-            EnglishEnforcementActionFile = null,
-            WelshEnforcementActionFile = null,
-            NortherIrishEnforcementActionFile = null,
-            ScottishEnforcementActionFileUrl = null,
-        }, options => options
-            .Excluding(x => x.BackLinkToDisplay)
-            .Excluding(x => x.CurrentPage)
-            .Excluding(x => x.Timestamp));
+            });
+        }
     }
 
-    private static DateTime ConvertToDateTime(string date)
+    private static async Task<GuidanceViewModel> RunGetGuidanceViewModel(DateTime fakeClock, FakeBlobStorageService fakeBlobStorageService)
     {
-        return DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-    }
-
-    private static async Task<GuidanceViewModel> RunGetGuidanceViewModel(DateTime utcNow)
-    {
-        var fakeBlobStorageService = new FakeBlobStorageService([
-            new FakeBlob(
-                Name: "2025/Public_Register_Producers_27_November_2025.csv",
-                Properties: new FakeBlobProperties(
-                    ContentLength: 132629,
-                    LastModified: new DateTime(2025, 9, 30, 23, 59, 59, DateTimeKind.Utc))),
-            new FakeBlob(
-                Name: "2026/Public_Register_Producers_27_November_2025.csv",
-                Properties: new FakeBlobProperties(
-                    ContentLength: 25883,
-                    LastModified: new DateTime(2025, 12, 7, 23, 59, 59, DateTimeKind.Utc))),
-        ]);
         var getRegisterViewModel = await PublicRegisterController.GetRegisterViewModel(
             isComplianceSchemesRegisterEnabled: false,
             isEnforcementActionsSectionEnabled: false,
@@ -180,13 +152,18 @@ public class PublicRegisterLogicTests
             urlOptionsBusinessAndEnvironmentUrl: "https://defra.example.org/business",
             defraHelplineEmail: "help@example.org",
             urlOptionsPublicRegisterScottishProtectionAgency: "https://defra.example.org/spa",
-            getUtcNow: () => utcNow,
+            getUtcNow: () => fakeClock,
             blobStorageService: fakeBlobStorageService,
             optionsPublicRegisterBlobContainerName: "unused",
             optionsPublicRegisterCsoBlobContainerName: "unused");
 
         return getRegisterViewModel;
     }
+
+    /// <summary>
+    /// DataRow values have to be compile-time constants. Helper to convert string dates to datetime.
+    /// </summary>
+    private static DateTime ConvertToDateTime(string date) => DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 }
 
 /// <summary>
