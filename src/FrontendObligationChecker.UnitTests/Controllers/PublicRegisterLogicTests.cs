@@ -33,12 +33,46 @@ public class PublicRegisterLogicTests
             getComplianceSchemeFileProperties: () => Task.FromResult(new PublicRegisterBlobModel()),
             getEnforcementActionFiles: () => Task.FromResult(new List<EnforcementActionFileViewModel>().AsEnumerable()));
 
-        Assert.IsNotNull(actual);
-
         capturedPrefixes.Should().BeEquivalentTo(new[]
         {
             "2025",
             "2026",
         });
+
+        actual.Should().BeEquivalentTo(new GuidanceViewModel
+        {
+            DefraUrl = "https://defra.example.org",
+            BusinessAndEnvironmentUrl = "https://defra.example.org/business",
+            DefraHelplineEmail = "help@example.org",
+            PublishedDate = "30 September 2025",
+            Currentyear = "2025",
+            Nextyear = "2026",
+            LastUpdated = "30 September 2025",
+            ProducerRegisteredFile = new PublicRegisterFileViewModel
+            {
+                DatePublished = "30 September 2025",
+                DateLastModified = "30 September 2025",
+                FileName = null,
+                FileSize = "0",
+                FileType = "CSV"
+            },
+            ProducerRegisteredFileNextYear = null,
+            ComplianceSchemeRegisteredFile = new PublicRegisterFileViewModel
+            {
+                DatePublished = "30 September 2025",
+                DateLastModified = "30 September 2025",
+                FileName = null,
+                FileSize = "0",
+                FileType = "CSV"
+            },
+            EnforcementActionFiles = new List<EnforcementActionFileViewModel>(),
+            EnglishEnforcementActionFile = null,
+            WelshEnforcementActionFile = null,
+            NortherIrishEnforcementActionFile = null,
+            ScottishEnforcementActionFileUrl = "https://defra.example.org/spa"
+        }, options => options
+            .Excluding(x => x.BackLinkToDisplay)
+            .Excluding(x => x.CurrentPage)
+            .Excluding(x => x.Timestamp));
     }
 }
