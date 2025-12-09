@@ -52,22 +52,22 @@ public class PublicRegisterLogicTests
             DefraUrl = "https://defra.example.org",
             BusinessAndEnvironmentUrl = "https://defra.example.org/business",
             DefraHelplineEmail = "help@example.org",
-            PublishedDate = "30 September 2025",
-            Currentyear = "2025",
-            Nextyear = "2026",
-            LastUpdated = "7 December 2025",
+            PublishedDate = "30 September 2025", // shown in footer, controlled via config only
+            Currentyear = "2025", // shown in download link as "2027 Public register of producers"
+            Nextyear = "2026", // shown in download link as "2027 Public register of producers"
+            LastUpdated = "7 December 2025", // shown in footer - is the newest file's modified date
             ProducerRegisteredFile = new PublicRegisterFileViewModel
             {
-                DatePublished = "30 September 2025",
-                DateLastModified = "7 December 2025",
+                DatePublished = "30 September 2025", // unused in UI
+                DateLastModified = "7 December 2025", // unused in UI
                 FileName = "2025/Public_Register_Producers_27_November_2025.csv",
                 FileSize = "132629",
                 FileType = "CSV",
             },
             ProducerRegisteredFileNextYear = new PublicRegisterFileViewModel
             {
-                DatePublished = "30 September 2025",
-                DateLastModified = "7 December 2025",
+                DatePublished = "30 September 2025", // unused in UI
+                DateLastModified = "7 December 2025", // unused in UI
                 FileName = "2026/Public_Register_Producers_27_November_2025.csv",
                 FileSize = "25883",
                 FileType = "CSV",
@@ -94,16 +94,17 @@ public class PublicRegisterLogicTests
     [TestMethod]
     // Characterization tests - capture current behaviour of logic.
     // before PublicRegister__PublicRegisterNextYearStartMonthAndDay
-    [DataRow("2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "8 December 2025", "10000354", null, null, null)] // now
-    [DataRow("2025-12-31", "2025", "2026", "30 December 2025", "2025/Public_Register_Producers_30_December_2025.csv", "30 December 2025", "10000376", null, null, null)] // end of year
-    [DataRow("2026-01-01", "2025", "2026", "31 December 2025", "2025/Public_Register_Producers_31_December_2025.csv", "31 December 2025", "10000377", null, null, null)] // new-year's day
-    [DataRow("2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_31_December_2025.csv", "30 January 2026", "10000377", "2026/Public_Register_Producers_30_January_2026.csv", "30 January 2026", "10000407")] // last day of showing last year's register as per config PublicRegister__PublicRegisterPreviousYearEndMonthAndDay
-    [DataRow("2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_December_2025.csv", "31 January 2026", "10000377", "2026/Public_Register_Producers_31_January_2026.csv", "31 January 2026", "10000408")]
-    [DataRow("2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "1 February 2026", "10000409", null, null, null)]
+    [DataRow("2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "10000354", null, null)] // now
+    [DataRow("2025-12-31", "2025", "2026", "30 December 2025", "2025/Public_Register_Producers_30_December_2025.csv", "10000376", null, null)] // end of year
+    [DataRow("2026-01-01", "2025", "2026", "31 December 2025", "2025/Public_Register_Producers_31_December_2025.csv", "10000377", null, null)] // new-year's day
+    [DataRow("2026-01-02", "2025", "2026", "1 January 2026", "2025/Public_Register_Producers_31_December_2025.csv", "10000377", "2026/Public_Register_Producers_01_January_2026.csv", "10000378")] // 2nd Jan
+    [DataRow("2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_31_December_2025.csv", "10000377", "2026/Public_Register_Producers_30_January_2026.csv", "10000407")] // last day of showing last year's register as per config PublicRegister__PublicRegisterPreviousYearEndMonthAndDay
+    [DataRow("2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_December_2025.csv", "10000377", "2026/Public_Register_Producers_31_January_2026.csv", "10000408")]
+    [DataRow("2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "10000409", null, null)]
     // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
     public async Task TestDateBoundaryLogic(string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
-        string expectedFile1Filename, string expectedFile1Modified, string expectedFile1Size,
-        string? expectedFile2Filename, string expectedFile2Modified, string expectedFile2Size)
+        string expectedFile1Filename, string expectedFile1Size,
+        string? expectedFile2Filename, string expectedFile2Size)
     {
         var fakeCurrentDateTime = ConvertToDateTime(fakeCurrentDate); // boilerplate, can't use datetimes directly in DataRow as they aren't compile-time constants
 
@@ -123,7 +124,6 @@ public class PublicRegisterLogicTests
             guidanceViewModel.Nextyear.Should().Be(expectedNextFileDisplayYear);
             guidanceViewModel.LastUpdated.Should().Be(expectedPageLastUpdated);
             guidanceViewModel.ProducerRegisteredFile.FileName.Should().Be(expectedFile1Filename);
-            guidanceViewModel.ProducerRegisteredFile.DateLastModified.Should().Be(expectedFile1Modified);
             guidanceViewModel.ProducerRegisteredFile.FileSize.Should().Be(expectedFile1Size);
             if (expectedFile2Filename == null)
             {
@@ -133,7 +133,6 @@ public class PublicRegisterLogicTests
             {
                 guidanceViewModel.ProducerRegisteredFileNextYear.Should().NotBeNull();
                 guidanceViewModel.ProducerRegisteredFileNextYear.FileName.Should().Be(expectedFile2Filename);
-                guidanceViewModel.ProducerRegisteredFileNextYear.DateLastModified.Should().Be(expectedFile2Modified);
                 guidanceViewModel.ProducerRegisteredFileNextYear.FileSize.Should().Be(expectedFile2Size);
             }
         }
