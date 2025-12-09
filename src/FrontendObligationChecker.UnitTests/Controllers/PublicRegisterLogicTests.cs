@@ -1,5 +1,6 @@
 namespace FrontendObligationChecker.UnitTests.Controllers;
 
+using FluentAssertions;
 using FrontendObligationChecker.Controllers;
 using FrontendObligationChecker.Models.BlobReader;
 using FrontendObligationChecker.ViewModels.PublicRegister;
@@ -33,9 +34,11 @@ public class PublicRegisterLogicTests
             getEnforcementActionFiles: () => Task.FromResult(new List<EnforcementActionFileViewModel>().AsEnumerable()));
 
         Assert.IsNotNull(actual);
-        Assert.IsNotNull(capturedPrefixes);
-        Assert.AreEqual(2, capturedPrefixes.Count);
-        Assert.AreEqual("2025", capturedPrefixes[0]);
-        Assert.AreEqual("2026", capturedPrefixes[1]);
+
+        capturedPrefixes.Should().BeEquivalentTo(new[]
+        {
+            "2025",
+            "2026",
+        });
     }
 }
