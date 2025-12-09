@@ -47,9 +47,9 @@
                 defraHelplineEmail: _emailAddressOptions.DefraHelpline,
                 urlOptionsPublicRegisterScottishProtectionAgency: _urlOptions.PublicRegisterScottishProtectionAgency,
                 getUtcNow: () => DateTime.UtcNow,
-                getLatestFilePropertiesForPrefixes: async folderPrefixes => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes),
-                getComplianceSchemeFileProperties: async () => await _blobStorageService.GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName),
-                getEnforcementActionFiles: async () => await _blobStorageService.GetEnforcementActionFiles());
+                blobStorageService: blobStorageService,
+                optionsPublicRegisterBlobContainerName: _options.PublicRegisterBlobContainerName,
+                optionsPublicRegisterCsoBlobContainerName: _options.PublicRegisterCsoBlobContainerName);
             return View("Guidance", viewModel);
         }
 
@@ -66,9 +66,9 @@
             string defraHelplineEmail,
             string urlOptionsPublicRegisterScottishProtectionAgency,
             Func<DateTime> getUtcNow,
-            Func<List<string>, Task<Dictionary<string, PublicRegisterBlobModel>>> getLatestFilePropertiesForPrefixes,
-            Func<Task<PublicRegisterBlobModel>> getComplianceSchemeFileProperties,
-            Func<Task<IEnumerable<EnforcementActionFileViewModel>>> getEnforcementActionFiles)
+            IBlobStorageService blobStorageService,
+            string? optionsPublicRegisterBlobContainerName,
+            string? optionsPublicRegisterCsoBlobContainerName)
         {
             int currentYear = string.IsNullOrWhiteSpace(optionsCurrentYear)
                 ? getUtcNow().Year
@@ -100,7 +100,8 @@
             }
 
             // dictionary key is the year, e.g. "2025"
-            var producerBlobModels = await getLatestFilePropertiesForPrefixes(folderPrefixes);
+            var producerBlobModels = await blobStorageService
+                .GetLatestFilePropertiesAsync(optionsPublicRegisterBlobContainerName, folderPrefixes);
 
             // Determine which year to display as "current"
             PublicRegisterBlobModel? producerBlobModelCurrentYear = null;
@@ -149,14 +150,15 @@
 
             if (isComplianceSchemesRegisterEnabled)
             {
-                var complianceBlobModel = await getComplianceSchemeFileProperties();
+                var complianceBlobModel = await blobStorageService
+                    .GetLatestFilePropertiesAsync(optionsPublicRegisterCsoBlobContainerName);
 
                 viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdatedFormatted);
             }
 
             if (isEnforcementActionsSectionEnabled)
             {
-                var enforcementActionFiles = (await getEnforcementActionFiles()).ToList();
+                var enforcementActionFiles = await blobStorageService.GetEnforcementActionFiles();
 
                 viewModel.EnforcementActionFiles = enforcementActionFiles;
 
