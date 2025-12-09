@@ -1,5 +1,6 @@
 namespace FrontendObligationChecker.UnitTests.Controllers;
 
+using System.Diagnostics;
 using System.Globalization;
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -91,54 +92,70 @@ public class PublicRegisterLogicTests
     }
 
     [TestMethod]
-    [DataRow("2025-12-08", "2025", "2026")]
-    [DataRow("2026-01-01", "2025", "2026")]
-    [DataRow("2026-01-31", "2025", "2026")]
-    [DataRow("2026-02-01", "2025", "2026")]
-    [DataRow("2026-02-02", "2026", "2027")]
-    public async Task TestDateBoundaryLogic(string fakeCurrentDate, string expectedCurrentYear, string expectedNextYear)
+    // before PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    [DataRow("2025-12-09", "2025", "2026", "8 December 2025")] // now
+    [DataRow("2025-12-31", "2025", "2026", "30 December 2025")] // end of year
+    [DataRow("2026-01-01", "2025", "2026", "31 December 2025")] // new-year's day
+    [DataRow("2026-01-31", "2025", "2026", "30 January 2026")] // last day of showing last year's register as per config PublicRegister__PublicRegisterPreviousYearEndMonthAndDay
+    [DataRow("2026-02-01", "2025", "2026", "31 January 2026")]
+    [DataRow("2026-02-02", "2026", "2027", "1 February 2026")]
+    // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    public async Task TestDateBoundaryLogic(string fakeCurrentDate, string expectedCurrentYear, string expectedNextYear, string expectedPageLastUpdated)
     {
+        var fakeCurrentDateTime = ConvertToDateTime(fakeCurrentDate); // boilerplate, can't use datetimes directly in DataRow as they aren't compile-time constants
+
         // Arrange
-        var fakeBlobStorageService = new FakeBlobStorageService([
-            new FakeBlob(Name: "2025/Public_Register_Producers_27_November_2025.csv",
-                Properties: new FakeBlobProperties(
-                    ContentLength: 132629,
-                    LastModified: new DateTime(2025, 9, 30, 23, 59, 59, DateTimeKind.Utc))),
-            new FakeBlob(Name: "2026/Public_Register_Producers_27_November_2025.csv",
-                Properties: new FakeBlobProperties(
-                    ContentLength: 25883,
-                    LastModified: new DateTime(2025, 12, 7, 23, 59, 59, DateTimeKind.Utc))),
-        ]);
- 
+        // Add fake blob CSVs up to "yesterday"
+        var registerCsvBlobList = BuildRealisticPublicRegisterCsvBlobList(upToDate: fakeCurrentDateTime.AddDays(-1));
+        var fakeBlobStorageService = new FakeBlobStorageService(registerCsvBlobList);
+
         // Act
-        var guidanceViewModel = await RunGetGuidanceViewModel(fakeClock: ConvertToDateTime(fakeCurrentDate), fakeBlobStorageService: fakeBlobStorageService);
+        // run the logic under test
+        var guidanceViewModel = await RunGetGuidanceViewModel(fakeCurrentDateTime, fakeBlobStorageService);
 
         // Assert
         using (new AssertionScope())
         {
             guidanceViewModel.Currentyear.Should().Be(expectedCurrentYear);
             guidanceViewModel.Nextyear.Should().Be(expectedNextYear);
-            guidanceViewModel.LastUpdated.Should().Be("7 December 2025");
-            guidanceViewModel.ProducerRegisteredFile.Should().BeEquivalentTo(new PublicRegisterFileViewModel
+            guidanceViewModel.LastUpdated.Should().Be(expectedPageLastUpdated);
+            guidanceViewModel.ProducerRegisteredFile.Should().BeEquivalentTo(new
             {
-                DatePublished = "30 September 2025",
-                DateLastModified = "7 December 2025",
-                FileName = "2025/Public_Register_Producers_27_November_2025.csv",
-                FileSize = "132629",
+                DateLastModified = "8 December 2025",
+                FileName = "2025/Public_Register_Producers_08_December_2025.csv",
+                FileSize = "10000354", // 354th fake file in fake blob store
                 FileType = "CSV",
             });
-            guidanceViewModel.ProducerRegisteredFileNextYear.Should().BeEquivalentTo(new PublicRegisterFileViewModel
-            {
-                DatePublished = "30 September 2025",
-                DateLastModified = "7 December 2025",
-                FileName = "2026/Public_Register_Producers_27_November_2025.csv",
-                FileSize = "25883",
-                FileType = "CSV",
-            });
+            guidanceViewModel.ProducerRegisteredFileNextYear.Should().BeNull(); // no blob available for 2026
         }
     }
 
-    private static async Task<GuidanceViewModel> RunGetGuidanceViewModel(DateTime fakeClock, FakeBlobStorageService fakeBlobStorageService)
+    private static List<FakeBlob> BuildRealisticPublicRegisterCsvBlobList(DateTime upToDate)
+    {
+        var fakeBlobs = new List<FakeBlob>();
+        var startDate = new DateTime(2024, 12, 20); // make a few csvs for end of 2024
+        var blobDate = startDate;
+        var fakeContentLength = 10000001;
+        while (blobDate <= upToDate)
+        {
+            fakeBlobs.Add(FakeRegisterCsv(blobDate, fakeContentLength));
+            blobDate = blobDate.AddDays(1);
+            fakeContentLength++;
+        }
+
+        return fakeBlobs;
+    }
+
+    private static FakeBlob FakeRegisterCsv(DateTime dateGenerated, int contentLength)
+    {
+        DateTime lastModified = dateGenerated.AddHours(19).AddMinutes(55).AddSeconds(56); // scheduled to generate daily ~ 7pm
+        return new FakeBlob(Name: $"{dateGenerated.Year}/Public_Register_Producers_{dateGenerated:dd_MMMM_yyyy}.csv",
+            Properties: new FakeBlobProperties(
+                ContentLength: contentLength,
+                LastModified: lastModified));
+    }
+
+    private static async Task<GuidanceViewModel> RunGetGuidanceViewModel(DateTime fakeCurrentDateTime, FakeBlobStorageService fakeBlobStorageService)
     {
         var getRegisterViewModel = await PublicRegisterController.GetRegisterViewModel(
             isComplianceSchemesRegisterEnabled: false,
@@ -152,7 +169,7 @@ public class PublicRegisterLogicTests
             urlOptionsBusinessAndEnvironmentUrl: "https://defra.example.org/business",
             defraHelplineEmail: "help@example.org",
             urlOptionsPublicRegisterScottishProtectionAgency: "https://defra.example.org/spa",
-            getUtcNow: () => fakeClock,
+            getUtcNow: () => fakeCurrentDateTime,
             blobStorageService: fakeBlobStorageService,
             optionsPublicRegisterBlobContainerName: "unused",
             optionsPublicRegisterCsoBlobContainerName: "unused");
@@ -252,5 +269,10 @@ public class FakeBlobStorageService(List<FakeBlob> fakeBlobs) : IBlobStorageServ
 }
 
 /// <param name="Name">This is the full path, e.g. '2025/Public_Register_Producers_27_November_2025.csv'</param>
-public record FakeBlob(string Name, FakeBlobProperties Properties);
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
+public record FakeBlob(string Name, FakeBlobProperties Properties)
+{
+    public string DebuggerDisplay => $"{Name}, {Properties.ContentLength}, {Properties.LastModified}";
+}
+
 public record FakeBlobProperties(int ContentLength, DateTime LastModified);
