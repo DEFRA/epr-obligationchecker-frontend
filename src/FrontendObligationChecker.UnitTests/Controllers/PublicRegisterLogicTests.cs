@@ -11,7 +11,10 @@ public class PublicRegisterLogicTests
     [TestMethod]
     public async Task TestGet()
     {
+        // Arrange
         List<string> capturedPrefixes = null;
+
+        // Act
         var actual = await PublicRegisterController.GetRegisterViewModel(
             isComplianceSchemesRegisterEnabled: true,
             isEnforcementActionsSectionEnabled: true,
@@ -33,6 +36,7 @@ public class PublicRegisterLogicTests
             getComplianceSchemeFileProperties: () => Task.FromResult(new PublicRegisterBlobModel()),
             getEnforcementActionFiles: () => Task.FromResult(new List<EnforcementActionFileViewModel>().AsEnumerable()));
 
+        // Assert
         capturedPrefixes.Should().BeEquivalentTo(new[]
         {
             "2025",
