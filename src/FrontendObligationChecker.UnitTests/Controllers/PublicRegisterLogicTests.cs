@@ -110,7 +110,7 @@ public class PublicRegisterLogicTests
 
         // Arrange
         // Add fake blob CSVs up to "yesterday"
-        var registerCsvBlobList = BuildRealisticPublicRegisterCsvBlobList(upToDate: fakeCurrentDateTime.AddDays(-1));
+        var registerCsvBlobList = BuildRealisticPublicRegisterCsvBlobList(untilDate: fakeCurrentDateTime.AddDays(-1));
         var fakeBlobStorageService = new FakeBlobStorageService(registerCsvBlobList);
 
         // Act
@@ -138,26 +138,52 @@ public class PublicRegisterLogicTests
         }
     }
 
-    private static List<FakeBlob> BuildRealisticPublicRegisterCsvBlobList(DateTime upToDate)
+    /// <summary>
+    /// Build a list of fake file entries for the fake blob storage.
+    /// Logic:
+    /// - Companies can register for next year, so there registrations available in a future year folder
+    /// - When the synapse pipeline is run it creates a file for *every* year that has regsitrations available in the range 2025-2034
+    /// - file paths are: yyyy/Public_Register_Producers_dd_MMMM_yyyy.csv where:
+    ///     - the prefix `yyyy/` is the year of the collected registrations within that file
+    ///       (which can be for the NEXT year because companies can register in advance for the following year), and...
+    ///     - the `dd_MMMM_yyyy` is when the csv file was generated
+    /// </summary>
+    private static List<FakeBlob> BuildRealisticPublicRegisterCsvBlobList(DateTime untilDate)
     {
         var fakeBlobs = new List<FakeBlob>();
-        var startDate = new DateTime(2024, 12, 20); // make a few csvs for end of 2024
+        var startDate = new DateTime(2024, 12, 20); // Start in 2024 to simulate existence of older folder(s)
         var blobDate = startDate;
-        var fakeContentLength = 10000001;
-        while (blobDate <= upToDate)
+        var fakeIncrementalContentLength = 1; // abuse the content length to give interesting unique ids to each file. In reality they would vary randomly but we need them deterministic for the tests.
+        while (blobDate <= untilDate)
         {
-            fakeBlobs.Add(FakeRegisterCsv(blobDate, fakeContentLength));
+            fakeBlobs.AddRange(
+                SimulateSynapseRun(blobDate, fakeIncrementalContentLength));
+
             blobDate = blobDate.AddDays(1);
-            fakeContentLength++;
+            fakeIncrementalContentLength++;
         }
 
         return fakeBlobs;
     }
 
-    private static FakeBlob FakeRegisterCsv(DateTime dateGenerated, int contentLength)
+    private static List<FakeBlob> SimulateSynapseRun(DateTime pipelineRunDate, int incrementalContentLength)
+    {
+        var fakeBlobs = new List<FakeBlob>();
+        var registrationYearsWithData = new[] { 2024, 2025, 2026 };
+        // simulate a single run of the synapse pipeline
+        foreach (var registrationYear in registrationYearsWithData)
+        {
+            var hackyContentLengthWithYearAndIncrement = (registrationYear * 10000) + incrementalContentLength;
+            fakeBlobs.Add(FakeRegisterCsv(registrationYear, pipelineRunDate, hackyContentLengthWithYearAndIncrement));
+        }
+
+        return fakeBlobs;
+    }
+
+    private static FakeBlob FakeRegisterCsv(int registrationYear, DateTime dateGenerated, int contentLength)
     {
         DateTime lastModified = dateGenerated.AddHours(19).AddMinutes(55).AddSeconds(56); // scheduled to generate daily ~ 7pm
-        return new FakeBlob(Name: $"{dateGenerated.Year}/Public_Register_Producers_{dateGenerated:dd_MMMM_yyyy}.csv",
+        return new FakeBlob(Name: $"{registrationYear}/Public_Register_Producers_{dateGenerated:dd_MMMM_yyyy}.csv",
             Properties: new FakeBlobProperties(
                 ContentLength: contentLength,
                 LastModified: lastModified));
