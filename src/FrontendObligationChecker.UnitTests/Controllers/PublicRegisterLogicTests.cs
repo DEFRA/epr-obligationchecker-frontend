@@ -93,16 +93,21 @@ public class PublicRegisterLogicTests
 
     [TestMethod]
     // Characterization tests - capture current behaviour of logic.
-    // before PublicRegister__PublicRegisterNextYearStartMonthAndDay
-    [DataRow("2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", null, null)] // now
-    [DataRow("2025-12-31", "2025", "2026", "30 December 2025", "2025/Public_Register_Producers_30_December_2025.csv", "20250376", null, null)] // end of year
-    [DataRow("2026-01-01", "2025", "2026", "31 December 2025", "2025/Public_Register_Producers_31_December_2025.csv", "20250377", "2026/Public_Register_Producers_31_December_2025.csv", "20260377")] // new-year's day
-    [DataRow("2026-01-02", "2025", "2026", "1 January 2026", "2025/Public_Register_Producers_01_January_2026.csv", "20250378", "2026/Public_Register_Producers_01_January_2026.csv", "20260378")] // 2nd Jan
-    [DataRow("2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")] // last day of showing last year's register as per config PublicRegister__PublicRegisterPreviousYearEndMonthAndDay
-    [DataRow("2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")]
-    [DataRow("2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)]
-    // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
-    public async Task TestDateBoundaryLogic(string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
+    [DataRow(false, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", null, null)] // now
+    [DataRow(false, "2025-12-31", "2025", "2026", "30 December 2025", "2025/Public_Register_Producers_30_December_2025.csv", "20250376", null, null)] // end of year
+    [DataRow(false, "2026-01-01", "2025", "2026", "31 December 2025", "2025/Public_Register_Producers_31_December_2025.csv", "20250377", "2026/Public_Register_Producers_31_December_2025.csv", "20260377")] // new-yearfalse, 's day
+    [DataRow(false, "2026-01-02", "2025", "2026", "1 January 2026", "2025/Public_Register_Producers_01_January_2026.csv", "20250378", "2026/Public_Register_Producers_01_January_2026.csv", "20260378")] // 2nd Jan
+    [DataRow(false, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")] // last day of showing last year's register as per config PublicRegister__PublicRegisterPreviousYearEndMonthAndDay
+    [DataRow(false, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")]
+    [DataRow(false, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    [DataRow(true, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", "2026/Public_Register_Producers_08_December_2025.csv", "20260354")] // now
+    [DataRow(true, "2025-12-31", "2025", "2026", "30 December 2025", "2025/Public_Register_Producers_30_December_2025.csv", "20250376", "2026/Public_Register_Producers_30_December_2025.csv", "20260376")] // end of year
+    [DataRow(true, "2026-01-01", "2025", "2026", "31 December 2025", "2025/Public_Register_Producers_31_December_2025.csv", "20250377", "2026/Public_Register_Producers_31_December_2025.csv", "20260377")] // new-yearfalse, 's day
+    [DataRow(true, "2026-01-02", "2025", "2026", "1 January 2026", "2025/Public_Register_Producers_01_January_2026.csv", "20250378", "2026/Public_Register_Producers_01_January_2026.csv", "20260378")] // 2nd Jan
+    [DataRow(true, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")] // last day of showing last year's register as per config PublicRegister__PublicRegisterPreviousYearEndMonthAndDay
+    [DataRow(true, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")]
+    [DataRow(true, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    public async Task TestDateBoundaryLogic(bool publicRegisterNextYearEnabled, string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
         string expectedFile1Filename, string expectedFile1Size,
         string? expectedFile2Filename, string expectedFile2Size)
     {
@@ -115,7 +120,7 @@ public class PublicRegisterLogicTests
 
         // Act
         // run the logic under test
-        var guidanceViewModel = await RunGetGuidanceViewModel(fakeCurrentDateTime, fakeBlobStorageService);
+        var guidanceViewModel = await RunGetGuidanceViewModel(fakeCurrentDateTime, fakeBlobStorageService, publicRegisterNextYearEnabled);
 
         // Assert
         using (new AssertionScope())
@@ -189,12 +194,12 @@ public class PublicRegisterLogicTests
                 LastModified: lastModified));
     }
 
-    private static async Task<GuidanceViewModel> RunGetGuidanceViewModel(DateTime fakeCurrentDateTime, FakeBlobStorageService fakeBlobStorageService)
+    private static async Task<GuidanceViewModel> RunGetGuidanceViewModel(DateTime fakeCurrentDateTime, FakeBlobStorageService fakeBlobStorageService, bool publicRegisterNextYearEnabled)
     {
         var getRegisterViewModel = await PublicRegisterController.GetRegisterViewModel(
             isComplianceSchemesRegisterEnabled: false,
             isEnforcementActionsSectionEnabled: false,
-            isPublicRegisterNextYearEnabled: false,
+            isPublicRegisterNextYearEnabled: publicRegisterNextYearEnabled,
             optionsCurrentYear: null, // This is null in Production, looks like it's only used for testing
             optionsPublicRegisterPreviousYearEndMonthAndDay: "02-01",
             optionsPublicRegisterNextYearStartMonthAndDay: "11-01",
