@@ -100,6 +100,9 @@ public class PublicRegisterLogicTests
     [DataRow(false, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")]
     [DataRow(false, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")] // Configured date for PublicRegister__PublicRegisterPreviousYearEndMonthAndDay "02-01"
     [DataRow(false, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    [DataRow(false, "2026-10-31", "2026", "2027", "30 October 2026", "2026/Public_Register_Producers_30_October_2026.csv", "20260680", null, null)]
+    [DataRow(false, "2026-11-01", "2026", "2027", "31 October 2026", "2026/Public_Register_Producers_31_October_2026.csv", "20260681", null, null)] // Configured date for PublicRegister__PublicRegisterNextYearStartMonthAndDay "11-01"
+    [DataRow(false, "2026-11-02", "2026", "2027", "1 November 2026", "2026/Public_Register_Producers_01_November_2026.csv", "20260682", null, null)]
     [DataRow(true, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", "2026/Public_Register_Producers_08_December_2025.csv", "20260354")] // now
     [DataRow(true, "2025-12-31", "2025", "2026", "30 December 2025", "2025/Public_Register_Producers_30_December_2025.csv", "20250376", "2026/Public_Register_Producers_30_December_2025.csv", "20260376")] // end of year
     [DataRow(true, "2026-01-01", "2025", "2026", "31 December 2025", "2025/Public_Register_Producers_31_December_2025.csv", "20250377", "2026/Public_Register_Producers_31_December_2025.csv", "20260377")] // new-year's day
@@ -107,6 +110,9 @@ public class PublicRegisterLogicTests
     [DataRow(true, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")]
     [DataRow(true, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")] // Configured date for PublicRegister__PublicRegisterPreviousYearEndMonthAndDay "02-01"
     [DataRow(true, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    [DataRow(true, "2026-10-31", "2026", "2027", "30 October 2026", "2026/Public_Register_Producers_30_October_2026.csv", "20260680", null, null)]
+    [DataRow(true, "2026-11-01", "2026", "2027", "31 October 2026", "2026/Public_Register_Producers_31_October_2026.csv", "20260681", "2027/Public_Register_Producers_31_October_2026.csv", "20270681")] // Configured date for PublicRegister__PublicRegisterNextYearStartMonthAndDay "11-01"
+    [DataRow(true, "2026-11-02", "2026", "2027", "1 November 2026", "2026/Public_Register_Producers_01_November_2026.csv", "20260682", "2027/Public_Register_Producers_01_November_2026.csv", "20270682")]
     public async Task TestDateBoundaryLogic(bool publicRegisterNextYearEnabled, string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
         string expectedFile1Filename, string expectedFile1Size,
         string? expectedFile2Filename, string expectedFile2Size)
@@ -174,7 +180,7 @@ public class PublicRegisterLogicTests
     private static List<FakeBlob> SimulateSynapseRun(DateTime pipelineRunDate, int incrementalContentLength)
     {
         var fakeBlobs = new List<FakeBlob>();
-        var registrationYearsWithData = new[] { 2024, 2025, 2026 };
+        var registrationYearsWithData = new[] { 2024, 2025, 2026, 2027 };
         // simulate a single run of the synapse pipeline
         foreach (var registrationYear in registrationYearsWithData)
         {
