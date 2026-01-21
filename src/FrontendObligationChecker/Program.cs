@@ -3,89 +3,90 @@ using FrontendObligationChecker.FeatureManagement;
 using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Azure;
 using Microsoft.FeatureManagement;
 
-namespace FrontendObligationChecker
+namespace FrontendObligationChecker;
+
+public partial class Program
 {
-    public partial class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Logging.ClearProviders();
+        builder.Logging.AddConsole();
+        builder.Logging.AddApplicationInsights();
+
+        builder.Services.AddFeatureManagement().UseDisabledFeaturesHandler(new RedirectDisabledFeatureHandler());
+
+        builder.Services.ConfigureOptions(builder.Configuration);
+
+        string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
+
+        builder.Services.AddAntiforgery(opts =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
+            opts.Cookie.Path = pathBase;
+            opts.Cookie.HttpOnly = true;
+            opts.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            opts.Cookie.SameSite = SameSiteMode.Strict;
+        });
 
-            builder.Services.AddFeatureManagement().UseDisabledFeaturesHandler(new RedirectDisabledFeatureHandler());
+        builder.Services.AddMemoryCache();
 
-            builder.Services.ConfigureOptions(builder.Configuration);
+        builder.Services
+            .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
+            .AddViewLocalization()
+            .AddDataAnnotationsLocalization();
 
-            string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
+        builder.Services
+            .ConfigureLocalization()
+            .ConfigureSession(builder.Configuration);
 
-            builder.Services.AddAntiforgery(opts =>
-            {
-                opts.Cookie.Name = builder.Configuration.GetValue<string>("COOKIE_OPTIONS:AntiForgeryCookieName");
-                opts.Cookie.Path = pathBase;
+        builder.Services.AddApplicationInsightsTelemetry();
 
-                opts.Cookie.HttpOnly = true;
-                opts.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                opts.Cookie.SameSite = SameSiteMode.Strict;
-            });
+        builder.Services.AddHsts(options =>
+        {
+            options.IncludeSubDomains = true;
+            options.MaxAge = TimeSpan.FromDays(365);
+        });
 
-            builder.Services.AddMemoryCache();
+        builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
-            builder.Services
-                .AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
-                .AddViewLocalization()
-                .AddDataAnnotationsLocalization();
+        builder.Services.RegisterServices();
 
-            builder.Services
-                .ConfigureLocalization()
-                .ConfigureSession(builder.Configuration);
-
-            builder.Services.AddApplicationInsightsTelemetry();
-
-            builder.Services.AddHsts(options =>
-            {
-                options.IncludeSubDomains = true;
-                options.MaxAge = TimeSpan.FromDays(365);
-            });
-
-            builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
-
-            builder.Services.RegisterServices();
-
-            if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
-            {
-                GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
-            }
-
-            var app = builder.Build();
-
-            app.UsePathBase(pathBase);
-
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/error");
-            }
-
-            app.UseMiddleware<SecurityHeaderMiddleware>();
-            app.UseSession();
-
-            // This must be put after security headers middleware to prevent executing it twice when error page is rendered
-            app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseRequestLocalization();
-            app.UseMiddleware<AnalyticsCookieMiddleware>();
-            app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
-            app.MapControllers();
-            app.Run();
+        if (builder.Configuration.GetValue<string>("ByPassSessionValidation") != null)
+        {
+            GlobalData.ByPassSessionValidation = bool.Parse(builder.Configuration.GetValue<string>("ByPassSessionValidation"));
         }
+
+        var app = builder.Build();
+
+        app.UsePathBase(pathBase);
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/error");
+        }
+
+        app.UseMiddleware<SecurityHeaderMiddleware>();
+        app.UseSession();
+
+        // This must be put after security headers middleware to prevent executing it twice when error page is rendered
+        app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseAuthorization();
+        app.UseRequestLocalization();
+        app.UseMiddleware<AnalyticsCookieMiddleware>();
+        app.MapHealthChecks(builder.Configuration.GetValue<string>("HEALTH_CHECK_LIVENESS_PATH"), HealthCheckOptionBuilder.Build());
+        app.MapControllers();
+        app.Run();
     }
 }
