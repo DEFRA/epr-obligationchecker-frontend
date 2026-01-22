@@ -23,7 +23,7 @@ public class ErrorController(ILogger<ErrorController> logger) : Controller
         if (statusCode == StatusCodes.Status404NotFound)
         {
             var originalRequest = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-            logger.LogWarning("404 NotFound path: {RequestPath}{RequestQuery}", originalRequest.OriginalPath, originalRequest.OriginalQueryString);
+            logger.LogWarning("404 NotFound path: {RequestPath}{RequestQuery}", originalRequest.OriginalPath, originalRequest.OriginalQueryString ?? string.Empty);
         }
 
         return View(nameof(PageType.Error), new BaseViewModel());
