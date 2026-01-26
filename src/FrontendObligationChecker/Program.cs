@@ -68,6 +68,8 @@ public partial class Program
 
         app.UsePathBase(pathBase);
 
+        app.MapGet("/", Results.NoContent);
+
         if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
