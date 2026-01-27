@@ -4,6 +4,7 @@ using FrontendObligationChecker.HealthChecks;
 using FrontendObligationChecker.Middleware;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.FeatureManagement;
+using Serilog;
 
 namespace FrontendObligationChecker;
 
@@ -14,8 +15,11 @@ public partial class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Logging.ClearProviders();
-        builder.Logging.AddConsole();
-        builder.Logging.AddApplicationInsights();
+        builder.Host.UseSerilog((context, _, config) =>
+        {
+            config.ReadFrom.Configuration(context.Configuration);
+            config.Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName);
+        });
 
         builder.Services.AddFeatureManagement().UseDisabledFeaturesHandler(new RedirectDisabledFeatureHandler());
 
@@ -64,6 +68,8 @@ public partial class Program
 
         app.UsePathBase(pathBase);
 
+        app.MapGet("/", Results.NoContent);
+
         if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -81,6 +87,7 @@ public partial class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+        app.UseSerilogRequestLogging(); // after `UseStaticFiles()` to prevent logging of requests to css/js/png etc.
         app.UseRouting();
         app.UseAuthorization();
         app.UseRequestLocalization();
