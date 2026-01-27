@@ -14,18 +14,20 @@ public partial class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var containerImage = builder.Configuration.GetValue<string>("DOCKER_CUSTOM_IMAGE_NAME");
+        var pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
+
         builder.Logging.ClearProviders();
         builder.Host.UseSerilog((context, _, config) =>
         {
             config.ReadFrom.Configuration(context.Configuration);
             config.Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName);
+            config.Enrich.WithProperty("ContainerImage", containerImage ?? "NOT_SET");
         });
 
         builder.Services.AddFeatureManagement().UseDisabledFeaturesHandler(new RedirectDisabledFeatureHandler());
 
         builder.Services.ConfigureOptions(builder.Configuration);
-
-        string pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
 
         builder.Services.AddAntiforgery(opts =>
         {

@@ -2,17 +2,17 @@
 {
     using System.Globalization;
     using System.Linq;
-    using FrontendObligationChecker.Constants;
-    using FrontendObligationChecker.Constants.PublicRegister;
-    using FrontendObligationChecker.Exceptions;
-    using FrontendObligationChecker.Models.BlobReader;
-    using FrontendObligationChecker.Models.Config;
-    using FrontendObligationChecker.Services.PublicRegister;
-    using FrontendObligationChecker.Services.PublicRegister.Interfaces;
-    using FrontendObligationChecker.ViewModels.PublicRegister;
+    using Constants;
+    using Constants.PublicRegister;
+    using Exceptions;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Microsoft.FeatureManagement.Mvc;
+    using Models.BlobReader;
+    using Models.Config;
+    using Services.PublicRegister;
+    using Services.PublicRegister.Interfaces;
+    using ViewModels.PublicRegister;
 
     [FeatureGate(FeatureFlags.PublicRegisterEnabled)]
     [Route(PagePath.PublicRegister)]
@@ -21,8 +21,10 @@
         IOptions<ExternalUrlsOptions> urlOptions,
         IOptions<EmailAddressOptions> emailAddressOptions,
         IOptions<PublicRegisterOptions> publicRegisterOptions,
-        IFeatureFlagService featureFlagService) : Controller
+        IFeatureFlagService featureFlagService,
+        ILogger<PublicRegisterController> logger) : Controller
     {
+        private readonly ILogger<PublicRegisterController> _logger = logger;
         private readonly IBlobStorageService _blobStorageService = blobStorageService;
         private readonly PublicRegisterOptions _options = publicRegisterOptions.Value;
         private readonly ExternalUrlsOptions _urlOptions = urlOptions.Value;
@@ -168,10 +170,18 @@
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> File(string fileName, string type)
         {
+            using var scope = _logger.BeginScope(new Dictionary<string, object>
+            {
+                ["ReportFileName"] = fileName, ["ReportType"] = type
+            });
+
             try
             {
-                if(string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(type))
+                _logger.LogInformation("Downloading public register of producers");
+
+                if (string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(type))
                 {
+                    _logger.LogWarning("File name or file type not specified");
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
                 }
 
@@ -179,6 +189,7 @@
 
                 if (string.IsNullOrWhiteSpace(fileModel.FileName))
                 {
+                    _logger.LogWarning("File not found in blob storage");
                     return RedirectToAction(nameof(PagePath.FileNotDownloaded));
                 }
 
@@ -186,7 +197,12 @@
             }
             catch (PublicRegisterServiceException ex)
             {
+                _logger.LogError(ex, "Caught exception downloading file");
                 return RedirectToAction(nameof(PagePath.FileNotDownloaded));
+            }
+            finally
+            {
+                _logger.LogInformation("Download of public register of producers complete");
             }
         }
 
