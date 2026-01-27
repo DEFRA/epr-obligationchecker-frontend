@@ -3,15 +3,16 @@
     using System.Globalization;
     using System.Reflection;
     using System.Threading.Tasks;
+    using Exceptions;
     using FluentAssertions;
     using FrontendObligationChecker.Controllers;
-    using FrontendObligationChecker.Exceptions;
     using FrontendObligationChecker.Models.BlobReader;
     using FrontendObligationChecker.Models.Config;
     using FrontendObligationChecker.Services.PublicRegister;
     using FrontendObligationChecker.Services.PublicRegister.Interfaces;
     using FrontendObligationChecker.ViewModels.PublicRegister;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
@@ -19,6 +20,7 @@
     [TestClass]
     public class PublicRegisterControllerTests
     {
+        private Mock<ILogger<PublicRegisterController>> _loggerMock = null;
         private Mock<IBlobStorageService> _blobStorageServiceMock = null!;
         private Mock<IFeatureFlagService> _mockFeatureFlagService = null!;
         private IOptions<PublicRegisterOptions> _publicRegisterOptions = null!;
@@ -34,6 +36,7 @@
         [TestInitialize]
         public void Setup()
         {
+            _loggerMock = new Mock<ILogger<PublicRegisterController>>(MockBehavior.Loose);
             _blobStorageServiceMock = new Mock<IBlobStorageService>();
             _mockFeatureFlagService = new Mock<IFeatureFlagService>();
             _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
@@ -105,7 +108,8 @@
                 _externalUrlsOptions,
                 _emailAddressOptions,
                 _publicRegisterOptions,
-                _mockFeatureFlagService.Object);
+                _mockFeatureFlagService.Object,
+                _loggerMock.Object);
         }
 
         [TestMethod]
@@ -482,11 +486,12 @@
                 .ReturnsAsync(producerBlobs);
 
             _controller = new PublicRegisterController(
-                            _blobStorageServiceMock.Object,
-                            _externalUrlsOptions,
-                            _emailAddressOptions,
-                            _publicRegisterOptions,
-                            _mockFeatureFlagService.Object);
+                _blobStorageServiceMock.Object,
+                _externalUrlsOptions,
+                _emailAddressOptions,
+                _publicRegisterOptions,
+                _mockFeatureFlagService.Object,
+                _loggerMock.Object);
 
             // Act
             var result = await _controller.Get();
