@@ -52,6 +52,7 @@
                 blobStorageService: blobStorageService,
                 optionsPublicRegisterBlobContainerName: _options.PublicRegisterBlobContainerName,
                 optionsPublicRegisterCsoBlobContainerName: _options.PublicRegisterCsoBlobContainerName);
+
             return View("Guidance", viewModel);
         }
 
