@@ -122,12 +122,6 @@
         neu
     </value>
   </data>
-  <data name="Welsh" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AboutYourOrganisation" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Creu cyfrif i adrodd am ddata pecynnu</value>
   </data>
@@ -145,9 +139,6 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="AmountOfPackaging" xml:space="preserve">
-    <value />
-  </data>
   <data name="AmountYouSupply.25TonnesTo50Tonnes" xml:space="preserve">
     <value>25 tunnell i 50 tunnell</value>
   </data>
@@ -156,9 +147,6 @@
   </data>
   <data name="AmountYouSupply.Under25Tonnes" xml:space="preserve">
     <value>O dan 25 tunnell</value>
-  </data>
-  <data name="Defra" xml:space="preserve">
-    <value />
   </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>Mae'r adnodd 'Gwirio a oes angen ichi roi gwybod am ddata pecynwaith' yn rhoi gwybodaeth a chefnogaeth gyffredinol ond nid yw'n gyngor cyfreithiol.</value>
@@ -197,9 +185,6 @@
   <data name="SingleQuestion.ImportingProducts.AlternateTitle" xml:space="preserve">
     <value>Mewnforio nwyddau wedi'u pecynnu i'w cyflenwi i farchnad y DU</value>
   </data>
-  <data name="SingleQuestion.ImportingProducts.AmountHandlePageText" xml:space="preserve">
-    <value />
-  </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.AluminiumCans" xml:space="preserve">
     <value>
         Caniau alwminiwm
@@ -209,9 +194,6 @@
     <value>
         Poteli gwydr
     </value>
-  </data>
-  <data name="SingleQuestion.MaterialsForDrinksContainers.None" xml:space="preserve">
-    <value />
   </data>
   <data name="SingleQuestion.MaterialsForDrinksContainers.PlasticBottles" xml:space="preserve">
     <value>Poteli plastig polyethylen tereffthalat (PET)</value>
@@ -233,9 +215,6 @@
   <data name="SingleQuestion.SellingEmptyPackaging.AlternateTitle" xml:space="preserve">
     <value>Cyflenwi deunydd pacio gwag i fusnesau sy'n dod o dan y trothwy uwch</value>
   </data>
-  <data name="SingleQuestion.SellingEmptyPackaging.AmountHandlePageText" xml:space="preserve">
-    <value />
-  </data>
   <data name="SingleQuestion.SupplyingFilledPackaging.AlternateTitle" xml:space="preserve">
     <value>Ydych chi'n cyflenwi pecynwaith wedi'i lenwi i ddefnyddwyr terfynol?</value>
   </data>
@@ -253,17 +232,8 @@
   </data>
   <data name="SingleQuestion.UnbrandedPackaging.AlternateTitle" xml:space="preserve">
     <value>Rhoi nwyddau i'w gwerthu mewn pecynnau</value>
-  </data>
-  <data name="skip_to_main_content_text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.MaterialsForDrinksContainersAlternateRowTitle" xml:space="preserve">
-    <value></value>
   </data>    
     <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
     <value>Rhowch gynwysyddion diodydd ar y farchnad</value>
-  </data>
-  <data name="YourPackagingActivities" xml:space="preserve">
-    <value />
   </data>
 </root>

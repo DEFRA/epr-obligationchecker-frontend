@@ -120,12 +120,6 @@
   <data name="PhaseBanner.Alpha" xml:space="preserve">
     <value>alpha</value>
   </data>
-  <data name="PhaseBanner.Beta" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PhaseBanner.Live" xml:space="preserve">
-    <value />
-  </data>
   <data name="PhaseBanner.Feedback" xml:space="preserve">
     <value>adborth</value>
   </data>

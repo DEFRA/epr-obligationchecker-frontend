@@ -123,15 +123,6 @@
   <data name="AmountYouSupply.50TonnesOrMore" xml:space="preserve">
     <value>Mwy na 50 tunnell</value>
   </data>
-  <data name="AmountYouSupply.Description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AmountYouSupply.DescriptionAlternate" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AmountYouSupply.DrinksParagraph" xml:space="preserve">
-    <value />
-  </data>
   <data name="AmountYouSupply.MultipleActivitiesParagraph" xml:space="preserve">
     <value> 
          &lt;a href="https://www.gov.uk/guidance/extended-producer-responsibility-for-packaging-who-is-affected-and-what-to-do#packaging-activities" target="_blank" &gt; Gwiriwch y canllawiau &lt;/a&gt; i weld y diffiniad o becynwaith a gwybodaeth am weithgareddau pecynnu perthnasol (cyfeirir at y rhain fel 'swyddogaethau cynhyrchwyr' hefyd).     
@@ -143,17 +134,8 @@
     <data name="AmountYouSupply.MultipleActivitiesQuestionError" xml:space="preserve">
     <value>Dewiswch opsiwn tunelledd.</value>
   </data>
-  <data name="AmountYouSupply.MultipleActivitiesQuestionTitle" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AmountYouSupply.SingleActivityParagraph" xml:space="preserve">
-    <value />
-  </data>
     <data name="AmountYouSupply.SingleActivityQuestionError" xml:space="preserve">
     <value>Dewiswch opsiwn tunelledd.</value>
-  </data>
-  <data name="AmountYouSupply.SingleActivityQuestionTitle" xml:space="preserve">
-    <value />
   </data>
   <data name="AmountYouSupply.Title" xml:space="preserve">
     <value>
