@@ -36,16 +36,53 @@
         {
             var (isComplianceSchemesRegisterEnabled, isEnforcementActionsSectionEnabled, isPublicRegisterNextYearEnabled) = await GetFeatureFlagsAsync();
 
-            int currentYear = string.IsNullOrWhiteSpace(_options.CurrentYear)
-                ? DateTime.UtcNow.Year
-                : int.Parse(_options.CurrentYear);
+            GuidanceViewModel viewModel = await GetRegisterViewModel(
+                isComplianceSchemesRegisterEnabled: isComplianceSchemesRegisterEnabled,
+                isEnforcementActionsSectionEnabled: isEnforcementActionsSectionEnabled,
+                isPublicRegisterNextYearEnabled: isPublicRegisterNextYearEnabled,
+                optionsCurrentYear: _options.CurrentYear,
+                optionsPublicRegisterPreviousYearEndMonthAndDay: _options.PublicRegisterPreviousYearEndMonthAndDay,
+                optionsPublicRegisterNextYearStartMonthAndDay: _options.PublicRegisterNextYearStartMonthAndDay,
+                optionsPublishedDate: _options.PublishedDate,
+                urlOptionsDefraUrl: _urlOptions.DefraUrl,
+                urlOptionsBusinessAndEnvironmentUrl: _urlOptions.BusinessAndEnvironmentUrl,
+                defraHelplineEmail: _emailAddressOptions.DefraHelpline,
+                urlOptionsPublicRegisterScottishProtectionAgency: _urlOptions.PublicRegisterScottishProtectionAgency,
+                getUtcNow: () => DateTime.UtcNow,
+                blobStorageService: blobStorageService,
+                optionsPublicRegisterBlobContainerName: _options.PublicRegisterBlobContainerName,
+                optionsPublicRegisterCsoBlobContainerName: _options.PublicRegisterCsoBlobContainerName);
+
+            return View("Guidance", viewModel);
+        }
+
+        public static async Task<GuidanceViewModel> GetRegisterViewModel(
+            bool isComplianceSchemesRegisterEnabled,
+            bool isEnforcementActionsSectionEnabled,
+            bool isPublicRegisterNextYearEnabled,
+            string? optionsCurrentYear,
+            string? optionsPublicRegisterPreviousYearEndMonthAndDay,
+            string optionsPublicRegisterNextYearStartMonthAndDay,
+            DateTime optionsPublishedDate,
+            string urlOptionsDefraUrl,
+            string urlOptionsBusinessAndEnvironmentUrl,
+            string defraHelplineEmail,
+            string urlOptionsPublicRegisterScottishProtectionAgency,
+            Func<DateTime> getUtcNow,
+            IBlobStorageService blobStorageService,
+            string? optionsPublicRegisterBlobContainerName,
+            string? optionsPublicRegisterCsoBlobContainerName)
+        {
+            int currentYear = string.IsNullOrWhiteSpace(optionsCurrentYear)
+                ? getUtcNow().Year
+                : int.Parse(optionsCurrentYear);
 
             int previousYear = currentYear - 1;
             int nextYear = currentYear + 1;
             var folderPrefixes = new List<string> { currentYear.ToString() };
 
-            var endMonthDay = _options.PublicRegisterPreviousYearEndMonthAndDay;
-            var currentMonthDay = DateTime.UtcNow.ToString("MM-dd");
+            var endMonthDay = optionsPublicRegisterPreviousYearEndMonthAndDay;
+            var currentMonthDay = getUtcNow().ToString("MM-dd");
 
             // Add previous year if today is on or before the configured month and day
             if (!string.IsNullOrWhiteSpace(endMonthDay) &&
@@ -57,7 +94,7 @@
             // Add next year if feature enabled and today is on or after the configured month and day
             if (isPublicRegisterNextYearEnabled)
             {
-                var startMonthDay = _options.PublicRegisterNextYearStartMonthAndDay;
+                var startMonthDay = optionsPublicRegisterNextYearStartMonthAndDay;
                 if (!string.IsNullOrWhiteSpace(startMonthDay) &&
                     string.Compare(currentMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
                 {
@@ -65,8 +102,9 @@
                 }
             }
 
-            var producerBlobModels = await _blobStorageService
-                .GetLatestFilePropertiesAsync(_options.PublicRegisterBlobContainerName, folderPrefixes);
+            // dictionary key is the year, e.g. "2025"
+            var producerBlobModels = await blobStorageService
+                .GetLatestFilePropertiesAsync(optionsPublicRegisterBlobContainerName, folderPrefixes);
 
             // Determine which year to display as "current"
             PublicRegisterBlobModel? producerBlobModelCurrentYear = null;
@@ -88,23 +126,23 @@
             // Next year logic
             producerBlobModels.TryGetValue(nextYear.ToString(), out producerBlobModelNextYear);
 
-            var publishedDate = FormatDate(_options.PublishedDate);
+            var publishedDate = FormatDate(optionsPublishedDate);
 
 #pragma warning disable S2589
             DateTime lastUpdated = producerBlobModels?.Values?
                 .Where(x => x?.LastModified.HasValue == true)
                 .Select(x => x!.LastModified!.Value)
-                .DefaultIfEmpty(_options.PublishedDate)
-                .Max() ?? _options.PublishedDate;
+                .DefaultIfEmpty(optionsPublishedDate)
+                .Max() ?? optionsPublishedDate;
 #pragma warning restore S2589
 
             var lastUpdatedFormatted = FormatDate(lastUpdated);
 
             var viewModel = new GuidanceViewModel
             {
-                DefraUrl = _urlOptions.DefraUrl,
-                BusinessAndEnvironmentUrl = _urlOptions.BusinessAndEnvironmentUrl,
-                DefraHelplineEmail = _emailAddressOptions.DefraHelpline,
+                DefraUrl = urlOptionsDefraUrl,
+                BusinessAndEnvironmentUrl = urlOptionsBusinessAndEnvironmentUrl,
+                DefraHelplineEmail = defraHelplineEmail,
                 PublishedDate = publishedDate,
                 Currentyear = currentYear.ToString(),
                 Nextyear = nextYear.ToString(),
@@ -115,25 +153,26 @@
 
             if (isComplianceSchemesRegisterEnabled)
             {
-                var complianceBlobModel = await _blobStorageService
-                    .GetLatestFilePropertiesAsync(_options.PublicRegisterCsoBlobContainerName);
+                var complianceBlobModel = await blobStorageService
+                    .GetLatestFilePropertiesAsync(optionsPublicRegisterCsoBlobContainerName);
 
                 viewModel.ComplianceSchemeRegisteredFile = MapToFileViewModel(complianceBlobModel, publishedDate, lastUpdatedFormatted);
             }
 
             if (isEnforcementActionsSectionEnabled)
             {
-                var enforcementActionFiles = await _blobStorageService.GetEnforcementActionFiles();
+                var enforcementActionFiles = await blobStorageService.GetEnforcementActionFiles();
+
                 viewModel.EnforcementActionFiles = enforcementActionFiles;
 
                 viewModel.EnglishEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.England);
                 viewModel.WelshEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.Wales);
                 viewModel.NortherIrishEnforcementActionFile = GetEnforcementActionFileViewModel(enforcementActionFiles, EnforcementAgency.NorthernIreland);
 
-                viewModel.ScottishEnforcementActionFileUrl = _urlOptions.PublicRegisterScottishProtectionAgency;
+                viewModel.ScottishEnforcementActionFileUrl = urlOptionsPublicRegisterScottishProtectionAgency;
             }
 
-            return View("Guidance", viewModel);
+            return viewModel;
         }
 
         [HttpGet(PagePath.Enforce)]
