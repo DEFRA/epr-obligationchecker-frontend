@@ -54,7 +54,11 @@ FROM configured-base AS final
 USER dotnet
 
 ARG PORT=3000
+ARG BUILD_NUMBER
+ARG GIT_SHA
 ENV ASPNETCORE_URLS=http://*:${PORT}
+ENV BUILD_NUMBER=$BUILD_NUMBER
+ENV GIT_SHA=$GIT_SHA
 EXPOSE ${PORT}
 WORKDIR /app
 COPY --from=publish /home/dotnet/publish .
