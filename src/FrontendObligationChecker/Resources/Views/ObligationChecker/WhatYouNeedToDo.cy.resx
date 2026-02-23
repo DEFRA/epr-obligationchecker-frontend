@@ -133,31 +133,13 @@
   <data name="WhatYouNeedToDo.ContentBanner" xml:space="preserve">
     <value>Bydd angen i chi roi gwybod am ddata pecynnu</value>
   </data>
-  <data name="WhatYouNeedToDo.ContentDetailsPrnPerns" xml:space="preserve">
-    <value />
-  </data>
   <data name="WhatYouNeedToDo.ContentHeading1" xml:space="preserve">
     <value>Beth mae hyn yn ei olygu i'ch sefydliad chi</value>
-  </data>
-  <data name="WhatYouNeedToDo.ContentHeading2Large" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.ContentHeading4" xml:space="preserve">
-    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentHeading5" xml:space="preserve">
     <value>
         Yr hyn rydych chi wedi'i ddweud wrthon ni
     </value>
-  </data>
-  <data name="WhatYouNeedToDo.ContentInset1Large" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.ContentInset1Small" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.ContentInset2Large" xml:space="preserve">
-    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataHeading" xml:space="preserve">
     <value>Cyflwyno data gwlad</value>
@@ -201,9 +183,6 @@
         &lt;p class="govuk-body"&gt; Os ydych chi wedi gwaredu'r pecynwaith, bydd angen ichi roi gwybod am ddata am y wlad yn y Deyrnas Unedig ble cafodd y pecynwaith ei waredu. &lt;/p&gt;
         &lt;p class="govuk-body"&gt;  &lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#check-if-you-need-to-report-nation-data" target="_blank" &gt;  Rhagor o wybodaeth am ddata gwlad.  &lt;/a&gt; &lt;/p&gt;  
     </value>
-  </data>
-  <data name="WhatYouNeedToDo.ContentNationDataParagraph3" xml:space="preserve">
-    <value />
   </data>
   <data name="WhatYouNeedToDo.ContentParagraph1Large" xml:space="preserve">
     <value>
@@ -300,9 +279,6 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
         &lt;/ul&gt;
     </value>
   </data>
-  <data name="WhatYouNeedToDo.ContentParagraph2Seller" xml:space="preserve">
-    <value />
-  </data>
   <data name="WhatYouNeedToDo.ContentParagraph2Small" xml:space="preserve">      
     <value>
         &lt;p class="govuk-body"&gt;Mae'n rhaid ichi:&lt;/p&gt;
@@ -314,26 +290,11 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
         &lt;/ul&gt;
     </value>
   </data>
-  <data name="WhatYouNeedToDo.ContentParagraph3Large" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.ContentParagraph4Large" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.ContentParagraph5Large" xml:space="preserve">
-    <value />
-  </data>
   <data name="WhatYouNeedToDo.ContentPrint1" xml:space="preserve">
     <value>Gallwch</value>
   </data>
   <data name="WhatYouNeedToDo.ContentPrint2" xml:space="preserve">
     <value>argraffu'r tudalen yma neu ei gadw fel PDF</value>
-  </data>
-  <data name="WhatYouNeedToDo.ContentUoList1A" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.ContentUoList1B" xml:space="preserve">
-    <value />
   </data>
   <data name="WhatYouNeedToDo.HiringLoaning.AlternateRowTitle" xml:space="preserve">
     <value>
@@ -360,22 +321,10 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
         Math o sefydliad 
     </value>
   </data>
-  <data name="WhatYouNeedToDo.OwnBrand.AlternateRowTitle" xml:space="preserve">
-    <value />
-  </data>
   <data name="WhatYouNeedToDo.PlaceDrinksOnMarketAlternateRowTitle" xml:space="preserve">
     <value>
         Rhowch gynwysyddion diodydd ar y farchnad
     </value>
-  </data>
-  <data name="WhatYouNeedToDo.SellingEmptyPackaging.AlternateRowTitle" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.SupplyingPackagingContent" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.Title" xml:space="preserve">
-    <value />
   </data>
   <data name="WhatYouNeedToDo.TypeOfProducerLarge" xml:space="preserve">
     <value>mawr</value>
@@ -387,21 +336,6 @@ Does dim angen ichi gynnwys data ar gyfer unrhyw un neu ragor o'ch is-gwmnïau s
     <value>
         Maint y sefydliad
     </value>
-  </data>
-  <data name="WhatYouNeedToDo.UnbrandedPackaging.AlternateRowTitle" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.WhatYouShouldDoNextLinkDescription" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.WhatYouShouldDoNextParagraph" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.WhenToCollectAndReportContent" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WhatYouNeedToDo.WhenToCollectAndReportHeader" xml:space="preserve">
-    <value />
   </data>
     <data name="WhatYouNeedToDo.ReturnToGuidanceButton" xml:space="preserve">
     <value>

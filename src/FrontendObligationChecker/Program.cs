@@ -15,6 +15,8 @@ public partial class Program
         var builder = WebApplication.CreateBuilder(args);
 
         var containerImage = builder.Configuration.GetValue<string>("DOCKER_CUSTOM_IMAGE_NAME");
+        var buildNumber = builder.Configuration.GetValue<string>("BUILD_NUMBER");
+        var gitSha = builder.Configuration.GetValue<string>("GIT_SHA");
         var pathBase = builder.Configuration.GetValue<string>("PATH_BASE");
 
         builder.Logging.ClearProviders();
@@ -23,6 +25,8 @@ public partial class Program
             config.ReadFrom.Configuration(context.Configuration);
             config.Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName);
             config.Enrich.WithProperty("ContainerImage", containerImage ?? "NOT_SET");
+            config.Enrich.WithProperty("BuildNumber", buildNumber ?? "NOT_SET");
+            config.Enrich.WithProperty("GitSha", gitSha ?? "NOT_SET");
         });
 
         builder.Services.AddFeatureManagement().UseDisabledFeaturesHandler(new RedirectDisabledFeatureHandler());
