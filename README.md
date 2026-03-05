@@ -9,7 +9,6 @@ ObligationChecker becomes a public portal that will serve all EPR-related pages 
 The register of large producers is the first of those pages.
 
 Original function of ObligationChecker has been disabled by feature toggle called `FeatureManagement:ObligationCheckerEnabled`.
-This functionality will be restored in the future roadmap.
 
 # Getting Started
 
