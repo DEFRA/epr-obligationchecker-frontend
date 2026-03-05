@@ -147,10 +147,7 @@
   <data name="WhatYouNeedToDo.ContentNationDataInset1" xml:space="preserve">
     <value>&lt;a href="https://report-packaging-data.defra.gov.uk/report-data" target="_blank" &gt; Mewngofnodi i'ch cyfrif EPR &lt;/a&gt; neu  &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; greu cyfrif &lt;/a&gt; </value>
   </data>
-  <data name="WhatYouNeedToDo.ContentNationDataInset2" xml:space="preserve">
-    <value>Bydd angen ichi gyflwyno'ch data erbyn 1 Ebrill 2025</value>
-  </data>
-    <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
+  <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
     <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt;Rhagor o wybodaeth am beth i'w gasglu ar gyfer EPR&lt;/a&gt;</value>
   </data>
     <data name="WhatYouNeedToDo.ContentNationDataInset4" xml:space="preserve">

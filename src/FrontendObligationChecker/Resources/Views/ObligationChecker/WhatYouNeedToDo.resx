@@ -176,10 +176,7 @@
         &lt;a href="https://report-packaging-data.defra.gov.uk/report-data" target="_blank" &gt; Sign in &lt;/a&gt; or &lt;a href="https://www.gov.uk/guidance/report-packaging-data" target="_blank" &gt; create an account &lt;/a&gt;
     </value>
   </data>
-    <data name="WhatYouNeedToDo.ContentNationDataInset2" xml:space="preserve">
-    <value>You'll need to submit your data by 1 April 2025</value>
-  </data>
-    <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
+  <data name="WhatYouNeedToDo.ContentNationDataInset3" xml:space="preserve">
     <value>&lt;a href="https://www.gov.uk/guidance/how-to-collect-your-packaging-data-for-extended-producer-responsibility#changes-to-the-data-you-must-report-from-2024" &gt; Find out what to collect for EPR&lt;/a&gt;</value>
   </data>
   <data name="WhatYouNeedToDo.ContentNationDataInset4" xml:space="preserve">
@@ -370,9 +367,6 @@
         &lt;p class="govuk-body"&gt;
             If you do not have all the required data recorded from 1 January, you must report all of your data from 1 March 2023. If you report data that covers a period starting from 1 March, this will be used to calculate a full year’s worth of data.
         &lt;/p&gt;</value>
-  </data>
-  <data name="WhatYouNeedToDo.ContentInset1Small" xml:space="preserve">
-    <value>You’ll need to submit your data by 1 April 2024.</value>
   </data>
   <data name="WhatYouNeedToDo.ContentInset1Large" xml:space="preserve">
     <value>For the period January to June 2023, report data by 1 October 2023.</value>
