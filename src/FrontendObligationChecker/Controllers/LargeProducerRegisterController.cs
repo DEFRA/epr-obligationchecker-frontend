@@ -36,7 +36,11 @@ public class LargeProducerRegisterController : Controller
 
         var latestFiles = await _largeProducerRegisterService.GetLatestAllNationsFileInfoAsync(culture);
 
-        var largeProducerViewModel = new LargeProducerRegisterViewModel { LatestAllNationsFiles = latestFiles };
+        var listOfLargeProducers = latestFiles.Where(x => x.ReportingYear < 2025).Select(x => x);
+
+        var registerOfProducers = latestFiles.Where(x => x.ReportingYear >= 2025).Select(x => x);
+
+        var largeProducerViewModel = new LargeProducerRegisterViewModel { LatestAllNationsFiles = latestFiles, ListOfLargeProducers = listOfLargeProducers, RegisterOfProducers = registerOfProducers };
 
         return View("LargeProducerRegister", largeProducerViewModel);
     }

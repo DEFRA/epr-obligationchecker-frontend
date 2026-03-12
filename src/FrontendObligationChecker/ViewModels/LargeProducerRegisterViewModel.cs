@@ -7,4 +7,8 @@ using FrontendObligationChecker.ViewModels.LargeProducer;
 public class LargeProducerRegisterViewModel : BaseViewModel
 {
     public IEnumerable<LargeProducerFileInfoViewModel> LatestAllNationsFiles { get; set; }
+
+    public IEnumerable<LargeProducerFileInfoViewModel> ListOfLargeProducers { get; set; }
+
+    public IEnumerable<LargeProducerFileInfoViewModel> RegisterOfProducers { get; set; }
 }
