@@ -29,7 +29,11 @@ public class StubBlobStorageService : IBlobStorageService
     public Task<Dictionary<string, PublicRegisterBlobModel>> GetLatestFilePropertiesAsync(
         string containerName, List<string> folderPrefixes)
     {
-        return Task.FromResult(ProducerBlobModels);
+        // Filter to only requested prefixes, matching real blob storage behaviour
+        var filtered = ProducerBlobModels
+            .Where(kvp => folderPrefixes.Contains(kvp.Key))
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        return Task.FromResult(filtered);
     }
 
     public Task<PublicRegisterFileModel> GetLatestFileAsync(string containerName, string blobName)

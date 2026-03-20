@@ -16,25 +16,33 @@ public class ObligationCheckerWebApplicationFactory : WebApplicationFactory<Prog
 
     public StubLargeProducerRegisterService LargeProducerRegister { get; } = new();
 
+    /// <summary>
+    /// Additional config overrides merged last (highest priority).
+    /// Set before calling CreateClient().
+    /// </summary>
+    public Dictionary<string, string?> ConfigOverrides { get; set; } = new();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureAppConfiguration((_, config) =>
+        // Infrastructure defaults only - test-relevant config goes in ConfigOverrides
+        var config = new Dictionary<string, string?>
         {
-            config.AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                // Enable feature flags for the endpoints under test
-                ["FeatureManagement:PublicRegisterEnabled"] = "true",
-                ["FeatureManagement:LargeProducerRegisterEnabled"] = "true",
-                ["FeatureManagement:PublicRegisterNextYearEnabled"] = "true",
+            ["FeatureManagement:PublicRegisterEnabled"] = "true",
+            ["FeatureManagement:LargeProducerRegisterEnabled"] = "true",
 
-                // Fake the clock to a date after Nov 1 so next year file logic activates
-                // (production config PublicRegisterNextYearStartMonthAndDay is "11-01")
-                ["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08",
+            // Azurite emulator connection string — not a real secret, just satisfies DI wiring.
+            ["StorageAccount:ConnectionString"] = "UseDevelopmentStorage=true",
+            ["StorageAccount:BlobContainerName"] = "test-container",
+        };
 
-                // Azurite emulator connection string — not a real secret, just satisfies DI wiring.
-                ["StorageAccount:ConnectionString"] = "UseDevelopmentStorage=true",
-                ["StorageAccount:BlobContainerName"] = "test-container",
-            });
+        foreach (var kvp in ConfigOverrides)
+        {
+            config[kvp.Key] = kvp.Value;
+        }
+
+        builder.ConfigureAppConfiguration((_, cfg) =>
+        {
+            cfg.AddInMemoryCollection(config);
         });
 
         Environment.SetEnvironmentVariable("ByPassSessionValidation", "true");

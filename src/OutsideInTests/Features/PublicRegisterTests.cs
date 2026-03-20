@@ -11,13 +11,26 @@ using FrontendObligationChecker.Models.BlobReader;
 [Collection(SequentialCollection.Sequential)]
 public class PublicRegisterTests : IntegrationTestBase
 {
-    [Fact]
-    public async Task PublicRegister_ShowsCurrentYearAndNextYearFiles()
+    public override Task InitializeAsync()
     {
-        // Arrange - two years of producer register files, matching production behaviour
-        // where the synapse pipeline generates a CSV per year that has registrations.
-        // Factory sets FakeDateTimeUtcNow to 2025-12-08 (after "11-01" threshold)
-        // so the next year file logic activates.
+        var result = base.InitializeAsync();
+
+        // These MM-DD thresholds control which year folders are requested.
+        // "11-01" = next year file shown from 1 Nov onwards
+        // "02-01" = previous year file shown until 1 Feb
+        ConfigOverrides["PublicRegister:PublicRegisterNextYearStartMonthAndDay"] = "11-01";
+        ConfigOverrides["PublicRegister:PublicRegisterPreviousYearEndMonthAndDay"] = "02-01";
+
+        return result;
+    }
+
+    [Fact]
+    public async Task ShowsCurrentYearAndNextYearFiles()
+    {
+        // Arrange
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
+
         BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
         {
             ["2025"] = new PublicRegisterBlobModel
@@ -50,9 +63,116 @@ public class PublicRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task PublicRegister_ShowsGuidancePage_WithNoFiles()
+    public async Task ShowsOnlyCurrentYearFile_WhenNextYearNotInBlobStorage()
     {
-        // Arrange - no blob data configured (default empty)
+        // Arrange
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
+
+        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
+        {
+            ["2025"] = new PublicRegisterBlobModel
+            {
+                Name = "2025/Public_Register_Producers_27_November_2025.csv",
+                LastModified = new DateTime(2025, 9, 30, 23, 59, 59),
+                ContentLength = "132629",
+                FileType = "CSV"
+            }
+        };
+
+        // Act
+        var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+
+        // Assert
+        using (new AssertionScope())
+        {
+            page.DownloadLinks.Should().HaveCount(1, "only current year file exists in blob storage");
+            page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2025"));
+        }
+    }
+
+    [Fact]
+    public async Task ShowsOnlyCurrentYearFile_WhenNextYearFeatureFlagOff()
+    {
+        // Arrange
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
+
+        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
+        {
+            ["2025"] = new PublicRegisterBlobModel
+            {
+                Name = "2025/Public_Register_Producers_27_November_2025.csv",
+                LastModified = new DateTime(2025, 9, 30, 23, 59, 59),
+                ContentLength = "132629",
+                FileType = "CSV"
+            },
+            ["2026"] = new PublicRegisterBlobModel
+            {
+                Name = "2026/Public_Register_Producers_27_November_2025.csv",
+                LastModified = new DateTime(2025, 12, 7, 23, 59, 59),
+                ContentLength = "25883",
+                FileType = "CSV"
+            }
+        };
+
+        // Act
+        var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+
+        // Assert
+        using (new AssertionScope())
+        {
+            page.DownloadLinks.Should().HaveCount(1, "next year feature flag is off");
+            page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2025"));
+            page.DownloadHrefs.Should().NotContain(href => href.Contains("fileName=2026"));
+        }
+    }
+
+    [Fact]
+    public async Task ShowsOnlyCurrentYearFile_WhenDateBeforeNextYearThreshold()
+    {
+        // Arrange
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-06-01"; // before "11-01" threshold
+
+        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
+        {
+            ["2025"] = new PublicRegisterBlobModel
+            {
+                Name = "2025/Public_Register_Producers_01_June_2025.csv",
+                LastModified = new DateTime(2025, 6, 1, 23, 59, 59),
+                ContentLength = "132629",
+                FileType = "CSV"
+            },
+            ["2026"] = new PublicRegisterBlobModel
+            {
+                Name = "2026/Public_Register_Producers_01_June_2025.csv",
+                LastModified = new DateTime(2025, 6, 1, 23, 59, 59),
+                ContentLength = "25883",
+                FileType = "CSV"
+            }
+        };
+
+        // Act
+        var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+
+        // Assert
+        using (new AssertionScope())
+        {
+            page.DownloadLinks.Should().HaveCount(1, "date is before 11-01 threshold");
+            page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2025"));
+            page.DownloadHrefs.Should().NotContain(href => href.Contains("fileName=2026"));
+        }
+    }
+
+    [Fact]
+    public async Task ShowsGuidancePage_WithNoFiles()
+    {
+        // Arrange
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08";
+
+        // no blob data configured
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
