@@ -13,7 +13,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     protected HttpClient Client => _client ??= Factory.CreateClient();
 
     protected StubBlobStorageService BlobStorage => Factory.BlobStorage;
-    protected StubLargeProducerRegisterService LargeProducerRegister => Factory.LargeProducerRegister;
+    protected StubBlobReader BlobReader => Factory.BlobReader;
 
     /// <summary>
     /// Set config overrides before the first HTTP request.
@@ -25,7 +25,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     {
         Factory = new ObligationCheckerWebApplicationFactory();
         BlobStorage.Reset();
-        LargeProducerRegister.Reset();
+        BlobReader.Reset();
         return Task.CompletedTask;
     }
 

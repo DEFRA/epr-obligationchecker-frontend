@@ -6,7 +6,7 @@ using AwesomeAssertions.Execution;
 using Infrastructure;
 using PageModels;
 
-using FrontendObligationChecker.ViewModels.LargeProducer;
+using FrontendObligationChecker.Models.BlobReader;
 
 [Collection(SequentialCollection.Sequential)]
 public class LargeProducerRegisterTests : IntegrationTestBase
@@ -14,20 +14,21 @@ public class LargeProducerRegisterTests : IntegrationTestBase
     [Fact]
     public async Task LargeProducers_ShowsPageWithFileList()
     {
-        // Arrange
-        LargeProducerRegister.FileInfoList =
+        // Arrange - blobs in two year directories with the "large_producers" prefix
+        // that LargeProducerRegisterService looks for via IBlobReader
+        BlobReader.Blobs =
         [
-            new LargeProducerFileInfoViewModel
+            new BlobModel
             {
-                ReportingYear = 2025,
-                DateCreated = new DateTime(2025, 6, 15),
-                DisplayFileSize = "1.2 MB"
+                Name = "2025/large_producers_20250615.csv",
+                ContentLength = 1258291,
+                CreatedOn = new DateTime(2025, 6, 15)
             },
-            new LargeProducerFileInfoViewModel
+            new BlobModel
             {
-                ReportingYear = 2024,
-                DateCreated = new DateTime(2024, 12, 1),
-                DisplayFileSize = "900 KB"
+                Name = "2024/large_producers_20241201.csv",
+                ContentLength = 921600,
+                CreatedOn = new DateTime(2024, 12, 1)
             }
         ];
 
@@ -48,7 +49,7 @@ public class LargeProducerRegisterTests : IntegrationTestBase
     [Fact]
     public async Task LargeProducers_ShowsPageWithNoFiles_WhenNoneAvailable()
     {
-        // Arrange - no files configured (default empty list)
+        // Arrange - no blobs configured (default empty list)
 
         // Act
         var page = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
