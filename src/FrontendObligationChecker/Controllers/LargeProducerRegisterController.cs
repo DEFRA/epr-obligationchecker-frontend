@@ -1,11 +1,16 @@
 ﻿namespace FrontendObligationChecker.Controllers;
 
+using ByteSizeLib;
 using Exceptions;
 using FrontendObligationChecker.Constants;
+using Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement.Mvc;
+using Models.Config;
 using Models.LargeProducerRegister;
 using Services.LargeProducerRegister.Interfaces;
+using Services.PublicRegister;
 using Sessions;
 using ViewModels;
 using ViewModels.LargeProducer;
@@ -15,16 +20,23 @@ using ViewModels.LargeProducer;
 public class LargeProducerRegisterController : Controller
 {
     private const string FileNotDownloadedExceptionLog = "Failed to receive file for nation code {NationCode}";
+    private const int RegisterOfProducersStartYear = 2025;
 
     private readonly ILargeProducerRegisterService _largeProducerRegisterService;
+    private readonly IBlobStorageService _blobStorageService;
     private readonly ILogger<LargeProducerRegisterController> _logger;
     private readonly SessionRequestCultureProvider _sessionRequestCultureProvider;
+    private readonly PublicRegisterOptions _publicRegisterOptions;
 
     public LargeProducerRegisterController(
         ILargeProducerRegisterService largeProducerRegisterService,
+        IBlobStorageService blobStorageService,
+        IOptions<PublicRegisterOptions> publicRegisterOptions,
         ILogger<LargeProducerRegisterController> logger)
     {
         _largeProducerRegisterService = largeProducerRegisterService;
+        _blobStorageService = blobStorageService;
+        _publicRegisterOptions = publicRegisterOptions.Value;
         _logger = logger;
         _sessionRequestCultureProvider = new SessionRequestCultureProvider();
     }
@@ -36,13 +48,57 @@ public class LargeProducerRegisterController : Controller
 
         var latestFiles = await _largeProducerRegisterService.GetLatestAllNationsFileInfoAsync(culture);
 
-        var listOfLargeProducers = latestFiles.Where(x => x.ReportingYear < 2025).Select(x => x);
+        var listOfLargeProducers = GetListOfLargeProducers(latestFiles);
 
-        var registerOfProducers = latestFiles.Where(x => x.ReportingYear >= 2025).Select(x => x);
+        var registerOfProducers = await GetRegisterOfProducersAsync();
 
-        var largeProducerViewModel = new LargeProducerRegisterViewModel { LatestAllNationsFiles = latestFiles, ListOfLargeProducers = listOfLargeProducers, RegisterOfProducers = registerOfProducers };
+        var largeProducerViewModel = new LargeProducerRegisterViewModel
+        {
+            ListOfLargeProducers = listOfLargeProducers,
+            RegisterOfProducers = registerOfProducers
+        };
 
         return View("LargeProducerRegister", largeProducerViewModel);
+    }
+
+    private static IEnumerable<LargeProducerFileInfoViewModel> GetListOfLargeProducers(
+        IEnumerable<LargeProducerFileInfoViewModel> latestFiles)
+    {
+        return latestFiles
+            .Where(x => x.ReportingYear < RegisterOfProducersStartYear)
+            .Select(x =>
+            {
+                x.DownloadUrl = $"/large-producers/report?reportingYear={x.ReportingYear}";
+                return x;
+            });
+    }
+
+    private async Task<IEnumerable<LargeProducerFileInfoViewModel>> GetRegisterOfProducersAsync()
+    {
+        var containerName = _publicRegisterOptions.PublicRegisterBlobContainerName;
+
+        int currentYear = string.IsNullOrWhiteSpace(_publicRegisterOptions.CurrentYear)
+            ? DateTime.UtcNow.Year
+            : int.Parse(_publicRegisterOptions.CurrentYear);
+
+        var folderPrefixes = Enumerable
+            .Range(RegisterOfProducersStartYear, currentYear - RegisterOfProducersStartYear)
+            .Select(y => y.ToString())
+            .ToList();
+
+        var blobs = await _blobStorageService.GetLatestFilePropertiesAsync(containerName, folderPrefixes);
+
+        return blobs
+            .OrderByDescending(kvp => kvp.Key)
+            .Select(kvp => new LargeProducerFileInfoViewModel
+            {
+                ReportingYear = int.Parse(kvp.Key),
+                DateCreated = kvp.Value.LastModified ?? DateTime.UtcNow,
+                DisplayFileSize = long.TryParse(kvp.Value.ContentLength, out var bytes)
+                    ? FileSizeFormatterHelper.ConvertByteSizeToString(ByteSize.FromBytes(bytes))
+                    : kvp.Value.ContentLength ?? "0",
+                DownloadUrl = $"/public-register/report?fileName={kvp.Value.Name}&type={containerName}"
+            });
     }
 
     [HttpGet(PagePath.Report)]

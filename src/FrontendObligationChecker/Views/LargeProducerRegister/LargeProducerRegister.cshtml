@@ -23,27 +23,27 @@
 
 				<h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.RegisterOfProducers"]</h2>
 				<p class="govuk-body">@Localizer["LargeProducerRegister.RegisterOfProducersDescription"]</p>
-				@foreach (var file in Model.RegisterOfProducers)
-				{
-					<ul class="govuk-list">
+				<ul class="govuk-list">
+					@foreach (var file in Model.RegisterOfProducers)
+					{
 						<li>
 							<h3 class="govuk-heading-s">@file.ReportingYear</h3>
-							<a href="/large-producers/report?reportingYear=@file.ReportingYear" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.RegisterOfProducersFile", file.ReportingYear, file.DisplayFileSize]</a>
+							<a href="@file.DownloadUrl" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.RegisterOfProducersFile", file.ReportingYear, file.DisplayFileSize]</a>
 						</li>
-					</ul>
-				}
+					}
+				</ul>
 
 				<h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.ListOfLargeProducers"]</h2>
 				<p class="govuk-body">@Localizer["LargeProducerRegister.ListOfLargeProducersDescription"]</p>
-				@foreach (var file in Model.ListOfLargeProducers)
-				{
-					<ul class="govuk-list">
+				<ul class="govuk-list">
+					@foreach (var file in Model.ListOfLargeProducers)
+					{
 						<li>
 							<h3 class="govuk-heading-s">@file.ReportingYear</h3>
-							<a href="/large-producers/report?reportingYear=@file.ReportingYear" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.ListOfLargeProducersFile", file.ReportingYear, file.DisplayFileSize]</a>
+							<a href="@file.DownloadUrl" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.ListOfLargeProducersFile", file.ReportingYear, file.DisplayFileSize]</a>
 						</li>
-					</ul>
-				}
+					}
+				</ul>
 
 				<p class="govuk-body">@Localizer["LargeProducerRegister.ThisInformationIsUpdated"]</p>
 
