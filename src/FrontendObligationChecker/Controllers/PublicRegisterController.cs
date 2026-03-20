@@ -48,7 +48,9 @@
                 urlOptionsBusinessAndEnvironmentUrl: _urlOptions.BusinessAndEnvironmentUrl,
                 defraHelplineEmail: _emailAddressOptions.DefraHelpline,
                 urlOptionsPublicRegisterScottishProtectionAgency: _urlOptions.PublicRegisterScottishProtectionAgency,
-                getUtcNow: () => DateTime.UtcNow,
+                getUtcNow: () => string.IsNullOrWhiteSpace(_options.FakeDateTimeUtcNow)
+                    ? DateTime.UtcNow
+                    : DateTime.ParseExact(_options.FakeDateTimeUtcNow, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture),
                 blobStorageService: blobStorageService,
                 optionsPublicRegisterBlobContainerName: _options.PublicRegisterBlobContainerName,
                 optionsPublicRegisterCsoBlobContainerName: _options.PublicRegisterCsoBlobContainerName);

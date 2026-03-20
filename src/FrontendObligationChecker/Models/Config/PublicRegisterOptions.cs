@@ -22,4 +22,10 @@ public class PublicRegisterOptions
     public string? PublicRegisterPreviousYearEndMonthAndDay { get; set; }
 
     public string? CurrentYear { get; set; }
+
+    /// <summary>
+    /// Override DateTime.UtcNow for testing/QA. Format: yyyy-MM-dd (e.g. "2025-12-08").
+    /// When null, the real clock is used.
+    /// </summary>
+    public string? FakeDateTimeUtcNow { get; set; }
 }

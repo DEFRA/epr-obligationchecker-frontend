@@ -25,6 +25,11 @@ public class ObligationCheckerWebApplicationFactory : WebApplicationFactory<Prog
                 // Enable feature flags for the endpoints under test
                 ["FeatureManagement:PublicRegisterEnabled"] = "true",
                 ["FeatureManagement:LargeProducerRegisterEnabled"] = "true",
+                ["FeatureManagement:PublicRegisterNextYearEnabled"] = "true",
+
+                // Fake the clock to a date after Nov 1 so next year file logic activates
+                // (production config PublicRegisterNextYearStartMonthAndDay is "11-01")
+                ["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08",
 
                 // Azurite emulator connection string — not a real secret, just satisfies DI wiring.
                 ["StorageAccount:ConnectionString"] = "UseDevelopmentStorage=true",
