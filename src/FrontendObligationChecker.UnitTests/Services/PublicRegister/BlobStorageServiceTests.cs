@@ -17,6 +17,9 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
     [TestClass]
     public class BlobStorageServiceTests
     {
+        private static readonly string[] SingleDirectory = ["2025"];
+        private static readonly string[] TwoDirectories = ["2025", "2026"];
+
         private Mock<IBlobReader> _blobReaderMock;
         private Mock<IOptions<PublicRegisterOptions>> _optionsMock;
         private Mock<ILogger<BlobStorageService>> _loggerMock;
@@ -57,7 +60,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
         public async Task GetLatestFilePropertiesAsync_ReturnsOnlyPublicRegisterBlobModelWithPublishedDate_WhenNoBlobsFound(string containerName)
         {
             _blobReaderMock.Setup(x => x.GetDirectories(containerName))
-                .ReturnsAsync(new[] { "2025" });
+                .ReturnsAsync(SingleDirectory);
             _blobReaderMock.Setup(x => x.GetBlobsAsync(containerName, "2025"))
                 .ReturnsAsync(Enumerable.Empty<BlobModel>());
 
@@ -76,7 +79,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
         {
             var lastModified = DateTime.UtcNow;
             _blobReaderMock.Setup(x => x.GetDirectories(containerName))
-                .ReturnsAsync(new[] { "2025", "2026" });
+                .ReturnsAsync(TwoDirectories);
             _blobReaderMock.Setup(x => x.GetBlobsAsync(containerName, "2026"))
                 .ReturnsAsync(new[]
                 {
@@ -117,7 +120,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
         public async Task GetLatestFilePropertiesAsync_ThrowsBlobReaderException_WhenFailsGetBlobs(string containerName)
         {
             _blobReaderMock.Setup(x => x.GetDirectories(containerName))
-                .ReturnsAsync(new[] { "2025" });
+                .ReturnsAsync(SingleDirectory);
             _blobReaderMock.Setup(x => x.GetBlobsAsync(containerName, "2025"))
                 .ThrowsAsync(new BlobReaderException("Failed to read public register producers files from blob storage"));
 

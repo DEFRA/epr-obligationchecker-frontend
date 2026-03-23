@@ -127,6 +127,33 @@ public class BlobReader : IBlobReader
         }
     }
 
+    public async Task<IEnumerable<BlobModel>> GetBlobsAsync(string containerName, string? prefix)
+    {
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            var list = new List<BlobModel>();
+
+            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
+            {
+                list.Add(new BlobModel
+                {
+                    Name = blobItem.Name,
+                    ContentLength = blobItem.Properties.ContentLength,
+                    CreatedOn = blobItem.Properties.CreatedOn?.LocalDateTime,
+                    LastModified = blobItem.Properties.LastModified?.LocalDateTime,
+                });
+            }
+
+            return list;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, prefix ?? containerName);
+            throw new BlobReaderException(string.Format(ErrorMessage, prefix ?? containerName), ex);
+        }
+    }
+
     public async Task<IEnumerable<string>> GetDirectories()
     {
         try
@@ -152,33 +179,6 @@ public class BlobReader : IBlobReader
         {
             _logger.LogError(ex, LogMessage, "directories");
             throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
-        }
-    }
-
-    public async Task<IEnumerable<BlobModel>> GetBlobsAsync(string containerName, string? prefix)
-    {
-        try
-        {
-            var containerClient = GetContainerClient(containerName);
-            var list = new List<BlobModel>();
-
-            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
-            {
-                list.Add(new BlobModel
-                {
-                    Name = blobItem.Name,
-                    ContentLength = blobItem.Properties.ContentLength,
-                    CreatedOn = blobItem.Properties.CreatedOn?.LocalDateTime,
-                    LastModified = blobItem.Properties.LastModified?.LocalDateTime,
-                });
-            }
-
-            return list;
-        }
-        catch (RequestFailedException ex)
-        {
-            _logger.LogError(ex, LogMessage, prefix ?? containerName);
-            throw new BlobReaderException(string.Format(ErrorMessage, prefix ?? containerName), ex);
         }
     }
 
