@@ -127,7 +127,6 @@ public class BlobReader : IBlobReader
         }
     }
 
-    [ExcludeFromCodeCoverage]
     public async Task<IEnumerable<BlobModel>> GetBlobsAsync(string containerName, string? prefix)
     {
         try
@@ -183,7 +182,6 @@ public class BlobReader : IBlobReader
         }
     }
 
-    [ExcludeFromCodeCoverage]
     public async Task<IEnumerable<string>> GetDirectories(string containerName)
     {
         try
@@ -208,7 +206,6 @@ public class BlobReader : IBlobReader
         }
     }
 
-    [ExcludeFromCodeCoverage]
     public async Task<Stream> DownloadBlobContentAsync(string containerName, string blobName)
     {
         try
@@ -225,7 +222,6 @@ public class BlobReader : IBlobReader
         }
     }
 
-    [ExcludeFromCodeCoverage]
     private BlobContainerClient GetContainerClient(string containerName)
     {
         return _blobServiceClient.GetBlobContainerClient(containerName);
