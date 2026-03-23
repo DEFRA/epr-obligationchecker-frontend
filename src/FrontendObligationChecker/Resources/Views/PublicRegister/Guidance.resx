@@ -148,7 +148,7 @@
     <value>Department for Environment, Food &amp; Rural Affairs</value>
   </data>
     <data name="Guidance.Description" xml:space="preserve">
-    <value>Download a list of producers that are registered on the Report Packaging Data service under the Producer Responsibility Obligations (Packaging and Packaging Waste) Regulations 2024.</value>
+    <value>Download a list of producers registered under the Producer Responsibility Obligations (Packaging and Packaging Waste) Regulations 2024.</value>
   </data>
     <data name="Guidance.Documents" xml:space="preserve">
     <value>Documents</value>
@@ -169,10 +169,10 @@
     <value>From:</value>
   </data>
     <data name="Guidance.Heading" xml:space="preserve">
-    <value>Packaging public registers</value>
+    <value>Extended producer responsibility for packaging: register of packaging producers</value>
   </data>
     <data name="Guidance.LastUpdated" xml:space="preserve">
-    <value>Last updated: </value>
+    <value>Last updated </value>
   </data>
     <data name="Guidance.NaturalResourcesWalesLink" xml:space="preserve">
     <value>Natural Resources Wales</value>
@@ -181,13 +181,10 @@
     <value>Northern Ireland Environment Agency</value>
   </data>
     <data name="Guidance.PageTitle" xml:space="preserve">
-    <value>Packaging public registers</value>
+    <value>Extended producer responsibility for packaging: register of packaging producers</value>
   </data>
     <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>{0} Public register of producers</value>
-  </data>
-    <data name="Guidance.Published" xml:space="preserve">
-    <value>Published:</value>
+    <value>{0} register of producers</value>
   </data>
   <data name="Guidance.Published2" xml:space="preserve">
     <value>Published</value>
@@ -214,10 +211,13 @@
     <value>(not yet available)</value>
   </data>
     <data name="Guidance.DisclaimerHeading" xml:space="preserve">
-    <value>Disclaimer</value>
+    <value>About the data</value>
   </data>
     <data name="Guidance.DisclaimerText" xml:space="preserve">
-    <value>Some fields may be blank. This could be because they do not apply to the producer in question.</value>
+    <value>This list shows unedited information reported directly by producers. Some fields may be blank if they do not apply to that producer.</value>
+  </data>
+  <data name="Guidance.DisclaimerText2" xml:space="preserve">
+    <value>Check with the producer directly if you’re unsure about anything.</value>
   </data>
     <data name="Guidance.PageTitleOld" xml:space="preserve">
     <value>Public register for the ‘report packaging data’ service</value>
