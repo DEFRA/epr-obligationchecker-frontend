@@ -12,7 +12,6 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     /// </summary>
     protected HttpClient Client => _client ??= Factory.CreateClient();
 
-    protected StubBlobStorageService BlobStorage => Factory.BlobStorage;
     protected StubBlobReader BlobReader => Factory.BlobReader;
 
     /// <summary>
@@ -24,7 +23,6 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     public virtual Task InitializeAsync()
     {
         Factory = new ObligationCheckerWebApplicationFactory();
-        BlobStorage.Reset();
         BlobReader.Reset();
         return Task.CompletedTask;
     }

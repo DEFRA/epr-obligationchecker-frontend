@@ -10,5 +10,7 @@
         public long? ContentLength { get; set; }
 
         public DateTime? CreatedOn { get; set; }
+
+        public DateTime? LastModified { get; set; }
     }
 }

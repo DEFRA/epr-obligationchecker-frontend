@@ -12,7 +12,7 @@ By testing only the inputs and outputs of the microservice we can isolate the te
 
 ## Key differences from epr-regulator-service integration tests
 
-The regulator service depends on backing microservices (HTTP APIs) and uses WireMock to fake them. This service depends on Azure Blob Storage, so instead of WireMock we replace `IBlobStorageService` and `ILargeProducerRegisterService` at the DI boundary with controllable stub implementations. The principle is the same: fake external dependencies at their boundary while exercising the full HTTP pipeline for real.
+The regulator service depends on backing microservices (HTTP APIs) and uses WireMock to fake them. This service depends on Azure Blob Storage, so instead of WireMock we replace `IBlobReader` at the DI boundary with a controllable stub. This is the lowest-level blob abstraction, so the real `BlobStorageService` and `LargeProducerRegisterService` logic (directory listing, prefix matching, latest-blob selection, file size formatting) is fully exercised. The principle is the same as WireMock: fake external dependencies at their boundary while exercising the full HTTP pipeline for real.
 
 No authentication stubbing is needed as all endpoints are public.
 

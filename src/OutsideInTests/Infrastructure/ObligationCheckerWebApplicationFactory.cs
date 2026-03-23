@@ -2,7 +2,6 @@ namespace OutsideInTests.Infrastructure;
 
 using FrontendObligationChecker;
 using FrontendObligationChecker.Readers;
-using FrontendObligationChecker.Services.PublicRegister;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -12,8 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 public class ObligationCheckerWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public StubBlobStorageService BlobStorage { get; } = new();
-
     public StubBlobReader BlobReader { get; } = new();
 
     /// <summary>
@@ -49,8 +46,8 @@ public class ObligationCheckerWebApplicationFactory : WebApplicationFactory<Prog
 
         builder.ConfigureTestServices(services =>
         {
-            // Replace blob storage services with controllable stubs
-            services.AddSingleton<IBlobStorageService>(BlobStorage);
+            // Replace blob reader with controllable stub — both BlobStorageService and
+            // LargeProducerRegisterService use IBlobReader, so their real logic is exercised.
             services.AddSingleton<IBlobReader>(BlobReader);
 
             services.AddAntiforgery(options =>

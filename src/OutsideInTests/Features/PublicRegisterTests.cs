@@ -11,6 +11,8 @@ using FrontendObligationChecker.Models.BlobReader;
 [Collection(SequentialCollection.Sequential)]
 public class PublicRegisterTests : IntegrationTestBase
 {
+    private const string ProducerContainer = "public-register-producers";
+
     public override Task InitializeAsync()
     {
         var result = base.InitializeAsync();
@@ -20,6 +22,7 @@ public class PublicRegisterTests : IntegrationTestBase
         // "02-01" = previous year file shown until 1 Feb
         ConfigOverrides["PublicRegister:PublicRegisterNextYearStartMonthAndDay"] = "11-01";
         ConfigOverrides["PublicRegister:PublicRegisterPreviousYearEndMonthAndDay"] = "02-01";
+        ConfigOverrides["PublicRegister:PublicRegisterBlobContainerName"] = ProducerContainer;
 
         return result;
     }
@@ -31,23 +34,21 @@ public class PublicRegisterTests : IntegrationTestBase
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
 
-        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
-        {
-            ["2025"] = new PublicRegisterBlobModel
+        BlobReader.ContainerBlobs[ProducerContainer] =
+        [
+            new BlobModel
             {
                 Name = "2025/Public_Register_Producers_27_November_2025.csv",
-                LastModified = new DateTime(2025, 9, 30, 23, 59, 59),
-                ContentLength = "132629",
-                FileType = "CSV"
+                ContentLength = 132629,
+                LastModified = new DateTime(2025, 9, 30, 23, 59, 59)
             },
-            ["2026"] = new PublicRegisterBlobModel
+            new BlobModel
             {
                 Name = "2026/Public_Register_Producers_27_November_2025.csv",
-                LastModified = new DateTime(2025, 12, 7, 23, 59, 59),
-                ContentLength = "25883",
-                FileType = "CSV"
+                ContentLength = 25883,
+                LastModified = new DateTime(2025, 12, 7, 23, 59, 59)
             }
-        };
+        ];
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
@@ -69,16 +70,15 @@ public class PublicRegisterTests : IntegrationTestBase
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
 
-        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
-        {
-            ["2025"] = new PublicRegisterBlobModel
+        BlobReader.ContainerBlobs[ProducerContainer] =
+        [
+            new BlobModel
             {
                 Name = "2025/Public_Register_Producers_27_November_2025.csv",
-                LastModified = new DateTime(2025, 9, 30, 23, 59, 59),
-                ContentLength = "132629",
-                FileType = "CSV"
+                ContentLength = 132629,
+                LastModified = new DateTime(2025, 9, 30, 23, 59, 59)
             }
-        };
+        ];
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
@@ -98,23 +98,21 @@ public class PublicRegisterTests : IntegrationTestBase
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
 
-        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
-        {
-            ["2025"] = new PublicRegisterBlobModel
+        BlobReader.ContainerBlobs[ProducerContainer] =
+        [
+            new BlobModel
             {
                 Name = "2025/Public_Register_Producers_27_November_2025.csv",
-                LastModified = new DateTime(2025, 9, 30, 23, 59, 59),
-                ContentLength = "132629",
-                FileType = "CSV"
+                ContentLength = 132629,
+                LastModified = new DateTime(2025, 9, 30, 23, 59, 59)
             },
-            ["2026"] = new PublicRegisterBlobModel
+            new BlobModel
             {
                 Name = "2026/Public_Register_Producers_27_November_2025.csv",
-                LastModified = new DateTime(2025, 12, 7, 23, 59, 59),
-                ContentLength = "25883",
-                FileType = "CSV"
+                ContentLength = 25883,
+                LastModified = new DateTime(2025, 12, 7, 23, 59, 59)
             }
-        };
+        ];
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
@@ -135,23 +133,21 @@ public class PublicRegisterTests : IntegrationTestBase
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-06-01"; // before "11-01" threshold
 
-        BlobStorage.ProducerBlobModels = new Dictionary<string, PublicRegisterBlobModel>
-        {
-            ["2025"] = new PublicRegisterBlobModel
+        BlobReader.ContainerBlobs[ProducerContainer] =
+        [
+            new BlobModel
             {
                 Name = "2025/Public_Register_Producers_01_June_2025.csv",
-                LastModified = new DateTime(2025, 6, 1, 23, 59, 59),
-                ContentLength = "132629",
-                FileType = "CSV"
+                ContentLength = 132629,
+                LastModified = new DateTime(2025, 6, 1, 23, 59, 59)
             },
-            ["2026"] = new PublicRegisterBlobModel
+            new BlobModel
             {
                 Name = "2026/Public_Register_Producers_01_June_2025.csv",
-                LastModified = new DateTime(2025, 6, 1, 23, 59, 59),
-                ContentLength = "25883",
-                FileType = "CSV"
+                ContentLength = 25883,
+                LastModified = new DateTime(2025, 6, 1, 23, 59, 59)
             }
-        };
+        ];
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
