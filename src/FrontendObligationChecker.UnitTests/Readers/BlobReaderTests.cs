@@ -255,4 +255,162 @@ public class BlobReaderTests
         act.Should().ThrowAsync<BlobReaderException>();
         _blobContainerClient.Verify(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default), Times.Once);
     }
+
+    // Only here to satisfy SonarQube coverage requirements and has nothing to do with regression-proofing.
+    [TestMethod]
+    public async Task GetBlobsAsync_WithContainerName_ReturnsBlobsFromNamedContainer()
+    {
+        // Arrange
+        const string containerName = "my-container";
+        const string prefix = "2025";
+        var containerClient = new Mock<BlobContainerClient>();
+
+        var blobList = new BlobItem[]
+        {
+            BlobsModelFactory.BlobItem(
+                name: "2025/file.csv",
+                properties: BlobsModelFactory.BlobItemProperties(
+                    accessTierInferred: true,
+                    createdOn: new DateTimeOffset(new DateTime(2025, 1, 1)),
+                    contentLength: 100)),
+        };
+
+        var pageableBlobList = AsyncPageable<BlobItem>.FromPages(
+            new[] { Page<BlobItem>.FromValues(blobList, null, Mock.Of<Response>()) });
+
+        containerClient.Setup(x => x.GetBlobsAsync(BlobTraits.None, BlobStates.None, prefix, default))
+            .Returns(pageableBlobList);
+        _blobServiceClient.Setup(x => x.GetBlobContainerClient(containerName))
+            .Returns(containerClient.Object);
+
+        // Act
+        var result = await _systemUnderTest.GetBlobsAsync(containerName, prefix);
+
+        // Assert
+        result.Should().HaveCount(1);
+        result.First().Name.Should().Be("2025/file.csv");
+    }
+
+    // Only here to satisfy SonarQube coverage requirements and has nothing to do with regression-proofing.
+    [TestMethod]
+    public async Task GetBlobsAsync_WithContainerName_ThrowsBlobReaderException_OnRequestFailed()
+    {
+        // Arrange
+        const string containerName = "my-container";
+        var containerClient = new Mock<BlobContainerClient>();
+
+        containerClient.Setup(x => x.GetBlobsAsync(BlobTraits.None, BlobStates.None, "prefix", default))
+            .Throws(new RequestFailedException("fail"));
+        _blobServiceClient.Setup(x => x.GetBlobContainerClient(containerName))
+            .Returns(containerClient.Object);
+
+        // Act
+        var act = () => _systemUnderTest.GetBlobsAsync(containerName, "prefix");
+
+        // Assert
+        await act.Should().ThrowAsync<BlobReaderException>();
+    }
+
+    // Only here to satisfy SonarQube coverage requirements and has nothing to do with regression-proofing.
+    [TestMethod]
+    public async Task GetDirectories_WithContainerName_ReturnsDirectoriesFromNamedContainer()
+    {
+        // Arrange
+        const string containerName = "my-container";
+        var containerClient = new Mock<BlobContainerClient>();
+        var expected = new[] { "2025", "2026" };
+
+        var blobHierarchyItemList = new BlobHierarchyItem[]
+        {
+            BlobsModelFactory.BlobHierarchyItem(expected[0], BlobsModelFactory.BlobItem(name: "test")),
+            BlobsModelFactory.BlobHierarchyItem(expected[1], BlobsModelFactory.BlobItem(name: "test")),
+            BlobsModelFactory.BlobHierarchyItem(null, BlobsModelFactory.BlobItem(name: "test")),
+        };
+
+        var pageableList = AsyncPageable<BlobHierarchyItem>.FromPages(
+            new[] { Page<BlobHierarchyItem>.FromValues(blobHierarchyItemList, null, Mock.Of<Response>()) });
+
+        containerClient.Setup(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default))
+            .Returns(pageableList);
+        _blobServiceClient.Setup(x => x.GetBlobContainerClient(containerName))
+            .Returns(containerClient.Object);
+
+        // Act
+        var result = await _systemUnderTest.GetDirectories(containerName);
+
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+
+    // Only here to satisfy SonarQube coverage requirements and has nothing to do with regression-proofing.
+    [TestMethod]
+    public async Task GetDirectories_WithContainerName_ThrowsBlobReaderException_OnRequestFailed()
+    {
+        // Arrange
+        const string containerName = "my-container";
+        var containerClient = new Mock<BlobContainerClient>();
+
+        containerClient.Setup(x => x.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", null, default))
+            .Throws(new RequestFailedException("fail"));
+        _blobServiceClient.Setup(x => x.GetBlobContainerClient(containerName))
+            .Returns(containerClient.Object);
+
+        // Act
+        var act = () => _systemUnderTest.GetDirectories(containerName);
+
+        // Assert
+        await act.Should().ThrowAsync<BlobReaderException>();
+    }
+
+    // Only here to satisfy SonarQube coverage requirements and has nothing to do with regression-proofing.
+    [TestMethod]
+    public async Task DownloadBlobContentAsync_WithContainerName_ReturnsStream()
+    {
+        // Arrange
+        const string containerName = "my-container";
+        const string blobName = "2025/file.csv";
+        var containerClient = new Mock<BlobContainerClient>();
+        var blobClientMock = new Mock<BlobClient>();
+
+        var blobContent = new BinaryData("test data");
+        var downloadResult = BlobsModelFactory.BlobDownloadResult(content: blobContent);
+        var response = Response.FromValue(downloadResult, new Mock<Response>().Object);
+
+        blobClientMock.Setup(x => x.DownloadContentAsync()).ReturnsAsync(response);
+        containerClient.Setup(x => x.GetBlobClient(blobName)).Returns(blobClientMock.Object);
+        _blobServiceClient.Setup(x => x.GetBlobContainerClient(containerName))
+            .Returns(containerClient.Object);
+
+        // Act
+        var result = await _systemUnderTest.DownloadBlobContentAsync(containerName, blobName);
+
+        // Assert
+        result.Should().NotBeNull();
+        using var reader = new StreamReader(result);
+        var content = await reader.ReadToEndAsync();
+        content.Should().Be("test data");
+    }
+
+    // Only here to satisfy SonarQube coverage requirements and has nothing to do with regression-proofing.
+    [TestMethod]
+    public async Task DownloadBlobContentAsync_WithContainerName_ThrowsBlobReaderException_OnRequestFailed()
+    {
+        // Arrange
+        const string containerName = "my-container";
+        const string blobName = "2025/file.csv";
+        var containerClient = new Mock<BlobContainerClient>();
+        var blobClientMock = new Mock<BlobClient>();
+
+        blobClientMock.Setup(x => x.DownloadContentAsync())
+            .ThrowsAsync(new RequestFailedException("fail"));
+        containerClient.Setup(x => x.GetBlobClient(blobName)).Returns(blobClientMock.Object);
+        _blobServiceClient.Setup(x => x.GetBlobContainerClient(containerName))
+            .Returns(containerClient.Object);
+
+        // Act
+        var act = () => _systemUnderTest.DownloadBlobContentAsync(containerName, blobName);
+
+        // Assert
+        await act.Should().ThrowAsync<BlobReaderException>();
+    }
 }
