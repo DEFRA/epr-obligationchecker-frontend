@@ -10,5 +10,7 @@
         public string DisplayFileSize { get; set; }
 
         public DateTime DateCreated { get; set; }
+
+        public string DownloadUrl { get; set; }
     }
 }

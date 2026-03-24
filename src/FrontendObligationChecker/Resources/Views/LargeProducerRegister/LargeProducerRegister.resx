@@ -139,10 +139,16 @@
     <value>Public Register of Registered Producers on the National Packaging Waste Database (NPWD)</value>
   </data>
   <data name="LargeProducerRegister.ListOfLargeProducers" xml:space="preserve">
-    <value>List of large producers - download the CSV file</value>
+    <value>List of large producers</value>
   </data>
-  <data name="LargeProducerRegister.TheInformationIsInCsvFiles" xml:space="preserve">
-    <value>The information contained in the CSV file is for all nations – England, Scotland, Wales and Northern Ireland</value>
+  <data name="LargeProducerRegister.RegisterOfProducers" xml:space="preserve">
+    <value>Register of producers</value>
+  </data>
+  <data name="LargeProducerRegister.ListOfLargeProducersDescription" xml:space="preserve">
+    <value>Large producers who reported data in 2023 and 2024.</value>
+  </data>
+  <data name="LargeProducerRegister.RegisterOfProducersDescription" xml:space="preserve">
+    <value>Registered under The Producer Responsibility Obligations (Packaging and Packaging Waste) Regulations 2024.</value>
   </data>
   <data name="LargeProducerRegister.EnglandLink" xml:space="preserve">
     <value>Environment Agency - England (CSV, {0})</value>
@@ -175,6 +181,9 @@
     <value>If you’re unsure about anything, check with the producer directly.</value>
   </data>
   <data name="LargeProducerRegister.ListOfLargeProducersFile" xml:space="preserve">
-    <value>List_of_large_producers_to_{0}_{1:dd}_{1:MMMM}_{1:yyyy} (CSV {2})</value>
+    <value>{0} list of large producers (CSV {1})</value>
+  </data>
+  <data name="LargeProducerRegister.RegisterOfProducersFile" xml:space="preserve">
+    <value>{0} register of producers (CSV {1})</value>
   </data>
 </root>
