@@ -117,6 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LargeProducerRegister.Title" xml:space="preserve">
+    <value>Lawrlwytho gwybodaeth am gynhyrchwyr pecynwaith yn y blynyddoedd blaenorol</value>
+  </data>
+  <data name="LargeProducerRegister.ListOfLargeProducers" xml:space="preserve">
+    <value>Rhestr o gynhyrchwyr mawr</value>
+  </data>
+  <data name="LargeProducerRegister.RegisterOfProducers" xml:space="preserve">
+    <value>Cofrestr o gynhyrchwyr</value>
+  </data>
+  <data name="LargeProducerRegister.ListOfLargeProducersDescription" xml:space="preserve">
+    <value>Cynhyrchwyr mawr a roddodd wybod am ddata yn 2023 a 2024.</value>
+  </data>
+  <data name="LargeProducerRegister.RegisterOfProducersDescription" xml:space="preserve">
+    <value>Wedi'u cofrestru o dan Reoliadau Rhwymedigaethau Cynhyrchwyr (Pecynnu a Gwastraff Pecynnu) 2024.</value>
+  </data>
+  <data name="LargeProducerRegister.ViewPreviousYears" xml:space="preserve">
+    <value>Gweld cynhyrchwyr sydd wedi'u cofrestru o dan reoliadau gwastraff pecynwaith 2007 ar y </value>
+  </data>
+  <data name="LargeProducerRegister.NPWDLinkText" xml:space="preserve">
+    <value>Gronfa Ddata Gwastraff Pecynwaith Genedlaethol</value>
+  </data>
+  <data name="LargeProducerRegister.NPWDPostLink" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="LargeProducerRegister.Disclaimer" xml:space="preserve">
+    <value>Ynglŷn â'r data</value>
+  </data>
+  <data name="LargeProducerRegister.TheListsShowTheInformation" xml:space="preserve">
+    <value>Mae'r rhestrau yma yn dangos gwybodaeth heb ei golygu a adroddwyd yn uniongyrchol gan gynhyrchwyr. Gall rhai meysydd fod yn wag os nad ydynt yn gymwys i'r cynhyrchydd hwnnw.</value>
+  </data>
+  <data name="LargeProducerRegister.IfYoureUnsureAboutAnything" xml:space="preserve">
+    <value>Gwiriwch gyda'r cynhyrchydd yn uniongyrchol os nad ydych chi'n siŵr am unrhyw beth.</value>
+  </data>
   <data name="LargeProducerRegister.ListOfLargeProducersFile" xml:space="preserve">
     <value>Rhestr {0} o cynhyrchwyr mawr (CSV {1})</value>
   </data>
