@@ -14,12 +14,6 @@
 		<div class="govuk-grid-row">
 			<div class="govuk-grid-column-two-thirds">
 				<h1 class="govuk-heading-l">@Localizer["LargeProducerRegister.Title"]</h1>
-				<p class="govuk-body">
-					@Localizer["LargeProducerRegister.BeforeYouStart"]<a href=@ExternalUrls.Value.WhoIsAffectedAndWhatToDo class="govuk-link">@Localizer["LargeProducerRegister.FindOutWhatThisLinkIsForLink"]</a>@Localizer["LargeProducerRegister.WhoIsAffectedPostLink"]
-				</p>
-				<p class="govuk-body">
-					@Localizer["LargeProducerRegister.ForAnythingBeforeReportingYear"]<a href=@ExternalUrls.Value.NpwdRegister class="govuk-link">@Localizer["LargeProducerRegister.PublicRegisterOfRegisteredProducersLink"]</a>@Localizer["LargeProducerRegister.PublicRegisterPostLink"]
-				</p>
 
 				<h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.RegisterOfProducers"]</h2>
 				<p class="govuk-body">@Localizer["LargeProducerRegister.RegisterOfProducersDescription"]</p>
@@ -27,7 +21,6 @@
 					@foreach (var file in Model.RegisterOfProducers)
 					{
 						<li>
-							<h3 class="govuk-heading-s">@file.ReportingYear</h3>
 							<a href="@file.DownloadUrl" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.RegisterOfProducersFile", file.ReportingYear, file.DisplayFileSize]</a>
 						</li>
 					}
@@ -39,17 +32,17 @@
 					@foreach (var file in Model.ListOfLargeProducers)
 					{
 						<li>
-							<h3 class="govuk-heading-s">@file.ReportingYear</h3>
 							<a href="@file.DownloadUrl" class="govuk-link govuk-link--no-visited-state">@Localizer["LargeProducerRegister.ListOfLargeProducersFile", file.ReportingYear, file.DisplayFileSize]</a>
 						</li>
 					}
 				</ul>
 
-				<p class="govuk-body">@Localizer["LargeProducerRegister.ThisInformationIsUpdated"]</p>
+                <p class="govuk-body">
+                    @Localizer["LargeProducerRegister.ViewPreviousYears"]<a href=@ExternalUrls.Value.NpwdRegister class="govuk-link">@Localizer["LargeProducerRegister.NPWDLinkText"]</a>@Localizer["LargeProducerRegister.NPWDPostLink"]
+                </p>
 
 				<h2 class="govuk-heading-m">@Localizer["LargeProducerRegister.Disclaimer"]</h2>
 				<p class="govuk-body">@Localizer["LargeProducerRegister.TheListsShowTheInformation"]</p>
-				<p class="govuk-body">@Localizer["LargeProducerRegister.SomeFieldsMayBeBlank"]</p>
 				<p class="govuk-body">@Localizer["LargeProducerRegister.IfYoureUnsureAboutAnything"]</p>
 			</div>
 		</div>
