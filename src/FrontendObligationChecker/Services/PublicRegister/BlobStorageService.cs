@@ -1,10 +1,6 @@
-﻿namespace FrontendObligationChecker.Services.PublicRegister;
+namespace FrontendObligationChecker.Services.PublicRegister;
 
 using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
-using Azure;
-using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
 using FrontendObligationChecker.Constants;
 using FrontendObligationChecker.Exceptions;
 using FrontendObligationChecker.Models.BlobReader;
@@ -14,7 +10,6 @@ using FrontendObligationChecker.ViewModels.PublicRegister;
 using Microsoft.Extensions.Options;
 
 public class BlobStorageService(
-    BlobServiceClient blobServiceClient,
     IBlobReader blobReader,
     ILogger<BlobStorageService> logger,
     IOptions<PublicRegisterOptions> publicRegisterOptions) : IBlobStorageService
@@ -31,26 +26,26 @@ public class BlobStorageService(
 
         try
         {
-            var containerClient = GetContainerClient(containerName);
-            if (containerClient is null) return result;
+            if (string.IsNullOrWhiteSpace(containerName)) return result;
 
-            var latestFolderPrefix = await GetLatestFolderPrefixAsync(containerClient);
+            var directories = await blobReader.GetDirectories(containerName);
+            var latestFolderPrefix = directories
+                .OrderByDescending(p => p)
+                .FirstOrDefault();
+
             if (string.IsNullOrWhiteSpace(latestFolderPrefix)) return result;
 
-            var latestBlob = await GetLatestBlobAsync(containerClient, latestFolderPrefix);
+            var latestBlob = await GetLatestBlobAsync(containerName, latestFolderPrefix);
             if (latestBlob is null) return result;
 
-            var blobClient = containerClient.GetBlobClient(latestBlob.Name);
-            var properties = await blobClient.GetPropertiesAsync();
-
             result.Name = latestBlob.Name;
-            result.LastModified = properties.Value.LastModified.DateTime;
-            result.ContentLength = properties.Value.ContentLength.ToString();
+            result.LastModified = latestBlob.LastModified;
+            result.ContentLength = latestBlob.ContentLength?.ToString();
             result.FileType = GetFileType(latestBlob.Name);
 
             return result;
         }
-        catch (RequestFailedException ex)
+        catch (BlobReaderException ex)
         {
             logger.LogError(ex, LogMessage, $"{containerName} files");
         }
@@ -64,32 +59,28 @@ public class BlobStorageService(
 
         try
         {
-            var containerClient = GetContainerClient(containerName);
-            if (containerClient is null) return result;
+            if (string.IsNullOrWhiteSpace(containerName)) return result;
 
             foreach (var folderPrefix in folderPrefixes)
             {
                 if (string.IsNullOrWhiteSpace(folderPrefix)) continue;
 
-                var latestBlob = await GetLatestBlobAsync(containerClient, folderPrefix);
+                var latestBlob = await GetLatestBlobAsync(containerName, folderPrefix);
                 if (latestBlob is null) continue;
-
-                var blobClient = containerClient.GetBlobClient(latestBlob.Name);
-                var properties = await blobClient.GetPropertiesAsync();
 
                 var model = new PublicRegisterBlobModel
                 {
                     PublishedDate = publicRegisterOptions.Value.PublishedDate,
                     Name = latestBlob.Name,
-                    LastModified = properties.Value.LastModified.DateTime,
-                    ContentLength = properties.Value.ContentLength.ToString(),
+                    LastModified = latestBlob.LastModified,
+                    ContentLength = latestBlob.ContentLength?.ToString(),
                     FileType = GetFileType(latestBlob.Name)
                 };
 
                 result[folderPrefix.TrimEnd('/')] = model;
             }
         }
-        catch (RequestFailedException ex)
+        catch (BlobReaderException ex)
         {
             logger.LogError(ex, LogMessage, $"{containerName} files");
         }
@@ -102,16 +93,12 @@ public class BlobStorageService(
         try
         {
             var fileModel = new PublicRegisterFileModel();
-            var containerClient = GetContainerClient(containerName);
-            var blobClient = containerClient.GetBlobClient(blobName);
-            var download = await blobClient.DownloadContentAsync();
-
-            fileModel.FileContent = download.Value.Content.ToStream();
+            fileModel.FileContent = await blobReader.DownloadBlobContentAsync(containerName, blobName);
             fileModel.FileName = GetFileName(blobName);
 
             return fileModel;
         }
-        catch (RequestFailedException ex)
+        catch (BlobReaderException ex)
         {
             logger.LogError(ex, LogMessage, $"{containerName} files");
             throw new PublicRegisterServiceException(string.Format(ErrorMessage, HomeNation.All), ex);
@@ -126,33 +113,27 @@ public class BlobStorageService(
 
         try
         {
-            var containerClient = GetContainerClient(containerName);
+            if (string.IsNullOrWhiteSpace(containerName)) return result;
 
-            if (containerClient is null) return result;
-
-            // Used as a filter.
             var suffix = string.Format("_{0}", agency);
-
-            // Get the file name value from the config file so the system knows what file name to look for.
-            // Filename from blob storage without the suffix and extension must much what's stored in the config
-            // otherwise the file won't be available for download. See user story (523627).
-
             var enforcementFileName = string.Format("{0}{1}", publicRegisterOptions.Value.EnforcementActionFileName, suffix);
 
-            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
+            var blobs = await blobReader.GetBlobsAsync(containerName, null);
+
+            foreach (var blob in blobs)
             {
-                if (Path.GetFileNameWithoutExtension(blobItem.Name) == enforcementFileName)
+                if (Path.GetFileNameWithoutExtension(blob.Name) == enforcementFileName)
                 {
-                    result.FileName = blobItem.Name;
-                    result.ContentFileLength = (int)blobItem.Properties.ContentLength;
-                    result.DateCreated = blobItem.Properties.CreatedOn.Value.DateTime;
-                    result.FileContents = await blobReader.DownloadBlobToStreamAsync(containerName, blobItem.Name, false);
+                    result.FileName = blob.Name;
+                    result.ContentFileLength = (int)(blob.ContentLength ?? 0);
+                    result.DateCreated = blob.CreatedOn ?? DateTime.MinValue;
+                    result.FileContents = await blobReader.DownloadBlobToStreamAsync(containerName, blob.Name, false);
 
                     break;
                 }
             }
         }
-        catch (RequestFailedException ex)
+        catch (BlobReaderException ex)
         {
             logger.LogError(ex, LogMessage, $"{containerName} files");
         }
@@ -160,10 +141,35 @@ public class BlobStorageService(
         return result;
     }
 
-    private static string? GetFolderPrefix(string blobName)
+    [ExcludeFromCodeCoverage]
+    public async Task<IEnumerable<EnforcementActionFileViewModel>> GetEnforcementActionFiles()
     {
-        var parts = blobName.Split('/');
-        return parts.Length > 1 ? parts[0] + "/" : null;
+        var results = new List<EnforcementActionFileViewModel>();
+        var containerName = publicRegisterOptions.Value.EnforcementActionsBlobContainerName;
+
+        try
+        {
+            if (string.IsNullOrWhiteSpace(containerName)) return results;
+
+            var blobs = await blobReader.GetBlobsAsync(containerName, null);
+
+            foreach (var blob in blobs)
+            {
+                results.Add(new EnforcementActionFileViewModel
+                {
+                    FileName = blob.Name,
+                    DateCreated = DateTime.Now,
+                    ContentFileLength = (int)(blob.ContentLength ?? 0)
+                });
+            }
+        }
+        catch (BlobReaderException ex)
+        {
+            logger.LogError(ex, LogMessage, $"{containerName} files");
+            throw;
+        }
+
+        return results;
     }
 
     private static string GetFileType(string blobName)
@@ -178,92 +184,12 @@ public class BlobStorageService(
         return parts.Length > 1 ? parts[1] : blobName;
     }
 
-    private static async Task<BlobItem?> GetLatestBlobAsync(BlobContainerClient containerClient, string prefix)
+    private async Task<BlobModel?> GetLatestBlobAsync(string containerName, string prefix)
     {
-        BlobItem? latestBlob = null;
+        var blobs = await blobReader.GetBlobsAsync(containerName, prefix);
 
-        await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
-        {
-            var contentLength = blobItem.Properties?.ContentLength ?? 0;
-            var lastModified = blobItem.Properties?.LastModified;
-
-            if (contentLength > 0 && (latestBlob == null || (lastModified != null && lastModified > latestBlob.Properties?.LastModified)))
-            {
-                latestBlob = blobItem;
-            }
-        }
-
-        return latestBlob;
-    }
-
-    private BlobContainerClient GetContainerClient(string containerName)
-    {
-        return blobServiceClient.GetBlobContainerClient(containerName);
-    }
-
-    private async Task<string?> GetLatestFolderPrefixAsync(BlobContainerClient containerClient)
-    {
-        try
-        {
-            var folderPrefixes = new HashSet<string>();
-
-            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
-            {
-                var prefix = GetFolderPrefix(blobItem.Name);
-                if (!string.IsNullOrWhiteSpace(prefix))
-                {
-                    folderPrefixes.Add(prefix);
-                }
-            }
-
-            return folderPrefixes
-                .OrderByDescending(p => p)
-                .FirstOrDefault();
-        }
-        catch (RequestFailedException ex)
-        {
-            LogError(ex, "directories");
-            throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
-        }
-    }
-
-    private void LogError(RequestFailedException ex, string fileName)
-    {
-        logger.LogError(ex, LogMessage, fileName);
-    }
-
-    [ExcludeFromCodeCoverage]
-
-    public async Task<IEnumerable<EnforcementActionFileViewModel>> GetEnforcementActionFiles()
-    {
-        var results = new List<EnforcementActionFileViewModel>();
-
-        try
-        {
-            var containerClient = blobServiceClient.GetBlobContainerClient(publicRegisterOptions.Value.EnforcementActionsBlobContainerName);
-            if (containerClient is null)
-            {
-                return results;
-            }
-
-            await foreach(BlobItem blobItem in containerClient.GetBlobsAsync())
-            {
-                var enforcementActionFileItem = new EnforcementActionFileViewModel();
-
-                enforcementActionFileItem.FileName = blobItem.Name;
-                enforcementActionFileItem.DateCreated = DateTime.Now;
-                enforcementActionFileItem.ContentFileLength = (int)blobItem.Properties.ContentLength;
-
-                results.Add(enforcementActionFileItem);
-            }
-
-        }
-        catch (RequestFailedException ex)
-        {
-            LogError(ex, "directories");
-            throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
-        }
-
-        return results;
+        return blobs
+            .Where(b => (b.ContentLength ?? 0) > 0 && b.LastModified != null)
+            .MaxBy(b => b.LastModified);
     }
 }

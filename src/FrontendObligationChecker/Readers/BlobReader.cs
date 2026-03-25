@@ -113,6 +113,7 @@ public class BlobReader : IBlobReader
                         Name = blobItem.Name,
                         ContentLength = blobItem.Properties.ContentLength,
                         CreatedOn = blobItem.Properties.CreatedOn?.LocalDateTime,
+                        LastModified = blobItem.Properties.LastModified?.LocalDateTime,
                     });
                 }
             }
@@ -123,6 +124,33 @@ public class BlobReader : IBlobReader
         {
             _logger.LogError(ex, LogMessage, prefix);
             throw new BlobReaderException(string.Format(ErrorMessage, prefix), ex);
+        }
+    }
+
+    public async Task<IEnumerable<BlobModel>> GetBlobsAsync(string containerName, string? prefix)
+    {
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            var list = new List<BlobModel>();
+
+            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync(prefix: prefix))
+            {
+                list.Add(new BlobModel
+                {
+                    Name = blobItem.Name,
+                    ContentLength = blobItem.Properties.ContentLength,
+                    CreatedOn = blobItem.Properties.CreatedOn?.LocalDateTime,
+                    LastModified = blobItem.Properties.LastModified?.LocalDateTime,
+                });
+            }
+
+            return list;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, prefix ?? containerName);
+            throw new BlobReaderException(string.Format(ErrorMessage, prefix ?? containerName), ex);
         }
     }
 
@@ -154,7 +182,46 @@ public class BlobReader : IBlobReader
         }
     }
 
-    [ExcludeFromCodeCoverage]
+    public async Task<IEnumerable<string>> GetDirectories(string containerName)
+    {
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            var directories = new List<string>();
+
+            await foreach (BlobHierarchyItem item in containerClient.GetBlobsByHierarchyAsync(delimiter: "/"))
+            {
+                if (item.IsPrefix)
+                {
+                    directories.Add(item.Prefix);
+                }
+            }
+
+            return directories;
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, "directories");
+            throw new BlobReaderException(string.Format(ErrorMessage, "directories"), ex);
+        }
+    }
+
+    public async Task<Stream> DownloadBlobContentAsync(string containerName, string blobName)
+    {
+        try
+        {
+            var containerClient = GetContainerClient(containerName);
+            var blobClient = containerClient.GetBlobClient(blobName);
+            var download = await blobClient.DownloadContentAsync();
+            return download.Value.Content.ToStream();
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, LogMessage, blobName);
+            throw new BlobReaderException(string.Format(ErrorMessage, blobName), ex);
+        }
+    }
+
     private BlobContainerClient GetContainerClient(string containerName)
     {
         return _blobServiceClient.GetBlobContainerClient(containerName);

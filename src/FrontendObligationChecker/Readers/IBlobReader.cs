@@ -12,5 +12,11 @@ public interface IBlobReader
 
     Task<IEnumerable<BlobModel>> GetBlobsAsync(string prefix);
 
+    Task<IEnumerable<BlobModel>> GetBlobsAsync(string containerName, string? prefix);
+
     Task<IEnumerable<string>> GetDirectories();
+
+    Task<IEnumerable<string>> GetDirectories(string containerName);
+
+    Task<Stream> DownloadBlobContentAsync(string containerName, string blobName);
 }
