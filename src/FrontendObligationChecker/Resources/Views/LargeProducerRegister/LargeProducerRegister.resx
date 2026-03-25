@@ -147,23 +147,20 @@
   <data name="LargeProducerRegister.AllFourRegulatorsLink" xml:space="preserve">
     <value>All four regulators (CSV, {0})</value>
   </data>
-  <data name="ViewPreviousYears" xml:space="preserve">
+  <data name="LargeProducerRegister.ViewPreviousYears" xml:space="preserve">
     <value>View producers registered under the 2007 packaging waste regulations on the </value>
   </data>
-  <data name="NPWDLinkText" xml:space="preserve">
+  <data name="LargeProducerRegister.NPWDLinkText" xml:space="preserve">
     <value>National Packaging Waste Database</value>
   </data>
-  <data name="NPWDPostLink" xml:space="preserve">
+  <data name="LargeProducerRegister.NPWDPostLink" xml:space="preserve">
     <value>.</value>
   </data>
   <data name="LargeProducerRegister.Disclaimer" xml:space="preserve">
-    <value>About the data </value>
+    <value>About the data</value>
   </data>
   <data name="LargeProducerRegister.TheListsShowTheInformation" xml:space="preserve">
     <value>These lists show unedited information reported directly by producers. Some fields may be blank if they do not apply to that producer.</value>
-  </data>
-  <data name="LargeProducerRegister.SomeFieldsMayBeBlank" xml:space="preserve">
-    <value>Check with the producer directly if you’re unsure about anything.</value>
   </data>
   <data name="LargeProducerRegister.IfYoureUnsureAboutAnything" xml:space="preserve">
     <value>Check with the producer directly if you’re unsure about anything.</value>
