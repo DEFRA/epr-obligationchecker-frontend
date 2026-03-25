@@ -132,21 +132,6 @@
   <data name="LargeProducerRegister.RegisterOfProducersDescription" xml:space="preserve">
     <value>Registered under The Producer Responsibility Obligations (Packaging and Packaging Waste) Regulations 2024.</value>
   </data>
-  <data name="LargeProducerRegister.EnglandLink" xml:space="preserve">
-    <value>Environment Agency - England (CSV, {0})</value>
-  </data>
-  <data name="LargeProducerRegister.ScotlandLink" xml:space="preserve">
-    <value>Scottish Environment Protection Agency (CSV {0})</value>
-  </data>
-  <data name="LargeProducerRegister.WalesLink" xml:space="preserve">
-    <value>Natural Resources Wales (CSV, {0})</value>
-  </data>
-  <data name="LargeProducerRegister.NorthernIrelandLink" xml:space="preserve">
-    <value>Northern Ireland Environment Agency (CSV, {0})</value>
-  </data>
-  <data name="LargeProducerRegister.AllFourRegulatorsLink" xml:space="preserve">
-    <value>All four regulators (CSV, {0})</value>
-  </data>
   <data name="LargeProducerRegister.ViewPreviousYears" xml:space="preserve">
     <value>View producers registered under the 2007 packaging waste regulations on the </value>
   </data>
