@@ -214,7 +214,7 @@
     <value>Ynglŷn â'r data</value>
   </data>
   <data name="Guidance.DisclaimerText" xml:space="preserve">
-    <value>Mae'r rhestr yma yn dangos gwybodaeth heb ei golygu a adroddwyd yn uniongyrchol gan gynhyrchwyr.</value>
+    <value>Mae'r rhestr yma yn dangos gwybodaeth heb ei golygu a adroddwyd yn uniongyrchol gan gynhyrchwyr. Gall rhai meysydd fod yn wag os nad ydynt yn gymwys i'r cynhyrchydd hwnnw.</value>
   </data>
   <data name="Guidance.DisclaimerText2" xml:space="preserve">
     <value>Gwiriwch gyda'r cynhyrchydd yn uniongyrchol os nad ydych chi'n siŵr am unrhyw beth.</value>
