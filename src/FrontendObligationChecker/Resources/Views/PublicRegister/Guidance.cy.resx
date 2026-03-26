@@ -169,10 +169,10 @@
     <value>Oddi wrth:</value>
   </data>
   <data name="Guidance.Heading" xml:space="preserve">
-    <value>Cofrestrau cyhoeddus pecynwaith</value>
+    <value>Cyfrifoldeb cynhyrchydd estynedig ar gyfer pecynnu: cofrestr o gynhyrchwyr pecynnu</value>
   </data>
   <data name="Guidance.LastUpdated" xml:space="preserve">
-    <value>Y diweddariad diwethaf:</value>
+    <value>Y diweddariad diwethaf</value>
   </data>
   <data name="Guidance.NaturalResourcesWalesLink" xml:space="preserve">
     <value>Cyfoeth Naturiol Cymru</value>
@@ -181,13 +181,10 @@
     <value>Asiantaeth Amgylchedd Gogledd Iwerddon</value>
   </data>
   <data name="Guidance.PageTitle" xml:space="preserve">
-    <value>Cofrestrau cyhoeddus pecynwaith</value>
+    <value>Cyfrifoldeb cynhyrchydd estynedig ar gyfer pecynnu: cofrestr o gynhyrchwyr pecynnu</value>
   </data>
   <data name="Guidance.ProducersRegisteredForRpd" xml:space="preserve">
-    <value>Cofrestr gyhoeddus cynhyrchwyr {0}</value>
-  </data>
-  <data name="Guidance.Published" xml:space="preserve">
-    <value>Wedi'i chyhoeddi:</value>
+    <value>Cofrestr cynhyrchwyr {0}</value>
   </data>
   <data name="Guidance.Published2" xml:space="preserve">
     <value>Wedi'i chyhoeddi</value>
@@ -214,10 +211,13 @@
     <value>(ddim ar gael eto)</value>
   </data>
   <data name="Guidance.DisclaimerHeading" xml:space="preserve">
-    <value>Ymwadiad</value>
+    <value>Ynglŷn â'r data</value>
   </data>
   <data name="Guidance.DisclaimerText" xml:space="preserve">
-    <value>Gall rhai meysydd fod yn wag. Un rheswm posibl am hynny yw nad ydyn nhw'n gymwys i'r cynhyrchydd dan sylw.</value>
+    <value>Mae'r rhestr yma yn dangos gwybodaeth heb ei golygu a adroddwyd yn uniongyrchol gan gynhyrchwyr.</value>
+  </data>
+  <data name="Guidance.DisclaimerText2" xml:space="preserve">
+    <value>Gwiriwch gyda'r cynhyrchydd yn uniongyrchol os nad ydych chi'n siŵr am unrhyw beth.</value>
   </data>
   <data name="Guidance.PageTitleOld" xml:space="preserve">
     <value>Cofrestr gyhoeddus ar gyfer y gwasanaeth ‘rhoi gwybod am ddata pecynwaith'</value>
