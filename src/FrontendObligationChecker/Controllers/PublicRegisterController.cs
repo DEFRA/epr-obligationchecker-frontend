@@ -42,7 +42,6 @@
                 isPublicRegisterNextYearEnabled: isPublicRegisterNextYearEnabled,
                 optionsCurrentYear: _options.CurrentYear,
                 optionsPublicRegisterPreviousYearEndMonthAndDay: _options.PublicRegisterPreviousYearEndMonthAndDay,
-                optionsPublicRegisterNextYearStartMonthAndDay: _options.PublicRegisterNextYearStartMonthAndDay,
                 optionsPublishedDate: _options.PublishedDate,
                 urlOptionsDefraUrl: _urlOptions.DefraUrl,
                 urlOptionsBusinessAndEnvironmentUrl: _urlOptions.BusinessAndEnvironmentUrl,
@@ -64,7 +63,6 @@
             bool isPublicRegisterNextYearEnabled,
             string? optionsCurrentYear,
             string? optionsPublicRegisterPreviousYearEndMonthAndDay,
-            string optionsPublicRegisterNextYearStartMonthAndDay,
             DateTime optionsPublishedDate,
             string urlOptionsDefraUrl,
             string urlOptionsBusinessAndEnvironmentUrl,
@@ -93,15 +91,10 @@
                 folderPrefixes.Add(previousYear.ToString());
             }
 
-            // Add next year if feature enabled and today is on or after the configured month and day
+            // Add next year if feature flag is enabled
             if (isPublicRegisterNextYearEnabled)
             {
-                var startMonthDay = optionsPublicRegisterNextYearStartMonthAndDay;
-                if (!string.IsNullOrWhiteSpace(startMonthDay) &&
-                    string.Compare(currentMonthDay, startMonthDay, StringComparison.Ordinal) >= 0)
-                {
-                    folderPrefixes.Add(nextYear.ToString());
-                }
+                folderPrefixes.Add(nextYear.ToString());
             }
 
             // dictionary key is the year, e.g. "2025"

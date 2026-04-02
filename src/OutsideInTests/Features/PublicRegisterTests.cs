@@ -17,10 +17,7 @@ public class PublicRegisterTests : IntegrationTestBase
     {
         var result = base.InitializeAsync();
 
-        // These MM-DD thresholds control which year folders are requested.
-        // "11-01" = next year file shown from 1 Nov onwards
         // "02-01" = previous year file shown until 1 Feb
-        ConfigOverrides["PublicRegister:PublicRegisterNextYearStartMonthAndDay"] = "11-01";
         ConfigOverrides["PublicRegister:PublicRegisterPreviousYearEndMonthAndDay"] = "02-01";
         ConfigOverrides["PublicRegister:PublicRegisterBlobContainerName"] = ProducerContainer;
 
@@ -32,7 +29,7 @@ public class PublicRegisterTests : IntegrationTestBase
     {
         // Arrange
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
-        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08";
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -68,7 +65,7 @@ public class PublicRegisterTests : IntegrationTestBase
     {
         // Arrange
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
-        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08";
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -96,7 +93,7 @@ public class PublicRegisterTests : IntegrationTestBase
     {
         // Arrange
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
-        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08"; // after "11-01" threshold
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-12-08";
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -127,11 +124,11 @@ public class PublicRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task ShowsOnlyCurrentYearFile_WhenDateBeforeNextYearThreshold()
+    public async Task ShowsCurrentYearAndNextYearFiles_WhenFlagOnRegardlessOfDate()
     {
         // Arrange
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "true";
-        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-06-01"; // before "11-01" threshold
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2025-06-01"; // before old "11-01" threshold — should still show next year
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -155,9 +152,9 @@ public class PublicRegisterTests : IntegrationTestBase
         // Assert
         using (new AssertionScope())
         {
-            page.DownloadLinks.Should().HaveCount(1, "date is before 11-01 threshold");
+            page.DownloadLinks.Should().HaveCount(2, "feature flag alone controls next year — no date threshold");
             page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2025"));
-            page.DownloadHrefs.Should().NotContain(href => href.Contains("fileName=2026"));
+            page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2026"));
         }
     }
 

@@ -27,6 +27,9 @@ public class ObligationCheckerWebApplicationFactory : WebApplicationFactory<Prog
             ["FeatureManagement:PublicRegisterEnabled"] = "true",
             ["FeatureManagement:LargeProducerRegisterEnabled"] = "true",
 
+            // Use in-memory session to avoid Redis dependency in tests
+            ["UseLocalSession"] = "true",
+
             // Azurite emulator connection string — not a real secret, just satisfies DI wiring.
             ["StorageAccount:ConnectionString"] = "UseDevelopmentStorage=true",
             ["StorageAccount:BlobContainerName"] = "test-container",
