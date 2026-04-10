@@ -477,8 +477,7 @@
             {
                 PublicRegisterBlobContainerName = "producers-container",
                 PublicRegisterCsoBlobContainerName = "schemes-container",
-                PublishedDate = _publishedDate,
-                PublicRegisterNextYearStartMonthAndDay = $"{DateTime.UtcNow.ToString("MM-dd")}"
+                PublishedDate = _publishedDate
             });
 
             _blobStorageServiceMock

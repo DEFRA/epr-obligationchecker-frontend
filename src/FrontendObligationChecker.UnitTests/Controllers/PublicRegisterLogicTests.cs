@@ -36,7 +36,6 @@ public class PublicRegisterLogicTests
             isPublicRegisterNextYearEnabled: true,
             optionsCurrentYear: null, // only used for manual QA
             optionsPublicRegisterPreviousYearEndMonthAndDay: "02-01",
-            optionsPublicRegisterNextYearStartMonthAndDay: "11-01",
             optionsPublishedDate: new DateTime(2025, 9, 30),
             urlOptionsDefraUrl: "https://defra.example.org",
             urlOptionsBusinessAndEnvironmentUrl: "https://defra.example.org/business",
@@ -100,9 +99,9 @@ public class PublicRegisterLogicTests
     [DataRow(false, "2026-01-02", "2025", "2026", "1 January 2026", "2025/Public_Register_Producers_01_January_2026.csv", "20250378", "2026/Public_Register_Producers_01_January_2026.csv", "20260378")] // 2nd Jan
     [DataRow(false, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")]
     [DataRow(false, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")] // Configured date for PublicRegister__PublicRegisterPreviousYearEndMonthAndDay "02-01"
-    [DataRow(false, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
+    [DataRow(false, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after previous year cutoff
     [DataRow(false, "2026-10-31", "2026", "2027", "30 October 2026", "2026/Public_Register_Producers_30_October_2026.csv", "20260680", null, null)]
-    [DataRow(false, "2026-11-01", "2026", "2027", "31 October 2026", "2026/Public_Register_Producers_31_October_2026.csv", "20260681", null, null)] // Configured date for PublicRegister__PublicRegisterNextYearStartMonthAndDay "11-01"
+    [DataRow(false, "2026-11-01", "2026", "2027", "31 October 2026", "2026/Public_Register_Producers_31_October_2026.csv", "20260681", null, null)] // Nov 1st (date check removed - feature flag alone controls next year)
     [DataRow(false, "2026-11-02", "2026", "2027", "1 November 2026", "2026/Public_Register_Producers_01_November_2026.csv", "20260682", null, null)]
     // publicRegisterNextYearEnabled on
     [DataRow(true, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", "2026/Public_Register_Producers_08_December_2025.csv", "20260354")] // now
@@ -112,18 +111,18 @@ public class PublicRegisterLogicTests
     [DataRow(true, "2026-01-02", "2025", "2026", "1 January 2026", "2025/Public_Register_Producers_01_January_2026.csv", "20250378", "2026/Public_Register_Producers_01_January_2026.csv", "20260378")] // 2nd Jan
     [DataRow(true, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")]
     [DataRow(true, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")] // Configured date for PublicRegister__PublicRegisterPreviousYearEndMonthAndDay "02-01"
-    [DataRow(true, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
-    [DataRow(true, "2026-10-31", "2026", "2027", "30 October 2026", "2026/Public_Register_Producers_30_October_2026.csv", "20260680", null, null)]
-    [DataRow(true, "2026-11-01", "2026", "2027", "31 October 2026", "2026/Public_Register_Producers_31_October_2026.csv", "20260681", "2027/Public_Register_Producers_31_October_2026.csv", "20270681")] // Configured date for PublicRegister__PublicRegisterNextYearStartMonthAndDay "11-01"
+    [DataRow(true, "2026-02-02", "2026", "2027", "1 February 2026", "2026/Public_Register_Producers_01_February_2026.csv", "20260409", "2027/Public_Register_Producers_01_February_2026.csv", "20270409")] // feature flag alone gates next year
+    [DataRow(true, "2026-10-31", "2026", "2027", "30 October 2026", "2026/Public_Register_Producers_30_October_2026.csv", "20260680", "2027/Public_Register_Producers_30_October_2026.csv", "20270680")]
+    [DataRow(true, "2026-11-01", "2026", "2027", "31 October 2026", "2026/Public_Register_Producers_31_October_2026.csv", "20260681", "2027/Public_Register_Producers_31_October_2026.csv", "20270681")] // Nov 1st (date check removed - feature flag alone controls next year)
     [DataRow(true, "2026-11-02", "2026", "2027", "1 November 2026", "2026/Public_Register_Producers_01_November_2026.csv", "20260682", "2027/Public_Register_Producers_01_November_2026.csv", "20270682")]
     // 2027
     [DataRow(true, "2027-01-01", "2026", "2027", "31 December 2026", "2026/Public_Register_Producers_31_December_2026.csv", "20260742", "2027/Public_Register_Producers_31_December_2026.csv", "20270742")] // new-year's day
     [DataRow(true, "2027-01-02", "2026", "2027", "1 January 2027", "2026/Public_Register_Producers_01_January_2027.csv", "20260743", "2027/Public_Register_Producers_01_January_2027.csv", "20270743")] // 2nd Jan
     [DataRow(true, "2027-01-31", "2026", "2027", "30 January 2027", "2026/Public_Register_Producers_30_January_2027.csv", "20260772", "2027/Public_Register_Producers_30_January_2027.csv", "20270772")]
     [DataRow(true, "2027-02-01", "2026", "2027", "31 January 2027", "2026/Public_Register_Producers_31_January_2027.csv", "20260773", "2027/Public_Register_Producers_31_January_2027.csv", "20270773")] // Configured date for PublicRegister__PublicRegisterPreviousYearEndMonthAndDay "02-01"
-    [DataRow(true, "2027-02-02", "2027", "2028", "1 February 2027", "2027/Public_Register_Producers_01_February_2027.csv", "20270774", null, null)] // after next year's PublicRegister__PublicRegisterNextYearStartMonthAndDay
-    [DataRow(true, "2027-10-31", "2027", "2028", "30 October 2027", "2027/Public_Register_Producers_30_October_2027.csv", "20271045", null, null)]
-    [DataRow(true, "2027-11-01", "2027", "2028", "31 October 2027", "2027/Public_Register_Producers_31_October_2027.csv", "20271046", "2028/Public_Register_Producers_31_October_2027.csv", "20281046")] // Configured date for PublicRegister__PublicRegisterNextYearStartMonthAndDay "11-01"
+    [DataRow(true, "2027-02-02", "2027", "2028", "1 February 2027", "2027/Public_Register_Producers_01_February_2027.csv", "20270774", "2028/Public_Register_Producers_01_February_2027.csv", "20280774")] // feature flag alone gates next year
+    [DataRow(true, "2027-10-31", "2027", "2028", "30 October 2027", "2027/Public_Register_Producers_30_October_2027.csv", "20271045", "2028/Public_Register_Producers_30_October_2027.csv", "20281045")]
+    [DataRow(true, "2027-11-01", "2027", "2028", "31 October 2027", "2027/Public_Register_Producers_31_October_2027.csv", "20271046", "2028/Public_Register_Producers_31_October_2027.csv", "20281046")] // Nov 1st (date check removed - feature flag alone controls next year)
     [DataRow(true, "2027-11-02", "2027", "2028", "1 November 2027", "2027/Public_Register_Producers_01_November_2027.csv", "20271047", "2028/Public_Register_Producers_01_November_2027.csv", "20281047")]
     public async Task TestDateBoundaryLogic(bool publicRegisterNextYearEnabled, string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
         string expectedFile1Filename, string expectedFile1Size,
@@ -220,7 +219,6 @@ public class PublicRegisterLogicTests
             isPublicRegisterNextYearEnabled: publicRegisterNextYearEnabled,
             optionsCurrentYear: null, // This is null in Production, looks like it's only used for testing
             optionsPublicRegisterPreviousYearEndMonthAndDay: "02-01",
-            optionsPublicRegisterNextYearStartMonthAndDay: "11-01",
             optionsPublishedDate: new DateTime(2025, 9, 30, 0, 0, 0, DateTimeKind.Utc),
             urlOptionsDefraUrl: "https://defra.example.org",
             urlOptionsBusinessAndEnvironmentUrl: "https://defra.example.org/business",
