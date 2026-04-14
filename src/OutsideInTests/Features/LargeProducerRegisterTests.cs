@@ -144,7 +144,7 @@ public class LargeProducerRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task RegisterOfProducers_LeapYear_CutoverWorksCorrectly()
+    public async Task RegisterOfProducers_IncludesPreviousYear_OnLeapYearCutoverDay()
     {
         // Arrange — February 1 2028 (leap year): cutover day, previous year (2027) drops
         // from main register and appears in archive.
