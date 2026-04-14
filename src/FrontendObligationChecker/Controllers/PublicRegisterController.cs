@@ -47,9 +47,7 @@
                 urlOptionsBusinessAndEnvironmentUrl: _urlOptions.BusinessAndEnvironmentUrl,
                 defraHelplineEmail: _emailAddressOptions.DefraHelpline,
                 urlOptionsPublicRegisterScottishProtectionAgency: _urlOptions.PublicRegisterScottishProtectionAgency,
-                getUtcNow: () => string.IsNullOrWhiteSpace(_options.FakeDateTimeUtcNow)
-                    ? DateTime.UtcNow
-                    : DateTime.ParseExact(_options.FakeDateTimeUtcNow, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture),
+                getUtcNow: () => PublicRegisterCutoverHelper.GetEffectiveUtcNow(_options),
                 blobStorageService: blobStorageService,
                 optionsPublicRegisterBlobContainerName: _options.PublicRegisterBlobContainerName,
                 optionsPublicRegisterCsoBlobContainerName: _options.PublicRegisterCsoBlobContainerName);
@@ -81,12 +79,11 @@
             int nextYear = currentYear + 1;
             var folderPrefixes = new List<string> { currentYear.ToString() };
 
-            var endMonthDay = optionsPublicRegisterPreviousYearEndMonthAndDay;
-            var currentMonthDay = getUtcNow().ToString("MM-dd");
-
-            // Add previous year if today is on or before the configured month and day
-            if (!string.IsNullOrWhiteSpace(endMonthDay) &&
-                 string.Compare(currentMonthDay, endMonthDay, StringComparison.Ordinal) <= 0)
+            // Add previous year if today is strictly before the configured cutover month and day.
+            // Strict less-than ensures the main register drops the previous year on the cutover
+            // date itself, at the same instant the archive page picks it up (no overlap).
+            if (PublicRegisterCutoverHelper.IsPreviousYearStillOnMainRegister(
+                    getUtcNow(), optionsPublicRegisterPreviousYearEndMonthAndDay))
             {
                 folderPrefixes.Add(previousYear.ToString());
             }
