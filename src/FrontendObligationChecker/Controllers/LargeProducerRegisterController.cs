@@ -77,12 +77,24 @@ public class LargeProducerRegisterController : Controller
     {
         var containerName = _publicRegisterOptions.PublicRegisterBlobContainerName;
 
+        var utcNow = PublicRegisterCutoverHelper.GetEffectiveUtcNow(_publicRegisterOptions);
+
         int currentYear = string.IsNullOrWhiteSpace(_publicRegisterOptions.CurrentYear)
-            ? DateTime.UtcNow.Year
+            ? utcNow.Year
             : int.Parse(_publicRegisterOptions.CurrentYear);
 
+        // While the previous year is still being shown on the main public register, exclude
+        // it from the archive so the same year is never displayed on both pages at once.
+        int archiveEndYearExclusive = currentYear;
+        if (PublicRegisterCutoverHelper.IsPreviousYearStillOnMainRegister(
+                utcNow, _publicRegisterOptions.PublicRegisterPreviousYearEndMonthAndDay))
+        {
+            archiveEndYearExclusive = currentYear - 1;
+        }
+
+        var count = Math.Max(0, archiveEndYearExclusive - RegisterOfProducersStartYear);
         var folderPrefixes = Enumerable
-            .Range(RegisterOfProducersStartYear, currentYear - RegisterOfProducersStartYear)
+            .Range(RegisterOfProducersStartYear, count)
             .Select(y => y.ToString())
             .ToList();
 

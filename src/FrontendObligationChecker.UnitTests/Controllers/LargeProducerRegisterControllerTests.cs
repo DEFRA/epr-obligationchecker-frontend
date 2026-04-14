@@ -216,6 +216,49 @@ public class LargeProducerRegisterControllerTests
     }
 
     [TestMethod]
+    [DataRow("2027-01-10", new[] { "2025" })] // 2026 still on main register, archive shows only 2025
+    [DataRow("2027-01-31", new[] { "2025" })] // last day previous year still on main
+    [DataRow("2027-02-01", new[] { "2025", "2026" })] // cutover day — archive picks up 2026
+    [DataRow("2027-02-02", new[] { "2025", "2026" })]
+    [DataRow("2028-01-10", new[] { "2025", "2026" })] // 2027 still on main register
+    [DataRow("2028-02-01", new[] { "2025", "2026", "2027" })] // leap year cutover day
+    [DataRow("2028-02-29", new[] { "2025", "2026", "2027" })] // leap day, after cutover
+    public async Task Get_RegisterOfProducers_AppliesFebruaryCutover_BasedOnFakeDateTimeUtcNow(string fakeUtcNow, string[] expectedPrefixes)
+    {
+        // Arrange
+        _publicRegisterOptions = Options.Create(new PublicRegisterOptions
+        {
+            PublicRegisterBlobContainerName = TestContainerName,
+            CurrentYear = null, // use the (faked) clock
+            PublicRegisterPreviousYearEndMonthAndDay = "02-01",
+            FakeDateTimeUtcNow = fakeUtcNow,
+        });
+
+        _systemUnderTest = new LargeProducerRegisterController(
+            _largeProducerRegisterService.Object,
+            _blobStorageService.Object,
+            _publicRegisterOptions,
+            _logger.Object);
+        _systemUnderTest.ControllerContext.HttpContext = _httpContextMock.Object;
+
+        _largeProducerRegisterService
+            .Setup(x => x.GetLatestAllNationsFileInfoAsync(It.IsAny<string>()))
+            .ReturnsAsync(new List<LargeProducerFileInfoViewModel>());
+
+        List<string>? capturedPrefixes = null;
+        _blobStorageService
+            .Setup(x => x.GetLatestFilePropertiesAsync(TestContainerName, It.IsAny<List<string>>()))
+            .Callback<string, List<string>>((_, prefixes) => capturedPrefixes = prefixes)
+            .ReturnsAsync(new Dictionary<string, PublicRegisterBlobModel>());
+
+        // Act
+        await _systemUnderTest.Get();
+
+        // Assert
+        capturedPrefixes.Should().BeEquivalentTo(expectedPrefixes);
+    }
+
+    [TestMethod]
     public async Task GetFile_WhenReportingYearIsNull_RedirectBackToLargeProducersPage()
     {
         // Act
