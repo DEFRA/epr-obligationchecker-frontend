@@ -1,6 +1,10 @@
 variables:
-  azureSubscription: 'AZR-RWD-PRD1'
-  docker.imageName: 'obligationregistry'
-  acr.azureContainerRegistryName: 'prdrwdinfac1401'
-  acr.repositoryName: 'obligationregistry'
-  serviceName: 'prdrwdwebwa1401'
+- group: ServiceConnection-PRD1
+- name: docker.imageName
+  value: 'obligationregistry'
+- name: acr.azureContainerRegistryName
+  value: 'prdrwdinfac1401'
+- name: acr.repositoryName
+  value: 'obligationregistry'
+- name: serviceName
+  value: 'prdrwdwebwa1401'
