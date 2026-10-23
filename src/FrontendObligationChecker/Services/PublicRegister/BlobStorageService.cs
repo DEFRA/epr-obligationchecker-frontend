@@ -1,6 +1,7 @@
 namespace FrontendObligationChecker.Services.PublicRegister;
 
 using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using FrontendObligationChecker.Constants;
 using FrontendObligationChecker.Exceptions;
 using FrontendObligationChecker.Models.BlobReader;
@@ -16,6 +17,12 @@ public class BlobStorageService(
 {
     private const string ErrorMessage = "Failed to read {0} from blob storage";
     private const string LogMessage = "Failed to read {FileName} from blob storage";
+
+    // Only the daily register file is public; the pipeline's DEBUG and _generated_on_ copies are internal
+    private static readonly Regex RegisterOfProducersFileName = new(
+        @"^(\d{4})/\1_register_of_producers\.csv$",
+        RegexOptions.None,
+        TimeSpan.FromSeconds(1));
 
     public async Task<PublicRegisterBlobModel> GetLatestFilePropertiesAsync(string containerName)
     {
@@ -65,7 +72,7 @@ public class BlobStorageService(
             {
                 if (string.IsNullOrWhiteSpace(folderPrefix)) continue;
 
-                var latestBlob = await GetLatestBlobAsync(containerName, folderPrefix);
+                var latestBlob = await GetLatestBlobAsync(containerName, folderPrefix, RegisterOfProducersFileName.IsMatch);
                 if (latestBlob is null) continue;
 
                 var model = new PublicRegisterBlobModel
@@ -93,6 +100,12 @@ public class BlobStorageService(
         try
         {
             var fileModel = new PublicRegisterFileModel();
+            if (containerName == publicRegisterOptions.Value.PublicRegisterBlobContainerName
+                && !RegisterOfProducersFileName.IsMatch(blobName))
+            {
+                return fileModel;
+            }
+
             fileModel.FileContent = await blobReader.DownloadBlobContentAsync(containerName, blobName);
             fileModel.FileName = GetFileName(blobName);
 
@@ -184,12 +197,12 @@ public class BlobStorageService(
         return parts.Length > 1 ? parts[1] : blobName;
     }
 
-    private async Task<BlobModel?> GetLatestBlobAsync(string containerName, string prefix)
+    private async Task<BlobModel?> GetLatestBlobAsync(string containerName, string prefix, Func<string, bool>? isPublicFile = null)
     {
         var blobs = await blobReader.GetBlobsAsync(containerName, prefix);
 
         return blobs
-            .Where(b => (b.ContentLength ?? 0) > 0 && b.LastModified != null)
+            .Where(b => (b.ContentLength ?? 0) > 0 && b.LastModified != null && (isPublicFile is null || isPublicFile(b.Name)))
             .MaxBy(b => b.LastModified);
     }
 }

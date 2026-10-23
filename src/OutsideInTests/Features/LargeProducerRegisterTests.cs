@@ -85,13 +85,13 @@ public class LargeProducerRegisterTests : IntegrationTestBase
         [
             new BlobModel
             {
-                Name = "2025/Public_Register_Producers_01_December_2025.csv",
+                Name = "2025/2025_register_of_producers.csv",
                 ContentLength = 100000,
                 LastModified = new DateTime(2025, 12, 1)
             },
             new BlobModel
             {
-                Name = "2026/Public_Register_Producers_01_December_2026.csv",
+                Name = "2026/2026_register_of_producers.csv",
                 ContentLength = 200000,
                 LastModified = new DateTime(2026, 12, 1)
             }
@@ -119,13 +119,13 @@ public class LargeProducerRegisterTests : IntegrationTestBase
         [
             new BlobModel
             {
-                Name = "2025/Public_Register_Producers_01_December_2025.csv",
+                Name = "2025/2025_register_of_producers.csv",
                 ContentLength = 100000,
                 LastModified = new DateTime(2025, 12, 1)
             },
             new BlobModel
             {
-                Name = "2026/Public_Register_Producers_01_December_2026.csv",
+                Name = "2026/2026_register_of_producers.csv",
                 ContentLength = 200000,
                 LastModified = new DateTime(2026, 12, 1)
             }
@@ -154,19 +154,19 @@ public class LargeProducerRegisterTests : IntegrationTestBase
         [
             new BlobModel
             {
-                Name = "2025/Public_Register_Producers_01_December_2025.csv",
+                Name = "2025/2025_register_of_producers.csv",
                 ContentLength = 100000,
                 LastModified = new DateTime(2025, 12, 1)
             },
             new BlobModel
             {
-                Name = "2026/Public_Register_Producers_01_December_2026.csv",
+                Name = "2026/2026_register_of_producers.csv",
                 ContentLength = 200000,
                 LastModified = new DateTime(2026, 12, 1)
             },
             new BlobModel
             {
-                Name = "2027/Public_Register_Producers_01_December_2027.csv",
+                Name = "2027/2027_register_of_producers.csv",
                 ContentLength = 300000,
                 LastModified = new DateTime(2027, 12, 1)
             }
