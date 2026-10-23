@@ -17,6 +17,8 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
     [TestClass]
     public class BlobStorageServiceTests
     {
+        private const string ProducersContainerName = "test-container";
+
         private static readonly string[] SingleDirectory = ["2025"];
         private static readonly string[] TwoDirectories = ["2025", "2026"];
 
@@ -34,7 +36,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
 
             _optionsMock.Setup(x => x.Value).Returns(new PublicRegisterOptions
             {
-                PublicRegisterBlobContainerName = "test-container",
+                PublicRegisterBlobContainerName = ProducersContainerName,
                 PublishedDate = DateTime.UtcNow
             });
 
@@ -174,9 +176,8 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
         }
 
         [TestMethod]
-        [DataRow("ProducerContainer", "")]
-        [DataRow("ProducerContainer", ".CSV")]
-        public async Task GetLatestFilePropertiesAsync_For_Given_Folder_2025_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName, string fileType)
+        [DataRow("ProducerContainer")]
+        public async Task GetLatestFilePropertiesAsync_For_Given_Folder_2025_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName)
         {
             string currentYear = DateTime.UtcNow.Year.ToString();
             var lastModified = DateTime.UtcNow;
@@ -186,7 +187,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
                 {
                     new BlobModel
                     {
-                        Name = $"{currentYear}/Blob1{fileType}",
+                        Name = $"{currentYear}/{currentYear}_register_of_producers.csv",
                         ContentLength = 1024,
                         LastModified = lastModified
                     }
@@ -202,13 +203,12 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
             Assert.IsNotNull(publicRegisterBlobModel.LastModified);
             publicRegisterBlobModel.ContentLength.Should().NotBeNull();
             publicRegisterBlobModel.FileType.Should().NotBeNull();
-            publicRegisterBlobModel.Name.Should().Contain("Blob1");
+            publicRegisterBlobModel.Name.Should().Be($"{currentYear}/{currentYear}_register_of_producers.csv");
         }
 
         [TestMethod]
-        [DataRow("ProducerContainer", "")]
-        [DataRow("ProducerContainer", ".CSV")]
-        public async Task GetLatestFilePropertiesAsync_For_Given_Folders_2025_And_2026_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName, string fileType)
+        [DataRow("ProducerContainer")]
+        public async Task GetLatestFilePropertiesAsync_For_Given_Folders_2025_And_2026_ReturnsSuccess_WhenBlobsFoundWithBlobClientProperties(string containerName)
         {
             string currentYear = DateTime.UtcNow.Year.ToString();
             string nextYear = (DateTime.UtcNow.Year + 1).ToString();
@@ -219,7 +219,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
                 {
                     new BlobModel
                     {
-                        Name = $"{currentYear}/Blob1{fileType}",
+                        Name = $"{currentYear}/{currentYear}_register_of_producers.csv",
                         ContentLength = 1024,
                         LastModified = lastModified
                     }
@@ -229,7 +229,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
                 {
                     new BlobModel
                     {
-                        Name = $"{nextYear}/Blob2{fileType}",
+                        Name = $"{nextYear}/{nextYear}_register_of_producers.csv",
                         ContentLength = 512,
                         LastModified = lastModified
                     }
@@ -245,7 +245,7 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
             Assert.IsNotNull(publicRegisterBlobModel.LastModified);
             publicRegisterBlobModel.ContentLength.Should().NotBeNull();
             publicRegisterBlobModel.FileType.Should().NotBeNull();
-            publicRegisterBlobModel.Name.Should().Contain("Blob1");
+            publicRegisterBlobModel.Name.Should().Be($"{currentYear}/{currentYear}_register_of_producers.csv");
         }
 
         [TestMethod]
@@ -260,6 +260,74 @@ namespace FrontendObligationChecker.UnitTests.Services.PublicRegister
             // Service catches BlobReaderException and logs it, returning empty dict
             Assert.IsNotNull(result);
             result.Count.Should().Be(0);
+        }
+
+        [TestMethod]
+        public async Task GetLatestFilePropertiesAsync_For_Given_Folders_ReturnsRegisterOfProducersFile_IgnoringNewerInternalFiles()
+        {
+            var publishedFileLastModified = new DateTime(2026, 10, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            _blobReaderMock.Setup(x => x.GetBlobsAsync("ProducerContainer", "2026"))
+                .ReturnsAsync(new[]
+                {
+                    new BlobModel { Name = "2026/2026_register_of_producers.csv", ContentLength = 1024, LastModified = publishedFileLastModified },
+                    new BlobModel { Name = "2026/2026_register_of_producers_DEBUG.csv", ContentLength = 2048, LastModified = publishedFileLastModified.AddDays(20) },
+                    new BlobModel { Name = "2026/2026_register_of_producers_DEBUG_generated_on_2026-10-21.csv", ContentLength = 2048, LastModified = publishedFileLastModified.AddDays(20) },
+                    new BlobModel { Name = "2026/2026_register_of_producers_generated_on_2026-10-16.csv", ContentLength = 1024, LastModified = publishedFileLastModified.AddDays(15) }
+                });
+
+            var result = await _service.GetLatestFilePropertiesAsync("ProducerContainer", new List<string> { "2026" });
+
+            result["2026"].Name.Should().Be("2026/2026_register_of_producers.csv");
+            result["2026"].LastModified.Should().Be(publishedFileLastModified);
+        }
+
+        [TestMethod]
+        public async Task GetLatestFilePropertiesAsync_For_Given_Folders_ReturnsNoData_WhenRegisterOfProducersFileNotFound()
+        {
+            var lastModified = DateTime.UtcNow;
+
+            _blobReaderMock.Setup(x => x.GetBlobsAsync("ProducerContainer", "2026"))
+                .ReturnsAsync(new[]
+                {
+                    new BlobModel { Name = "2026/2026_register_of_producers_debug.csv", ContentLength = 2048, LastModified = lastModified },
+                    new BlobModel { Name = "2026/2026_register_of_producers_generated_on_2026-10-16.csv", ContentLength = 1024, LastModified = lastModified },
+                    new BlobModel { Name = "2026/2025_register_of_producers.csv", ContentLength = 1024, LastModified = lastModified }
+                });
+
+            var result = await _service.GetLatestFilePropertiesAsync("ProducerContainer", new List<string> { "2026" });
+
+            result.Count.Should().Be(0);
+        }
+
+        [TestMethod]
+        [DataRow("2026/2026_register_of_producers_DEBUG.csv")]
+        [DataRow("2026/2026_register_of_producers_debug_generated_on_2026-10-21.csv")]
+        [DataRow("2026/2026_register_of_producers_generated_on_2026-10-16.csv")]
+        [DataRow("2026/2025_register_of_producers.csv")]
+        [DataRow("2026/other.csv")]
+        [DataRow("2026/2026_REGISTER_OF_PRODUCERS.CSV")]
+        public async Task GetLatestFileAsync_ReturnsEmptyFileModel_WhenProducersFileIsNotRegisterOfProducers(string blobName)
+        {
+            var result = await _service.GetLatestFileAsync(ProducersContainerName, blobName);
+
+            result.FileName.Should().BeNull();
+            result.FileContent.Should().BeNull();
+            _blobReaderMock.Verify(x => x.DownloadBlobContentAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task GetLatestFileAsync_ReturnsSuccess_WhenRegisterOfProducersFileRequested()
+        {
+            var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("some data"));
+
+            _blobReaderMock.Setup(x => x.DownloadBlobContentAsync(ProducersContainerName, "2026/2026_register_of_producers.csv"))
+                .ReturnsAsync(stream);
+
+            var result = await _service.GetLatestFileAsync(ProducersContainerName, "2026/2026_register_of_producers.csv");
+
+            result.FileContent.Should().BeSameAs(stream);
+            result.FileName.Should().Be("2026_register_of_producers.csv");
         }
     }
 }
