@@ -44,8 +44,8 @@ public class LargeProducerRegisterControllerTests
         _publicRegisterOptions = Options.Create(new PublicRegisterOptions
         {
             PublicRegisterBlobContainerName = TestContainerName,
-            CurrentYear = DateTime.UtcNow.Year.ToString(),
-            ArchivedUpToYear = DateTime.UtcNow.Year - 1
+            CurrentYear = "2026",
+            ArchivedUpToYear = 2025
         });
 
         _blobStorageService
@@ -195,10 +195,7 @@ public class LargeProducerRegisterControllerTests
     [TestMethod]
     public async Task Get_RegisterOfProducers_QueriesBlobStorageWithFolderPrefixesFrom2025ToPreviousYear()
     {
-        // Arrange
-        var currentYear = DateTime.UtcNow.Year;
-        var previousYear = currentYear - 1;
-
+        // Arrange — current year 2026, archived up to 2025 (see TestInitialize)
         _largeProducerRegisterService
             .Setup(x => x.GetLatestAllNationsFileInfoAsync(It.IsAny<string>()))
             .ReturnsAsync(new List<LargeProducerFileInfoViewModel>());
@@ -209,10 +206,7 @@ public class LargeProducerRegisterControllerTests
         // Assert
         _blobStorageService.Verify(x => x.GetLatestFilePropertiesAsync(
             TestContainerName,
-            It.Is<List<string>>(prefixes =>
-                prefixes.All(p => int.Parse(p) >= 2025) &&
-                prefixes.All(p => int.Parse(p) <= previousYear) &&
-                !prefixes.Contains(currentYear.ToString()))),
+            It.Is<List<string>>(prefixes => prefixes.SequenceEqual(new[] { "2025" }))),
             Times.Once);
     }
 
