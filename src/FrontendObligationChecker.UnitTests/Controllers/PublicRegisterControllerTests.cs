@@ -20,6 +20,11 @@
     [TestClass]
     public class PublicRegisterControllerTests
     {
+        private const string FakeToday = "2026-06-15";
+        private const string CurrentYear = "2026";
+        private const string NextYear = "2027";
+        private const int PreviousYear = 2025;
+
         private Mock<ILogger<PublicRegisterController>> _loggerMock = null;
         private Mock<IBlobStorageService> _blobStorageServiceMock = null!;
         private Mock<IFeatureFlagService> _mockFeatureFlagService = null!;
@@ -39,7 +44,7 @@
             _loggerMock = new Mock<ILogger<PublicRegisterController>>(MockBehavior.Loose);
             _blobStorageServiceMock = new Mock<IBlobStorageService>();
             _mockFeatureFlagService = new Mock<IFeatureFlagService>();
-            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
+            _folderPrefixes = new List<string> { CurrentYear };
 
             _publishedDate = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Utc);
             _lastModified = new DateTime(2025, 4, 15, 0, 0, 0, DateTimeKind.Utc);
@@ -64,7 +69,7 @@
 
             var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
             {
-                { DateTime.UtcNow.Year.ToString(), producerBlob2025 },
+                { CurrentYear, producerBlob2025 },
             };
 
             var complianceBlob = new PublicRegisterBlobModel
@@ -89,6 +94,8 @@
                 PublicRegisterBlobContainerName = "producers-container",
                 PublicRegisterCsoBlobContainerName = "schemes-container",
                 PublishedDate = _publishedDate,
+                FakeDateTimeUtcNow = FakeToday,
+                ArchivedUpToYear = PreviousYear,
             });
 
             _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
@@ -467,17 +474,19 @@
 
             var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
             {
-                { DateTime.UtcNow.Year.ToString(), producerBlob2025 },
-                { (DateTime.UtcNow.Year + 1).ToString(), producerBlob2026 }
+                { CurrentYear, producerBlob2025 },
+                { NextYear, producerBlob2026 }
             };
 
-            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString(), (DateTime.UtcNow.Year + 1).ToString() };
+            _folderPrefixes = new List<string> { CurrentYear, NextYear };
 
             _publicRegisterOptions = Options.Create(new PublicRegisterOptions
             {
                 PublicRegisterBlobContainerName = "producers-container",
                 PublicRegisterCsoBlobContainerName = "schemes-container",
-                PublishedDate = _publishedDate
+                PublishedDate = _publishedDate,
+                FakeDateTimeUtcNow = FakeToday,
+                ArchivedUpToYear = PreviousYear
             });
 
             _blobStorageServiceMock
@@ -553,10 +562,10 @@
 
             var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
             {
-                { DateTime.UtcNow.Year.ToString(), producerBlob }
+                { CurrentYear, producerBlob }
             };
 
-            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
+            _folderPrefixes = new List<string> { CurrentYear };
 
             _blobStorageServiceMock
                 .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))
@@ -588,10 +597,10 @@
 
             var producerBlobs = new Dictionary<string, PublicRegisterBlobModel>
             {
-                { DateTime.UtcNow.Year.ToString(), producerBlob }
+                { CurrentYear, producerBlob }
             };
 
-            _folderPrefixes = new List<string> { DateTime.UtcNow.Year.ToString() };
+            _folderPrefixes = new List<string> { CurrentYear };
 
             _blobStorageServiceMock
                 .Setup(x => x.GetLatestFilePropertiesAsync("producers-container", _folderPrefixes))

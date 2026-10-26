@@ -17,8 +17,6 @@ public class PublicRegisterTests : IntegrationTestBase
     {
         var result = base.InitializeAsync();
 
-        // "02-01" = previous year file shown until 1 Feb
-        ConfigOverrides["PublicRegister:PublicRegisterPreviousYearEndMonthAndDay"] = "02-01";
         ConfigOverrides["PublicRegister:PublicRegisterBlobContainerName"] = ProducerContainer;
 
         return result;
@@ -156,6 +154,104 @@ public class PublicRegisterTests : IntegrationTestBase
             page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2025"));
             page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2026"));
         }
+    }
+
+    [Fact]
+    public async Task ShowsPreviousYearFileOnMainRegisterOnly_WhenArchivedUpToYearBlank()
+    {
+        // Arrange — blank setting: nothing is archived, so 2026 stays on the main register
+        // and is not on the archive page
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "";
+
+        BlobReader.ContainerBlobs[ProducerContainer] =
+        [
+            new BlobModel
+            {
+                Name = "2026/2026_register_of_producers.csv",
+                ContentLength = 132629,
+                LastModified = new DateTime(2027, 1, 31, 23, 59, 59)
+            },
+            new BlobModel
+            {
+                Name = "2027/2027_register_of_producers.csv",
+                ContentLength = 25883,
+                LastModified = new DateTime(2027, 1, 31, 23, 59, 59)
+            }
+        ];
+
+        // Act
+        var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+        var archivePage = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
+
+        // Assert
+        using (new AssertionScope())
+        {
+            page.DownloadLinks.Should().HaveCount(2);
+            page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2026"));
+            page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2027"));
+            archivePage.RegisterOfProducersLinks.Should().BeEmpty();
+        }
+    }
+
+    [Fact]
+    public async Task ShowsArchivedYearsOnArchivePageOnly_WhenArchivedUpToYearSet()
+    {
+        // Arrange — setting 2026: 2025 and 2026 are on the archive page, 2027 stays on the main register
+        ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "2026";
+
+        BlobReader.ContainerBlobs[ProducerContainer] =
+        [
+            new BlobModel
+            {
+                Name = "2025/2025_register_of_producers.csv",
+                ContentLength = 100000,
+                LastModified = new DateTime(2025, 12, 1)
+            },
+            new BlobModel
+            {
+                Name = "2026/2026_register_of_producers.csv",
+                ContentLength = 200000,
+                LastModified = new DateTime(2026, 12, 1)
+            },
+            new BlobModel
+            {
+                Name = "2027/2027_register_of_producers.csv",
+                ContentLength = 300000,
+                LastModified = new DateTime(2027, 1, 31)
+            }
+        ];
+
+        // Act
+        var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+        var archivePage = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
+
+        // Assert
+        using (new AssertionScope())
+        {
+            page.DownloadLinks.Should().HaveCount(1);
+            page.DownloadHrefs.Should().ContainSingle(href => href.Contains("fileName=2027"));
+            archivePage.RegisterOfProducersLinks.Should().HaveCount(2);
+            archivePage.RegisterOfProducersLinks[0].Href.Should().Contain("fileName=2026");
+            archivePage.RegisterOfProducersLinks[1].Href.Should().Contain("fileName=2025");
+        }
+    }
+
+    [Fact]
+    public async Task FailsToStart_WhenArchivedUpToYearInvalid()
+    {
+        // Arrange
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "2O26";
+
+        // Act
+        var act = () => Client.GetAsync("/public-register");
+
+        // Assert
+        (await act.Should().ThrowAsync<InvalidOperationException>())
+            .WithMessage("*PublicRegister:ArchivedUpToYear*");
     }
 
     [Fact]

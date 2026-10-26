@@ -83,18 +83,15 @@ public class LargeProducerRegisterController : Controller
             ? utcNow.Year
             : int.Parse(_publicRegisterOptions.CurrentYear);
 
-        // While the previous year is still being shown on the main public register, exclude
-        // it from the archive so the same year is never displayed on both pages at once.
-        int archiveEndYearExclusive = currentYear;
-        if (PublicRegisterCutoverHelper.IsPreviousYearStillOnMainRegister(
-                utcNow, _publicRegisterOptions.PublicRegisterPreviousYearEndMonthAndDay))
-        {
-            archiveEndYearExclusive = currentYear - 1;
-        }
-
-        var count = Math.Max(0, archiveEndYearExclusive - RegisterOfProducersStartYear);
+        // Only years archived via the ArchivedUpToYear setting are listed here. The main public
+        // register uses the same check, so a year is never shown on both pages at once.
+        var count = Math.Max(0, currentYear - RegisterOfProducersStartYear);
         var folderPrefixes = Enumerable
             .Range(RegisterOfProducersStartYear, count)
+            .Where(y => PublicRegisterCutoverHelper.IsYearArchived(
+                registerYear: y,
+                currentYear: currentYear,
+                archivedUpToYear: _publicRegisterOptions.ArchivedUpToYear))
             .Select(y => y.ToString())
             .ToList();
 

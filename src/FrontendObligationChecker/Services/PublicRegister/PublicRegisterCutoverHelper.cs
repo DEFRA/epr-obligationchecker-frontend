@@ -17,20 +17,20 @@ public static class PublicRegisterCutoverHelper
     }
 
     /// <summary>
-    /// Returns true if the previous calendar year is still being shown on the main
-    /// public register as of <paramref name="utcNow"/>. Strict less-than comparison
-    /// against <paramref name="endMonthDay"/> ("MM-dd") so that on the cutover date
-    /// itself the previous year is dropped from the main register and picked up by
-    /// the archive page (no overlap between the two pages).
+    /// Returns true if the register for <paramref name="registerYear"/> has been moved from the main
+    /// public register to the archive page, i.e. it is on or before
+    /// <see cref="PublicRegisterOptions.ArchivedUpToYear"/>. The current year is never archived,
+    /// and a null <paramref name="archivedUpToYear"/> archives nothing. Both pages use this so the
+    /// same year is never displayed on both at once.
     /// </summary>
-    public static bool IsPreviousYearStillOnMainRegister(DateTime utcNow, string? endMonthDay)
+    /// <param name="registerYear">The register year to check, e.g. 2025.</param>
+    /// <param name="currentYear">The current calendar year.</param>
+    /// <param name="archivedUpToYear">The configured <see cref="PublicRegisterOptions.ArchivedUpToYear"/>.</param>
+    /// <returns>True if the year belongs on the archive page.</returns>
+    public static bool IsYearArchived(int registerYear, int currentYear, int? archivedUpToYear)
     {
-        if (string.IsNullOrWhiteSpace(endMonthDay))
-        {
-            return false;
-        }
-
-        var currentMonthDay = utcNow.ToString("MM-dd", CultureInfo.InvariantCulture);
-        return string.Compare(currentMonthDay, endMonthDay, StringComparison.Ordinal) < 0;
+        return archivedUpToYear.HasValue
+            && registerYear <= archivedUpToYear.Value
+            && registerYear < currentYear;
     }
 }

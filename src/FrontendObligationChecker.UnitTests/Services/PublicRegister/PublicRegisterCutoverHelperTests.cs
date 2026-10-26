@@ -9,35 +9,37 @@ using FrontendObligationChecker.Services.PublicRegister;
 public class PublicRegisterCutoverHelperTests
 {
     [TestMethod]
-    // Cutover string "02-01" — strict less-than semantics
-    [DataRow("2027-01-01", "02-01", true)] // start of year — previous year still on main
-    [DataRow("2027-01-10", "02-01", true)]
-    [DataRow("2027-01-31", "02-01", true)] // last day previous year is shown on main
-    [DataRow("2027-02-01", "02-01", false)] // cutover day — main drops, archive picks up
-    [DataRow("2027-02-02", "02-01", false)]
-    [DataRow("2027-03-01", "02-01", false)]
-    [DataRow("2027-12-31", "02-01", false)]
-    // Leap year — cutover unaffected by Feb 29
-    [DataRow("2028-01-31", "02-01", true)]
-    [DataRow("2028-02-01", "02-01", false)]
-    [DataRow("2028-02-29", "02-01", false)]
-    public void IsPreviousYearStillOnMainRegister_ReturnsExpected(string utcNowString, string endMonthDay, bool expected)
+    // ArchivedUpToYear 2026 with registers for 2025, 2026 and 2027
+    [DataRow(2025, 2027, 2026, true)] // before the year set in `archivedUpToYear` — archived
+    [DataRow(2026, 2027, 2026, true)] // the year set in `archivedUpToYear` — archived
+    [DataRow(2027, 2027, 2026, false)] // after the year set in `archivedUpToYear` — stays on main register
+    // ArchivedUpToYear 2025 (live on release)
+    [DataRow(2025, 2026, 2025, true)]
+    [DataRow(2026, 2026, 2025, false)]
+    [DataRow(2026, 2027, 2025, false)] // previous year stays on main register until the setting is updated
+    // The current year is never archived, even if the setting covers it
+    [DataRow(2027, 2027, 2027, false)]
+    [DataRow(2027, 2027, 2028, false)]
+    public void IsYearArchived_ReturnsExpected(int registerYear, int currentYear, int archivedUpToYear, bool expected)
     {
-        var utcNow = DateTime.ParseExact(utcNowString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-        var actual = PublicRegisterCutoverHelper.IsPreviousYearStillOnMainRegister(utcNow, endMonthDay);
+        var actual = PublicRegisterCutoverHelper.IsYearArchived(
+            registerYear: registerYear,
+            currentYear: currentYear,
+            archivedUpToYear: archivedUpToYear);
 
         actual.Should().Be(expected);
     }
 
     [TestMethod]
-    [DataRow(null)]
-    [DataRow("")]
-    [DataRow("   ")]
-    public void IsPreviousYearStillOnMainRegister_ReturnsFalse_WhenEndMonthDayMissing(string? endMonthDay)
+    [DataRow(2024)]
+    [DataRow(2025)]
+    [DataRow(2026)]
+    public void IsYearArchived_ReturnsFalse_WhenArchivedUpToYearNotSet(int registerYear)
     {
-        var actual = PublicRegisterCutoverHelper.IsPreviousYearStillOnMainRegister(
-            new DateTime(2027, 1, 10), endMonthDay);
+        var actual = PublicRegisterCutoverHelper.IsYearArchived(
+            registerYear: registerYear,
+            currentYear: 2027,
+            archivedUpToYear: null);
 
         actual.Should().BeFalse();
     }

@@ -41,7 +41,7 @@
                 isEnforcementActionsSectionEnabled: isEnforcementActionsSectionEnabled,
                 isPublicRegisterNextYearEnabled: isPublicRegisterNextYearEnabled,
                 optionsCurrentYear: _options.CurrentYear,
-                optionsPublicRegisterPreviousYearEndMonthAndDay: _options.PublicRegisterPreviousYearEndMonthAndDay,
+                optionsArchivedUpToYear: _options.ArchivedUpToYear,
                 optionsPublishedDate: _options.PublishedDate,
                 urlOptionsDefraUrl: _urlOptions.DefraUrl,
                 urlOptionsBusinessAndEnvironmentUrl: _urlOptions.BusinessAndEnvironmentUrl,
@@ -60,7 +60,7 @@
             bool isEnforcementActionsSectionEnabled,
             bool isPublicRegisterNextYearEnabled,
             string? optionsCurrentYear,
-            string? optionsPublicRegisterPreviousYearEndMonthAndDay,
+            int? optionsArchivedUpToYear,
             DateTime optionsPublishedDate,
             string urlOptionsDefraUrl,
             string urlOptionsBusinessAndEnvironmentUrl,
@@ -79,11 +79,12 @@
             int nextYear = currentYear + 1;
             var folderPrefixes = new List<string> { currentYear.ToString() };
 
-            // Add previous year if today is strictly before the configured cutover month and day.
-            // Strict less-than ensures the main register drops the previous year on the cutover
-            // date itself, at the same instant the archive page picks it up (no overlap).
-            if (PublicRegisterCutoverHelper.IsPreviousYearStillOnMainRegister(
-                    getUtcNow(), optionsPublicRegisterPreviousYearEndMonthAndDay))
+            // Add previous year until it is archived via the ArchivedUpToYear setting.
+            // The archive page uses the same check, so a year is never shown on both pages.
+            if (!PublicRegisterCutoverHelper.IsYearArchived(
+                    registerYear: previousYear,
+                    currentYear: currentYear,
+                    archivedUpToYear: optionsArchivedUpToYear))
             {
                 folderPrefixes.Add(previousYear.ToString());
             }

@@ -17,7 +17,12 @@ public static class Options
         services.Configure<StorageAccountOptions>(configuration.GetSection(StorageAccountOptions.ConfigSection));
         services.Configure<LargeProducerReportFileNamesOptions>(configuration.GetSection(LargeProducerReportFileNamesOptions.ConfigSection));
         services.Configure<CachingOptions>(configuration.GetSection(CachingOptions.ConfigSection));
-        services.Configure<PublicRegisterOptions>(configuration.GetSection(PublicRegisterOptions.ConfigSection));
+
+        // Bind on start so an invalid value (e.g. a non-numeric ArchivedUpToYear) fails the
+        // deployment instead of returning errors from the public register pages.
+        services.AddOptions<PublicRegisterOptions>()
+            .Bind(configuration.GetSection(PublicRegisterOptions.ConfigSection))
+            .ValidateOnStart();
 
         return services;
     }
