@@ -44,7 +44,8 @@ public class LargeProducerRegisterControllerTests
         _publicRegisterOptions = Options.Create(new PublicRegisterOptions
         {
             PublicRegisterBlobContainerName = TestContainerName,
-            CurrentYear = DateTime.UtcNow.Year.ToString()
+            CurrentYear = DateTime.UtcNow.Year.ToString(),
+            ArchivedUpToYear = DateTime.UtcNow.Year - 1
         });
 
         _blobStorageService
@@ -216,21 +217,21 @@ public class LargeProducerRegisterControllerTests
     }
 
     [TestMethod]
-    [DataRow("2027-01-10", new[] { "2025" })] // 2026 still on main register, archive shows only 2025
-    [DataRow("2027-01-31", new[] { "2025" })] // last day previous year still on main
-    [DataRow("2027-02-01", new[] { "2025", "2026" })] // cutover day — archive picks up 2026
-    [DataRow("2027-02-02", new[] { "2025", "2026" })]
-    [DataRow("2028-01-10", new[] { "2025", "2026" })] // 2027 still on main register
-    [DataRow("2028-02-01", new[] { "2025", "2026", "2027" })] // leap year cutover day
-    [DataRow("2028-02-29", new[] { "2025", "2026", "2027" })] // leap day, after cutover
-    public async Task Get_RegisterOfProducers_AppliesFebruaryCutover_BasedOnFakeDateTimeUtcNow(string fakeUtcNow, string[] expectedPrefixes)
+    [DataRow(null, "2027-02-01", new string[] { })] // blank setting — nothing archived, even after 1 Feb
+    [DataRow(2025, "2026-10-26", new[] { "2025" })] // live on release
+    [DataRow(2025, "2027-02-01", new[] { "2025" })] // setting not updated — 2026 stays on main register
+    [DataRow(2026, "2027-01-10", new[] { "2025", "2026" })] // setting updated to 2026
+    [DataRow(2026, "2027-02-01", new[] { "2025", "2026" })]
+    [DataRow(2027, "2027-06-01", new[] { "2025", "2026" })] // current year is never archived
+    [DataRow(2027, "2028-01-10", new[] { "2025", "2026", "2027" })]
+    public async Task Get_RegisterOfProducers_ListsYearsUpToArchivedUpToYear(int? archivedUpToYear, string fakeUtcNow, string[] expectedPrefixes)
     {
         // Arrange
         _publicRegisterOptions = Options.Create(new PublicRegisterOptions
         {
             PublicRegisterBlobContainerName = TestContainerName,
             CurrentYear = null, // use the (faked) clock
-            PublicRegisterPreviousYearEndMonthAndDay = "02-01",
+            ArchivedUpToYear = archivedUpToYear,
             FakeDateTimeUtcNow = fakeUtcNow,
         });
 

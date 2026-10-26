@@ -17,7 +17,6 @@ public class LargeProducerRegisterTests : IntegrationTestBase
     {
         var result = base.InitializeAsync();
 
-        ConfigOverrides["PublicRegister:PublicRegisterPreviousYearEndMonthAndDay"] = "02-01";
         ConfigOverrides["PublicRegister:PublicRegisterBlobContainerName"] = ProducerContainer;
 
         return result;
@@ -75,11 +74,12 @@ public class LargeProducerRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task RegisterOfProducers_ExcludesPreviousYear_BeforeCutover()
+    public async Task RegisterOfProducers_ExcludesPreviousYear_WhenArchivedUpToYearNotUpdated()
     {
-        // Arrange — January 10 2027: previous year (2026) is still on the main register,
-        // so the archive should show only 2025.
-        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-01-10";
+        // Arrange — February 1 2027 with setting 2025: previous year (2026) stays on the main
+        // register until the setting is updated, so the archive should show only 2025.
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "2025";
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -109,11 +109,11 @@ public class LargeProducerRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task RegisterOfProducers_IncludesPreviousYear_OnCutoverDay()
+    public async Task RegisterOfProducers_ShowsNoYears_WhenArchivedUpToYearBlank()
     {
-        // Arrange — February 1 2027: cutover day. Previous year (2026) is dropped from
-        // the main register and should now appear in the archive.
+        // Arrange — February 1 2027 with a blank setting: nothing is archived.
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "";
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -134,21 +134,17 @@ public class LargeProducerRegisterTests : IntegrationTestBase
         // Act
         var page = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
 
-        // Assert — both 2025 and 2026 should appear (ordered descending)
-        using (new AssertionScope())
-        {
-            page.RegisterOfProducersLinks.Should().HaveCount(2);
-            page.RegisterOfProducersLinks[0].Href.Should().Contain("fileName=2026");
-            page.RegisterOfProducersLinks[1].Href.Should().Contain("fileName=2025");
-        }
+        // Assert
+        page.RegisterOfProducersLinks.Should().BeEmpty();
     }
 
     [Fact]
-    public async Task RegisterOfProducers_IncludesPreviousYear_OnLeapYearCutoverDay()
+    public async Task RegisterOfProducers_ShowsYearsUpToArchivedUpToYear()
     {
-        // Arrange — February 1 2028 (leap year): cutover day, previous year (2027) drops
-        // from main register and appears in archive.
-        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2028-02-01";
+        // Arrange — January 10 2028 with setting 2026: 2025 and 2026 are archived, 2027 stays
+        // on the main register.
+        ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2028-01-10";
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "2026";
 
         BlobReader.ContainerBlobs[ProducerContainer] =
         [
@@ -175,13 +171,12 @@ public class LargeProducerRegisterTests : IntegrationTestBase
         // Act
         var page = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
 
-        // Assert — 2025, 2026, and 2027 should all appear
+        // Assert — 2026 and 2025 should appear (ordered descending), not 2027
         using (new AssertionScope())
         {
-            page.RegisterOfProducersLinks.Should().HaveCount(3);
-            page.RegisterOfProducersLinks[0].Href.Should().Contain("fileName=2027");
-            page.RegisterOfProducersLinks[1].Href.Should().Contain("fileName=2026");
-            page.RegisterOfProducersLinks[2].Href.Should().Contain("fileName=2025");
+            page.RegisterOfProducersLinks.Should().HaveCount(2);
+            page.RegisterOfProducersLinks[0].Href.Should().Contain("fileName=2026");
+            page.RegisterOfProducersLinks[1].Href.Should().Contain("fileName=2025");
         }
     }
 }

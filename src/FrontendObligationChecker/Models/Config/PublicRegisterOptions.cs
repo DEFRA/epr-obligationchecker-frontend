@@ -17,7 +17,11 @@ public class PublicRegisterOptions
 
     public DateTime PublishedDate { get; set; }
 
-    public string? PublicRegisterPreviousYearEndMonthAndDay { get; set; }
+    /// <summary>
+    /// Registers for this year and earlier are shown on the archive page instead of the
+    /// main public register (e.g. 2025). When null, nothing is archived.
+    /// </summary>
+    public int? ArchivedUpToYear { get; set; }
 
     public string? CurrentYear { get; set; }
 

@@ -89,6 +89,7 @@
                 PublicRegisterBlobContainerName = "producers-container",
                 PublicRegisterCsoBlobContainerName = "schemes-container",
                 PublishedDate = _publishedDate,
+                ArchivedUpToYear = DateTime.UtcNow.Year - 1,
             });
 
             _externalUrlsOptions = Options.Create(new ExternalUrlsOptions
@@ -477,7 +478,8 @@
             {
                 PublicRegisterBlobContainerName = "producers-container",
                 PublicRegisterCsoBlobContainerName = "schemes-container",
-                PublishedDate = _publishedDate
+                PublishedDate = _publishedDate,
+                ArchivedUpToYear = DateTime.UtcNow.Year - 1
             });
 
             _blobStorageServiceMock
