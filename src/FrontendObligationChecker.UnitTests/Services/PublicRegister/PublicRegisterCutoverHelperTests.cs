@@ -10,9 +10,9 @@ public class PublicRegisterCutoverHelperTests
 {
     [TestMethod]
     // ArchivedUpToYear 2026 with registers for 2025, 2026 and 2027
-    [DataRow(2025, 2027, 2026, true)] // before the setting — archived
-    [DataRow(2026, 2027, 2026, true)] // the setting year itself — archived
-    [DataRow(2027, 2027, 2026, false)] // after the setting — stays on main register
+    [DataRow(2025, 2027, 2026, true)] // before the year set in `archivedUpToYear` — archived
+    [DataRow(2026, 2027, 2026, true)] // the year set in `archivedUpToYear` — archived
+    [DataRow(2027, 2027, 2026, false)] // after the year set in `archivedUpToYear` — stays on main register
     // ArchivedUpToYear 2025 (live on release)
     [DataRow(2025, 2026, 2025, true)]
     [DataRow(2026, 2026, 2025, false)]
