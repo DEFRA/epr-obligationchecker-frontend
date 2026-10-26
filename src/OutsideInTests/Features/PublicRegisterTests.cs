@@ -157,9 +157,9 @@ public class PublicRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task ShowsPreviousYearFileOnMainRegisterOnly_AfterFirstFebruary_WhenArchivedUpToYearBlank()
+    public async Task ShowsPreviousYearFileOnMainRegisterOnly_WhenArchivedUpToYearBlank()
     {
-        // Arrange — blank setting: nothing is archived, so 2026 stays on the main register after 1 Feb
+        // Arrange — blank setting: nothing is archived, so 2026 stays on the main register
         // and is not on the archive page
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
