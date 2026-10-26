@@ -91,24 +91,19 @@ public class PublicRegisterLogicTests
     }
 
     [TestMethod]
-    // ArchivedUpToYear blank — nothing archived, previous year stays on the main register after 1 Feb
-    [DataRow(null, false, "2026-01-31", "2025", "2026", "30 January 2026", "2025/Public_Register_Producers_30_January_2026.csv", "20250407", "2026/Public_Register_Producers_30_January_2026.csv", "20260407")]
-    [DataRow(null, false, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")] // previously the 1 Feb cutover
-    [DataRow(null, false, "2026-11-02", "2025", "2026", "1 November 2026", "2025/Public_Register_Producers_01_November_2026.csv", "20250682", "2026/Public_Register_Producers_01_November_2026.csv", "20260682")]
-    [DataRow(null, true, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")]
+    // ArchivedUpToYear blank — previous year stays on the main register
+    [DataRow(null, "2026-02-01", "2025", "2026", "31 January 2026", "2025/Public_Register_Producers_31_January_2026.csv", "20250408", "2026/Public_Register_Producers_31_January_2026.csv", "20260408")]
+    [DataRow(null, "2026-11-02", "2025", "2026", "1 November 2026", "2025/Public_Register_Producers_01_November_2026.csv", "20250682", "2026/Public_Register_Producers_01_November_2026.csv", "20260682")]
     // ArchivedUpToYear 2025 (live on release)
-    [DataRow(2025, false, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", null, null)] // current year is never archived
-    [DataRow(2025, true, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", "2026/Public_Register_Producers_08_December_2025.csv", "20260354")]
-    [DataRow(2025, false, "2026-01-01", "2026", "2027", "31 December 2025", "2026/Public_Register_Producers_31_December_2025.csv", "20260377", null, null)] // 2025 archived, so 2026 is shown from new-year's day
-    [DataRow(2025, false, "2026-02-01", "2026", "2027", "31 January 2026", "2026/Public_Register_Producers_31_January_2026.csv", "20260408", null, null)]
-    [DataRow(2025, true, "2026-11-02", "2026", "2027", "1 November 2026", "2026/Public_Register_Producers_01_November_2026.csv", "20260682", "2027/Public_Register_Producers_01_November_2026.csv", "20270682")]
-    [DataRow(2025, true, "2027-02-01", "2026", "2027", "31 January 2027", "2026/Public_Register_Producers_31_January_2027.csv", "20260773", "2027/Public_Register_Producers_31_January_2027.csv", "20270773")] // setting not updated — 2026 stays on the main register after 1 Feb
+    [DataRow(2025, "2025-12-09", "2025", "2026", "8 December 2025", "2025/Public_Register_Producers_08_December_2025.csv", "20250354", null, null)] // current year is never archived
+    [DataRow(2025, "2026-01-01", "2026", "2027", "31 December 2025", "2026/Public_Register_Producers_31_December_2025.csv", "20260377", null, null)] // 2025 archived, so 2026 is shown from new-year's day
+    [DataRow(2025, "2026-11-02", "2026", "2027", "1 November 2026", "2026/Public_Register_Producers_01_November_2026.csv", "20260682", null, null)]
+    [DataRow(2025, "2027-02-01", "2026", "2027", "31 January 2027", "2026/Public_Register_Producers_31_January_2027.csv", "20260773", "2027/Public_Register_Producers_31_January_2027.csv", "20270773")] // setting not updated — 2026 stays on the main register
     // ArchivedUpToYear 2026 — 2025 and 2026 archived, 2027 stays on the main register
-    [DataRow(2026, false, "2027-01-02", "2027", "2028", "1 January 2027", "2027/Public_Register_Producers_01_January_2027.csv", "20270743", null, null)]
-    [DataRow(2026, true, "2027-02-01", "2027", "2028", "31 January 2027", "2027/Public_Register_Producers_31_January_2027.csv", "20270773", "2028/Public_Register_Producers_31_January_2027.csv", "20280773")]
+    [DataRow(2026, "2027-02-01", "2027", "2028", "31 January 2027", "2027/Public_Register_Producers_31_January_2027.csv", "20270773", null, null)]
     // ArchivedUpToYear set to the current year — current year still shown
-    [DataRow(2027, false, "2027-11-02", "2027", "2028", "1 November 2027", "2027/Public_Register_Producers_01_November_2027.csv", "20271047", null, null)]
-    public async Task TestArchivedUpToYearLogic(int? archivedUpToYear, bool publicRegisterNextYearEnabled, string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
+    [DataRow(2027, "2027-11-02", "2027", "2028", "1 November 2027", "2027/Public_Register_Producers_01_November_2027.csv", "20271047", null, null)]
+    public async Task TestArchivedUpToYearLogic(int? archivedUpToYear, string fakeCurrentDate, string expectedCurrentFileDisplayYear, string expectedNextFileDisplayYear, string expectedPageLastUpdated,
         string expectedFile1Filename, string expectedFile1Size,
         string? expectedFile2Filename, string expectedFile2Size)
     {
@@ -121,7 +116,7 @@ public class PublicRegisterLogicTests
 
         // Act
         // run the logic under test
-        var guidanceViewModel = await RunGetGuidanceViewModel(fakeCurrentDateTime, fakeBlobStorageService, publicRegisterNextYearEnabled, archivedUpToYear);
+        var guidanceViewModel = await RunGetGuidanceViewModel(fakeCurrentDateTime, fakeBlobStorageService, publicRegisterNextYearEnabled: false, archivedUpToYear);
 
         // Assert
         using (new AssertionScope())
@@ -142,6 +137,27 @@ public class PublicRegisterLogicTests
                 guidanceViewModel.ProducerRegisteredFileNextYear.FileSize.Should().Be(expectedFile2Size);
             }
         }
+    }
+
+    [TestMethod]
+    // Previous year archived
+    [DataRow(2025, "2026-11-02", false, null)]
+    [DataRow(2025, "2026-11-02", true, "2027/Public_Register_Producers_01_November_2026.csv")]
+    // Previous year not archived — the current year is the second file either way
+    [DataRow(2025, "2027-02-01", false, "2027/Public_Register_Producers_31_January_2027.csv")]
+    [DataRow(2025, "2027-02-01", true, "2027/Public_Register_Producers_31_January_2027.csv")]
+    public async Task NextYearFlag_OnlyAddsSecondFile_OncePreviousYearIsArchived(int archivedUpToYear, string fakeCurrentDate, bool publicRegisterNextYearEnabled, string? expectedSecondFilename)
+    {
+        // Arrange
+        var fakeCurrentDateTime = ConvertToDateTime(fakeCurrentDate);
+        var fakeBlobStorageService = new FakeBlobStorageService(
+            BuildRealisticPublicRegisterCsvBlobList(untilDate: fakeCurrentDateTime.AddDays(-1)));
+
+        // Act
+        var guidanceViewModel = await RunGetGuidanceViewModel(fakeCurrentDateTime, fakeBlobStorageService, publicRegisterNextYearEnabled, archivedUpToYear);
+
+        // Assert
+        (guidanceViewModel.ProducerRegisteredFileNextYear?.FileName).Should().Be(expectedSecondFilename);
     }
 
     /// <summary>
