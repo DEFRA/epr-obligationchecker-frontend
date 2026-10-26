@@ -81,7 +81,10 @@
 
             // Add previous year until it is archived via the ArchivedUpToYear setting.
             // The archive page uses the same check, so a year is never shown on both pages.
-            if (!PublicRegisterCutoverHelper.IsYearArchived(previousYear, currentYear, optionsArchivedUpToYear))
+            if (!PublicRegisterCutoverHelper.IsYearArchived(
+                    registerYear: previousYear,
+                    currentYear: currentYear,
+                    archivedUpToYear: optionsArchivedUpToYear))
             {
                 folderPrefixes.Add(previousYear.ToString());
             }

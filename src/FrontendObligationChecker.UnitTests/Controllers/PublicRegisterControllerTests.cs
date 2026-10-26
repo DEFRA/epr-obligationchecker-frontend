@@ -20,7 +20,6 @@
     [TestClass]
     public class PublicRegisterControllerTests
     {
-        // Pin the clock so the expected years don't depend on when the tests run
         private const string FakeToday = "2026-06-15";
         private const string CurrentYear = "2026";
         private const string NextYear = "2027";

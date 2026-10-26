@@ -20,9 +20,12 @@ public class PublicRegisterCutoverHelperTests
     // The current year is never archived, even if the setting covers it
     [DataRow(2027, 2027, 2027, false)]
     [DataRow(2027, 2027, 2028, false)]
-    public void IsYearArchived_ReturnsExpected(int year, int currentYear, int archivedUpToYear, bool expected)
+    public void IsYearArchived_ReturnsExpected(int registerYear, int currentYear, int archivedUpToYear, bool expected)
     {
-        var actual = PublicRegisterCutoverHelper.IsYearArchived(year, currentYear, archivedUpToYear);
+        var actual = PublicRegisterCutoverHelper.IsYearArchived(
+            registerYear: registerYear,
+            currentYear: currentYear,
+            archivedUpToYear: archivedUpToYear);
 
         actual.Should().Be(expected);
     }
@@ -31,9 +34,12 @@ public class PublicRegisterCutoverHelperTests
     [DataRow(2024)]
     [DataRow(2025)]
     [DataRow(2026)]
-    public void IsYearArchived_ReturnsFalse_WhenArchivedUpToYearNotSet(int year)
+    public void IsYearArchived_ReturnsFalse_WhenArchivedUpToYearNotSet(int registerYear)
     {
-        var actual = PublicRegisterCutoverHelper.IsYearArchived(year, 2027, null);
+        var actual = PublicRegisterCutoverHelper.IsYearArchived(
+            registerYear: registerYear,
+            currentYear: 2027,
+            archivedUpToYear: null);
 
         actual.Should().BeFalse();
     }

@@ -88,7 +88,10 @@ public class LargeProducerRegisterController : Controller
         var count = Math.Max(0, currentYear - RegisterOfProducersStartYear);
         var folderPrefixes = Enumerable
             .Range(RegisterOfProducersStartYear, count)
-            .Where(y => PublicRegisterCutoverHelper.IsYearArchived(y, currentYear, _publicRegisterOptions.ArchivedUpToYear))
+            .Where(y => PublicRegisterCutoverHelper.IsYearArchived(
+                registerYear: y,
+                currentYear: currentYear,
+                archivedUpToYear: _publicRegisterOptions.ArchivedUpToYear))
             .Select(y => y.ToString())
             .ToList();
 
