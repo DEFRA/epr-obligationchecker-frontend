@@ -157,9 +157,10 @@ public class PublicRegisterTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task ShowsPreviousYearFile_AfterFirstFebruary_WhenArchivedUpToYearBlank()
+    public async Task ShowsPreviousYearFileOnMainRegisterOnly_AfterFirstFebruary_WhenArchivedUpToYearBlank()
     {
         // Arrange — blank setting: nothing is archived, so 2026 stays on the main register after 1 Feb
+        // and is not on the archive page
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
         ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "";
@@ -182,6 +183,7 @@ public class PublicRegisterTests : IntegrationTestBase
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+        var archivePage = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
 
         // Assert
         using (new AssertionScope())
@@ -189,13 +191,14 @@ public class PublicRegisterTests : IntegrationTestBase
             page.DownloadLinks.Should().HaveCount(2);
             page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2026"));
             page.DownloadHrefs.Should().Contain(href => href.Contains("fileName=2027"));
+            archivePage.RegisterOfProducersLinks.Should().BeEmpty();
         }
     }
 
     [Fact]
-    public async Task DoesNotShowArchivedYears_WhenArchivedUpToYearSet()
+    public async Task ShowsArchivedYearsOnArchivePageOnly_WhenArchivedUpToYearSet()
     {
-        // Arrange — setting 2026: 2025 and 2026 are on the archive page, 2027 stays here
+        // Arrange — setting 2026: 2025 and 2026 are on the archive page, 2027 stays on the main register
         ConfigOverrides["FeatureManagement:PublicRegisterNextYearEnabled"] = "false";
         ConfigOverrides["PublicRegister:FakeDateTimeUtcNow"] = "2027-02-01";
         ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "2026";
@@ -224,13 +227,31 @@ public class PublicRegisterTests : IntegrationTestBase
 
         // Act
         var page = await GetAsPageModel<PublicRegisterGuidancePageModel>("/public-register");
+        var archivePage = await GetAsPageModel<LargeProducerRegisterPageModel>("/large-producers");
 
         // Assert
         using (new AssertionScope())
         {
             page.DownloadLinks.Should().HaveCount(1);
             page.DownloadHrefs.Should().ContainSingle(href => href.Contains("fileName=2027"));
+            archivePage.RegisterOfProducersLinks.Should().HaveCount(2);
+            archivePage.RegisterOfProducersLinks[0].Href.Should().Contain("fileName=2026");
+            archivePage.RegisterOfProducersLinks[1].Href.Should().Contain("fileName=2025");
         }
+    }
+
+    [Fact]
+    public async Task FailsToStart_WhenArchivedUpToYearInvalid()
+    {
+        // Arrange
+        ConfigOverrides["PublicRegister:ArchivedUpToYear"] = "2O26";
+
+        // Act
+        var act = () => Client.GetAsync("/public-register");
+
+        // Assert
+        (await act.Should().ThrowAsync<InvalidOperationException>())
+            .WithMessage("*PublicRegister:ArchivedUpToYear*");
     }
 
     [Fact]

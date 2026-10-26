@@ -19,7 +19,8 @@ public class PublicRegisterOptions
 
     /// <summary>
     /// Registers for this year and earlier are shown on the archive page instead of the
-    /// main public register (e.g. 2025). When null, nothing is archived.
+    /// main public register (e.g. 2025). When null, nothing is archived. The current year is
+    /// never archived, even if this is set to the current year or later.
     /// </summary>
     public int? ArchivedUpToYear { get; set; }
 
