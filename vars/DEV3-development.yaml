@@ -1,6 +1,12 @@
 variables:
-  azureSubscription: 'AZD-RWD-DEV3'
-  docker.imageName: 'obligationregistry'
-  acr.azureContainerRegistryName: 'devrwdinfac1401'
-  acr.repositoryName: 'obligationregistry'
-  serviceName: 'devrwdwebwa3401'
+- group: ServiceConnections
+- name: azureSubscription
+  value: $(ServiceConnectionDEV3)
+- name: docker.imageName
+  value: 'obligationregistry'
+- name: acr.azureContainerRegistryName
+  value: 'devrwdinfac1401'
+- name: acr.repositoryName
+  value: 'obligationregistry'
+- name: serviceName
+  value: 'devrwdwebwa3401'
